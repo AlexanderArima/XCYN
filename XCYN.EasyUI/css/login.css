@@ -1,0 +1,20 @@
+﻿#login
+{
+    padding-top :5px
+}
+
+p{
+    padding-left:25px
+}
+
+.textbox{
+    height:22px
+}
+
+#btn{
+    text-align:center;
+}
+
+.easyui-linkbutton{
+    width:70px
+}

@@ -1,0 +1,12 @@
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\XCYN.Linq.exe.config
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\XCYN.Linq.exe
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\XCYN.Linq.pdb
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\obj\Debug\XCYN.Linq.csprojResolveAssemblyReference.cache
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\obj\Debug\XCYN.Linq.exe
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\obj\Debug\XCYN.Linq.pdb
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\EntityFramework.dll
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\EntityFramework.SqlServer.dll
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\EntityFramework.xml
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\EntityFramework.SqlServer.xml
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\zh-Hans\EntityFramework.resources.dll
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Linq\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

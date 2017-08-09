@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Scripts/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Scripts/easyui/themes/icon.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+
+    <script>
+
+        var _room_id = "";
+
+        //连接地址
+        var conn = $.hubConnection("/myConn");
+        //var conn = $.hubConnection("http://localhost:9004/");//访问控制台Server
+
+        //代理类
+        var proxy = conn.createHubProxy("ChatHub");
+        //定义客户端返回方法(监听服务器返回的hello方法)
+        proxy.on("groupNotice", function (data) {
+            var str = "<div class=\"div_system\"><span>系统公告:</span><span>" + data + "</span></div>";
+            $("#div_center").append(str);
+        })
+
+        proxy.on("groupChat", function (data) {
+            //var str = "<div class=\"div_system\"><span>系统公告:</span><span>" + data + "</span></div>";
+            $("#div_center").append(data);
+        })
+
+        proxy.on("notice", function (data) {
+            data = "<div class=\"div_system\"><span>系统公告:</span><span>" + data + "</span></div>";
+            $("#div_center").append(data);
+        })
+
+        proxy.on("allChat", function (data) {
+            $("#div_center").append(data);
+        })
+
+        //开始连接服务器
+        conn.start().done(function (data) {
+            var str = "<div class=\"div_system\"><span>系统公告:</span><span>连接服务器成功</span></div>";
+            $("#div_center").append(str);
+            //还原按钮状态
+            $('#linkSendChat').linkbutton("enable");
+            
+        }).fail(function (data) {
+            var str = "<div class=\"div_system\"><span>系统公告:</span><span>连接服务器失败</span></div>";
+            $("#div_center").append(str);
+        });
+
+        //进入房间
+        function EnterClick(room_id)
+        {
+            proxy.invoke("EnterRoom", room_id).done(function (msg) {
+                _room_id = room_id;
+                console.log("调用服务器EnterRoom方法后，回调的结果:" + msg);
+            }).fail(function (msg_fail) {
+                console.log("调用服务器EnterRoom方法后，(失败)回调的结果:" + msg_fail);
+            });
+        }
+
+        //发送聊天内容到服务器
+        function SendChat()
+        {
+            var chat = $("#textarea_chat").val();
+            proxy.invoke("Chat", _room_id, chat).done();
+        }
+
+       
+    </script>
+
+    <style>
+        .div_system span{
+            color:red;
+        }
+
+        .div_user span{
+            color:darkblue;
+        }
+
+        .div_system,.div_user
+        {
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'north',height:100,split:true">房间名称</div>
+        <div data-options="region:'south',height:150,split:true">
+            <textarea style="width:99.5%;height:70%" id="textarea_chat"></textarea>
+            <div style="text-align:right">
+                <a id="linkSendChat" href="javascript:void(0)" onclick="SendChat()" style="width:150px">发送</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" style="width:150px">退出</a>
+            </div>
+        </div>
+        <div data-options="region:'east',width:100,title:'房间列表',split:true">
+            <ul>
+                <li><a href="javascript:void(0)" onclick="EnterClick(1)">房间1</a></li>
+                <li><a href="javascript:void(0)" onclick="EnterClick(2)">房间2</a></li>
+                <li><a href="javascript:void(0)" onclick="EnterClick(3)">房间3</a></li>
+            </ul>
+        </div>
+        <div data-options="region:'center',title:'',split:true" id="div_center">
+            <!--<div class="div_system">
+                <span>系统公告:</span>
+                <span>xxx进入房间</span>
+            </div>
+            <div class="div_user">
+                <span>xxx：</span><span>哈哈哈</span>
+            </div>
+            <div class="div_user">
+                <span>xxx：</span><span>哈哈哈</span>
+            </div>-->
+        </div>
+    </div>
+    <script src="Scripts/easyui/jquery.min.js"></script>
+    <script src="Scripts/easyui/jquery.easyui.min.js"></script>
+    <script src="Scripts/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script>
+        $(function () {
+            $('#linkSendChat').linkbutton({
+                disabled:true,
+            });
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\bin\Debug\XCYN.Service.exe.config
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\bin\Debug\XCYN.Service.exe
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\bin\Debug\XCYN.Service.pdb
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\obj\Debug\XCYN.Service.exe
+d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\obj\Debug\XCYN.Service.pdb
