@@ -86,6 +86,8 @@
     <Content Include="14.html" />
     <Content Include="11.html" />
     <Content Include="22.html" />
+    <Content Include="27.html" />
+    <Content Include="26.html" />
     <Content Include="23.html" />
     <Content Include="46.html" />
     <Content Include="admin.html" />
@@ -131,6 +133,8 @@
     <Content Include="script\14.js" />
     <Content Include="script\11.js" />
     <Content Include="script\22.js" />
+    <Content Include="script\27.js" />
+    <Content Include="script\26.js" />
     <Content Include="script\23.js" />
     <Content Include="script\46.js" />
     <Content Include="script\admin.js" />
