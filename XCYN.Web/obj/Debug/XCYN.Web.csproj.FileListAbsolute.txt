@@ -87,3 +87,4 @@ d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Web\obj\Debug\XCYN.Web.dll
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Web\obj\Debug\XCYN.Web.pdb
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Web\bin\StackExchange.Redis.dll
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Web\bin\StackExchange.Redis.xml
+D:\我的文档\Visual Studio 2015\Projects\XCYN\XCYN.Web\obj\Debug\XCYN.Web.csprojResolveAssemblyReference.cache
