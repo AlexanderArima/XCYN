@@ -89,6 +89,8 @@
     <Content Include="27.html" />
     <Content Include="26.html" />
     <Content Include="23.html" />
+    <Content Include="33.html" />
+    <Content Include="32.html" />
     <Content Include="46.html" />
     <Content Include="admin.html" />
     <Content Include="css\admin.css" />
@@ -133,6 +135,8 @@
     <Content Include="script\14.js" />
     <Content Include="script\11.js" />
     <Content Include="script\22.js" />
+    <Content Include="script\33.js" />
+    <Content Include="script\32.js" />
     <Content Include="script\27.js" />
     <Content Include="script\26.js" />
     <Content Include="script\23.js" />
@@ -152,6 +156,8 @@
     <Content Include="nav.json" />
     <Content Include="ashx\TreeHandler.ashx" />
     <Content Include="tree.json" />
+    <Content Include="RegisterHandler.ashx" />
+    <Content Include="33_data.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1284,6 +1290,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterHandler.ashx.cs">
+      <DependentUpon>RegisterHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\NavViewModel.cs" />
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
