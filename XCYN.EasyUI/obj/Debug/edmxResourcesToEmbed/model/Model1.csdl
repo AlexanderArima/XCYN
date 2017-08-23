@@ -605,6 +605,24 @@
     <Property Name="reg_time" Type="DateTime" Precision="3" />
     <Property Name="reg_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="zcp_ads">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="module_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="page_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="page_url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="max_length" Type="Int32" />
+    <Property Name="img_url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="link_url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="img_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+    <Property Name="state" Type="Int32" />
+  </EntityType>
   <EntityType Name="zcp_article_post_collect">
     <Key>
       <PropertyRef Name="id" />
@@ -629,6 +647,28 @@
     <Property Name="user_id" Type="Int32" />
     <Property Name="add_time" Type="DateTime" Precision="3" />
     <Property Name="state" Type="Int32" />
+  </EntityType>
+  <EntityType Name="zcp_auth_expert">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
+    <Property Name="auth_time" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="zcp_auth_master">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
+    <Property Name="auth_time" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="zcp_bank">
     <Key>
@@ -790,6 +830,14 @@
     <Property Name="state" Type="Int32" />
     <Property Name="add_time" Type="DateTime" Precision="0" />
   </EntityType>
+  <EntityType Name="zcp_formu_select_authority">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="select_items" Type="Int32" />
+  </EntityType>
   <EntityType Name="zcp_formula_click">
     <Key>
       <PropertyRef Name="id" />
@@ -806,6 +854,18 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="coefficient" Type="Double" />
+  </EntityType>
+  <EntityType Name="zcp_formula_collect">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="formula_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="add_time" Type="DateTime" Precision="3" />
+    <Property Name="b_id" Type="Int32" />
   </EntityType>
   <EntityType Name="zcp_formula_comment">
     <Key>
@@ -846,6 +906,14 @@
     <Property Name="weekclick_date" Type="DateTime" Precision="0" />
     <Property Name="dayclick_date" Type="DateTime" Precision="0" />
   </EntityType>
+  <EntityType Name="zcp_formula_query_quantity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="number" Type="Int32" />
+  </EntityType>
   <EntityType Name="zcp_formula_rank">
     <Key>
       <PropertyRef Name="id" />
@@ -866,6 +934,30 @@
     <Property Name="point" Type="Int32" />
     <Property Name="state" Type="Boolean" />
     <Property Name="add_time" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="zcp_help">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_id" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sort" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="zcp_help_cate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_id" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sort" Type="Int32" />
+    <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="zcp_info_ext">
     <Key>
@@ -1384,6 +1476,18 @@
     <Property Name="state" Type="Int32" />
     <Property Name="formula_id" Type="Int32" />
   </EntityType>
+  <EntityType Name="zcp_signIn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="exp" Type="Int32" />
+    <Property Name="point" Type="Int32" />
+    <Property Name="series_count" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
+  </EntityType>
   <EntityType Name="zcp_space_log">
     <Key>
       <PropertyRef Name="id" />
@@ -1421,6 +1525,21 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="formu_id" Type="Int32" Nullable="false" />
     <Property Name="hitinfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="zcp_third_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="account_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="card" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="icon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="icon_pay" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="is_soloShow" Type="Int32" />
+    <Property Name="user_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="Boolean" />
+    <Property Name="add_time" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="zcp_third_party">
     <Key>
@@ -1837,18 +1956,6 @@
     <Property Name="add_time" Type="DateTime" Precision="3" />
     <Property Name="nick_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="zcp_formula_collect">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="category_id" Type="Int32" />
-    <Property Name="formula_id" Type="Int32" />
-    <Property Name="user_id" Type="Int32" />
-    <Property Name="state" Type="Int32" />
-    <Property Name="add_time" Type="DateTime" Precision="3" />
-    <Property Name="b_id" Type="Int32" />
-  </EntityType>
   <EntityType Name="zcp_formula_list">
     <Key>
       <PropertyRef Name="formula_item" />
@@ -2172,6 +2279,7 @@
     <Property Name="is_vipclick" Type="Boolean" />
     <Property Name="vipclick_rank" Type="Int32" />
     <Property Name="is_last" Type="Boolean" />
+    <Property Name="last_rank" Type="Int32" />
   </EntityType>
   <EntityType Name="ballnum_attrValue_map_view">
     <Key>
@@ -2288,6 +2396,7 @@
     <Property Name="click" Type="Int32" />
     <Property Name="zhaiyao" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="user_id" Type="Int32" />
+    <Property Name="dcinfo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <Property Name="comment_count" Type="Int32" />
     <Property Name="great_count" Type="Int32" />
   </EntityType>
@@ -2299,7 +2408,7 @@
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="category_id" Type="Int32" Nullable="false" />
     <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="formula_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="formula_info" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="formula_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="right_id" Type="Int32" />
     <Property Name="point" Type="Int32" />
@@ -2649,6 +2758,50 @@
     <Property Name="status" Type="Byte" />
     <Property Name="reg_time" Type="DateTime" Precision="3" />
     <Property Name="reg_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="v_shop_all">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="category_id" />
+      <PropertyRef Name="order_num" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="formula_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="formula_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="right_id" Type="Int32" />
+    <Property Name="point" Type="Int32" />
+    <Property Name="b_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="add_time" Type="DateTime" Precision="0" />
+    <Property Name="click" Type="Int32" />
+    <Property Name="great_count" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="grade_id" Type="Int32" />
+    <Property Name="accuracy_id" Type="Int32" />
+    <Property Name="special_point" Type="Int32" />
+    <Property Name="special_time" Type="Int32" />
+    <Property Name="gs_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="update_time" Type="DateTime" Precision="0" />
+    <Property Name="iballOrder" Type="Int32" />
+    <Property Name="sBallDirSet" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="iCalc_type" Type="Int32" />
+    <Property Name="iHitType" Type="Int32" />
+    <Property Name="LR_SCOPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="isSix_gs" Type="Int32" />
+    <Property Name="jzrq" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cur_times" Type="Int32" />
+    <Property Name="collect_count" Type="Int32" />
+    <Property Name="start_time_qs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="end_time_qs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pushingformula" Type="Int32" />
+    <Property Name="is_hot" Type="Int32" />
+    <Property Name="is_vip" Type="Int32" />
+    <Property Name="is_totalclick" Type="Boolean" />
+    <Property Name="is_weekclick" Type="Boolean" />
+    <Property Name="is_dayclick" Type="Boolean" />
+    <Property Name="order_num" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="v_space_log">
     <Key>
@@ -3026,8 +3179,11 @@
     <EntitySet Name="user_point_log" EntityType="Self.user_point_log" />
     <EntitySet Name="user_recharge" EntityType="Self.user_recharge" />
     <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="zcp_ads" EntityType="Self.zcp_ads" />
     <EntitySet Name="zcp_article_post_collect" EntityType="Self.zcp_article_post_collect" />
     <EntitySet Name="zcp_article_post_great" EntityType="Self.zcp_article_post_great" />
+    <EntitySet Name="zcp_auth_expert" EntityType="Self.zcp_auth_expert" />
+    <EntitySet Name="zcp_auth_master" EntityType="Self.zcp_auth_master" />
     <EntitySet Name="zcp_bank" EntityType="Self.zcp_bank" />
     <EntitySet Name="zcp_bank_account" EntityType="Self.zcp_bank_account" />
     <EntitySet Name="zcp_bank_transfer" EntityType="Self.zcp_bank_transfer" />
@@ -3041,13 +3197,18 @@
     <EntitySet Name="zcp_focus" EntityType="Self.zcp_focus" />
     <EntitySet Name="zcp_form_hitrate" EntityType="Self.zcp_form_hitrate" />
     <EntitySet Name="zcp_formu_order" EntityType="Self.zcp_formu_order" />
+    <EntitySet Name="zcp_formu_select_authority" EntityType="Self.zcp_formu_select_authority" />
     <EntitySet Name="zcp_formula_click" EntityType="Self.zcp_formula_click" />
     <EntitySet Name="zcp_formula_coefficient" EntityType="Self.zcp_formula_coefficient" />
+    <EntitySet Name="zcp_formula_collect" EntityType="Self.zcp_formula_collect" />
     <EntitySet Name="zcp_formula_comment" EntityType="Self.zcp_formula_comment" />
     <EntitySet Name="zcp_formula_commentpraise" EntityType="Self.zcp_formula_commentpraise" />
     <EntitySet Name="zcp_formula_ext" EntityType="Self.zcp_formula_ext" />
+    <EntitySet Name="zcp_formula_query_quantity" EntityType="Self.zcp_formula_query_quantity" />
     <EntitySet Name="zcp_formula_rank" EntityType="Self.zcp_formula_rank" />
     <EntitySet Name="zcp_formula_reward" EntityType="Self.zcp_formula_reward" />
+    <EntitySet Name="zcp_help" EntityType="Self.zcp_help" />
+    <EntitySet Name="zcp_help_cate" EntityType="Self.zcp_help_cate" />
     <EntitySet Name="zcp_info_ext" EntityType="Self.zcp_info_ext" />
     <EntitySet Name="zcp_info_small" EntityType="Self.zcp_info_small" />
     <EntitySet Name="zcp_integral_formula_category" EntityType="Self.zcp_integral_formula_category" />
@@ -3087,9 +3248,11 @@
     <EntitySet Name="zcp_record_smallClass" EntityType="Self.zcp_record_smallClass" />
     <EntitySet Name="zcp_record_yearClass" EntityType="Self.zcp_record_yearClass" />
     <EntitySet Name="zcp_reward_detail" EntityType="Self.zcp_reward_detail" />
+    <EntitySet Name="zcp_signIn" EntityType="Self.zcp_signIn" />
     <EntitySet Name="zcp_space_log" EntityType="Self.zcp_space_log" />
     <EntitySet Name="zcp_superior" EntityType="Self.zcp_superior" />
     <EntitySet Name="zcp_test" EntityType="Self.zcp_test" />
+    <EntitySet Name="zcp_third_account" EntityType="Self.zcp_third_account" />
     <EntitySet Name="zcp_third_party" EntityType="Self.zcp_third_party" />
     <EntitySet Name="zcp_third_transfer" EntityType="Self.zcp_third_transfer" />
     <EntitySet Name="zcp_users" EntityType="Self.zcp_users" />
@@ -3122,7 +3285,6 @@
     <EntitySet Name="zcp_formula_accuracy" EntityType="Self.zcp_formula_accuracy" />
     <EntitySet Name="zcp_formula_bookmark" EntityType="Self.zcp_formula_bookmark" />
     <EntitySet Name="zcp_formula_category" EntityType="Self.zcp_formula_category" />
-    <EntitySet Name="zcp_formula_collect" EntityType="Self.zcp_formula_collect" />
     <EntitySet Name="zcp_formula_list" EntityType="Self.zcp_formula_list" />
     <EntitySet Name="zcp_formula_list2" EntityType="Self.zcp_formula_list2" />
     <EntitySet Name="zcp_formula_point" EntityType="Self.zcp_formula_point" />
@@ -3166,6 +3328,7 @@
     <EntitySet Name="v_post_expert" EntityType="Self.v_post_expert" />
     <EntitySet Name="v_post_list" EntityType="Self.v_post_list" />
     <EntitySet Name="v_recommend" EntityType="Self.v_recommend" />
+    <EntitySet Name="v_shop_all" EntityType="Self.v_shop_all" />
     <EntitySet Name="v_space_log" EntityType="Self.v_space_log" />
     <EntitySet Name="v_ta_formula" EntityType="Self.v_ta_formula" />
     <EntitySet Name="v_ta_info" EntityType="Self.v_ta_info" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="MeetingSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="MeetingSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="article">
     <Key>
       <PropertyRef Name="id" />
@@ -777,6 +777,24 @@
           <Property Name="attr_value" Type="int" />
           <Property Name="ballnums" Type="varchar" MaxLength="50" />
         </EntityType>-->
+  <EntityType Name="zcp_ads">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="module_name" Type="varchar" MaxLength="50" />
+    <Property Name="page_name" Type="varchar" MaxLength="50" />
+    <Property Name="page_url" Type="varchar" MaxLength="100" />
+    <Property Name="position" Type="varchar" MaxLength="50" />
+    <Property Name="size" Type="varchar" MaxLength="50" />
+    <Property Name="title" Type="varchar" MaxLength="500" />
+    <Property Name="max_length" Type="int" />
+    <Property Name="img_url" Type="varchar" MaxLength="1000" />
+    <Property Name="link_url" Type="varchar" MaxLength="500" />
+    <Property Name="img_type" Type="varchar" MaxLength="100" />
+    <Property Name="type" Type="int" Nullable="false" />
+    <Property Name="state" Type="int" />
+  </EntityType>
   <EntityType Name="zcp_article_post_collect">
     <Key>
       <PropertyRef Name="id" />
@@ -866,6 +884,28 @@
     <Property Name="model_value" Type="int" />
     <Property Name="follow_year_flag" Type="int" />
     <Property Name="attr_year" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="zcp_auth_expert">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="reason" Type="varchar" MaxLength="200" />
+    <Property Name="add_time" Type="smalldatetime" />
+    <Property Name="auth_time" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="zcp_auth_master">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="reason" Type="varchar" MaxLength="200" />
+    <Property Name="add_time" Type="smalldatetime" />
+    <Property Name="auth_time" Type="smalldatetime" />
   </EntityType>
   <!--生成过程中发现错误:
 警告 6002: 表/视图“MeetingSys.dbo.zcp_ballnum_attrValue_map”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1097,6 +1137,14 @@
     <Property Name="state" Type="int" />
     <Property Name="add_time" Type="smalldatetime" />
   </EntityType>
+  <EntityType Name="zcp_formu_select_authority">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+    <Property Name="select_items" Type="int" />
+  </EntityType>
   <!--生成过程中发现错误:
 警告 6002: 表/视图“MeetingSys.dbo.zcp_formula”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
   <EntityType Name="zcp_formula">
@@ -1197,8 +1245,6 @@
     <Property Name="type" Type="varchar" MaxLength="50" />
     <Property Name="coefficient" Type="float" />
   </EntityType>
-  <!--生成过程中发现错误:
-警告 6002: 表/视图“MeetingSys.dbo.zcp_formula_collect”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
   <EntityType Name="zcp_formula_collect">
     <Key>
       <PropertyRef Name="id" />
@@ -1295,6 +1341,14 @@
     <Property Name="state" Type="int" />
     <Property Name="add_time" Type="datetime" />
   </EntityType>
+  <EntityType Name="zcp_formula_query_quantity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="number" Type="int" />
+  </EntityType>
   <EntityType Name="zcp_formula_rank">
     <Key>
       <PropertyRef Name="id" />
@@ -1329,6 +1383,30 @@
     <Property Name="category_id" Type="int" />
     <Property Name="state" Type="int" />
     <Property Name="add_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="zcp_help">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="c_id" Type="int" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="content" Type="text" />
+    <Property Name="sort" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="add_time" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="zcp_help_cate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p_id" Type="int" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="sort" Type="int" />
+    <Property Name="icon" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="int" />
+    <Property Name="add_time" Type="smalldatetime" />
   </EntityType>
   <!--生成过程中发现错误:
 警告 6002: 表/视图“MeetingSys.dbo.zcp_info”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2109,6 +2187,18 @@
     <Property Name="MAX_VAL" Type="decimal" Precision="12" Scale="0" Nullable="false" />
     <Property Name="INCREMENT" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="zcp_signIn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="exp" Type="int" />
+    <Property Name="point" Type="int" />
+    <Property Name="series_count" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="add_time" Type="smalldatetime" />
+  </EntityType>
   <EntityType Name="zcp_space_log">
     <Key>
       <PropertyRef Name="id" />
@@ -2159,6 +2249,21 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="formu_id" Type="int" Nullable="false" />
     <Property Name="hitinfo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="zcp_third_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="account_name" Type="varchar" MaxLength="100" />
+    <Property Name="card" Type="varchar" MaxLength="100" />
+    <Property Name="icon" Type="varchar" MaxLength="100" />
+    <Property Name="icon_pay" Type="varchar" MaxLength="100" />
+    <Property Name="is_soloShow" Type="int" />
+    <Property Name="user_id" Type="text" />
+    <Property Name="state" Type="bit" />
+    <Property Name="add_time" Type="datetime" />
   </EntityType>
   <EntityType Name="zcp_third_party">
     <Key>
@@ -2294,6 +2399,7 @@
     <Property Name="is_vipclick" Type="bit" />
     <Property Name="vipclick_rank" Type="int" />
     <Property Name="is_last" Type="bit" />
+    <Property Name="last_rank" Type="int" />
   </EntityType>
   <!--生成过程中发现错误:
 警告 6002: 表/视图“MeetingSys.dbo.ballnum_attrValue_map_view”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2422,6 +2528,7 @@
     <Property Name="click" Type="int" />
     <Property Name="zhaiyao" Type="nvarchar" MaxLength="255" />
     <Property Name="user_id" Type="int" />
+    <Property Name="dcinfo" Type="varchar" MaxLength="11" />
     <Property Name="comment_count" Type="int" />
     <Property Name="great_count" Type="int" />
   </EntityType>
@@ -2435,7 +2542,7 @@
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="category_id" Type="int" Nullable="false" />
     <Property Name="content" Type="text" />
-    <Property Name="formula_info" Type="varchar" MaxLength="1000" />
+    <Property Name="formula_info" Type="varchar" MaxLength="200" />
     <Property Name="formula_name" Type="varchar" MaxLength="200" />
     <Property Name="right_id" Type="int" />
     <Property Name="point" Type="int" />
@@ -2891,6 +2998,52 @@
           <Property Name="user_id" Type="int" />
           <Property Name="winner_count" Type="int" />
         </EntityType>-->
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“MeetingSys.dbo.v_shop_all”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="v_shop_all">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="category_id" />
+      <PropertyRef Name="order_num" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="content" Type="text" />
+    <Property Name="formula_info" Type="varchar" MaxLength="1000" />
+    <Property Name="formula_name" Type="varchar" MaxLength="200" />
+    <Property Name="right_id" Type="int" />
+    <Property Name="point" Type="int" />
+    <Property Name="b_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="add_time" Type="smalldatetime" />
+    <Property Name="click" Type="int" />
+    <Property Name="great_count" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="grade_id" Type="int" />
+    <Property Name="accuracy_id" Type="int" />
+    <Property Name="special_point" Type="int" />
+    <Property Name="special_time" Type="int" />
+    <Property Name="gs_name" Type="nvarchar" MaxLength="20" />
+    <Property Name="update_time" Type="smalldatetime" />
+    <Property Name="iballOrder" Type="int" />
+    <Property Name="sBallDirSet" Type="varchar" MaxLength="20" />
+    <Property Name="iCalc_type" Type="int" />
+    <Property Name="iHitType" Type="int" />
+    <Property Name="LR_SCOPE" Type="varchar" MaxLength="20" />
+    <Property Name="isSix_gs" Type="int" />
+    <Property Name="jzrq" Type="varchar" MaxLength="10" />
+    <Property Name="cur_times" Type="int" />
+    <Property Name="collect_count" Type="int" />
+    <Property Name="start_time_qs" Type="varchar" MaxLength="50" />
+    <Property Name="end_time_qs" Type="varchar" MaxLength="50" />
+    <Property Name="Pushingformula" Type="int" />
+    <Property Name="is_hot" Type="int" />
+    <Property Name="is_vip" Type="int" />
+    <Property Name="is_totalclick" Type="bit" />
+    <Property Name="is_weekclick" Type="bit" />
+    <Property Name="is_dayclick" Type="bit" />
+    <Property Name="order_num" Type="int" Nullable="false" />
+  </EntityType>
   <!--生成过程中发现错误:
 警告 6013: 表/视图“MeetingSys.dbo.v_space_lastVisit”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
         <EntityType Name="v_space_lastVisit">
@@ -3350,8 +3503,11 @@
     <EntitySet Name="user_point_log" EntityType="Self.user_point_log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_recharge" EntityType="Self.user_recharge" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_ads" EntityType="Self.zcp_ads" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_article_post_collect" EntityType="Self.zcp_article_post_collect" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_article_post_great" EntityType="Self.zcp_article_post_great" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_auth_expert" EntityType="Self.zcp_auth_expert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_auth_master" EntityType="Self.zcp_auth_master" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_bank" EntityType="Self.zcp_bank" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_bank_account" EntityType="Self.zcp_bank_account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_bank_transfer" EntityType="Self.zcp_bank_transfer" Schema="dbo" store:Type="Tables" />
@@ -3365,13 +3521,18 @@
     <EntitySet Name="zcp_focus" EntityType="Self.zcp_focus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_form_hitrate" EntityType="Self.zcp_form_hitrate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formu_order" EntityType="Self.zcp_formu_order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_formu_select_authority" EntityType="Self.zcp_formu_select_authority" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_click" EntityType="Self.zcp_formula_click" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_coefficient" EntityType="Self.zcp_formula_coefficient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_formula_collect" EntityType="Self.zcp_formula_collect" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_comment" EntityType="Self.zcp_formula_comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_commentpraise" EntityType="Self.zcp_formula_commentpraise" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_ext" EntityType="Self.zcp_formula_ext" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_formula_query_quantity" EntityType="Self.zcp_formula_query_quantity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_rank" EntityType="Self.zcp_formula_rank" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_formula_reward" EntityType="Self.zcp_formula_reward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_help" EntityType="Self.zcp_help" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_help_cate" EntityType="Self.zcp_help_cate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_info_ext" EntityType="Self.zcp_info_ext" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_info_small" EntityType="Self.zcp_info_small" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_integral_formula_category" EntityType="Self.zcp_integral_formula_category" Schema="dbo" store:Type="Tables" />
@@ -3411,9 +3572,11 @@
     <EntitySet Name="zcp_record_smallClass" EntityType="Self.zcp_record_smallClass" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_record_yearClass" EntityType="Self.zcp_record_yearClass" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_reward_detail" EntityType="Self.zcp_reward_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_signIn" EntityType="Self.zcp_signIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_space_log" EntityType="Self.zcp_space_log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_superior" EntityType="Self.zcp_superior" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_test" EntityType="Self.zcp_test" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zcp_third_account" EntityType="Self.zcp_third_account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_third_party" EntityType="Self.zcp_third_party" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_third_transfer" EntityType="Self.zcp_third_transfer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="zcp_users" EntityType="Self.zcp_users" Schema="dbo" store:Type="Tables" />
@@ -3683,17 +3846,6 @@
     [zcp_formula_category].[add_time] AS [add_time], 
     [zcp_formula_category].[nick_name] AS [nick_name]
     FROM [dbo].[zcp_formula_category] AS [zcp_formula_category]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="zcp_formula_collect" EntityType="Self.zcp_formula_collect" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [zcp_formula_collect].[id] AS [id], 
-    [zcp_formula_collect].[category_id] AS [category_id], 
-    [zcp_formula_collect].[formula_id] AS [formula_id], 
-    [zcp_formula_collect].[user_id] AS [user_id], 
-    [zcp_formula_collect].[state] AS [state], 
-    [zcp_formula_collect].[add_time] AS [add_time], 
-    [zcp_formula_collect].[b_id] AS [b_id]
-    FROM [dbo].[zcp_formula_collect] AS [zcp_formula_collect]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="zcp_formula_list" EntityType="Self.zcp_formula_list" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -3981,7 +4133,8 @@
     [1].[Expr2] AS [Expr2], 
     [1].[is_vipclick] AS [is_vipclick], 
     [1].[vipclick_rank] AS [vipclick_rank], 
-    [1].[is_last] AS [is_last]
+    [1].[is_last] AS [is_last], 
+    [1].[last_rank] AS [last_rank]
     FROM [dbo].[1] AS [1]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ballnum_attrValue_map_view" EntityType="Self.ballnum_attrValue_map_view" store:Type="Views" store:Schema="dbo">
@@ -4085,6 +4238,7 @@
     [v_formu_info_post].[click] AS [click], 
     [v_formu_info_post].[zhaiyao] AS [zhaiyao], 
     [v_formu_info_post].[user_id] AS [user_id], 
+    [v_formu_info_post].[dcinfo] AS [dcinfo], 
     [v_formu_info_post].[comment_count] AS [comment_count], 
     [v_formu_info_post].[great_count] AS [great_count]
     FROM [dbo].[v_formu_info_post] AS [v_formu_info_post]</DefiningQuery>
@@ -4427,6 +4581,47 @@
     [v_recommend].[reg_time] AS [reg_time], 
     [v_recommend].[reg_ip] AS [reg_ip]
     FROM [dbo].[v_recommend] AS [v_recommend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_shop_all" EntityType="Self.v_shop_all" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_shop_all].[id] AS [id], 
+    [v_shop_all].[category_id] AS [category_id], 
+    [v_shop_all].[content] AS [content], 
+    [v_shop_all].[formula_info] AS [formula_info], 
+    [v_shop_all].[formula_name] AS [formula_name], 
+    [v_shop_all].[right_id] AS [right_id], 
+    [v_shop_all].[point] AS [point], 
+    [v_shop_all].[b_id] AS [b_id], 
+    [v_shop_all].[user_id] AS [user_id], 
+    [v_shop_all].[add_time] AS [add_time], 
+    [v_shop_all].[click] AS [click], 
+    [v_shop_all].[great_count] AS [great_count], 
+    [v_shop_all].[state] AS [state], 
+    [v_shop_all].[grade_id] AS [grade_id], 
+    [v_shop_all].[accuracy_id] AS [accuracy_id], 
+    [v_shop_all].[special_point] AS [special_point], 
+    [v_shop_all].[special_time] AS [special_time], 
+    [v_shop_all].[gs_name] AS [gs_name], 
+    [v_shop_all].[update_time] AS [update_time], 
+    [v_shop_all].[iballOrder] AS [iballOrder], 
+    [v_shop_all].[sBallDirSet] AS [sBallDirSet], 
+    [v_shop_all].[iCalc_type] AS [iCalc_type], 
+    [v_shop_all].[iHitType] AS [iHitType], 
+    [v_shop_all].[LR_SCOPE] AS [LR_SCOPE], 
+    [v_shop_all].[isSix_gs] AS [isSix_gs], 
+    [v_shop_all].[jzrq] AS [jzrq], 
+    [v_shop_all].[cur_times] AS [cur_times], 
+    [v_shop_all].[collect_count] AS [collect_count], 
+    [v_shop_all].[start_time_qs] AS [start_time_qs], 
+    [v_shop_all].[end_time_qs] AS [end_time_qs], 
+    [v_shop_all].[Pushingformula] AS [Pushingformula], 
+    [v_shop_all].[is_hot] AS [is_hot], 
+    [v_shop_all].[is_vip] AS [is_vip], 
+    [v_shop_all].[is_totalclick] AS [is_totalclick], 
+    [v_shop_all].[is_weekclick] AS [is_weekclick], 
+    [v_shop_all].[is_dayclick] AS [is_dayclick], 
+    [v_shop_all].[order_num] AS [order_num]
+    FROM [dbo].[v_shop_all] AS [v_shop_all]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="v_space_log" EntityType="Self.v_space_log" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

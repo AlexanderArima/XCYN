@@ -91,6 +91,7 @@
     <Content Include="23.html" />
     <Content Include="33.html" />
     <Content Include="32.html" />
+    <Content Include="34.html" />
     <Content Include="46.html" />
     <Content Include="admin.html" />
     <Content Include="css\admin.css" />
@@ -135,6 +136,7 @@
     <Content Include="script\14.js" />
     <Content Include="script\11.js" />
     <Content Include="script\22.js" />
+    <Content Include="script\34.js" />
     <Content Include="script\33.js" />
     <Content Include="script\32.js" />
     <Content Include="script\27.js" />
@@ -146,6 +148,13 @@
     <Content Include="WebService1.asmx" />
     <Content Include="Handler1.ashx" />
     <Content Include="ashx\LoginHandler.ashx" />
+    <Content Include="nav.json" />
+    <Content Include="ashx\TreeHandler.ashx" />
+    <Content Include="tree.json" />
+    <Content Include="RegisterHandler.ashx" />
+    <Content Include="33_data.json" />
+    <Content Include="34_data.json" />
+    <Content Include="ashx\UserHandler.ashx" />
     <EntityDeploy Include="model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -153,11 +162,6 @@
     <Content Include="model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="nav.json" />
-    <Content Include="ashx\TreeHandler.ashx" />
-    <Content Include="tree.json" />
-    <Content Include="RegisterHandler.ashx" />
-    <Content Include="33_data.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -695,7 +699,9 @@
     <Content Include="easyui\themes\metro\validatebox.css" />
     <Content Include="easyui\themes\metro\window.css" />
     <Content Include="script\9.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ashx\LoginHandler.ashx.cs">
@@ -703,6 +709,9 @@
     </Compile>
     <Compile Include="ashx\TreeHandler.ashx.cs">
       <DependentUpon>TreeHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\UserHandler.ashx.cs">
+      <DependentUpon>UserHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handler1.ashx.cs">
       <DependentUpon>Handler1.ashx</DependentUpon>
@@ -944,6 +953,9 @@
     <Compile Include="model\v_recommend.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\v_shop_all.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\v_space_log.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -962,6 +974,9 @@
     <Compile Include="model\whan_ball_attr_table.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\zcp_ads.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\zcp_article_post_collect.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -978,6 +993,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_attr_relation_table.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\zcp_auth_expert.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\zcp_auth_master.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_ballnum_attrValue_map.cs">
@@ -1070,6 +1091,9 @@
     <Compile Include="model\zcp_formula_praise.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\zcp_formula_query_quantity.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\zcp_formula_rank.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1082,7 +1106,16 @@
     <Compile Include="model\zcp_formu_order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\zcp_formu_select_authority.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\zcp_form_hitrate.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\zcp_help.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\zcp_help_cate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_info.cs">
@@ -1253,6 +1286,9 @@
     <Compile Include="model\zcp_SEQUENCE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\zcp_signIn.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\zcp_space_log.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1263,6 +1299,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_test.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\zcp_third_account.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_third_party.cs">
@@ -1293,6 +1332,7 @@
     <Compile Include="RegisterHandler.ashx.cs">
       <DependentUpon>RegisterHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DataGridViewModel.cs" />
     <Compile Include="ViewModel\NavViewModel.cs" />
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>

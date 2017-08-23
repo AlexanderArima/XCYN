@@ -33,5 +33,6 @@ namespace XCYN.EasyUI.model
         public Nullable<bool> is_vipclick { get; set; }
         public Nullable<int> vipclick_rank { get; set; }
         public Nullable<bool> is_last { get; set; }
+        public Nullable<int> last_rank { get; set; }
     }
 }

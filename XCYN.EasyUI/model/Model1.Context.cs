@@ -63,8 +63,11 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<user_point_log> user_point_log { get; set; }
         public virtual DbSet<user_recharge> user_recharge { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<zcp_ads> zcp_ads { get; set; }
         public virtual DbSet<zcp_article_post_collect> zcp_article_post_collect { get; set; }
         public virtual DbSet<zcp_article_post_great> zcp_article_post_great { get; set; }
+        public virtual DbSet<zcp_auth_expert> zcp_auth_expert { get; set; }
+        public virtual DbSet<zcp_auth_master> zcp_auth_master { get; set; }
         public virtual DbSet<zcp_bank> zcp_bank { get; set; }
         public virtual DbSet<zcp_bank_account> zcp_bank_account { get; set; }
         public virtual DbSet<zcp_bank_transfer> zcp_bank_transfer { get; set; }
@@ -78,13 +81,18 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_focus> zcp_focus { get; set; }
         public virtual DbSet<zcp_form_hitrate> zcp_form_hitrate { get; set; }
         public virtual DbSet<zcp_formu_order> zcp_formu_order { get; set; }
+        public virtual DbSet<zcp_formu_select_authority> zcp_formu_select_authority { get; set; }
         public virtual DbSet<zcp_formula_click> zcp_formula_click { get; set; }
         public virtual DbSet<zcp_formula_coefficient> zcp_formula_coefficient { get; set; }
+        public virtual DbSet<zcp_formula_collect> zcp_formula_collect { get; set; }
         public virtual DbSet<zcp_formula_comment> zcp_formula_comment { get; set; }
         public virtual DbSet<zcp_formula_commentpraise> zcp_formula_commentpraise { get; set; }
         public virtual DbSet<zcp_formula_ext> zcp_formula_ext { get; set; }
+        public virtual DbSet<zcp_formula_query_quantity> zcp_formula_query_quantity { get; set; }
         public virtual DbSet<zcp_formula_rank> zcp_formula_rank { get; set; }
         public virtual DbSet<zcp_formula_reward> zcp_formula_reward { get; set; }
+        public virtual DbSet<zcp_help> zcp_help { get; set; }
+        public virtual DbSet<zcp_help_cate> zcp_help_cate { get; set; }
         public virtual DbSet<zcp_info_ext> zcp_info_ext { get; set; }
         public virtual DbSet<zcp_info_small> zcp_info_small { get; set; }
         public virtual DbSet<zcp_integral_formula_category> zcp_integral_formula_category { get; set; }
@@ -124,9 +132,11 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_record_smallClass> zcp_record_smallClass { get; set; }
         public virtual DbSet<zcp_record_yearClass> zcp_record_yearClass { get; set; }
         public virtual DbSet<zcp_reward_detail> zcp_reward_detail { get; set; }
+        public virtual DbSet<zcp_signIn> zcp_signIn { get; set; }
         public virtual DbSet<zcp_space_log> zcp_space_log { get; set; }
         public virtual DbSet<zcp_superior> zcp_superior { get; set; }
         public virtual DbSet<zcp_test> zcp_test { get; set; }
+        public virtual DbSet<zcp_third_account> zcp_third_account { get; set; }
         public virtual DbSet<zcp_third_party> zcp_third_party { get; set; }
         public virtual DbSet<zcp_third_transfer> zcp_third_transfer { get; set; }
         public virtual DbSet<zcp_users> zcp_users { get; set; }
@@ -159,7 +169,6 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_formula_accuracy> zcp_formula_accuracy { get; set; }
         public virtual DbSet<zcp_formula_bookmark> zcp_formula_bookmark { get; set; }
         public virtual DbSet<zcp_formula_category> zcp_formula_category { get; set; }
-        public virtual DbSet<zcp_formula_collect> zcp_formula_collect { get; set; }
         public virtual DbSet<zcp_formula_list> zcp_formula_list { get; set; }
         public virtual DbSet<zcp_formula_list2> zcp_formula_list2 { get; set; }
         public virtual DbSet<zcp_formula_point> zcp_formula_point { get; set; }
@@ -203,6 +212,7 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<v_post_expert> v_post_expert { get; set; }
         public virtual DbSet<v_post_list> v_post_list { get; set; }
         public virtual DbSet<v_recommend> v_recommend { get; set; }
+        public virtual DbSet<v_shop_all> v_shop_all { get; set; }
         public virtual DbSet<v_space_log> v_space_log { get; set; }
         public virtual DbSet<v_ta_formula> v_ta_formula { get; set; }
         public virtual DbSet<v_ta_info> v_ta_info { get; set; }

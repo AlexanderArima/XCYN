@@ -28,6 +28,7 @@ namespace XCYN.EasyUI.model
         public Nullable<int> click { get; set; }
         public string zhaiyao { get; set; }
         public Nullable<int> user_id { get; set; }
+        public string dcinfo { get; set; }
         public Nullable<int> comment_count { get; set; }
         public Nullable<int> great_count { get; set; }
     }

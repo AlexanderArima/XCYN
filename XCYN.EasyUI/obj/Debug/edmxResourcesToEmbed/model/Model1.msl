@@ -630,6 +630,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="zcp_ads">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_ads">
+        <MappingFragment StoreEntitySet="zcp_ads">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="module_name" ColumnName="module_name" />
+          <ScalarProperty Name="page_name" ColumnName="page_name" />
+          <ScalarProperty Name="page_url" ColumnName="page_url" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="max_length" ColumnName="max_length" />
+          <ScalarProperty Name="img_url" ColumnName="img_url" />
+          <ScalarProperty Name="link_url" ColumnName="link_url" />
+          <ScalarProperty Name="img_type" ColumnName="img_type" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="zcp_article_post_collect">
       <EntityTypeMapping TypeName="MeetingSysModel.zcp_article_post_collect">
         <MappingFragment StoreEntitySet="zcp_article_post_collect">
@@ -654,6 +673,30 @@
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="add_time" ColumnName="add_time" />
           <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_auth_expert">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_auth_expert">
+        <MappingFragment StoreEntitySet="zcp_auth_expert">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+          <ScalarProperty Name="auth_time" ColumnName="auth_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_auth_master">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_auth_master">
+        <MappingFragment StoreEntitySet="zcp_auth_master">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+          <ScalarProperty Name="auth_time" ColumnName="auth_time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -830,6 +873,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="zcp_formu_select_authority">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_formu_select_authority">
+        <MappingFragment StoreEntitySet="zcp_formu_select_authority">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="select_items" ColumnName="select_items" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="zcp_formula_click">
       <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_click">
         <MappingFragment StoreEntitySet="zcp_formula_click">
@@ -846,6 +898,19 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_formula_collect">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_collect">
+        <MappingFragment StoreEntitySet="zcp_formula_collect">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="formula_id" ColumnName="formula_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+          <ScalarProperty Name="b_id" ColumnName="b_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -891,6 +956,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="zcp_formula_query_quantity">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_query_quantity">
+        <MappingFragment StoreEntitySet="zcp_formula_query_quantity">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="number" ColumnName="number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="zcp_formula_rank">
       <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_rank">
         <MappingFragment StoreEntitySet="zcp_formula_rank">
@@ -909,6 +983,32 @@
         <MappingFragment StoreEntitySet="zcp_formula_reward">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_help">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_help">
+        <MappingFragment StoreEntitySet="zcp_help">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="sort" ColumnName="sort" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_help_cate">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_help_cate">
+        <MappingFragment StoreEntitySet="zcp_help_cate">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="p_id" ColumnName="p_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="sort" ColumnName="sort" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
           <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="add_time" ColumnName="add_time" />
         </MappingFragment>
@@ -1470,6 +1570,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="zcp_signIn">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_signIn">
+        <MappingFragment StoreEntitySet="zcp_signIn">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="exp" ColumnName="exp" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="series_count" ColumnName="series_count" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="zcp_space_log">
       <EntityTypeMapping TypeName="MeetingSysModel.zcp_space_log">
         <MappingFragment StoreEntitySet="zcp_space_log">
@@ -1508,6 +1621,22 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="formu_id" ColumnName="formu_id" />
           <ScalarProperty Name="hitinfo" ColumnName="hitinfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zcp_third_account">
+      <EntityTypeMapping TypeName="MeetingSysModel.zcp_third_account">
+        <MappingFragment StoreEntitySet="zcp_third_account">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="account_name" ColumnName="account_name" />
+          <ScalarProperty Name="card" ColumnName="card" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="icon_pay" ColumnName="icon_pay" />
+          <ScalarProperty Name="is_soloShow" ColumnName="is_soloShow" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1926,19 +2055,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="zcp_formula_collect">
-      <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_collect">
-        <MappingFragment StoreEntitySet="zcp_formula_collect">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="category_id" ColumnName="category_id" />
-          <ScalarProperty Name="formula_id" ColumnName="formula_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="state" ColumnName="state" />
-          <ScalarProperty Name="add_time" ColumnName="add_time" />
-          <ScalarProperty Name="b_id" ColumnName="b_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="zcp_formula_list">
       <EntityTypeMapping TypeName="MeetingSysModel.zcp_formula_list">
         <MappingFragment StoreEntitySet="zcp_formula_list">
@@ -2275,6 +2391,7 @@
           <ScalarProperty Name="is_vipclick" ColumnName="is_vipclick" />
           <ScalarProperty Name="vipclick_rank" ColumnName="vipclick_rank" />
           <ScalarProperty Name="is_last" ColumnName="is_last" />
+          <ScalarProperty Name="last_rank" ColumnName="last_rank" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2390,6 +2507,7 @@
           <ScalarProperty Name="click" ColumnName="click" />
           <ScalarProperty Name="zhaiyao" ColumnName="zhaiyao" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="dcinfo" ColumnName="dcinfo" />
           <ScalarProperty Name="comment_count" ColumnName="comment_count" />
           <ScalarProperty Name="great_count" ColumnName="great_count" />
         </MappingFragment>
@@ -2755,6 +2873,49 @@
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="reg_time" ColumnName="reg_time" />
           <ScalarProperty Name="reg_ip" ColumnName="reg_ip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_shop_all">
+      <EntityTypeMapping TypeName="MeetingSysModel.v_shop_all">
+        <MappingFragment StoreEntitySet="v_shop_all">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="formula_info" ColumnName="formula_info" />
+          <ScalarProperty Name="formula_name" ColumnName="formula_name" />
+          <ScalarProperty Name="right_id" ColumnName="right_id" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="b_id" ColumnName="b_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+          <ScalarProperty Name="click" ColumnName="click" />
+          <ScalarProperty Name="great_count" ColumnName="great_count" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+          <ScalarProperty Name="accuracy_id" ColumnName="accuracy_id" />
+          <ScalarProperty Name="special_point" ColumnName="special_point" />
+          <ScalarProperty Name="special_time" ColumnName="special_time" />
+          <ScalarProperty Name="gs_name" ColumnName="gs_name" />
+          <ScalarProperty Name="update_time" ColumnName="update_time" />
+          <ScalarProperty Name="iballOrder" ColumnName="iballOrder" />
+          <ScalarProperty Name="sBallDirSet" ColumnName="sBallDirSet" />
+          <ScalarProperty Name="iCalc_type" ColumnName="iCalc_type" />
+          <ScalarProperty Name="iHitType" ColumnName="iHitType" />
+          <ScalarProperty Name="LR_SCOPE" ColumnName="LR_SCOPE" />
+          <ScalarProperty Name="isSix_gs" ColumnName="isSix_gs" />
+          <ScalarProperty Name="jzrq" ColumnName="jzrq" />
+          <ScalarProperty Name="cur_times" ColumnName="cur_times" />
+          <ScalarProperty Name="collect_count" ColumnName="collect_count" />
+          <ScalarProperty Name="start_time_qs" ColumnName="start_time_qs" />
+          <ScalarProperty Name="end_time_qs" ColumnName="end_time_qs" />
+          <ScalarProperty Name="Pushingformula" ColumnName="Pushingformula" />
+          <ScalarProperty Name="is_hot" ColumnName="is_hot" />
+          <ScalarProperty Name="is_vip" ColumnName="is_vip" />
+          <ScalarProperty Name="is_totalclick" ColumnName="is_totalclick" />
+          <ScalarProperty Name="is_weekclick" ColumnName="is_weekclick" />
+          <ScalarProperty Name="is_dayclick" ColumnName="is_dayclick" />
+          <ScalarProperty Name="order_num" ColumnName="order_num" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
