@@ -23,3 +23,4 @@ d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.WS.APP\bin\Debug\zh-Hans\M
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.WS.APP\bin\Debug\Microsoft.Owin.Cors.dll
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.WS.APP\bin\Debug\System.Web.Cors.dll
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.WS.APP\bin\Debug\Microsoft.Owin.Cors.xml
+D:\我的文档\Visual Studio 2015\Projects\XCYN\XCYN.WS.APP\bin\Debug\zh-Hans\Microsoft.AspNet.SignalR.Core.resources.dll

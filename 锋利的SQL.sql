@@ -1083,8 +1083,57 @@ output deleted.* ,inserted.*
 where id = 9
 
 
----------------第11章 视图---------------
+---------------第11章 视图-------------------
 
+---------------第12章 游标-------------------
+
+--12.1 游标主要应用于存储过程和触发器
+--步骤1 声明变量，用于包含游标的变量
+--步骤2 使用Declare Cursor语句将游标与Select语句相关联，另外它还定义了游标名称和只读还是只进
+--步骤3 使用Open语句，执行Select语句并填充游标
+--步骤4 使用Fetch into语句提取单个行，并将每列数据移至指定变量中。然后其他变量可以引用变量来访问提取的数据值
+--步骤5 使用Close语句结束游标的使用。关闭游标可以释放某些资源。Deallocate语句可以完全释放分配给游标的资源。
+
+alter procedure GetPosts
+as 
+declare @id int;
+declare @title varchar(50);
+declare @add_time datetime;
+
+--声明游标
+declare myFirstCursor cursor local for
+select id,title,add_time 
+from zcp_post
+order by id desc
+for read only
+
+--打开游标
+open myFirstCursor;
+while 0 = 0
+begin
+	fetch next --读取行
+		from myFirstCursor
+		into @id,@title,@add_time
+	if @@FETCH_STATUS <> 0	--非0表示执行失败
+	begin
+		break;--跳出循环
+	end
+	print cast(@id as varchar(10)) + '-' + @title + '-' + cast(@add_time as varchar(20))
+end
+
+close myFirstCursor		--关闭游标
+deallocate myFirstCursor	--释放游标资源
+go
+
+exec GetPosts
+
+--建议在声明游标的局部游标(local)，这样名字不会冲突
+
+-- 12.2快速只进游标和可滚动游标
+-- 默认情况下，创建的游标是只进游标，不支持滚动，只能按照从头到尾的顺序提取行。
+-- 对于Fetch语句来说，也就是只能进行Fetch Next，而不能向前提取。
+-- 为了提高只进游标的性能，可以在Cursor语句之后添加Fast_Forward关键字，在打开游标时，查询优化器可以对游标中的Select语句进行优化
+-- 但是如果指定了Scroll(创建滚动游标)或For Update(可更新游标)，则不能指定Fast_Forward
 
 ---------------第13章 存储过程---------------
 

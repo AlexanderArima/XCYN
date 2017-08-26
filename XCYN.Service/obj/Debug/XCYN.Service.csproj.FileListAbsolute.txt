@@ -3,3 +3,4 @@ d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\bin\Debug\XCYN.Ser
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\bin\Debug\XCYN.Service.pdb
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\obj\Debug\XCYN.Service.exe
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Service\obj\Debug\XCYN.Service.pdb
+D:\我的文档\Visual Studio 2015\Projects\XCYN\XCYN.Service\obj\Debug\XCYN.Service.csprojResolveAssemblyReference.cache

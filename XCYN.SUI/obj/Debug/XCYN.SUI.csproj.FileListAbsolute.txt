@@ -17,3 +17,4 @@ d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.SUI\bin\Microsoft.CodeDom.
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.SUI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.SUI\obj\Debug\XCYN.SUI.dll
 d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.SUI\obj\Debug\XCYN.SUI.pdb
+D:\我的文档\Visual Studio 2015\Projects\XCYN\XCYN.SUI\obj\Debug\XCYN.SUI.csprojResolveAssemblyReference.cache

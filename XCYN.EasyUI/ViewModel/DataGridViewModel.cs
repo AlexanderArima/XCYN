@@ -10,5 +10,6 @@ namespace XCYN.EasyUI.ViewModel
     {
         public int total { get; set; }
         public IList rows { get; set; }
+        public IList footer { get; set; }
     }
 }

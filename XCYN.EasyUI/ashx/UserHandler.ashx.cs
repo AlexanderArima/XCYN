@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.SqlServer;
 using System.Linq;
@@ -66,10 +67,13 @@ namespace XCYN.EasyUI.ashx
                 }
                 query = query.Skip((page - 1) * pageSize).Take(pageSize);
                 var list = query.ToList();
-                //for (int i = 0; i < list.Count; i++)
-                //{
-                //    list[i].reg_time = 
-                //}
+                //声明页尾
+                //ArrayList list_footer = new ArrayList();
+                //Dictionary<string, string> dict = new Dictionary<string, string>();
+                //dict.Add("id", "1");
+                //dict.Add("reg_time", "2");
+                //dict.Add("user_name", "3");
+                //list_footer.Add(dict);
                 DataGridViewModel viewModel = new DataGridViewModel
                 {
                     total = count,
