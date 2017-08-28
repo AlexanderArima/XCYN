@@ -1,5 +1,0 @@
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Common\bin\Debug\XCYN.Common.dll
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Common\bin\Debug\XCYN.Common.pdb
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Common\obj\Debug\XCYN.Common.csprojResolveAssemblyReference.cache
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Common\obj\Debug\XCYN.Common.dll
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Common\obj\Debug\XCYN.Common.pdb

@@ -91,6 +91,8 @@
     <Content Include="23.html" />
     <Content Include="33.html" />
     <Content Include="32.html" />
+    <Content Include="38.html" />
+    <Content Include="35.html" />
     <Content Include="34.html" />
     <Content Include="46.html" />
     <Content Include="admin.html" />
@@ -136,6 +138,8 @@
     <Content Include="script\14.js" />
     <Content Include="script\11.js" />
     <Content Include="script\22.js" />
+    <Content Include="script\38.js" />
+    <Content Include="script\35.js" />
     <Content Include="script\34.js" />
     <Content Include="script\33.js" />
     <Content Include="script\32.js" />
@@ -1334,6 +1338,7 @@
     </Compile>
     <Compile Include="ViewModel\DataGridViewModel.cs" />
     <Compile Include="ViewModel\NavViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>

@@ -1,8 +1,0 @@
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\bin\Debug\XCYN.Redis.exe.config
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\bin\Debug\XCYN.Redis.exe
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\bin\Debug\XCYN.Redis.pdb
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\bin\Debug\StackExchange.Redis.dll
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\bin\Debug\StackExchange.Redis.xml
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\obj\Debug\XCYN.Redis.exe
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\obj\Debug\XCYN.Redis.pdb
-d:\我的文档\visual studio 2015\Projects\XCYN\XCYN.Redis\obj\Debug\XCYN.Redis.csprojResolveAssemblyReference.cache

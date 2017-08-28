@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,10 @@ namespace XCYN.EasyUI.ashx
 
         public void ProcessRequest(HttpContext context)
         {
+            //获取查询参数
+            string user_name = !string.IsNullOrEmpty(context.Request["user_name"]) ? context.Request["user_name"] : string.Empty;
+            DateTime reg_from = !string.IsNullOrEmpty(context.Request["reg_from"]) ? Convert.ToDateTime(context.Request["reg_from"]) : new DateTime(1970,1,1);
+            DateTime reg_to = !string.IsNullOrEmpty(context.Request["reg_to"]) ? Convert.ToDateTime(context.Request["reg_to"]) : new DateTime(1970, 1, 1);
             int page = Convert.ToInt32(context.Request["page"]);
             int pageSize = Convert.ToInt32(context.Request["rows"]);
             string sort = context.Request["sort"];
@@ -28,11 +33,25 @@ namespace XCYN.EasyUI.ashx
             {
                 var query = from a in db.users
                             where a.status != 0
-                            select new {
+                            select new UserViewModel
+                            {
                                 id = a.id,
                                 user_name = a.user_name,
-                                reg_time = SqlFunctions.DateName("yyyy",a.reg_time) + "-" + SqlFunctions.DateName("mm", a.reg_time) + "-" + SqlFunctions.DatePart("dd", a.reg_time),
+                                //reg_time = SqlFunctions.DateName("yyyy",a.reg_time) + "-" + SqlFunctions.DateName("mm", a.reg_time) + "-" + SqlFunctions.DatePart("dd", a.reg_time)),
+                                reg_time = a.reg_time.Value
                             };
+                if(user_name.Length > 0)
+                {
+                    query = query.Where(i => i.user_name.Contains(user_name));
+                }
+                if (reg_from.Year != 1970)
+                {
+                    query = query.Where(i => i.reg_time > reg_from);
+                }
+                if (reg_to.Year != 1970)
+                {
+                    query = query.Where(i => i.reg_time < reg_to);
+                }
                 int count = query.Count();
                 query = query.OrderBy(m => m.id);
                 if (order.ToLower().Equals("asc"))
@@ -74,12 +93,19 @@ namespace XCYN.EasyUI.ashx
                 //dict.Add("reg_time", "2");
                 //dict.Add("user_name", "3");
                 //list_footer.Add(dict);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    list[i].reg_time = Convert.ToDateTime(list[i].reg_time.ToString("yyyy-MM-dd"));
+                }
                 DataGridViewModel viewModel = new DataGridViewModel
                 {
                     total = count,
                     rows = list,
                 };
-                context.Response.Write(JsonConvert.SerializeObject(viewModel));
+                context.Response.Write(JsonConvert.SerializeObject(viewModel, new IsoDateTimeConverter()
+                {
+                    DateTimeFormat = "yyyy-MM-dd HH:mm:ss",
+                }));
                 context.Response.End();
             }
         }
