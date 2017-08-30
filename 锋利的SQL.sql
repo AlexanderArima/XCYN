@@ -1135,12 +1135,49 @@ exec GetPosts
 -- 为了提高只进游标的性能，可以在Cursor语句之后添加Fast_Forward关键字，在打开游标时，查询优化器可以对游标中的Select语句进行优化
 -- 但是如果指定了Scroll(创建滚动游标)或For Update(可更新游标)，则不能指定Fast_Forward
 
+--例子
+select * from zcp_post
+order by id desc
+go
+
+--声明存储过程
+alter procedure p_post
+as 
+--声明游标
+declare c_post scroll cursor for
+	select * from zcp_post
+
+--打开游标
+open c_post;
+--读取最后一行
+fetch last from c_post
+
+--读取当前行的前一行
+fetch prior from c_post
+
+--读取游标中的第二行
+fetch absolute 2 from c_post
+
+--读取当前行的第三行
+fetch relative 3 from c_post
+
+--读取当前行的第三行
+fetch relative -2 from c_post
+
+--关闭游标
+close c_post
+deallocate c_post
+go
+
+exec p_post
+go
 ---------------第13章 存储过程---------------
 
 --创建存储过程
-create procedure myProcedure
+alter procedure myProcedure
 as
 	select * from users
+go
 
 --修改存储过程
 alter proc myProcedure
@@ -1148,10 +1185,11 @@ as
 	select top 1 * from users
 --调用存储过程
 execute myProcedure
+go
 
 --try和catch块
 --创建存储过程检索错误信息
-create proc usp_GetErrorInfo
+alter proc usp_GetErrorInfo
 as
 select ERROR_NUMBER() as ERROR_NUMBER,
 	   ERROR_SEVERITY() as ERROR_SEVERITY,
@@ -1183,3 +1221,83 @@ select @@NESTLEVEL as NESTLEVEL
 exec('select @@NESTLEVEL as NESTLEVEL')
 exec sp_executesql  N'select @@NESTLEVEL as NESTLEVEL'
 
+
+
+---------------第14章 触发器---------------
+
+--14.1 DML触发器
+--触发器分为After触发器，Instead Of触发器和CLR触发器
+--14.1.1 AFTER触发器
+
+--例子
+--创建主表
+create table PriTable
+(OrderID int identity(1,1),OrderTotal money)
+--创建详情表
+create table DetailTable
+(OrderID int,ProductID int,ProductCount int not null,Price money);
+go
+
+--向主表中插入数据 
+insert into PriTable values(2100)
+insert into PriTable values(1000)
+--向明细表中插入订单的产品信息
+insert into DetailTable values(1,1,10,110)
+insert into DetailTable values(1,2,10,100)
+insert into DetailTable values(2,2,10,100)
+go
+
+--为PriTable表添加触发器
+create trigger PriTrigger
+on PriTable
+for Delete
+as
+delete from DetailTable
+where OrderID in(select OrderID from Deleted);
+Print N'已经删除了DetailTable表中的相关数据'
+
+select * from PriTable
+select * from DetailTable
+
+--接下来让我们删除PriTable表的第一行
+Delete from PriTable 
+where OrderID = 2
+
+--14.1.2 进行事务提交和回滚操作
+--在自动事务处理模式下，当语句遇到错误时，会有隐含的BeginTransaction语句来回滚该语句所影响的修改。
+--但是，该回滚对批处理中的其他语句没有影响，不会回滚前面操作正常的语句。
+--因为语句完成时，该事务要么提交要么回滚，事务处理已经结束。
+--需要注意的是，这个回滚操作也会终止批处理中对该语句的后面语句的执行。
+
+--例子
+
+--创建表
+create table DetailTable
+(OrderID int,ProductID int,ProductCount int not null,Price money);
+create table DetailTable1
+(OrderID int,ProductID int,ProductCount int not null,Price money);
+go
+--创建触发器，将插入表DetailTable的数据复制到DetailTable1中
+alter trigger DetailTrigger
+on DetailTable
+after Insert
+as 
+	begin transaction
+	insert into DetailTable1 
+		select * from inserted;
+	
+	if(@@ERROR <> 0 or Exists(select * from inserted where ProductID = 0 or ProductCount = 0 or Price = 0))
+	begin
+		rollback transaction
+	end
+	else 
+	begin
+		commit transaction
+	end
+	--rollback transaction
+
+insert into DetailTable values(2,1,1,88)
+go
+
+select * from DetailTable
+select * from DetailTable1
