@@ -1301,3 +1301,69 @@ go
 
 select * from DetailTable
 select * from DetailTable1
+
+--14.1.5 嵌套和递归触发器
+--1.嵌套触发器
+
+sp_configure 'nested triggers',1; --允许触发器嵌套
+go
+reconfigure --使用新环境值
+go
+exec sp_configure 'nested triggers' --查看nested triggers选项设置
+go
+
+--例子
+
+--创建主表
+create table PriTable
+(OrderID int identity(1,1),OrderTotal money)
+--创建详情表
+create table DetailTable
+(OrderID int,ProductID int,ProductCount int not null,Price money);
+--创建备份表
+create table DetailTableBak
+(OrderID int,ProductID int,ProductCount int not null,Price money);
+go
+
+--向主表中插入数据 
+insert into PriTable values(2100)
+insert into PriTable values(1000)
+--向明细表中插入订单的产品信息
+insert into DetailTable values(1,1,10,110)
+insert into DetailTable values(1,2,10,100)
+insert into DetailTable values(2,2,10,100)
+go
+
+--为PriTable表创建触发器
+create trigger PriTrigger
+on PriTable
+after delete
+as 
+	delete from DetailTable 
+	where OrderID in (select OrderID from deleted)
+go
+
+--为DetailTable表创建触发器
+alter trigger DetailDelTrigger
+on DetailTable
+after delete 
+as 
+	insert into DetailTableBak
+	select * from deleted
+go
+
+--测试触发器
+delete from DetailTable
+truncate table PriTable
+delete from DetailTableBak
+
+delete from PriTable
+where OrderID = 1
+
+select * from DetailTableBak
+select * from DetailTable
+select * from PriTable
+
+--2.递归触发器
+
+

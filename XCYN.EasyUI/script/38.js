@@ -24,7 +24,7 @@ $(function () {
 
     //全局对象
     global = {
-        editable:true,
+        editable:undefined,
         search: function () {
             console.log($("#reg_from").datebox('getValue'))
             $("#table_users").datagrid("load",{
@@ -34,15 +34,10 @@ $(function () {
             });
         },
         add: function () {
-            if (!this.editable)
+            if (this.editable != undefined)
             {
                 return;
             }
-            //if ($("#button_save").css("display") != "none")
-            //{
-            //    //正在编辑，则返回
-            //    return;
-            //}
             //开启编辑状态
             $("#table_users").datagrid('insertRow', {
                 index: 0,
@@ -53,20 +48,37 @@ $(function () {
             })
             $("#table_users").datagrid('beginEdit', 0)
             //显示保存和取消按钮
-            $("#button_save").show();
-            $("#button_cancel").show();
-            this.editable = false;
+            $("#button_save,#button_cancel").show();
+            this.editable = 0;
         },
         save: function () {
            //结束编辑
-           $("#table_users").datagrid("endEdit",0);
+            $("#table_users").datagrid("endEdit", this.editable);
         },
         cancel: function () {
-            $("#button_save").hide();
-            $("#button_cancel").hide();
-            this.editable = true;
+            $("#button_save,#button_cancel").hide();
+            this.editable = undefined;
             //回滚所有编辑
             $("#table_users").datagrid("rejectChanges");
+        },
+        update: function () {
+            //获取选中的行
+            //console.log($("#table_users").datagrid("getSelected"))
+            var rows = $("#table_users").datagrid("getRows");
+            var selected_row = $("#table_users").datagrid("getRowIndex", $("#table_users").datagrid("getSelected"));
+            if (selected_row > -1)
+            {
+                for (var i = 0; i < rows.length; i++) {
+                    $("#table_users").datagrid("endEdit", $("#table_users").datagrid("getRowIndex", rows[i]))
+                }
+                $("#table_users").datagrid("beginEdit", selected_row);
+                $("#button_save,#button_cancel").show();
+                global.editable = selected_row;
+            }
+            else
+            {
+                $.messager.alert("提示", "请选择一行!", "info");
+            }
         }
     }
 
@@ -117,13 +129,18 @@ $(function () {
         sortName: 'id',
         sortOrder: 'ASC',
         toolbar: "#tb",
+        singleSelect:true,
         onAfterEdit:function(rowIndex, rowData, changes)
         {
             //编辑结束后
-            $("#button_save").hide();
-            $("#button_cancel").hide();
-            global.editable = true;
+            $("#button_save,#button_cancel").hide();
+            global.editable = undefined;
             console.log(rowData);
+        },
+        onDblClickRow: function (rowIndex, rowData)
+        {
+            //双击行
+            global.update();
         },
     })
 })

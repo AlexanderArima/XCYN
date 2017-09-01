@@ -104,7 +104,7 @@ namespace XCYN.EasyUI.ashx
                 };
                 context.Response.Write(JsonConvert.SerializeObject(viewModel, new IsoDateTimeConverter()
                 {
-                    DateTimeFormat = "yyyy-MM-dd HH:mm:ss",
+                    DateTimeFormat = "yyyy-MM-dd",
                 }));
                 context.Response.End();
             }
