@@ -19,9 +19,57 @@ namespace XCYN.EasyUI.ashx
 
         public void ProcessRequest(HttpContext context)
         {
+            string action = context.Request["action"];
+            switch (action)
+            {
+                case "query":
+                    query(context);
+                    break;
+                case "add":
+                    add(context);
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
+        private void add(HttpContext context)
+        {
+            string user_name = context.Request["user_name"];
+            string reg_time = context.Request["reg_time"];
+            try
+            {
+                using (MeetingSysEntities db = new MeetingSysEntities())
+                {
+                    var user = new user();
+                    user.user_name = user_name;
+                    user.password = "11111";
+                    user.group_id = 0;
+                    user.birthday = DateTime.Now;
+                    user.amount = 0;
+                    user.point = 0;
+                    user.exp = 0;
+                    user.status = 1;
+                    user.reg_time = Convert.ToDateTime(reg_time);
+                    var user_inserted = db.users.Add(user);
+                    db.SaveChanges();
+                    context.Response.Clear();
+                    context.Response.Write("1");
+                    context.Response.End();
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        private void query(HttpContext context)
+        {
             //获取查询参数
             string user_name = !string.IsNullOrEmpty(context.Request["user_name"]) ? context.Request["user_name"] : string.Empty;
-            DateTime reg_from = !string.IsNullOrEmpty(context.Request["reg_from"]) ? Convert.ToDateTime(context.Request["reg_from"]) : new DateTime(1970,1,1);
+            DateTime reg_from = !string.IsNullOrEmpty(context.Request["reg_from"]) ? Convert.ToDateTime(context.Request["reg_from"]) : new DateTime(1970, 1, 1);
             DateTime reg_to = !string.IsNullOrEmpty(context.Request["reg_to"]) ? Convert.ToDateTime(context.Request["reg_to"]) : new DateTime(1970, 1, 1);
             int page = Convert.ToInt32(context.Request["page"]);
             int pageSize = Convert.ToInt32(context.Request["rows"]);
@@ -40,7 +88,7 @@ namespace XCYN.EasyUI.ashx
                                 //reg_time = SqlFunctions.DateName("yyyy",a.reg_time) + "-" + SqlFunctions.DateName("mm", a.reg_time) + "-" + SqlFunctions.DatePart("dd", a.reg_time)),
                                 reg_time = a.reg_time.Value
                             };
-                if(user_name.Length > 0)
+                if (user_name.Length > 0)
                 {
                     query = query.Where(i => i.user_name.Contains(user_name));
                 }
@@ -53,14 +101,14 @@ namespace XCYN.EasyUI.ashx
                     query = query.Where(i => i.reg_time < reg_to);
                 }
                 int count = query.Count();
-                query = query.OrderBy(m => m.id);
+                query = query.OrderByDescending(m => m.id);
                 if (order.ToLower().Equals("asc"))
                 {
-                    if(sort.ToLower().Equals("id"))
+                    if (sort.ToLower().Equals("id"))
                     {
                         query = query.OrderBy(m => m.id);
                     }
-                    else if(sort.ToLower().Equals("reg_time"))
+                    else if (sort.ToLower().Equals("reg_time"))
                     {
                         query = query.OrderBy(m => m.reg_time);
                     }

@@ -1,6 +1,12 @@
 ﻿
 $(function () {
 
+    //var timestamp3 = "/Date(15213464464)/".replace("/Date(", "").replace(")/", "");
+    //alert(timestamp3);
+    //var newDate = new Date();
+    //newDate.setTime(timestamp3 * 1000);
+    //alert(newDate.toDateString());
+
     $.extend($.fn.validatebox.defaults.rules, {
         date: {
             validator: function (value, param) {
@@ -14,7 +20,7 @@ $(function () {
     function RQcheck(RQ) {
         var date = RQ;
         var result = date.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
-
+       
         if (result == null)
             return false;
         var d = new Date(result[1], result[3] - 1, result[4]);
@@ -24,6 +30,7 @@ $(function () {
 
     //全局对象
     global = {
+        action:"",
         editable:undefined,
         search: function () {
             console.log($("#reg_from").datebox('getValue'))
@@ -49,10 +56,33 @@ $(function () {
             $("#table_users").datagrid('beginEdit', 0)
             //显示保存和取消按钮
             $("#button_save,#button_cancel").show();
+            $("#table_users").datagrid('selectRow', 0);//选中第一行
             this.editable = 0;
+            this.action = "add";
         },
         save: function () {
-           //结束编辑
+            //结束编辑
+            if (this.action == "add")
+            {
+                
+                //添加，并获取那一行的数据
+                //var user_name = $("#table_users").datagrid('getEditor', { index: 0, field: 'user_name' });
+                //var reg_time = $("#table_users").datagrid('getEditor', { index: 0, field: 'reg_time' });
+                //console.log(reg_time);
+                //$.post("../ashx/UserHandler.ashx",
+                //    {
+                //        action: "add",
+                //        user_name: user_name,
+                //        reg_time: reg_time,
+                //    },
+                //    function (data) {
+                //        if(data == "1")
+                //        {
+                //            $("#table_users").datagrid("reload")
+                //        }
+                //    })
+                //console.log(row);
+            }
             $("#table_users").datagrid("endEdit", this.editable);
         },
         cancel: function () {
@@ -73,7 +103,8 @@ $(function () {
                 }
                 $("#table_users").datagrid("beginEdit", selected_row);
                 $("#button_save,#button_cancel").show();
-                global.editable = selected_row;
+                this.editable = selected_row;
+                this.action = "update";
             }
             else
             {
@@ -84,7 +115,7 @@ $(function () {
 
     $("#table_users").datagrid({
         width: 600,
-        url: 'ashx/UserHandler.ashx',
+        url: 'ashx/UserHandler.ashx?action=query',
         title: "用户列表",
         iconCls: "icon-add",
         fitColumns:true,
@@ -132,10 +163,27 @@ $(function () {
         singleSelect:true,
         onAfterEdit:function(rowIndex, rowData, changes)
         {
+            var inserted_row = $("#table_users").datagrid('getChanges', 'inserted');
+            $.post("../ashx/UserHandler.ashx",
+                {
+                    action: "add",
+                    user_name: inserted_row[0].user_name,
+                    reg_time: inserted_row[0].reg_time,
+                },
+                function (data) {
+                    if(data == "1")
+                    {
+                        $("#table_users").datagrid("reload")
+                    }
+                    else
+                    {
+                        $("#table_users").datagrid('rejectChanges');
+                    }
+                })
             //编辑结束后
             $("#button_save,#button_cancel").hide();
             global.editable = undefined;
-            console.log(rowData);
+            global.action = "";
         },
         onDblClickRow: function (rowIndex, rowData)
         {

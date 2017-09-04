@@ -1365,5 +1365,12 @@ select * from DetailTable
 select * from PriTable
 
 --2.递归触发器
+--递归分为，直接递归和间接递归
+--直接递归：在触发器触发并执行一个导致一个触发器再出触发的操作时，将发生递归。
+--间接递归：触发器触发并执行另一个触发器的操作时，该触发器却再次触发了第一个触发器，这就产生了间接递归
+--ps：只有在设置了Recursive_Triggers的数据项为ON的情况下，才允许以递归的方式调用After触发器。
+--例如：
+set recursive_triggers on;
+--在将Recursive_triggers设置为OFF时，仅能防止直接递归。如果要禁用间接递归，还应该将nest triggers服务器选项设置为0
 
 
