@@ -62,27 +62,6 @@ $(function () {
         },
         save: function () {
             //结束编辑
-            if (this.action == "add")
-            {
-                
-                //添加，并获取那一行的数据
-                //var user_name = $("#table_users").datagrid('getEditor', { index: 0, field: 'user_name' });
-                //var reg_time = $("#table_users").datagrid('getEditor', { index: 0, field: 'reg_time' });
-                //console.log(reg_time);
-                //$.post("../ashx/UserHandler.ashx",
-                //    {
-                //        action: "add",
-                //        user_name: user_name,
-                //        reg_time: reg_time,
-                //    },
-                //    function (data) {
-                //        if(data == "1")
-                //        {
-                //            $("#table_users").datagrid("reload")
-                //        }
-                //    })
-                //console.log(row);
-            }
             $("#table_users").datagrid("endEdit", this.editable);
         },
         cancel: function () {
@@ -110,6 +89,27 @@ $(function () {
             {
                 $.messager.alert("提示", "请选择一行!", "info");
             }
+        },
+        delete: function () {
+            var list_checked = $("#table_users").datagrid("getChecked");
+            if (list_checked.length > 0)
+            {
+                $.messager.confirm("确认操作", "您确定要删除所有的记录吗?", function (flag) {
+                    if(flag)
+                    {
+                        var list_id = [];
+                        for (var i = 0; i < list_checked.length; i++) {
+                            list_id.push(list_checked[i].id);
+                        }
+                        console.log(list_id.join(','))
+                    }
+                });
+                
+            }
+            else
+            {
+                $.messager.alert("提示", "请选择要删除的记录", "info");
+            }
         }
     }
 
@@ -125,7 +125,7 @@ $(function () {
                 title: '用户id',
                 sortable: true,
                 width: 50,
-                hidden:true,
+                checkbox:true,
             },
             {
                 field: 'user_name',
@@ -160,26 +160,48 @@ $(function () {
         sortName: 'id',
         sortOrder: 'ASC',
         toolbar: "#tb",
-        singleSelect:true,
+        //singleSelect:true,
         onAfterEdit:function(rowIndex, rowData, changes)
         {
-            var inserted_row = $("#table_users").datagrid('getChanges', 'inserted');
-            $.post("../ashx/UserHandler.ashx",
-                {
-                    action: "add",
-                    user_name: inserted_row[0].user_name,
-                    reg_time: inserted_row[0].reg_time,
-                },
-                function (data) {
-                    if(data == "1")
+            if (global.action == "add")
+            {
+                //添加，并获取那一行的数据
+                var inserted_row = $("#table_users").datagrid('getChanges', 'inserted');
+                $.post("../ashx/UserHandler.ashx",
                     {
-                        $("#table_users").datagrid("reload")
-                    }
-                    else
+                        action: "add",
+                        user_name: inserted_row[0].user_name,
+                        reg_time: inserted_row[0].reg_time,
+                    },
+                    function (data) {
+                        if (data == "1") {
+                            $("#table_users").datagrid("reload")
+                        }
+                        else {
+                            $("#table_users").datagrid('rejectChanges');
+                        }
+                    });
+            }
+            else if (global.action == "update")
+            {
+                var updated_row = $("#table_users").datagrid('getChanges', 'updated');
+                $.post("../ashx/UserHandler.ashx",
                     {
-                        $("#table_users").datagrid('rejectChanges');
-                    }
-                })
+                        action: "update",
+                        id: updated_row[updated_row.length - 1].id,
+                        user_name: updated_row[updated_row.length - 1].user_name,
+                        reg_time: updated_row[updated_row.length - 1].reg_time,
+                    },
+                    function (data)
+                    {
+                        if (data == "1") {
+                            $("#table_users").datagrid("reload")
+                        }
+                        else {
+                            $("#table_users").datagrid('rejectChanges');
+                        }
+                    });
+            }
             //编辑结束后
             $("#button_save,#button_cancel").hide();
             global.editable = undefined;
@@ -188,7 +210,7 @@ $(function () {
         onDblClickRow: function (rowIndex, rowData)
         {
             //双击行
-            global.update();
+            //global.update();
         },
     })
 })

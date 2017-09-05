@@ -28,12 +28,43 @@ namespace XCYN.EasyUI.ashx
                 case "add":
                     add(context);
                     break;
+                case "update":
+                    update(context);
+                    break;
                 default:
                     break;
             }
             
         }
 
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="context"></param>
+        private void update(HttpContext context)
+        {
+            string user_name = context.Request["user_name"];
+            string reg_time = context.Request["reg_time"];
+            int id = Convert.ToInt32(context.Request["id"]);
+            using (MeetingSysEntities db = new MeetingSysEntities())
+            {
+                var query = from a in db.users
+                           where a.id == id
+                           select a;
+                var users = query.FirstOrDefault();
+                users.user_name = user_name;
+                users.reg_time = Convert.ToDateTime(reg_time);
+                db.SaveChanges();
+                context.Response.Clear();
+                context.Response.Write("1");
+                context.Response.End();
+            }
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="context"></param>
         private void add(HttpContext context)
         {
             string user_name = context.Request["user_name"];
@@ -44,7 +75,7 @@ namespace XCYN.EasyUI.ashx
                 {
                     var user = new user();
                     user.user_name = user_name;
-                    user.password = "11111";
+                    user.password = "111111";
                     user.group_id = 0;
                     user.birthday = DateTime.Now;
                     user.amount = 0;

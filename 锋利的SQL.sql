@@ -1373,4 +1373,115 @@ select * from PriTable
 set recursive_triggers on;
 --在将Recursive_triggers设置为OFF时，仅能防止直接递归。如果要禁用间接递归，还应该将nest triggers服务器选项设置为0
 
+--例子
+--允许递归
+alter database MeetingSys
+	set recursive_triggers on
+go
 
+--创建表
+create table emp_mgr
+(
+	emp char(30) primary key,
+	mgr char(30) null foreign key references emp_mgr(emp),
+	mycount int default 0,
+);
+go
+
+--创建insert触发器，当插入新行时，增加相应的经理的管理人数
+create trigger emp_mgr_insert
+on emp_mgr
+after insert
+as 
+	update emp_mgr
+	set emp_mgr.mycount = emp_mgr.mycount + 1
+	from inserted
+	where emp_mgr.emp = inserted.mgr;
+go
+
+--创建Update触发器，当调整雇员的经理时，则相应调整经理的管理人数
+--该触发器要求每次仅更新一条雇员的经理
+create trigger emp_mgr_update
+on emp_mgr
+after update
+as 
+	if update(mgr)
+	begin
+		update emp_mgr
+		set emp_mgr.mycount = emp_mgr.mycount + 1
+		from inserted
+		where emp_mgr.emp = inserted.mgr;
+
+		update emp_mgr
+		set emp_mgr.mycount = emp_mgr.mycount - 1
+		from deleted
+		where emp_mgr.emp = deleted.mgr;
+	end
+go
+
+--插入测试数据
+insert emp_mgr(emp,mgr) values('Harry',null)
+insert emp_mgr(emp,mgr) values('Alice','Harry')
+insert emp_mgr(emp,mgr) values('Paul','Alice')
+insert emp_mgr(emp,mgr) values('Joe','Alice')
+insert emp_mgr(emp,mgr) values('Dave','Joe')
+
+
+select * from emp_mgr
+
+--将Dave的经理由Jon改为Harry
+update emp_mgr
+set mgr = 'Harry'
+where emp = 'Dave'
+
+
+--14.1.1 Instead Of 触发器
+
+--1.为表创建INSTEAD OF触发器
+
+--创建表
+create table Employee
+(
+	Name char(30) primary key,
+	Address char(30),
+);
+go
+
+--创建触发器，当添加的雇员名称有重复时，修改地址
+create trigger EmployeeInsteadInsert
+on Employee
+instead of insert
+as 
+	if exists(select * from Employee,inserted where Employee.Name = inserted.Name)
+	begin
+		update Employee
+		set Address = inserted.Address
+		from inserted
+		where Employee.Name = inserted.Name
+	end
+	else
+	begin
+		insert into Employee 
+		select * from inserted
+	end
+go
+
+--执行下面的测试语句
+--下面的两句SQL语句中插入的雇员不存在，可以正常插入
+insert Employee(name,Address) values('Harry','Chicago')
+insert Employee(name,Address) values('Alice','Washington')
+
+--由于Harry已经存在了，则修改Harry的地址
+insert Employee(name,Address) values('Harry','Washington')
+select * from Employee
+
+
+--2. 为视图创建INSTEAD OF 触发器
+--INSTEAD OF触发器最大的作用是实现视图的更新，尤其是针对多张表的视图。
+--如果为视图创建了一个用于Insert的Instead Of 触发器，在使用Insert语句向视图插入数据时，
+--必须为每个不允许为空值的视图提供值。
+--这样的基表列包括：基表中的计算列，基表中Indentity_insert属性为OFF的标识列，具有timestamp数据类型的基表列
+--虽然视图要求为上述列提供值，但是，在Instead Of触发器中真正生成要插入基表的Insert语句时，必须忽略掉这些列
+
+--例子
+create table 
