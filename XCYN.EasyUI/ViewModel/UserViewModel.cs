@@ -9,6 +9,7 @@ namespace XCYN.EasyUI.ViewModel
     {
         public int id { get; set; }
         public string user_name { get; set; }
+        public string nick_name { get; set; }
         public DateTime reg_time { get; set; }
     }
 }

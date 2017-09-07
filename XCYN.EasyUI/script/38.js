@@ -101,7 +101,32 @@ $(function () {
                         for (var i = 0; i < list_checked.length; i++) {
                             list_id.push(list_checked[i].id);
                         }
-                        console.log(list_id.join(','))
+                        $("#table_users").datagrid("loading")
+                        $.post("ashx/UserHandler.ashx",
+                            {
+                                action: "delete",
+                                id:list_id.join(',')
+                            },
+                            function (data)
+                            {
+                                var json = eval("(" + data + ")")
+                                $("#table_users").datagrid("loaded")
+                                if (json.state != "0")
+                                {
+                                    $("#table_users").datagrid("reload");
+                                    $.messager.show({
+                                        title: '提示',
+                                        msg: '删除了' + json.msg + '条数据',
+                                    })
+                                }
+                                else
+                                {
+                                    $.messager.show({
+                                        title: '警告',
+                                        msg: '后台程序发生错误，请联系管理员',
+                                    })
+                                }
+                            });
                     }
                 });
                 
@@ -118,24 +143,62 @@ $(function () {
         url: 'ashx/UserHandler.ashx?action=query',
         title: "用户列表",
         iconCls: "icon-add",
-        fitColumns:true,
+        fitColumns: true,
+        //fitColumns: false,//设置冻结列时，fitColumns必须设置为false
+        //frozenColumns: [[
+        //{
+        //    field: 'id',
+        //    title: '用户id',
+        //    sortable: true,
+        //    width: 50,
+        //    checkbox: true,
+        //},
+        //{
+        //    field: 'user_name',
+        //    title: '用户名',
+        //    sortable: true,
+        //    width: 200,
+        //    editor: {
+        //        type: 'validatebox',
+        //        options: {
+        //            required: true,
+        //        }
+        //    }
+        //}
+        //]],
         columns: [[
             {
                 field: 'id',
                 title: '用户id',
                 sortable: true,
-                width: 50,
-                checkbox:true,
+                //width: 50,
+                checkbox: true,
             },
             {
                 field: 'user_name',
                 title: '用户名',
                 sortable: true,
-                width: 100,
+                //width: 200,
                 editor: {
                     type: 'validatebox',
                     options: {
-                        required:true,
+                        required: true,
+                    }
+                },
+                formatter:function(value,rowData,rowIndex)
+                {
+                    return value + "(" + rowData.id + ")";
+                }
+            },
+            {
+                field: 'nick_name',
+                title: '昵称',
+                sortable: true,
+                //width: 100,
+                editor: {
+                    type: 'validatebox',
+                    options: {
+                        required: true,
                     }
                 }
             },
@@ -207,10 +270,14 @@ $(function () {
             global.editable = undefined;
             global.action = "";
         },
-        onDblClickRow: function (rowIndex, rowData)
-        {
+        onRowContextMenu: function (e, rowIndex, rowData) {
+            e.preventDefault();//阻止默认事件
+            console.log(rowData)
+        }
+        //onDblClickRow: function (rowIndex, rowData)
+        //{
             //双击行
             //global.update();
-        },
+        //},
     })
 })

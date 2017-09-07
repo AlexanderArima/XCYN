@@ -31,10 +31,48 @@ namespace XCYN.EasyUI.ashx
                 case "update":
                     update(context);
                     break;
+                case "delete":
+                    delete(context);
+                    break;
                 default:
                     break;
             }
             
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="context"></param>
+        private void delete(HttpContext context)
+        {
+            string[] list_id = context.Request["id"].Split(',');
+            List<int> list_id_int = new List<int>();
+            //将id转成int[]
+            for (int i = 0; i < list_id.Length; i++)
+            {
+                list_id_int.Add(Convert.ToInt32(list_id[i]));
+            }
+            try
+            {
+                using (MeetingSysEntities db = new MeetingSysEntities())
+                {
+                    var query = from a in db.users
+                                where list_id_int.Contains(a.id)
+                                select a;
+                    int count = query.Count();
+                    db.users.RemoveRange(query);
+                    db.SaveChanges();
+                    context.Response.Clear();
+                    context.Response.Write("{state:1,msg:"+ count+"}");
+                }
+            }
+            catch(Exception ex)
+            {
+                context.Response.Clear();
+                context.Response.Write("{state:0,msg:'"+ ex + "'}");
+            }
+            context.Response.End();
         }
 
         /// <summary>
@@ -116,6 +154,7 @@ namespace XCYN.EasyUI.ashx
                             {
                                 id = a.id,
                                 user_name = a.user_name,
+                                nick_name = a.nick_name,
                                 //reg_time = SqlFunctions.DateName("yyyy",a.reg_time) + "-" + SqlFunctions.DateName("mm", a.reg_time) + "-" + SqlFunctions.DatePart("dd", a.reg_time)),
                                 reg_time = a.reg_time.Value
                             };

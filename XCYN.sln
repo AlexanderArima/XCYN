@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.WS.APP", "XCYN.WS.APP\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Common", "XCYN.Common\XCYN.Common.csproj", "{B3C9D415-A7E9-4884-A908-434B9404F696}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Test", "XCYN.Test\XCYN.Test.csproj", "{98269044-7AC6-4103-9855-0A7C34228F4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,14 @@ Global
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|x64.ActiveCfg = Release|Any CPU
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|x64.Build.0 = Release|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Debug|x64.Build.0 = Debug|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Release|x64.ActiveCfg = Release|Any CPU
+		{98269044-7AC6-4103-9855-0A7C34228F4E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
