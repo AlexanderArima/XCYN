@@ -1484,4 +1484,48 @@ select * from Employee
 --虽然视图要求为上述列提供值，但是，在Instead Of触发器中真正生成要插入基表的Insert语句时，必须忽略掉这些列
 
 --例子
-create table 
+create table Employee
+(
+	EmployeeName char(30) primary key,
+	Address char(30),
+);
+go
+
+create trigger EmployeeInsert
+on Employee
+instead of insert
+as
+	if exists(select * from Employee,inserted where Employee.EmployeeName = inserted.EmployeeName)
+	begin
+		--如果用户名相同，则修改地址
+		update Employee 
+		set Address = inserted.Address
+		from inserted
+		where Employee.EmployeeName = inserted.EmployeeName
+	end
+	else
+	begin
+		--否则添加
+		insert into Employee
+		select * from inserted;
+	end
+go
+
+insert into Employee
+values('Harry','BeiJing')
+
+insert into Employee
+values('Harry','NanJing')
+
+select * from Employee
+go
+
+--14.2 使用DLL触发器
+
+--创建DLL触发器
+create trigger Safety
+on Employee
+for Drop_Table
+as 
+	print N'禁止删除'
+	rollback
