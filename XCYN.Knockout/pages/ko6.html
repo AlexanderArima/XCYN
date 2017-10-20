@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <button data-bind="click:add('ddd')">添加</button>
+
+    <!-- 遍历 -->
+    <div data-bind="foreach:personList">
+        <div data-bind="text:$data"></div>
+        <button data-bind="click:$parent.remove">删除</button>
+    </div>
+
+    <!-- 另外一种遍历方法 -->
+    <!-- ko foreach:personList-->
+        <div data-bind="text:$data"></div>
+        <button data-bind="click:$parent.remove">删除</button>
+    <!-- /ko -->
+
+    <script src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../Scripts/knockout-3.4.2.js"></script>
+    <script>
+
+        var arr = ['a', 'b', 'c', 'd', 'e'];
+
+        /* 流程控制，循环控制 */
+        var appFunc = function () {
+            var self = this;//将this遍历存起来方便，内部调用。
+            this.personList = ko.observableArray(arr);
+            this.remove = function (data) {
+                self.personList.remove(data);
+
+            }
+            this.add = function (data) {
+                self.personList.push(data);
+            }
+        }
+
+        var app = new appFunc();
+
+        ko.applyBindings(app);
+    </script>
+</body>
+</html>
