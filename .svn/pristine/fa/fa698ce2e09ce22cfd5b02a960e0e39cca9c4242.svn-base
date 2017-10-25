@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MeetingSys" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=MeetingSys;Integrated Security=True" SettingsObjectName="XCYN.Linq.Properties.Settings" SettingsPropertyName="MeetingSysConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.users" Member="users">
+    <Type Name="users">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="user_name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="salt" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="mobile" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="avatar" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="nick_name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="telphone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="area" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="qq" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="msn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Decimal(9,2)" CanBeNull="true" />
+      <Column Name="point" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="exp" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="status" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="reg_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="reg_ip" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

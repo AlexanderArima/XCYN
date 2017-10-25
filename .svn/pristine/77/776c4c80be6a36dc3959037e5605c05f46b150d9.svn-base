@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div data-bind="text:fullName"></div>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/knockout-3.4.2.js"></script>
+    <script>
+
+        /*
+        computed observables(计算观察者)
+        */
+        var viewModelFunc = function(){
+            this.firstName = ko.observable("张");
+            this.lastName = ko.observable("三");
+            this.fullName = ko.computed(function () {
+                return this.firstName() + this.lastName();
+            }, this);
+        }
+
+        var viewModel = new viewModelFunc();
+
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>

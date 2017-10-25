@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        .red{
+            color:red;
+        }
+        .green{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <!--visible控制显示-->
+    <div data-bind="visible:firstName">
+        你好
+    </div>
+    <!--text设置文本-->
+    <div data-bind="text:lastName"></div>
+    <!--html设置html标签可是会有注入风险-->
+    <div data-bind="html:lastName"></div>
+    <!--attr设置属性-->
+    <div data-bind="attr:{title:age}">年龄</div>
+    <!--style设置css的样式-->
+    <div data-bind="style:{fontSize:size}">666</div>
+    <!--css设置class的值-->
+    <div data-bind="css:color">颜色</div>
+    <script src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../Scripts/knockout-3.4.2.js"></script>
+    <script>
+        
+        var appFunc = function () {
+            this.firstName = ko.observable(true);
+            this.lastName = ko.observable("<h3>诚</h3>");
+            this.age = ko.observable(18);
+            this.nameLength = ko.computed(function () {
+                return this.firstName() + this.lastName();
+            },this)
+            this.color = ko.computed(function () {
+                return this.age() > 18 ? "red" : "green";
+            }, this)
+            this.size = ko.observable("22px");
+        }
+        var app = new appFunc();
+        
+
+        ko.applyBindings(app);
+    </script>
+</body>
+</html>

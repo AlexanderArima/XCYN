@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <input type="text" data-bind="textInput :userName" />
+    <h2 data-bind="text:userName"></h2>
+    <script src="../Scripts/knockout-3.4.2.debug.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        value绑定DOM元素的value属性值
+        默认情况下，KO触发改变元素的事件是blur，但是也可以通过设置valueUpdate属性来改变默认的触发事件(它的值有input,keyup,keydown,afterkeydown)
+        */
+        var viewModel = {
+            userName : ko.observable('')
+        }
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

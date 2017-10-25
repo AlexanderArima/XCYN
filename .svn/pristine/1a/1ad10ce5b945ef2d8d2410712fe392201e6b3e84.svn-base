@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="easyui/themes/icon.css" rel="stylesheet" />
+    <script src="easyui/jquery.min.js"></script>
+    <script src="easyui/jquery.easyui.min.js"></script>
+    <script src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="script/18.js"></script>
+</head>
+<body>
+	<div id="my_menu" class="easyui-menu" data-options="hideOnUnhover:false,minWidth:200">
+        <div id="div_sort">排序</div>
+        <div>刷新</div>
+        <div data-options="iconCls:'icon-add'">
+            新建
+            <div>
+                <div data-options="href:'http://www.baidu.com'">word</div>
+                <div>excel</div>
+                <div>txt</div>
+            </div>
+        </div>
+        <div>属性</div>
+    </div>
+</body>
+</html>

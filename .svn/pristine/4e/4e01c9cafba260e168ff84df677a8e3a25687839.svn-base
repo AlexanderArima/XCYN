@@ -1,0 +1,40 @@
+[
+	{
+		"id" : 1,
+		"text" : "系统管理",
+		"iconCls" : "icon-save",
+		"children" : [
+			{
+				"text" : "主机信息",
+				"state" : "closed",
+				"children" : [
+					{
+						"text" : "版本信息"
+					},
+					{
+						"text" : "数据库信息"
+					}
+				]
+			},
+			{
+				"text" : "更新信息"
+			},
+			{
+				"text" : "程序信息"
+			}
+		]
+	},
+	{
+		"id" : 2,
+		"text" : "会员管理",
+		"children" : [
+			{
+				"text" : "新增会员",
+				"checked" : true
+			},
+			{
+				"text" : "审核会员"
+			}
+		]
+	}
+]

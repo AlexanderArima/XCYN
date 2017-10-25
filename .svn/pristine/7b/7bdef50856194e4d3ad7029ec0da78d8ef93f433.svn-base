@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div data-bind="event:{dblclick:hideText,mouseout:showText}">移入即隐藏下面的文字</div>
+    <br/>
+    <div data-bind="if:isShow">我是谁?</div>
+
+    <form data-bind="submit:submitClick">
+        <input type="submit" data-bind="enable:isSubmit" value="提交" />
+    </form>
+
+    
+    <script src="../Scripts/knockout-3.4.2.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        enable,disable属性可以控制按钮的可用状态，在提交表单时将提交按钮设置为disable时可以避免用户重复提交造成服务器压力过大
+        submit事件用来阻止浏览器默认提交表单，你可以在这个事件中，做自定义的行为，比如验证表单。
+        */
+        var appFunc = function () {
+            var self = this;
+            this.isShow = ko.observable(true);
+            this.hideText = function () {
+                self.isShow(false)
+            };
+            this.showText = function () {
+                self.isShow(true)
+            };
+            this.isSubmit = ko.observable(true);
+            this.submitClick = function () {
+                console.log(1111)
+                //此处可以进行表单验证
+                $.ajax("../ashx/KOHandler.ashx", {
+                    beforeSend: function () {
+                        //将提交按钮设置为disabled
+                        self.isSubmit(false)
+                    },
+                    complete: function () {
+                        self.isSubmit(true);
+                    }
+                })
+            }
+        }
+
+        var viewModel = new appFunc();
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>
