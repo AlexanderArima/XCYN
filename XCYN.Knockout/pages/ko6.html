@@ -10,14 +10,20 @@
     <button data-bind="click:add('ddd')">添加</button>
 
     <!-- 遍历 -->
-    <div data-bind="foreach:personList">
-        <div data-bind="text:$data"></div>
+    <div data-bind="foreach:{data:personList,as:'list'}">
+        <div data-bind="text:$index"></div>
+        <div data-bind="text:list.name"></div>
+        <!-- 取别名能方便的获取上下文的迭代变量，因为可能对象会很复杂，会有多层嵌套-->
+        <div data-bind="foreach:{data:list.nickName,as:'list_n'}">
+            <div data-bind="text:list_n"></div>
+        </div>
+        
         <button data-bind="click:$parent.remove">删除</button>
     </div>
-
+    <br/>
     <!-- 另外一种遍历方法 -->
     <!-- ko foreach:personList-->
-        <div data-bind="text:$data"></div>
+        <div data-bind="text:$data.name"></div>
         <button data-bind="click:$parent.remove">删除</button>
     <!-- /ko -->
 
@@ -25,7 +31,12 @@
     <script src="../Scripts/knockout-3.4.2.js"></script>
     <script>
 
-        var arr = ['a', 'b', 'c', 'd', 'e'];
+        var arr = [
+                    { name: 'a', age: 12,nickName:['aa','bb'] },
+                   { name: 'b', age: 19, nickName: ['cc', 'dd'] },
+                   { name: 'c', age: 22, nickName: ['ee', 'ff'] },
+                   { name: 'd', age: 23, nickName: ['gg', 'hh'] }
+                  ];
 
         /* 流程控制，循环控制 */
         var appFunc = function () {

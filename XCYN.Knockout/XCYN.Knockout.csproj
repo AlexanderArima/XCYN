@@ -217,6 +217,8 @@
     <Content Include="pages\ko3.html" />
     <Content Include="pages\ko5.html" />
     <Content Include="pages\ko6.html" />
+    <Content Include="pages\ko7.html" />
+    <Content Include="pages\ko8.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
