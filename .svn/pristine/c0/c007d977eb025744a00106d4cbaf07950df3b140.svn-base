@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    姓名：<input type="text" data-bind="hasFocus:isFocus,textInput:userName,uniqueName:true" />
+    <input type="button" data-bind="click:submitClick" value="提交" />
+    <span data-bind="visible:isShowTip">请输入姓名</span>
+    <br/>
+    <script src="../Scripts/knockout-3.4.2.debug.js"></script>
+    <script>
+
+        var viewModelFunc = function ()
+        {
+            var self = this;
+            this.isFocus = ko.observable(false);
+            this.userName = ko.observable("");
+            this.submitClick = function () {
+                this.isFocus(true);
+            };
+            this.isShowTip = ko.computed(function () {
+                var user_length = self.userName().length <= 0 ? true : false;
+                var isF = self.isFocus(true);
+                return user_length && isF;
+            },this)
+        }
+        var viewModel = new viewModelFunc();
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>
