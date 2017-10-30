@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script src="../Scripts/knockout-3.4.2.debug.js"></script>
+    <script>
+        var viewModel = {
+            name : ko.observable("张三"),
+            age : ko.observable(20)
+        }
+
+        //toJs将viewModel转成普通的js对象
+        console.log(ko.toJS(viewModel));
+
+        //toJson将viewModel转成JSON对象
+        console.log(ko.toJSON(viewModel))
+
+
+    </script>
+</body>
+</html>

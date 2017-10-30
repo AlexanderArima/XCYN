@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        姓名:<div data-bind="text:name"></div>
+    </div>
+    <div>
+        年龄:<div data-bind="text:age"></div>
+    </div>
+    <div>
+        学校:
+        <!-- ko foreach:school -->
+        <br />
+        名称:<span data-bind="text:name"></span>&nbsp;
+        地址:<span data-bind="text:location"></span>&nbsp;
+        <!-- /ko -->
+    </div>
+    <script src="../Scripts/knockout-3.4.2.debug.js"></script>
+    <script src="../Scripts/knockout.mapping-latest.debug.js"></script>
+    <script>
+
+        var data = {
+            name: "张三",
+            age: 22,
+            school: [{
+                name: '一冶九小',
+                location: '45街坊'
+            }, {
+                name: '钢花中学',
+                location: '120街坊'
+            }]
+        }
+
+        //通过手写的方式将js对象转成viewModel对象，但这种方式存在一定的问题，如果viewModel对象很复杂很多，就会有问题
+        var viewModel = {
+            name: ko.observable(""),
+            age: ko.observable(),
+            school: ko.observableArray([{
+                name: '',
+                age :0
+            }])
+        }
+
+        var mapping = {
+            
+            //school: {
+            //    //创建对象时，自定义映射
+            //    create: function (options) {
+            //        var item = options.data;
+            //        item.len = 11;
+            //        return ko.observable(item)
+            //    },
+                  //自定义对象的更新方式
+            //    update: function (options) {
+            //        var item = options.data;
+            //        item.name += 's';
+            //        return ko.observable(item)
+            //    },
+            //},
+
+            //忽略JS对象的某些属性
+            //'ignore':['school'],
+
+            //只复制某些属性(JS对象)
+            //'copy':['school'],
+
+            //只观察某些属性(observe对象)
+            //'observe':['school'],
+        }
+
+        //通过mapping插件将js对象转换为viewModel对象
+        viewModel = ko.mapping.fromJS(data, mapping);
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

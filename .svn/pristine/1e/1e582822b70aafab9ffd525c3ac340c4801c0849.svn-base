@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div data-bind="foreach:{data:continent,as:'continent'}">
+        <h1 data-bind="text:continent.name"></h1>
+        <div data-bind="foreach:{data:continent.country,as:'country'}">
+            <h2 data-bind="text:country.name,style:{color:continent.color}"></h2>
+            <div data-bind="foreach:{data:country.citys,as:'city'}">
+                <span data-bind="text:city"></span>
+            </div>
+        </div>
+    </div>
+    <script src="../Scripts/knockout-3.4.2.debug.js"></script>
+
+
+    <script>
+        var viewModel = {
+            continent: [
+                {
+                    name: "亚洲",
+                    country: [
+                         {
+                             name: "中国",
+                             citys: ["北京", "上海", "广州"],
+                         },
+                         {
+                             name: "日本",
+                             citys: ["东京", "京都", "大阪"]
+                         },
+                         {
+                             name: "韩国",
+                             citys: ["首尔", "釜山", "全州"]
+                         },
+                    ],
+                    color: "red",
+                },
+                {
+                    name: "美洲",
+                    country: [
+                        {
+                            name: "美国",
+                            citys: ["华盛顿", "纽约", "费城"]
+                        },
+                         {
+                             name: "加拿大",
+                             citys: ["渥太华", "蒙特利尔", "多伦多"]
+                         },
+                         {
+                             name: "巴西",
+                             citys: ["里约热内卢", "萨尔瓦多", "桑托斯"]
+                         },
+                    ],
+                    color: "blue",
+                },
+                {
+                    name: "欧洲",
+                    country: [
+                        {
+                            name: "德国",
+                            citys: ["柏林", "慕尼黑", "法兰克福"]
+                        },
+                         {
+                             name: "英国",
+                             citys: ["伦敦", "牛津", "多佛尔"]
+                         },
+                         {
+                             name: "法国",
+                             citys: ["巴黎", "里昂", "亚眠"]
+                         },
+                    ],
+                    color: "orange",
+                }
+            ]
+        }
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>
