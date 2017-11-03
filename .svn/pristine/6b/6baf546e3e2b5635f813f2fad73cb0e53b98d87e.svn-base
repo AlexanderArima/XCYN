@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopModelStoreContainer" CdmEntityContainer="ShopEntities">
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="ShopModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="order_number" ColumnName="order_number" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_detail">
+      <EntityTypeMapping TypeName="ShopModel.order_detail">
+        <MappingFragment StoreEntitySet="order_detail">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="p_id" ColumnName="p_id" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ShopModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="add_time" ColumnName="add_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

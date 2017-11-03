@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="order_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_id" Type="Int32" />
+    <Property Name="amount" Type="Int32" />
+    <Property Name="state" Type="Boolean" />
+    <Property Name="add_time" Type="DateTimeOffset" Precision="7" />
+    <Property Name="product_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="state" Type="Boolean" />
+    <Property Name="add_time" Type="DateTimeOffset" Precision="7" />
+  </EntityType>
+  <EntityContainer Name="ShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="orders" EntityType="Self.order" />
+    <EntitySet Name="order_detail" EntityType="Self.order_detail" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+  </EntityContainer>
+</Schema>
