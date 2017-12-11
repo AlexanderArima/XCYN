@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <button data-bind="click:add('ddd')">添加</button>
+
+    <!-- 遍历 -->
+    <div data-bind="foreach:{data:personList,as:'list'}">
+        <div data-bind="text:$index"></div>
+        <div data-bind="text:list.name"></div>
+        <!-- 取别名能方便的获取上下文的迭代变量，因为可能对象会很复杂，会有多层嵌套-->
+        <div data-bind="foreach:{data:list.nickName,as:'list_n'}">
+            <div data-bind="text:list_n"></div>
+        </div>
+        
+        <button data-bind="click:$parent.remove">删除</button>
+    </div>
+    <br/>
+    <!-- 另外一种遍历方法 -->
+    <!-- ko foreach:personList-->
+        <div data-bind="text:$data.name"></div>
+        <button data-bind="click:$parent.remove">删除</button>
+    <!-- /ko -->
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        var arr = [
+                    { name: 'a', age: 12,nickName:['aa','bb'] },
+                   { name: 'b', age: 19, nickName: ['cc', 'dd'] },
+                   { name: 'c', age: 22, nickName: ['ee', 'ff'] },
+                   { name: 'd', age: 23, nickName: ['gg', 'hh'] }
+                  ];
+
+        /* 流程控制，循环控制 */
+        var appFunc = function () {
+            var self = this;//将this遍历存起来方便，内部调用。
+            this.personList = ko.observableArray(arr);
+            this.remove = function (data) {
+                self.personList.remove(data);
+
+            }
+            this.add = function (data) {
+                self.personList.push(data);
+            }
+        }
+
+        var app = new appFunc();
+
+        ko.applyBindings(app);
+    </script>
+</body>
+</html>

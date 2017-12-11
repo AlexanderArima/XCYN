@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <div data-bind="text:firstName"></div>
+    <div data-bind="text:lastName"></div>
+    <input data-bind="textInput:fullName"></input>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        Writable computed observables(可写的计算观察者)
+        */
+
+        var myFunc = function () {
+            this.firstName = ko.observable("张")
+            this.lastName = ko.observable("三")
+            this.fullName = ko.computed({
+                read: function () {
+                    return this.firstName() + " " + this.lastName();
+                },
+                write: function (item) {
+                    var str = item + "";
+                    var spacePos = str.indexOf(" ")
+                    this.firstName(str.substr(0, spacePos))
+                    this.lastName(str.substr(spacePos, str.length - spacePos))
+                }
+            }, this)
+
+        }
+
+        var viewModel = new myFunc();
+        ko.applyBindings(viewModel);
+        
+    </script>
+</body>
+</html>

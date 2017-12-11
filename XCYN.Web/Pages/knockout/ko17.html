@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="divCan" data-bind="text:$element"></div>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        var viewModel = function () {
+            this.parents = ko.observable(true);
+        }
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

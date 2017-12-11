@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <input type="button" value="click" data-bind="click:myClick.bind($data,'args1','args2')" />
+    <a data-bind="click:myClick.bind($data,'args1','args2')">click2</a>
+    <input type="checkbox" data-bind="click:add" />
+    <!--<button value="click" data-bind="click:myClick">click</button>-->
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        传递更多的参数:
+        传递：click:myClick.bind($data,'args1','args2')
+        接收：myClick = function(args1,args2,data,e)
+        */
+        var appFun = function () {
+            myClick = function(args1,args2,data,e)
+            {
+                var i = data;
+            },
+            add = function(data,e)
+            {
+                console.log(e);
+                e.preventDefault = false;//这两种方式都可以，禁止阻止浏览器的默认行为
+                return true;//这两种方式都可以，禁止阻止浏览器的默认行为
+            }
+        }
+
+        var viewModel = new appFun();
+        ko.applyBindings(viewModel)
+    </script>
+</body>
+</html>

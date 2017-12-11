@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="../../Css/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="container">
+        <div style="padding:20px">
+            <span>收件地址:</span>
+            <select data-bind="options:provinceArray,
+                               optionsText:function(item){
+                                   return item.name + '省';
+                               },
+                               optionsValue:'pinyin',
+                               optionsCaption:'请选择'"></select>
+            
+        </div>
+
+        <div style="padding:20px">
+            <span>
+                <input id="chk_0" type="checkbox" value="0" data-bind="checked:selectedMoney" />
+                <label for="chk_0">0~1500</label>
+            </span>
+            <span>
+                <input id="chk_1" type="checkbox" value="1" data-bind="checked:selectedMoney" />
+                <label for="chk_1">1500~3000</label>
+            </span>
+            <span>
+                <input id="chk_2" type="checkbox" value="2" data-bind="checked:selectedMoney" />
+                <label for="chk_2">3000~4500</label>
+            </span>
+            <span>
+                <input id="chk_3" type="checkbox" value="3" data-bind="checked:selectedMoney" />
+                <label for="chk_3">4500~6000</label>
+            </span>
+            <span>
+                <input id="chk_4" type="checkbox" value="4" data-bind="checked:selectedMoney" />
+                <label for="chk_4">6000~8000</label>
+            </span>
+            <span>
+                <input id="chk_5" type="checkbox" value="5" data-bind="checked:selectedMoney" />
+                <label for="chk_5">8000~10000</label>
+            </span>
+            <input type="button" value="删除" data-bind="click:deleteMoney" />
+        </div>
+        
+    </div>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        下拉事件options
+        */
+
+        var province = function (name, pinyin) {
+            this.name = name;
+            this.pinyin = pinyin;
+        }
+
+        var _MoneyArray = ['0', '2', '4'];
+
+        var appFunc = function () {
+            var self = this;
+            this.provinceArray = ko.observableArray([
+                new province('黑龙江', 'hlj'),
+                new province('吉林', 'jl'),
+                new province('辽宁', 'ln')
+            ]);
+            this.selectedProvince = ko.observable();
+            this.selectedMoney = ko.observableArray(_MoneyArray);
+            this.deleteMoney = function () {
+                self.selectedMoney().pop();
+            }
+        }
+
+        var viewModel = new appFunc();
+
+        _MoneyArray.push('1');
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

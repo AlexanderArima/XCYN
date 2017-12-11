@@ -333,6 +333,31 @@
     <Content Include="Pages\bootStrap\bs5.html" />
     <Content Include="Pages\bootStrap\bs6.html" />
     <Content Include="Pages\bootStrap\bs7.html" />
+    <Content Include="Pages\knockout\Knockout2.html" />
+    <Content Include="Pages\knockout\ko1.html" />
+    <Content Include="Pages\knockout\ko10.html" />
+    <Content Include="Pages\knockout\ko11.html" />
+    <Content Include="Pages\knockout\ko12.html" />
+    <Content Include="Pages\knockout\ko13.html" />
+    <Content Include="Pages\knockout\ko14.html" />
+    <Content Include="Pages\knockout\ko15.html" />
+    <Content Include="Pages\knockout\ko16.html" />
+    <Content Include="Pages\knockout\ko17.html" />
+    <Content Include="Pages\knockout\ko18.html" />
+    <Content Include="Pages\knockout\ko19.html" />
+    <Content Include="Pages\knockout\ko2.html" />
+    <Content Include="Pages\knockout\ko20.html" />
+    <Content Include="Pages\knockout\ko21.html" />
+    <Content Include="Pages\knockout\ko3.html" />
+    <Content Include="Pages\knockout\ko4.html" />
+    <Content Include="Pages\knockout\ko5.html" />
+    <Content Include="Pages\knockout\ko6.html" />
+    <Content Include="Pages\knockout\ko7.html" />
+    <Content Include="Pages\knockout\ko8.html" />
+    <Content Include="Pages\knockout\ko9.html" />
+    <Content Include="Pages\knockout\shop.aspx" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Plugins\vue\dist\vue.common.js" />
     <Content Include="Plugins\vue\dist\vue.esm.browser.js" />
@@ -740,6 +765,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\knockout\shop.aspx.cs">
+      <DependentUpon>shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

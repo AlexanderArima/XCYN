@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <!--<div data-bind="template:{ name:'person',foreach:seller}"></div>
+    <script type="text/html" id="person">
+        <div>
+            <span>姓名：</span>
+            <span data-bind="text:name"></span>
+        </div>
+        <div>
+            <span>年龄：</span>
+            <span data-bind="text:age"></span>
+        </div>
+    </script>-->
+
+    <ul data-bind="template: { name: 'seasonTemplate', foreach: seasons, as: 'season' }"></ul>
+
+    <script type="text/html" id="seasonTemplate">
+        <li>
+            <strong data-bind="text: name"></strong>
+            <ul data-bind="template: { name: 'monthTemplate', foreach: months, as: 'month' }"></ul>
+        </li>
+    </script>
+
+    <script type="text/html" id="monthTemplate">
+        <li>
+            <span data-bind="text: month"></span>
+            is in
+            <span data-bind="text: season.name"></span>
+        </li>
+    </script>
+
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        /*
+        使用template绑定数据，foreach循环绑定
+        */
+        //var appFunc = function () {
+        //    var self = this;
+        //    this.buyer = { name: 'cheng', age: 12 };
+        //    this.seller = [{ name: 'wang', age: 22 },{ name: 'huang', age: 19 }];
+        //}
+
+        //ko.applyBindings(new appFunc())
+
+        var viewModel = {
+            seasons: ko.observableArray([
+                { name: 'Spring', months: ['March', 'April', 'May'] },
+                { name: 'Summer', months: ['June', 'July', 'August'] },
+                { name: 'Autumn', months: ['September', 'October', 'November'] },
+                { name: 'Winter', months: ['December', 'January', 'February'] }
+            ])
+        };
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>

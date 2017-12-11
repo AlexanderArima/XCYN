@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div data-bind="foreach:{data:continent,as:'continent'}" style="background-color:#dddddd">
+        <h2 data-bind="text:continent.name"></h2>
+        <div data-bind="foreach:{data:continent.country,as:'country'}">
+            <span data-bind="text:country,style:{color:continent.color}"></span>
+        </div>
+    </div>
+    <div data-bind="foreach:{data:$root.continent,as:'continent'}" style="background-color:#bbbbbb">
+        <h2 data-bind="text:continent.name"></h2>
+        <div data-bind="foreach:{data:continent.country,as:'country'}">
+            <span data-bind="text:country,style:{color:$parents[0].color}"></span>
+        </div>
+    </div>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script>
+
+        var viewModel = {
+            continent: [
+                {
+                    name: "亚洲",
+                    country: [
+                         "中国","日本","韩国"
+                    ],
+                    color: "red",
+                },
+                {
+                    name: "美洲",
+                    country: [
+                        "美国", "巴西", "加拿大"
+                    ],
+                    color: "blue",
+                },
+                {
+                    name: "欧洲",
+                    country: [
+                        "德国", "英国", "法国"
+                    ],
+                    color: "orange",
+                }
+            ]
+        }
+
+        ko.applyBindings(viewModel);
+
+    </script>
+</body>
+</html>
