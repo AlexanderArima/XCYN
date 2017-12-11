@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9487C4C-F0D4-4F61-9E0B-C05F940C6636}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCYN.Web</RootNamespace>
+    <AssemblyName>XCYN.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Css\bootstrap\.gitattributes" />
+    <Content Include="Css\bootstrap\.gitignore" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Css\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Css\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Css\bootstrap\dist\js\npm.js" />
+    <Content Include="Css\bootstrap\docs\about.html" />
+    <Content Include="Css\bootstrap\docs\apple-touch-icon.png" />
+    <Content Include="Css\bootstrap\docs\assets\brand\bootstrap-outline.svg" />
+    <Content Include="Css\bootstrap\docs\assets\brand\bootstrap-punchout.svg" />
+    <Content Include="Css\bootstrap\docs\assets\brand\bootstrap-solid.svg" />
+    <Content Include="Css\bootstrap\docs\assets\css\docs.min.css" />
+    <Content Include="Css\bootstrap\docs\assets\css\ie10-viewport-bug-workaround.css" />
+    <Content Include="Css\bootstrap\docs\assets\css\src\docs.css" />
+    <Content Include="Css\bootstrap\docs\assets\css\src\pygments-manni.css" />
+    <Content Include="Css\bootstrap\docs\assets\flash\ZeroClipboard.swf" />
+    <Content Include="Css\bootstrap\docs\assets\img\components.png" />
+    <Content Include="Css\bootstrap\docs\assets\img\devices.png" />
+    <Content Include="Css\bootstrap\docs\assets\img\expo-lyft.jpg" />
+    <Content Include="Css\bootstrap\docs\assets\img\expo-newsweek.jpg" />
+    <Content Include="Css\bootstrap\docs\assets\img\expo-riot.jpg" />
+    <Content Include="Css\bootstrap\docs\assets\img\expo-vogue.jpg" />
+    <Content Include="Css\bootstrap\docs\assets\img\sass-less.png" />
+    <Content Include="Css\bootstrap\docs\assets\js\customize.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\docs.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\ie-emulation-modes-warning.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\ie8-responsive-file-warning.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\raw-files.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\src\application.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\src\customizer.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\anchor.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\autoprefixer.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\Blob.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\FileSaver.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\holder.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\jquery.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\jszip.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\less.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\uglify.min.js" />
+    <Content Include="Css\bootstrap\docs\assets\js\vendor\ZeroClipboard.min.js" />
+    <Content Include="Css\bootstrap\docs\browser-bugs.html" />
+    <Content Include="Css\bootstrap\docs\components.html" />
+    <Content Include="Css\bootstrap\docs\css.html" />
+    <Content Include="Css\bootstrap\docs\customize.html" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap-theme.css" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap.css" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap.min.css" />
+    <Content Include="Css\bootstrap\docs\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\bootstrap\docs\dist\js\bootstrap.js" />
+    <Content Include="Css\bootstrap\docs\dist\js\bootstrap.min.js" />
+    <Content Include="Css\bootstrap\docs\dist\js\npm.js" />
+    <Content Include="Css\bootstrap\docs\examples\blog\blog.css" />
+    <Content Include="Css\bootstrap\docs\examples\blog\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\carousel\carousel.css" />
+    <Content Include="Css\bootstrap\docs\examples\carousel\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\cover\cover.css" />
+    <Content Include="Css\bootstrap\docs\examples\cover\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\dashboard\dashboard.css" />
+    <Content Include="Css\bootstrap\docs\examples\dashboard\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\grid\grid.css" />
+    <Content Include="Css\bootstrap\docs\examples\grid\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\jumbotron-narrow\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\jumbotron-narrow\jumbotron-narrow.css" />
+    <Content Include="Css\bootstrap\docs\examples\jumbotron\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\jumbotron\jumbotron.css" />
+    <Content Include="Css\bootstrap\docs\examples\justified-nav\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\justified-nav\justified-nav.css" />
+    <Content Include="Css\bootstrap\docs\examples\navbar-fixed-top\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\navbar-fixed-top\navbar-fixed-top.css" />
+    <Content Include="Css\bootstrap\docs\examples\navbar-static-top\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\navbar-static-top\navbar-static-top.css" />
+    <Content Include="Css\bootstrap\docs\examples\navbar\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\navbar\navbar.css" />
+    <Content Include="Css\bootstrap\docs\examples\non-responsive\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\non-responsive\non-responsive.css" />
+    <Content Include="Css\bootstrap\docs\examples\offcanvas\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\offcanvas\offcanvas.css" />
+    <Content Include="Css\bootstrap\docs\examples\offcanvas\offcanvas.js" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\blog.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\carousel.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\cover.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\dashboard.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\equal-height-columns.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\grid.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\jumbotron-narrow.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\jumbotron.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\justified-nav.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\navbar-fixed.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\navbar-static.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\navbar.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\non-responsive.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\offcanvas.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\sign-in.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\starter-template.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\sticky-footer-navbar.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\sticky-footer.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\screenshots\theme.jpg" />
+    <Content Include="Css\bootstrap\docs\examples\signin\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\signin\signin.css" />
+    <Content Include="Css\bootstrap\docs\examples\starter-template\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\starter-template\starter-template.css" />
+    <Content Include="Css\bootstrap\docs\examples\sticky-footer-navbar\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\sticky-footer-navbar\sticky-footer-navbar.css" />
+    <Content Include="Css\bootstrap\docs\examples\sticky-footer\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\sticky-footer\sticky-footer.css" />
+    <Content Include="Css\bootstrap\docs\examples\theme\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\theme\theme.css" />
+    <Content Include="Css\bootstrap\docs\examples\tooltip-viewport\index.html" />
+    <Content Include="Css\bootstrap\docs\examples\tooltip-viewport\tooltip-viewport.css" />
+    <Content Include="Css\bootstrap\docs\examples\tooltip-viewport\tooltip-viewport.js" />
+    <Content Include="Css\bootstrap\docs\favicon.ico" />
+    <Content Include="Css\bootstrap\docs\getting-started.html" />
+    <Content Include="Css\bootstrap\docs\index.html" />
+    <Content Include="Css\bootstrap\docs\javascript.html" />
+    <Content Include="Css\bootstrap\docs\migration.html" />
+    <Content Include="Css\bootstrap\docs\robots.txt" />
+    <Content Include="Css\bootstrap\docs\_includes\ads.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\alerts.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\badges.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\breadcrumbs.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\button-dropdowns.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\button-groups.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\dropdowns.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\glyphicons.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\input-groups.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\jumbotron.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\labels.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\list-group.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\media.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\navbar.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\navs.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\page-header.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\pagination.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\panels.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\progress-bars.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\responsive-embed.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\thumbnails.html" />
+    <Content Include="Css\bootstrap\docs\_includes\components\wells.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\buttons.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\code.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\forms.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\grid.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\helpers.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\images.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\less.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\overview.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\responsive-utilities.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\sass.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\tables.html" />
+    <Content Include="Css\bootstrap\docs\_includes\css\type.html" />
+    <Content Include="Css\bootstrap\docs\_includes\customizer-variables.html" />
+    <Content Include="Css\bootstrap\docs\_includes\footer.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\accessibility.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\browser-device-support.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\community.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\disabling-responsiveness.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\download.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\examples.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\grunt.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\license.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\template.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\third-party-support.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\tools.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\translations.html" />
+    <Content Include="Css\bootstrap\docs\_includes\getting-started\whats-included.html" />
+    <Content Include="Css\bootstrap\docs\_includes\header.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\affix.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\alerts.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\buttons.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\carousel.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\collapse.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\dropdowns.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\modal.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\overview.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\popovers.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\scrollspy.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\tabs.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\tooltips.html" />
+    <Content Include="Css\bootstrap\docs\_includes\js\transitions.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\about.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\components.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\css.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\customize.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\getting-started.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\javascript.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\main.html" />
+    <Content Include="Css\bootstrap\docs\_includes\nav\migration.html" />
+    <Content Include="Css\bootstrap\docs\_layouts\default.html" />
+    <Content Include="Css\bootstrap\docs\_layouts\home.html" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\bootstrap\Gruntfile.js" />
+    <Content Include="Css\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Css\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Css\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Css\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Css\bootstrap\grunt\change-version.js" />
+    <Content Include="Css\bootstrap\js\affix.js" />
+    <Content Include="Css\bootstrap\js\alert.js" />
+    <Content Include="Css\bootstrap\js\button.js" />
+    <Content Include="Css\bootstrap\js\carousel.js" />
+    <Content Include="Css\bootstrap\js\collapse.js" />
+    <Content Include="Css\bootstrap\js\dropdown.js" />
+    <Content Include="Css\bootstrap\js\modal.js" />
+    <Content Include="Css\bootstrap\js\popover.js" />
+    <Content Include="Css\bootstrap\js\scrollspy.js" />
+    <Content Include="Css\bootstrap\js\tab.js" />
+    <Content Include="Css\bootstrap\js\tests\index.html" />
+    <Content Include="Css\bootstrap\js\tests\unit\affix.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\alert.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\button.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\carousel.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\collapse.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\dropdown.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\modal.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\phantom.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\popover.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\scrollspy.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\tab.js" />
+    <Content Include="Css\bootstrap\js\tests\unit\tooltip.js" />
+    <Content Include="Css\bootstrap\js\tests\vendor\jquery.min.js" />
+    <Content Include="Css\bootstrap\js\tests\vendor\qunit.css" />
+    <Content Include="Css\bootstrap\js\tests\vendor\qunit.js" />
+    <Content Include="Css\bootstrap\js\tests\visual\affix-with-sticky-footer.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\affix.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\alert.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\button.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\carousel.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\collapse.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\dropdown.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\modal.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\popover.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\scrollspy.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\tab.html" />
+    <Content Include="Css\bootstrap\js\tests\visual\tooltip.html" />
+    <Content Include="Css\bootstrap\js\tooltip.js" />
+    <Content Include="Css\bootstrap\js\transition.js" />
+    <Content Include="Css\bootstrap\package.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Pages\bootStrap\bs1.html" />
+    <Content Include="Pages\bootStrap\bs2.html" />
+    <Content Include="Pages\bootStrap\bs3.html" />
+    <Content Include="Pages\bootStrap\bs4.html" />
+    <Content Include="Pages\bootStrap\bs5.html" />
+    <Content Include="Pages\bootStrap\bs6.html" />
+    <Content Include="Pages\bootStrap\bs7.html" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Plugins\vue\dist\vue.common.js" />
+    <Content Include="Plugins\vue\dist\vue.esm.browser.js" />
+    <Content Include="Plugins\vue\dist\vue.esm.js" />
+    <Content Include="Plugins\vue\dist\vue.js" />
+    <Content Include="Plugins\vue\dist\vue.min.js" />
+    <Content Include="Plugins\vue\dist\vue.runtime.common.js" />
+    <Content Include="Plugins\vue\dist\vue.runtime.esm.js" />
+    <Content Include="Plugins\vue\dist\vue.runtime.js" />
+    <Content Include="Plugins\vue\dist\vue.runtime.min.js" />
+    <Content Include="Plugins\vue\src\compiler\codegen\events.js" />
+    <Content Include="Plugins\vue\src\compiler\codegen\index.js" />
+    <Content Include="Plugins\vue\src\compiler\create-compiler.js" />
+    <Content Include="Plugins\vue\src\compiler\directives\bind.js" />
+    <Content Include="Plugins\vue\src\compiler\directives\index.js" />
+    <Content Include="Plugins\vue\src\compiler\directives\model.js" />
+    <Content Include="Plugins\vue\src\compiler\directives\on.js" />
+    <Content Include="Plugins\vue\src\compiler\error-detector.js" />
+    <Content Include="Plugins\vue\src\compiler\helpers.js" />
+    <Content Include="Plugins\vue\src\compiler\index.js" />
+    <Content Include="Plugins\vue\src\compiler\optimizer.js" />
+    <Content Include="Plugins\vue\src\compiler\parser\entity-decoder.js" />
+    <Content Include="Plugins\vue\src\compiler\parser\filter-parser.js" />
+    <Content Include="Plugins\vue\src\compiler\parser\html-parser.js" />
+    <Content Include="Plugins\vue\src\compiler\parser\index.js" />
+    <Content Include="Plugins\vue\src\compiler\parser\text-parser.js" />
+    <Content Include="Plugins\vue\src\compiler\to-function.js" />
+    <Content Include="Plugins\vue\src\core\components\index.js" />
+    <Content Include="Plugins\vue\src\core\components\keep-alive.js" />
+    <Content Include="Plugins\vue\src\core\config.js" />
+    <Content Include="Plugins\vue\src\core\global-api\assets.js" />
+    <Content Include="Plugins\vue\src\core\global-api\extend.js" />
+    <Content Include="Plugins\vue\src\core\global-api\index.js" />
+    <Content Include="Plugins\vue\src\core\global-api\mixin.js" />
+    <Content Include="Plugins\vue\src\core\global-api\use.js" />
+    <Content Include="Plugins\vue\src\core\index.js" />
+    <Content Include="Plugins\vue\src\core\instance\events.js" />
+    <Content Include="Plugins\vue\src\core\instance\index.js" />
+    <Content Include="Plugins\vue\src\core\instance\init.js" />
+    <Content Include="Plugins\vue\src\core\instance\inject.js" />
+    <Content Include="Plugins\vue\src\core\instance\lifecycle.js" />
+    <Content Include="Plugins\vue\src\core\instance\proxy.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\bind-object-listeners.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\bind-object-props.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\check-keycodes.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\index.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\render-list.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\render-slot.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\render-static.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\resolve-filter.js" />
+    <Content Include="Plugins\vue\src\core\instance\render-helpers\resolve-slots.js" />
+    <Content Include="Plugins\vue\src\core\instance\render.js" />
+    <Content Include="Plugins\vue\src\core\instance\state.js" />
+    <Content Include="Plugins\vue\src\core\observer\array.js" />
+    <Content Include="Plugins\vue\src\core\observer\dep.js" />
+    <Content Include="Plugins\vue\src\core\observer\index.js" />
+    <Content Include="Plugins\vue\src\core\observer\scheduler.js" />
+    <Content Include="Plugins\vue\src\core\observer\traverse.js" />
+    <Content Include="Plugins\vue\src\core\observer\watcher.js" />
+    <Content Include="Plugins\vue\src\core\util\debug.js" />
+    <Content Include="Plugins\vue\src\core\util\env.js" />
+    <Content Include="Plugins\vue\src\core\util\error.js" />
+    <Content Include="Plugins\vue\src\core\util\index.js" />
+    <Content Include="Plugins\vue\src\core\util\lang.js" />
+    <Content Include="Plugins\vue\src\core\util\next-tick.js" />
+    <Content Include="Plugins\vue\src\core\util\options.js" />
+    <Content Include="Plugins\vue\src\core\util\perf.js" />
+    <Content Include="Plugins\vue\src\core\util\props.js" />
+    <Content Include="Plugins\vue\src\core\vdom\create-component.js" />
+    <Content Include="Plugins\vue\src\core\vdom\create-element.js" />
+    <Content Include="Plugins\vue\src\core\vdom\create-functional-component.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\extract-props.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\get-first-component-child.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\index.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\is-async-placeholder.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\merge-hook.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\normalize-children.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\resolve-async-component.js" />
+    <Content Include="Plugins\vue\src\core\vdom\helpers\update-listeners.js" />
+    <Content Include="Plugins\vue\src\core\vdom\modules\directives.js" />
+    <Content Include="Plugins\vue\src\core\vdom\modules\index.js" />
+    <Content Include="Plugins\vue\src\core\vdom\modules\ref.js" />
+    <Content Include="Plugins\vue\src\core\vdom\patch.js" />
+    <Content Include="Plugins\vue\src\core\vdom\vnode.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\directives\html.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\directives\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\directives\model.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\directives\text.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\modules\class.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\modules\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\modules\model.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\modules\style.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\options.js" />
+    <Content Include="Plugins\vue\src\platforms\web\compiler\util.js" />
+    <Content Include="Plugins\vue\src\platforms\web\entry-compiler.js" />
+    <Content Include="Plugins\vue\src\platforms\web\entry-runtime-with-compiler.js" />
+    <Content Include="Plugins\vue\src\platforms\web\entry-runtime.js" />
+    <Content Include="Plugins\vue\src\platforms\web\entry-server-basic-renderer.js" />
+    <Content Include="Plugins\vue\src\platforms\web\entry-server-renderer.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\class-util.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\components\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\components\transition-group.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\components\transition.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\directives\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\directives\model.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\directives\show.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\attrs.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\class.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\dom-props.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\events.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\style.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\modules\transition.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\node-ops.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\patch.js" />
+    <Content Include="Plugins\vue\src\platforms\web\runtime\transition-util.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\compiler.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\directives\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\directives\model.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\directives\show.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\modules\attrs.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\modules\class.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\modules\dom-props.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\modules\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\modules\style.js" />
+    <Content Include="Plugins\vue\src\platforms\web\server\util.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\attrs.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\class.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\compat.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\element.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\index.js" />
+    <Content Include="Plugins\vue\src\platforms\web\util\style.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\directives\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\directives\model.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\modules\append.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\modules\class.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\modules\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\modules\props.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\modules\style.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\entry-compiler.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\entry-framework.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\entry-runtime-factory.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\components\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\components\richtext.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\components\transition-group.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\components\transition.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\directives\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\attrs.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\class.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\events.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\index.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\style.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\modules\transition.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\node-ops.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\patch.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\runtime\text-node.js" />
+    <Content Include="Plugins\vue\src\platforms\weex\util\index.js" />
+    <Content Include="Plugins\vue\src\server\bundle-renderer\create-bundle-renderer.js" />
+    <Content Include="Plugins\vue\src\server\bundle-renderer\create-bundle-runner.js" />
+    <Content Include="Plugins\vue\src\server\bundle-renderer\source-map-support.js" />
+    <Content Include="Plugins\vue\src\server\create-basic-renderer.js" />
+    <Content Include="Plugins\vue\src\server\create-renderer.js" />
+    <Content Include="Plugins\vue\src\server\optimizing-compiler\codegen.js" />
+    <Content Include="Plugins\vue\src\server\optimizing-compiler\index.js" />
+    <Content Include="Plugins\vue\src\server\optimizing-compiler\modules.js" />
+    <Content Include="Plugins\vue\src\server\optimizing-compiler\optimizer.js" />
+    <Content Include="Plugins\vue\src\server\optimizing-compiler\runtime-helpers.js" />
+    <Content Include="Plugins\vue\src\server\render-context.js" />
+    <Content Include="Plugins\vue\src\server\render-stream.js" />
+    <Content Include="Plugins\vue\src\server\render.js" />
+    <Content Include="Plugins\vue\src\server\template-renderer\create-async-file-mapper.js" />
+    <Content Include="Plugins\vue\src\server\template-renderer\index.js" />
+    <Content Include="Plugins\vue\src\server\template-renderer\parse-template.js" />
+    <Content Include="Plugins\vue\src\server\template-renderer\template-stream.js" />
+    <Content Include="Plugins\vue\src\server\util.js" />
+    <Content Include="Plugins\vue\src\server\webpack-plugin\client.js" />
+    <Content Include="Plugins\vue\src\server\webpack-plugin\server.js" />
+    <Content Include="Plugins\vue\src\server\webpack-plugin\util.js" />
+    <Content Include="Plugins\vue\src\server\write.js" />
+    <Content Include="Plugins\vue\src\sfc\parser.js" />
+    <Content Include="Plugins\vue\src\shared\constants.js" />
+    <Content Include="Plugins\vue\src\shared\util.js" />
+    <Content Include="Pages\vue\test.html" />
+    <Content Include="Plugins\select2\.gitignore" />
+    <Content Include="Plugins\select2\dist\css\select2.css" />
+    <Content Include="Plugins\select2\dist\css\select2.min.css" />
+    <Content Include="Plugins\select2\dist\js\i18n\af.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ar.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\az.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\bg.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\bs.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ca.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\cs.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\da.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\de.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\dsb.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\el.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\en.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\es.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\et.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\eu.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\fa.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\fi.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\fr.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\gl.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\he.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\hi.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\hr.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\hsb.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\hu.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\hy.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\id.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\is.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\it.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ja.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\km.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ko.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\lt.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\lv.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\mk.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ms.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\nb.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\nl.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\pl.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ps.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\pt-BR.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\pt.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ro.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\ru.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\sk.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\sl.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\sr-Cyrl.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\sr.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\sv.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\th.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\tr.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\uk.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\vi.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\zh-CN.js" />
+    <Content Include="Plugins\select2\dist\js\i18n\zh-TW.js" />
+    <Content Include="Plugins\select2\dist\js\select2.full.js" />
+    <Content Include="Plugins\select2\dist\js\select2.full.min.js" />
+    <Content Include="Plugins\select2\dist\js\select2.js" />
+    <Content Include="Plugins\select2\dist\js\select2.min.js" />
+    <Content Include="Plugins\select2\docs\announcements-4.0.html" />
+    <Content Include="Plugins\select2\docs\community.html" />
+    <Content Include="Plugins\select2\docs\examples.html" />
+    <Content Include="Plugins\select2\docs\index.html" />
+    <Content Include="Plugins\select2\docs\options-old.html" />
+    <Content Include="Plugins\select2\docs\options.html" />
+    <Content Include="Plugins\select2\Gruntfile.js" />
+    <Content Include="Plugins\select2\src\js\banner.end.js" />
+    <Content Include="Plugins\select2\src\js\banner.start.js" />
+    <Content Include="Plugins\select2\src\js\jquery.mousewheel.shim.js" />
+    <Content Include="Plugins\select2\src\js\jquery.select2.js" />
+    <Content Include="Plugins\select2\src\js\jquery.shim.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\containerCss.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\dropdownCss.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\initSelection.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\inputData.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\matcher.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\query.js" />
+    <Content Include="Plugins\select2\src\js\select2\compat\utils.js" />
+    <Content Include="Plugins\select2\src\js\select2\core.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\ajax.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\array.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\base.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\maximumInputLength.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\maximumSelectionLength.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\minimumInputLength.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\select.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\tags.js" />
+    <Content Include="Plugins\select2\src\js\select2\data\tokenizer.js" />
+    <Content Include="Plugins\select2\src\js\select2\defaults.js" />
+    <Content Include="Plugins\select2\src\js\select2\diacritics.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\attachBody.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\attachContainer.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\closeOnSelect.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\hidePlaceholder.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\infiniteScroll.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\minimumResultsForSearch.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\search.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\selectOnClose.js" />
+    <Content Include="Plugins\select2\src\js\select2\dropdown\stopPropagation.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\af.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ar.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\az.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\bg.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\bs.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ca.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\cs.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\da.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\de.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\dsb.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\el.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\en.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\es.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\et.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\eu.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\fa.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\fi.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\fr.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\gl.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\he.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\hi.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\hr.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\hsb.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\hu.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\hy.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\id.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\is.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\it.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ja.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\km.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ko.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\lt.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\lv.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\mk.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ms.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\nb.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\nl.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\pl.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ps.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\pt-BR.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\pt.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ro.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\ru.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\sk.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\sl.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\sr-Cyrl.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\sr.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\sv.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\th.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\tr.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\uk.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\vi.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\zh-CN.js" />
+    <Content Include="Plugins\select2\src\js\select2\i18n\zh-TW.js" />
+    <Content Include="Plugins\select2\src\js\select2\keys.js" />
+    <Content Include="Plugins\select2\src\js\select2\options.js" />
+    <Content Include="Plugins\select2\src\js\select2\results.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\allowClear.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\base.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\clickMask.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\eventRelay.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\multiple.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\placeholder.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\search.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\single.js" />
+    <Content Include="Plugins\select2\src\js\select2\selection\stopPropagation.js" />
+    <Content Include="Plugins\select2\src\js\select2\translation.js" />
+    <Content Include="Plugins\select2\src\js\select2\utils.js" />
+    <Content Include="Plugins\select2\src\js\wrapper.end.js" />
+    <Content Include="Plugins\select2\src\js\wrapper.start.js" />
+    <Content Include="Plugins\select2\tests\a11y\search-tests.js" />
+    <Content Include="Plugins\select2\tests\a11y\selection-tests.js" />
+    <Content Include="Plugins\select2\tests\data\array-tests.js" />
+    <Content Include="Plugins\select2\tests\data\base-tests.js" />
+    <Content Include="Plugins\select2\tests\data\inputData-tests.js" />
+    <Content Include="Plugins\select2\tests\data\maximumInputLength-tests.js" />
+    <Content Include="Plugins\select2\tests\data\maximumSelectionLength-tests.js" />
+    <Content Include="Plugins\select2\tests\data\minimumInputLength-tests.js" />
+    <Content Include="Plugins\select2\tests\data\select-tests.js" />
+    <Content Include="Plugins\select2\tests\data\tags-tests.js" />
+    <Content Include="Plugins\select2\tests\data\tokenizer-tests.js" />
+    <Content Include="Plugins\select2\tests\dropdown\dropdownCss-tests.js" />
+    <Content Include="Plugins\select2\tests\dropdown\positioning-tests.js" />
+    <Content Include="Plugins\select2\tests\dropdown\selectOnClose-tests.js" />
+    <Content Include="Plugins\select2\tests\dropdown\stopPropagation-tests.js" />
+    <Content Include="Plugins\select2\tests\helpers.js" />
+    <Content Include="Plugins\select2\tests\integration.html" />
+    <Content Include="Plugins\select2\tests\integration\dom-changes.js" />
+    <Content Include="Plugins\select2\tests\integration\jquery-calls.js" />
+    <Content Include="Plugins\select2\tests\integration\select2-methods.js" />
+    <Content Include="Plugins\select2\tests\options\ajax-tests.js" />
+    <Content Include="Plugins\select2\tests\options\data-tests.js" />
+    <Content Include="Plugins\select2\tests\options\deprecated-tests.js" />
+    <Content Include="Plugins\select2\tests\options\translation-tests.js" />
+    <Content Include="Plugins\select2\tests\options\width-tests.js" />
+    <Content Include="Plugins\select2\tests\results\focusing-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\allowClear-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\containerCss-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\multiple-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\placeholder-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\search-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\single-tests.js" />
+    <Content Include="Plugins\select2\tests\selection\stopPropagation-tests.js" />
+    <Content Include="Plugins\select2\tests\unit.html" />
+    <Content Include="Plugins\select2\tests\utils\decorator-tests.js" />
+    <Content Include="Plugins\select2\tests\utils\escapeMarkup-tests.js" />
+    <Content Include="Plugins\select2\tests\vendor\jquery-1.7.2.js" />
+    <Content Include="Plugins\select2\tests\vendor\qunit-1.23.1.css" />
+    <Content Include="Plugins\select2\tests\vendor\qunit-1.23.1.js" />
+    <Content Include="Plugins\select2\vendor\jquery-2.1.0.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Css\bootstrap\.editorconfig" />
+    <Content Include="Css\bootstrap\.hound.yml" />
+    <Content Include="Css\bootstrap\.travis.yml" />
+    <Content Include="Css\bootstrap\bower.json" />
+    <Content Include="Css\bootstrap\CHANGELOG.md" />
+    <Content Include="Css\bootstrap\CNAME" />
+    <Content Include="Css\bootstrap\composer.json" />
+    <Content Include="Css\bootstrap\CONTRIBUTING.md" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Css\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Css\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Css\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Css\bootstrap\docs\assets\css\docs.min.css.map" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap.css.map" />
+    <Content Include="Css\bootstrap\docs\dist\css\bootstrap.min.css.map" />
+    <Content Include="Css\bootstrap\docs\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\bootstrap\docs\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\bootstrap\docs\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Css\bootstrap\docs\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Css\bootstrap\docs\LICENSE" />
+    <Content Include="Css\bootstrap\docs\_data\browser-bugs.yml" />
+    <Content Include="Css\bootstrap\docs\_data\browser-features.yml" />
+    <Content Include="Css\bootstrap\docs\_data\core-team.yml" />
+    <Content Include="Css\bootstrap\docs\_data\glyphicons.yml" />
+    <Content Include="Css\bootstrap\docs\_data\sass-team.yml" />
+    <Content Include="Css\bootstrap\docs\_data\showcase.yml" />
+    <Content Include="Css\bootstrap\docs\_data\translations.yml" />
+    <Content Include="Css\bootstrap\docs\_plugins\bridge.rb" />
+    <Content Include="Css\bootstrap\docs\_plugins\bugify.rb" />
+    <Content Include="Css\bootstrap\docs\_pug\customizer-nav.pug" />
+    <Content Include="Css\bootstrap\docs\_pug\customizer-variables.pug" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Css\bootstrap\Gemfile" />
+    <Content Include="Css\bootstrap\Gemfile.lock" />
+    <Content Include="Css\bootstrap\grunt\.jshintrc" />
+    <Content Include="Css\bootstrap\grunt\configBridge.json" />
+    <Content Include="Css\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="Css\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="Css\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Include="Css\bootstrap\js\.jscsrc" />
+    <Content Include="Css\bootstrap\js\.jshintrc" />
+    <Content Include="Css\bootstrap\js\tests\README.md" />
+    <Content Include="Css\bootstrap\js\tests\unit\.jshintrc" />
+    <Content Include="Css\bootstrap\less\.csscomb.json" />
+    <Content Include="Css\bootstrap\less\.csslintrc" />
+    <Content Include="Css\bootstrap\less\alerts.less" />
+    <Content Include="Css\bootstrap\less\badges.less" />
+    <Content Include="Css\bootstrap\less\bootstrap.less" />
+    <Content Include="Css\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Css\bootstrap\less\button-groups.less" />
+    <Content Include="Css\bootstrap\less\buttons.less" />
+    <Content Include="Css\bootstrap\less\carousel.less" />
+    <Content Include="Css\bootstrap\less\close.less" />
+    <Content Include="Css\bootstrap\less\code.less" />
+    <Content Include="Css\bootstrap\less\component-animations.less" />
+    <Content Include="Css\bootstrap\less\dropdowns.less" />
+    <Content Include="Css\bootstrap\less\forms.less" />
+    <Content Include="Css\bootstrap\less\glyphicons.less" />
+    <Content Include="Css\bootstrap\less\grid.less" />
+    <Content Include="Css\bootstrap\less\input-groups.less" />
+    <Content Include="Css\bootstrap\less\jumbotron.less" />
+    <Content Include="Css\bootstrap\less\labels.less" />
+    <Content Include="Css\bootstrap\less\list-group.less" />
+    <Content Include="Css\bootstrap\less\media.less" />
+    <Content Include="Css\bootstrap\less\mixins.less" />
+    <Content Include="Css\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Css\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Css\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Css\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Css\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Css\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Css\bootstrap\less\mixins\forms.less" />
+    <Content Include="Css\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Css\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Css\bootstrap\less\mixins\grid.less" />
+    <Content Include="Css\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Css\bootstrap\less\mixins\image.less" />
+    <Content Include="Css\bootstrap\less\mixins\labels.less" />
+    <Content Include="Css\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Css\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Css\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Css\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Css\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Css\bootstrap\less\mixins\panels.less" />
+    <Content Include="Css\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Css\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Css\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Css\bootstrap\less\mixins\resize.less" />
+    <Content Include="Css\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Css\bootstrap\less\mixins\size.less" />
+    <Content Include="Css\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Css\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Css\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Css\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Css\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Css\bootstrap\less\modals.less" />
+    <Content Include="Css\bootstrap\less\navbar.less" />
+    <Content Include="Css\bootstrap\less\navs.less" />
+    <Content Include="Css\bootstrap\less\normalize.less" />
+    <Content Include="Css\bootstrap\less\pager.less" />
+    <Content Include="Css\bootstrap\less\pagination.less" />
+    <Content Include="Css\bootstrap\less\panels.less" />
+    <Content Include="Css\bootstrap\less\popovers.less" />
+    <Content Include="Css\bootstrap\less\print.less" />
+    <Content Include="Css\bootstrap\less\progress-bars.less" />
+    <Content Include="Css\bootstrap\less\responsive-embed.less" />
+    <Content Include="Css\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Css\bootstrap\less\scaffolding.less" />
+    <Content Include="Css\bootstrap\less\tables.less" />
+    <Content Include="Css\bootstrap\less\theme.less" />
+    <Content Include="Css\bootstrap\less\thumbnails.less" />
+    <Content Include="Css\bootstrap\less\tooltip.less" />
+    <Content Include="Css\bootstrap\less\type.less" />
+    <Content Include="Css\bootstrap\less\utilities.less" />
+    <Content Include="Css\bootstrap\less\variables.less" />
+    <Content Include="Css\bootstrap\less\wells.less" />
+    <Content Include="Css\bootstrap\LICENSE" />
+    <Content Include="Css\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Css\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Css\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Css\bootstrap\package.json" />
+    <Content Include="Css\bootstrap\README.md" />
+    <Content Include="Css\bootstrap\_config.yml" />
+    <Content Include="Plugins\select2\.editorconfig" />
+    <Content Include="Plugins\select2\.github\CONTRIBUTING.md" />
+    <Content Include="Plugins\select2\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="Plugins\select2\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Plugins\select2\.jshintignore" />
+    <Content Include="Plugins\select2\.jshintrc" />
+    <Content Include="Plugins\select2\.travis.yml" />
+    <Content Include="Plugins\select2\bower.json" />
+    <Content Include="Plugins\select2\CHANGELOG.md" />
+    <Content Include="Plugins\select2\component.json" />
+    <Content Include="Plugins\select2\composer.json" />
+    <Content Include="Plugins\select2\docs\README.md" />
+    <Content Include="Plugins\select2\LICENSE.md" />
+    <Content Include="Plugins\select2\package.json" />
+    <Content Include="Plugins\select2\README.md" />
+    <Content Include="Plugins\select2\select2.jquery.json" />
+    <Content Include="Plugins\select2\src\scss\core.scss" />
+    <Content Include="Plugins\select2\src\scss\mixins\_gradients.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\classic\layout.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\classic\_defaults.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\classic\_multiple.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\classic\_single.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\default\layout.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\default\_multiple.scss" />
+    <Content Include="Plugins\select2\src\scss\theme\default\_single.scss" />
+    <Content Include="Plugins\select2\src\scss\_dropdown.scss" />
+    <Content Include="Plugins\select2\src\scss\_multiple.scss" />
+    <Content Include="Plugins\select2\src\scss\_single.scss" />
+    <Content Include="Plugins\vue\dist\README.md" />
+    <Content Include="Plugins\vue\LICENSE" />
+    <Content Include="Plugins\vue\package.json" />
+    <Content Include="Plugins\vue\README.md" />
+    <Content Include="Plugins\vue\src\.DS_Store" />
+    <Content Include="Plugins\vue\src\compiler\.DS_Store" />
+    <Content Include="Plugins\vue\src\platforms\.DS_Store" />
+    <Content Include="Plugins\vue\src\platforms\weex\.DS_Store" />
+    <Content Include="Plugins\vue\src\platforms\weex\compiler\.DS_Store" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Plugins\vue\types\index.d.ts" />
+    <TypeScriptCompile Include="Plugins\vue\types\options.d.ts" />
+    <TypeScriptCompile Include="Plugins\vue\types\plugin.d.ts" />
+    <TypeScriptCompile Include="Plugins\vue\types\vnode.d.ts" />
+    <TypeScriptCompile Include="Plugins\vue\types\vue.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4923</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4923/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

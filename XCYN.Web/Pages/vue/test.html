@@ -1,0 +1,212 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=gbk">
+</head>
+<body>
+    <div id="app" v-bind:title="message">
+        条件渲染<br />
+        <template v-if="seen == 0">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="input_userName">
+        </template>
+        <template v-else-if="seen == 1">
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="input_email">
+        </template>
+        <input type="button" value="切换账户" v-on:click="SwitchClick">
+    </div>
+    <div id="app2">
+        列表渲染<br />
+        <ul v-for="(item,index) in skills" v-bind:key="item.id">
+            <li>
+                {{count}}.{{index+1}}-{{item.title}}
+            </li>
+        </ul>
+        取出偶数<br />
+        <ul v-for="item in evenNumbers">
+            <li>{{item.id}}-{{item.title}}</li>
+        </ul>
+    </div>
+    <div id="app3">
+        双向绑定<br />
+        <p>{{message.length}}</p>
+        <input type="text" v-bind:value="message">
+    </div>
+    <div id="app4">
+        {{rawHtml}}
+        绑定HTML<br>
+        <div v-html="rawHtml"></div>
+    </div>
+    <div id="app5">
+        属性绑定<br />
+        <a v-bind:href="url" target="_blank">点我</a>
+        <input type="text" v-model="url">
+    </div>
+    <div id="app6">
+        计算属性:<br>
+        <p>{{message}}</p>
+        <p>{{reverseMessage}}</p>
+    </div>
+    <div id="app7">
+        监听器:<br />
+        Ask you question?
+        <input type="text" v-model="question">
+        <br />
+        {{answer}}
+    </div>
+    <div id="app8">
+        Class绑定<br />
+        <span class="static" v-bind:class="{show:isShow,hidden:!isShow}">显示Class</span>
+        Style绑定<br />
+        <span v-bind:style="activeStyle">1234567890</span>
+    </div>
+    <div id="app9">
+        事件处理<br />
+        <input type="button" value="+" v-on:click="counter ++ " />
+        <input type="button" value="-" v-on:click="counter -- " />
+        <label>{{counter}}</label>
+        访问原始DOM事件
+        <div v-on:click="warn($event)">
+            .stop阻止事件的继续传播<br>
+            <a href="javascript:void(0)" v-on:click.stop="warn($event)">click me</a>
+        </div>
+        <div>
+            .prevent阻止表单必填刷新
+            <form v-on:submit.prevent="FormSubmit">
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div>
+            修饰符可以串联<br />
+            <a href="http://baidu.com" v-on:click.stop.prevent="JumpToBaidu">百度</a>
+        </div>
+        <div>
+            按键修饰符<br />
+            <input type="text" v-model="input_userName" v-on:keyup.ctrl.67="FormSubmit">
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/lodash.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                seen: 0
+            },
+            methods: {
+                SwitchClick: function () {
+                    if (this.seen == 0)
+                        this.seen = 1;
+                    else
+                        this.seen = 0;
+                }
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                count: 3,
+                skills: [
+                    { id: 1, title: "C#" },
+                    { id: 2, title: "javascript" },
+                    { id: 3, title: "SQL" },
+                ]
+            },
+            computed: {
+                evenNumbers: function () {
+                    return this.skills.filter(function (skills) {
+                        return skills.id % 2 === 0
+                    })
+                }
+            }
+        });
+
+        var app3 = new Vue({
+            el: "#app3",
+            data: {
+                message: "hello world!"
+            }
+        })
+
+        var app4 = new Vue({
+            el: '#app4',
+            data: {
+                rawHtml: '<span style="color:red">this is red text</span>'
+            }
+        })
+
+        var app5 = new Vue({
+            el: '#app5',
+            data: {
+                url: 'http://www.baidu.com'
+            }
+        })
+
+        var app6 = new Vue({
+            el: '#app6',
+            data: {
+                message: "hello world",
+            },
+            computed: {
+                reverseMessage: function () {
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        });
+
+        var app7 = new Vue({
+            el: "#app7",
+            data: {
+                question: '',
+                answer: 'please input you question'
+            },
+            watch: {
+                question: function (arg) {
+                    this.answer = "please waiting",
+					this.GetAnswer();
+                }
+            },
+            methods: {
+                GetAnswer: _.debounce(function () {
+                    this.answer = '';
+                }, 1000)
+            }
+        })
+
+        var app8 = new Vue({
+            el: "#app8",
+            data: {
+                isShow: true,
+                activeStyle: {
+                    color: "red",
+                    fontSize: "20px"
+                }
+            }
+        });
+
+        var app9 = new Vue({
+            el: "#app9",
+            data: {
+                counter: 0,
+                input_userName: "",
+            },
+            methods: {
+                warn: function (event) {
+                    console.log(event);
+                },
+                FormSubmit: function () {
+                    console.log(this.input_userName);
+                },
+                JumpToBaidu: function () {
+                    console.log("baidu");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

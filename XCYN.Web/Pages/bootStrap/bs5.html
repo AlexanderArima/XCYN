@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../../Css/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../Font-Awesome/css/font-awesome.css" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+</head>
+<body>
+    <div class="container">
+        <form class="form-horizontal">
+            <!-- 多选框 -->
+            <div class="form-group">
+                <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" />C#
+                    </label>
+                </div>
+                <div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" />JAVA
+                    </label>
+                </div>
+                <div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" />PHP
+                    </label>
+                </div>
+            </div>
+
+            <!-- 单选框 -->
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <input name="sex" type="radio" />男
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="sex" type="radio" />女
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="sex" type="radio" disabled/>未知
+                    </label>
+                </div>
+            </div>
+
+            
+        </form>
+        <form>
+            <!-- 验证状态 -->
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input type="text" class="form-control" />
+                <!--<i class="fa fa-key"></i>-->
+            </div>
+            <div class="form-group has-warning has-feedback">
+                <label class="control-label">密码</label>
+                <input type="password" class="form-control input-lg" />
+                <i class="fa fa-key form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <div class="form-group has-error">
+                <label class="control-label">确认密码</label>
+                <input type="password" class="form-control input-sm" />
+                <span class="help-block">请输入长度6-20的密码</span>
+            </div>
+        </form>
+
+        <form class="form-horizontal">
+            <div class="form-group form-group-lg">
+                <p class="form-control-static">请选择收件地址</p>
+            </div>
+            <div class="form-group form-group-lg">
+                <div class="row">
+                    <label class="control-label col-sm-1">省</label>
+                    <div class="col-sm-3">
+                        <select class="form-control">
+                            <option>湖北省</option>
+                            <option>湖南省</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1">市</label>
+                    <div class="col-sm-3">
+                        <select class="form-control">
+                            <option>武汉市</option>
+                            <option>宜昌市</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1">区</label>
+                    <div class="col-sm-3">
+                        <select class="form-control">
+                            <option>武昌区</option>
+                            <option>硚口区</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+</div>
+</body>
+</html>

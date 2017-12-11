@@ -1,0 +1,132 @@
+﻿<head>
+    <link href="../../Css/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../select2/dist/css/select2.css" rel="stylesheet" />
+    <link href="../../Plugins/select2/dist/css/select2.css" rel="stylesheet" />
+    <script src="../../Plugins/select2/vendor/jquery-2.1.0.js"></script>
+    <script src="../../Plugins/select2/dist/js/select2.full.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //分组显示下拉菜单
+            //var _data = [
+            //    {
+            //        "text":"Group1",
+            //        "children" : [
+            //            { id: 0, text: 'enhancement' },
+            //            { id: 1, text: 'bug' },
+            //            { id: 2, text: 'duplicate'},
+            //            { id: 3, text: 'invalid' },
+            //            { id: 4, text: 'wontfix' }
+            //        ]
+            //    },
+            //    {
+            //         "text": "Group1",
+            //         "children": [
+            //             { id: 0, text: 'enhancement' },
+            //             { id: 1, text: 'bug' },
+            //             { id: 2, text: 'duplicate' },
+            //             { id: 3, text: 'invalid' },
+            //             { id: 4, text: 'wontfix' }
+            //         ]
+            //     },
+            //];
+
+            //Ajax加载
+            //$('#e1').select2({
+            //    ajax: {
+            //        url: 'https://api.github.com/search/repositories',
+            //        dataType: 'json',
+            //        delay: 500,//延迟加载
+            //        data: function (item) {
+            //            if (item.term != undefined && item.term.length > 0)
+            //            {
+            //                return {
+            //                    q: item.term,
+            //                    type: 'public',
+            //                }
+            //            }
+            //            return {
+            //                q : "1",
+            //            };
+            //        },
+            //        processResults: function (data) {
+            //            //重新组织JSON数据格式
+                       
+            //            var array = new Array();
+            //            for (var i = 0; i < data.items.length; i++)
+            //            {
+            //                var dict = {
+            //                    id: data.items[i].id,
+            //                    text: data.items[i].full_name,
+            //                }
+            //                array.push(dict);
+            //            }
+            //            console.log(array);
+            //            return {
+            //                results: array
+            //            };
+            //        },
+            //    }
+            //});
+            
+            //var _old = "";
+           // var _pageIndex = 1;
+
+            $("#e1").select2({
+                ajax: {
+                    url: 'https://api.github.com/search/repositories',
+                    dataType: 'json',
+                    delay: 500,//延迟加载
+                    data: function (params) {
+                        //初次传递page参数时，不能传递空值，否则加载更多时不会带上page参数
+                        var query = {
+                            q: params.term,
+                            page: params.page == undefined ? 1 : params.page
+                        }
+                        return query;
+                    },
+                    processResults: function (data, params) {
+                        params.page = (params.page == undefined ? 1 : params.page);
+                        console.log("当前时第" + params.page + "页,一共有" + Math.ceil(data.total_count / 30) + "页")
+                        //返回的结果
+                        console.log(params);
+                        var array = new Array();
+                        for (var i = 0; i < data.items.length; i++)
+                        {
+                            var dict = {
+                                id: data.items[i].id,
+                                text: data.items[i].full_name,
+                            }
+                            array.push(dict);
+                        }
+                        return {
+                            results: array,
+                            pagination: {
+                                more:  params.page * 30 <= data.total_count 
+                            }
+                        }
+                    }
+                }
+            })
+
+            //multiple表示支持多选
+            //data是一个数组，存放选中的数据
+            //$("#e1").select2({
+            //    data: data2,
+            //    placeholder: '请选择',
+            //    allowClear: true,
+            //    multiple:false,
+            //})
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <label for="e1">地区</label>
+            <select class="js-states form-control" id="e1">
+                
+            </select>
+        </form>
+    </div>
+</body>
