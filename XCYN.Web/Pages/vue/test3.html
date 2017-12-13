@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>组件</title>
+    <link href="../../Css/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" style="padding-top:20px">
+        <table class="table table-bordered">
+            <tr>
+                <td>定义一个全局组件：</td>
+            </tr>
+            <tr id="app1">
+                <td><com1></com1><com1></com1><com1></com1></td>
+            </tr>
+            <tr>
+                <td>定义一个局部组件：</td>
+            </tr>
+            <tr id="app2">
+                <td><com2></com2></td>
+            </tr>
+            <tr>
+                <td>使用Prop传递数据</td>
+            </tr>
+            <tr id="app3">
+                <td>
+                    <input type="text" v-model="message" />
+                    <!--HTML 特性是不区分大小写的。所以，当使用的不是字符串模板时，camelCase (驼峰式命名) 的 prop 需要转换为相对应的 kebab-case (短横线分隔式命名)：-->
+                    <com3 v-bind:my-message="message"></com3>
+                </td>
+            </tr>
+            <tr>
+                <td>自定义事件</td>
+            </tr>
+            <tr id="app4">
+                <td>
+                    <com4 v-on:increment2="incrementTotal"></com4>+
+                    <com4 v-on:increment2="incrementTotal"></com4>=
+                    {{total}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script>
+
+        /*
+        注册一个组件
+        */
+        Vue.component("com1",
+            {
+                template: "<input type='button' v-model='counter' v-on:click='addCounter' />",
+                data: function () {
+                    return {
+                        counter: 0
+                    }
+                },
+                methods: {
+                    addCounter: function () {
+                        if (this.counter >= 9)
+                        {
+                            this.counter = 0;
+                        }
+                        else
+                        {
+                            this.counter++;
+                        }
+                        
+                    }
+                }
+            }
+        )
+        new Vue({
+            el: "#app1"
+        })
+        var com2 = { template: "<span>A Costom Component!</span>" };
+        new Vue({
+            el: "#app2",
+            components: {
+                'com2': com2
+            },
+        })
+
+        //父组件的数据需要通过 prop 才能下发到子组件中
+        //子组件要显式地用 props 选项声明它预期的数据
+        var com3 = {
+            template: "<span>{{myMessage}}</span>",
+            props: {
+                myMessage:{
+                    type: String,
+                    required:true
+                }
+            }
+        }
+
+        new Vue({
+            el: "#app3",
+            data:{
+                message:"hello world"
+            },
+            components: {
+                'com3':com3
+            }
+        })
+
+        var com4 = {
+            template: "<input type='button' v-on:click='increment' v-bind:value='itemNumber'/>",
+            data: function () {
+                return {
+                    itemNumber:0
+                }
+            },
+            methods:{
+                increment:function(){
+                    this.itemNumber++;
+                    this.$emit('increment2')
+                }
+            }
+        }
+
+        new Vue({
+            el: "#app4",
+            data:{
+                total:0
+            },
+            components:{
+                "com4":com4
+            },
+            methods: {
+                incrementTotal: function () {
+                    this.total++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

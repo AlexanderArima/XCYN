@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>表单输入绑定</title>
+    <link href="../../Css/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="table-responsive" style="padding-top:20px">
+            <table class="table table-bordered " id="app1">
+                <tr >
+                    <td>
+                        <strong>表单输入绑定</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>多行文本</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea class="form-control" v-model="message"></textarea><p>{{message}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        复选框
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="chk_1" value="C#" v-model="skills" />C#
+                            </label>
+                            <label>
+                                <input type="checkbox" id="chk_2" value="Java" v-model="skills" />Java
+                            </label>
+                            <label>
+                                <input type="checkbox" id="chk_3" value="Php" v-model="skills" />Php
+                            </label>
+                        </div>
+                        &nbsp;&nbsp;选中项:
+                        <template v-for="(item,index) in skills">
+                            <template v-if="index == skills.length - 1">
+                                {{item}}
+                            </template>
+                            <template v-else>
+                                {{item + ","}}
+                            </template>
+                        </template>
+                    </td>
+                </tr>
+                <tr>
+                    <td>单选按钮</td>
+                </tr>
+                <tr>
+                    <td>
+                        <template v-for="item in sexList">
+                            <label>
+                                <input type="radio" v-model="sex" v-bind:value="item.value" />{{item.text}}
+                            </label>
+                            &nbsp; &nbsp;
+                        </template>
+                        &nbsp;&nbsp;选中项:
+                        <strong class="text-danger">{{ sex_chi }}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>单选列表</td>
+                </tr>
+                <tr>
+                    <td>年:
+                        <select v-model="year">
+                            <option v-for="n in new Date().getFullYear()" v-if="n > new Date().getFullYear() - 100">{{n}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        修饰符
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        将用户输入的值转成Number类型
+                        <div class="input-group">
+                            <input type="text" class="form-control" v-model.number="age" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" v-on:click="SubmitAge">提交</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        
+    </div>
+    
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script>
+
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                message: "hello world",
+                skills: [],
+                sexList: [
+                    { text: "男", value: "man" },
+                    { text: "女", value: "woman" },
+                ],
+                sex:  "",
+                year: new Date().getFullYear(),
+                age:0
+            },
+            computed: {
+                sex_chi: function () {
+                    for (var i = 0; i < this.sexList.length; i++) {
+                        if (this.sexList[i].value == this.sex)
+                            return this.sexList[i].text;
+                    }
+                }
+            },
+            methods: {
+                SubmitAge: function () {
+                    console.log(this.age)
+                }
+            }
+        });
+    </script>
+</body>
+</html>
