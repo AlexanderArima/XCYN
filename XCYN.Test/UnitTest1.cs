@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using log4net.Config;
 using log4net;
+using XCYN.Print.rabbitmq;
 
 namespace XCYN.Test
 {
@@ -44,6 +45,12 @@ namespace XCYN.Test
             YieldTest y = new Test.YieldTest();
             y.WithNoYield();
             Console.ReadLine();
+        }
+
+        [TestMethod]
+        public void PublishTest()
+        {
+            Publish.PublishBasic();
         }
 
     }
