@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.delegates;
 using XCYN.Print.linq;
+using XCYN.Print.rabbitmq;
 using XCYN.Print.yield;
 
 namespace XCYN.Print
@@ -15,9 +16,9 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            delegateTest.DelegateFun();
-
-            Console.ReadLine();
+            //Publish.PublishBasic();
+            Consumer.ConsumerBasic();
+            Console.ReadKey();
         }
     }
 }
