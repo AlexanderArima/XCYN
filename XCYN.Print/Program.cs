@@ -18,7 +18,7 @@ namespace XCYN.Print
         {
             //Publish.PublishBasic();
             //var key = Console.ReadKey();
-            Consumer.ConsumerWorkQueue();
+            Consumer.ConsumerHeader();
             
         }
     }
