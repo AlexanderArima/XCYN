@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace XCYN.Print.rabbitmq
@@ -147,6 +148,7 @@ namespace XCYN.Print.rabbitmq
 
         #endregion
 
+        #region 多播(Fanout)的方式，往多个Queue传递同一个消息
         /// <summary>
         /// 通过多播(Fanout)消费消息
         /// </summary>
@@ -217,6 +219,12 @@ namespace XCYN.Print.rabbitmq
             }
         }
 
+        #endregion
+
+        #region 消息头(Headers)的方式，根据发送的消息内容中的headers属性进行匹配
+        /// <summary>
+        /// Header类型
+        /// </summary>
         public static void ConsumerHeader()
         {
             ConnectionFactory factory = new ConnectionFactory();
@@ -248,5 +256,111 @@ namespace XCYN.Print.rabbitmq
                 }
             }
         }
+        #endregion
+
+        #region 主题(topic)的方式，分组归类发送消息
+        /// <summary>
+        /// 通过主题(topic)分组归类发送消息
+        /// </summary>
+        public static void ConsumerTopic1()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare("MyExchange", ExchangeType.Topic, true, false, null);
+                    channel.QueueDeclare("queue1", true, false, false, null);
+                    //#可以匹配0到n个标识符
+                    channel.QueueBind("queue1", "MyExchange", "#.com", null);
+                    //.可以匹配一个标识符
+                    //channel.QueueBind("queue1", "MyExchange", "*.com", null);
+                    //获取消息
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (sender, e) =>
+                    {
+                        var msg = Encoding.UTF8.GetString(e.Body);
+                        Console.WriteLine(msg);
+                    };
+                    channel.BasicConsume("queue1", true, consumer);
+                    Console.ReadKey();
+                    //var result = channel.BasicGet("test", true);
+                    //var msg = Encoding.UTF8.GetString(result.Body);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 通过主题(topic)分组归类发送消息
+        /// </summary>
+        public static void ConsumerTopic2()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare("MyExchange", ExchangeType.Topic, true, false, null);
+                    channel.QueueDeclare("queue2", true, false, false, null);
+                    channel.QueueBind("queue2", "MyExchange", "*.cn", null);
+                    //获取消息
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (sender, e) =>
+                    {
+                        var msg = Encoding.UTF8.GetString(e.Body);
+                        Console.WriteLine(msg);
+                    };
+                    channel.BasicConsume("queue2", true, consumer);
+                    Console.ReadKey();
+                    //var result = channel.BasicGet("test", true);
+                    //var msg = Encoding.UTF8.GetString(result.Body);
+                }
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 消费一个会自动删除(AutoDelete)的队列
+        /// </summary>
+        public static void ConsumerPassive()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //获取消息
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (sender, e) =>
+                    {
+                        var msg = Encoding.UTF8.GetString(e.Body);
+                        Thread.Sleep(500);
+                        var queue = channel.QueueDeclarePassive("test");
+                        Console.WriteLine(msg);
+                    };
+                    channel.BasicConsume("test", true, consumer);
+                    Console.ReadKey();
+                    //var result = channel.BasicGet("test", true);
+                    //var msg = Encoding.UTF8.GetString(result.Body);
+                }
+            }
+        }
+
     }
 }
