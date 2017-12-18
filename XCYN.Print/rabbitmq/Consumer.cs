@@ -16,6 +16,7 @@ namespace XCYN.Print.rabbitmq
         /// </summary>
         public static void ConsumerBasic()
         {
+            Console.WriteLine("开启消息消费者");
             ConnectionFactory factory = new ConnectionFactory();
             factory.UserName = "root";
             factory.Password = "900424";
@@ -29,6 +30,7 @@ namespace XCYN.Print.rabbitmq
                     //获取消息
                    var result = channel.BasicGet("test", true);
                    var msg = Encoding.UTF8.GetString(result.Body);
+                   Console.WriteLine(msg);
                 }
             }
         }
@@ -331,7 +333,7 @@ namespace XCYN.Print.rabbitmq
         #endregion
 
         /// <summary>
-        /// 消费一个会自动删除(AutoDelete)的队列
+        /// QueueDeclarePassive用于判断队列是否存在，及队列的相关信息
         /// </summary>
         public static void ConsumerPassive()
         {
@@ -350,11 +352,44 @@ namespace XCYN.Print.rabbitmq
                     consumer.Received += (sender, e) =>
                     {
                         var msg = Encoding.UTF8.GetString(e.Body);
-                        Thread.Sleep(500);
                         var queue = channel.QueueDeclarePassive("test");
                         Console.WriteLine(msg);
                     };
                     channel.BasicConsume("test", true, consumer);
+                    Console.ReadKey();
+                    //var result = channel.BasicGet("test", true);
+                    //var msg = Encoding.UTF8.GetString(result.Body);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 消费队列中死信交换机和路由键
+        /// </summary>
+        public static void ConsumerDeadLetterExchangeAndRoutingKey()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //声明死信的交换机和队列，被删除的消息会发到这里面
+                    channel.ExchangeDeclare("dead_exchange", ExchangeType.Direct, false, false, null);
+                    channel.QueueDeclare("dead_queue", false, false, false, null);
+                    channel.QueueBind("dead_queue","dead_exchange","dead_queue",null);
+                    //获取消息
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (sender, e) =>
+                    {
+                        var msg = Encoding.UTF8.GetString(e.Body);
+                        Console.WriteLine(msg);
+                    };
+                    channel.BasicConsume("dead_queue", true, consumer);
                     Console.ReadKey();
                     //var result = channel.BasicGet("test", true);
                     //var msg = Encoding.UTF8.GetString(result.Body);

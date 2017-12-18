@@ -50,7 +50,7 @@ namespace XCYN.Test
         [TestMethod]
         public void PublishTest()
         {
-            Publish.PublishHeader();
+            Publish.PublishPriority();
         }
 
     }

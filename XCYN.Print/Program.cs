@@ -16,10 +16,8 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            //Publish.PublishBasic();
-            //var key = Console.ReadKey();
-            Consumer.ConsumerPassive();
-            
+            Publish.PublishPriority();
+            //Consumer.ConsumerWorkQueue();
         }
     }
 }

@@ -293,5 +293,186 @@ namespace XCYN.Print.rabbitmq
             }
         }
 
+        /// <summary>
+        /// 生产一个有生命周期(Time-To-Live)的消息
+        /// </summary>
+        public static void PublishMessageTTL()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义一个队列中所有的消息的生命周期
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-message-ttl", 60000);
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false,dict);
+                    var msg = Encoding.UTF8.GetBytes(string.Format("你好"));
+                    //定义一个消息的生命周期
+                    //当同时定义了两个生命周期时，以小的为准。
+                    var properties = channel.CreateBasicProperties();
+                    properties.Expiration = "8000";
+                    channel.BasicPublish(string.Empty, "test", properties, msg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 当一个队列不被使用时，过多久会被删除
+        /// </summary>
+        public static void PublishAutoExpire()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义一个队列中所有的消息的生命周期
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-expires", 11000);
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false, dict);
+                    var msg = Encoding.UTF8.GetBytes(string.Format("你好"));
+                    channel.BasicPublish(string.Empty, "test", null, msg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置队列中消息的最大数量(LRU算法，保留最近调用过的消息)
+        /// </summary>
+        public static void PublishMaxLength()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义一个队列中所有的消息的生命周期
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-max-length", 10);
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false, dict);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("你好,{0}",i));
+                        channel.BasicPublish(string.Empty, "test", null, msg);
+                    }
+                    
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置队列中消息的最大数量(LRU算法，保留最近调用过的消息)
+        /// </summary>
+        public static void PublishMaxLengthByte()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义一个队列中所有的消息的生命周期
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-max-length-bytes", 100);
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false, dict);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("你好,{0}", i));//占8字节
+                        channel.BasicPublish(string.Empty, "test", null, msg);
+                    }
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置队列中死信交换机和路由键
+        /// </summary>
+        public static void PublishDeadLetterExchangeAndRoutingKey()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义消息的最大长度和死信交换机和队列
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-max-length", 10);
+                    dict.Add("x-dead-letter-exchange", "dead_exchange");
+                    dict.Add("x-dead-letter-routing-key", "dead_queue");
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false, dict);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("你好,{0}", i));//占8字节
+                        channel.BasicPublish(string.Empty, "test", null, msg);
+                    }
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置队列中的优先级
+        /// </summary>
+        public static void PublishPriority()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //定义队列的最大优先级
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-max-priority", 10);
+                    //创建队列
+                    channel.QueueDeclare("test", false, false, false, dict);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        //设置消息的优先级
+                        var properties = channel.CreateBasicProperties();
+                        properties.Priority = (byte)i;
+                        var msg = Encoding.UTF8.GetBytes(string.Format("你好,{0}", i));//占8字节
+                        channel.BasicPublish(string.Empty, "test", properties, msg);
+                    }
+                    Console.ReadKey();
+                }
+            }
+        }
+
     }
 }
