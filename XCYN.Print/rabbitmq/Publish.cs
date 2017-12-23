@@ -29,7 +29,7 @@ namespace XCYN.Print.rabbitmq
                     //创建Queue
                     var queue = channel.QueueDeclare("test", true, false, false, null);
 
-                    for (int i = 0; i < 100; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好",i));
                         //发送消息
@@ -470,6 +470,48 @@ namespace XCYN.Print.rabbitmq
                         channel.BasicPublish(string.Empty, "test", properties, msg);
                     }
                     Console.ReadKey();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 发布消息确认
+        /// </summary>
+        public static void PublishTX()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //创建交换机
+
+                    //创建Queue
+                    var queue = channel.QueueDeclare("test", true, false, false, null);
+                    //开启确认机制
+                    channel.TxSelect();
+                    try
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好", i));
+                            //发送消息
+                            channel.BasicPublish("", "test", true, basicProperties: null, body: msg);
+                        }
+                        //消息确认
+                        channel.TxCommit();
+                    }
+                    catch(Exception ex)
+                    {
+                        //回滚
+                        channel.TxRollback();
+                    }
+
                 }
             }
         }

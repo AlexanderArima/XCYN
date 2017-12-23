@@ -27,3 +27,5 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\StackExchange.Redis.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\StackExchange.Redis.xml

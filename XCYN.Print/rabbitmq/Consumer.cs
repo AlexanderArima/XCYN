@@ -397,5 +397,60 @@ namespace XCYN.Print.rabbitmq
             }
         }
 
+        /// <summary>
+        /// 消息确认机制，接收
+        /// </summary>
+        public static void ConsumerAck()
+        {
+            Console.WriteLine("开启消息消费者");
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //获取消息
+                    var result = channel.BasicGet("test", false);
+                    var msg = Encoding.UTF8.GetString(result.Body);
+                    //确认消息
+                    channel.BasicAck(result.DeliveryTag, false);
+                    Console.WriteLine(msg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 消息确认机制，拒绝
+        /// </summary>
+        public static void ConsumerReject()
+        {
+            Console.WriteLine("开启消息消费者");
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //获取消息
+                    var result = channel.BasicGet("test", false);
+                    var msg = Encoding.UTF8.GetString(result.Body);
+                    //拒绝消息，消息返回队列
+                    //channel.BasicReject(result.DeliveryTag, true);
+                    //拒绝消息，消息不返回队列
+                    channel.BasicReject(result.DeliveryTag, false);
+                    Console.WriteLine(msg);
+                }
+            }
+        }
+
+
     }
 }
