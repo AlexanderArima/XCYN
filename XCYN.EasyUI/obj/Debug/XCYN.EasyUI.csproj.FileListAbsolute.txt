@@ -55,6 +55,6 @@ D:\MyProject\XCYN\XCYN.EasyUI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlat
 D:\MyProject\XCYN\XCYN.EasyUI\bin\Newtonsoft.Json.xml
 D:\MyProject\XCYN\XCYN.EasyUI\bin\zh-Hans\EntityFramework.resources.dll
 D:\MyProject\XCYN\XCYN.EasyUI\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
-D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.csprojResolveAssemblyReference.cache
+D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.csproj.CoreCompileInputs.cache
 D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.dll
 D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.pdb

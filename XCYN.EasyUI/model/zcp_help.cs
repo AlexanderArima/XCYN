@@ -18,7 +18,6 @@ namespace XCYN.EasyUI.model
         public Nullable<int> c_id { get; set; }
         public string title { get; set; }
         public string content { get; set; }
-        public Nullable<int> sort { get; set; }
         public Nullable<int> state { get; set; }
         public Nullable<System.DateTime> add_time { get; set; }
     }

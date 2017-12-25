@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Service", "XCYN.Service\XCYN.Service.csproj", "{275EF310-C8B8-40F5-8BAD-3A077EB311CC}"
 EndProject
@@ -90,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E72ED4E-E39F-4F53-9BAB-36C2FEA783F1}
 	EndGlobalSection
 EndGlobal

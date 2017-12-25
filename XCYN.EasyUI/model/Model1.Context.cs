@@ -66,8 +66,6 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_ads> zcp_ads { get; set; }
         public virtual DbSet<zcp_article_post_collect> zcp_article_post_collect { get; set; }
         public virtual DbSet<zcp_article_post_great> zcp_article_post_great { get; set; }
-        public virtual DbSet<zcp_auth_expert> zcp_auth_expert { get; set; }
-        public virtual DbSet<zcp_auth_master> zcp_auth_master { get; set; }
         public virtual DbSet<zcp_bank> zcp_bank { get; set; }
         public virtual DbSet<zcp_bank_account> zcp_bank_account { get; set; }
         public virtual DbSet<zcp_bank_transfer> zcp_bank_transfer { get; set; }
@@ -81,14 +79,12 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_focus> zcp_focus { get; set; }
         public virtual DbSet<zcp_form_hitrate> zcp_form_hitrate { get; set; }
         public virtual DbSet<zcp_formu_order> zcp_formu_order { get; set; }
-        public virtual DbSet<zcp_formu_select_authority> zcp_formu_select_authority { get; set; }
         public virtual DbSet<zcp_formula_click> zcp_formula_click { get; set; }
         public virtual DbSet<zcp_formula_coefficient> zcp_formula_coefficient { get; set; }
         public virtual DbSet<zcp_formula_collect> zcp_formula_collect { get; set; }
         public virtual DbSet<zcp_formula_comment> zcp_formula_comment { get; set; }
         public virtual DbSet<zcp_formula_commentpraise> zcp_formula_commentpraise { get; set; }
         public virtual DbSet<zcp_formula_ext> zcp_formula_ext { get; set; }
-        public virtual DbSet<zcp_formula_query_quantity> zcp_formula_query_quantity { get; set; }
         public virtual DbSet<zcp_formula_rank> zcp_formula_rank { get; set; }
         public virtual DbSet<zcp_formula_reward> zcp_formula_reward { get; set; }
         public virtual DbSet<zcp_help> zcp_help { get; set; }
@@ -132,7 +128,6 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_record_smallClass> zcp_record_smallClass { get; set; }
         public virtual DbSet<zcp_record_yearClass> zcp_record_yearClass { get; set; }
         public virtual DbSet<zcp_reward_detail> zcp_reward_detail { get; set; }
-        public virtual DbSet<zcp_signIn> zcp_signIn { get; set; }
         public virtual DbSet<zcp_space_log> zcp_space_log { get; set; }
         public virtual DbSet<zcp_superior> zcp_superior { get; set; }
         public virtual DbSet<zcp_test> zcp_test { get; set; }
@@ -193,7 +188,6 @@ namespace XCYN.EasyUI.model
         public virtual DbSet<zcp_SEQUENCE> zcp_SEQUENCE { get; set; }
         public virtual DbSet<zcp_sx_table> zcp_sx_table { get; set; }
         public virtual DbSet<zcp_whan_attr_table> zcp_whan_attr_table { get; set; }
-        public virtual DbSet<C1> C1 { get; set; }
         public virtual DbSet<ballnum_attrValue_map_view> ballnum_attrValue_map_view { get; set; }
         public virtual DbSet<v_collect> v_collect { get; set; }
         public virtual DbSet<v_collect_account> v_collect_account { get; set; }

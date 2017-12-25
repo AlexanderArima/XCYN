@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -757,9 +758,6 @@
     <Compile Include="model\ballnum_attrValue_map_view.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="model\C1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="model\channel.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1003,12 +1001,6 @@
     <Compile Include="model\zcp_attr_relation_table.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="model\zcp_auth_expert.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="model\zcp_auth_master.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="model\zcp_ballnum_attrValue_map.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1099,9 +1091,6 @@
     <Compile Include="model\zcp_formula_praise.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="model\zcp_formula_query_quantity.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="model\zcp_formula_rank.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1112,9 +1101,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_formu_order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="model\zcp_formu_select_authority.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="model\zcp_form_hitrate.cs">
@@ -1294,9 +1280,6 @@
     <Compile Include="model\zcp_SEQUENCE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="model\zcp_signIn.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="model\zcp_space_log.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1351,6 +1334,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
