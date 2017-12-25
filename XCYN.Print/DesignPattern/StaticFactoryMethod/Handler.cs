@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace XCYN.Print.DesignPattern.StaticFactoryMethod
 {
-    public class User
+    public class Handler
     {
         public static string db = ConfigurationManager.AppSettings["StaticFactoryMethod_db"];
         public void Insert()

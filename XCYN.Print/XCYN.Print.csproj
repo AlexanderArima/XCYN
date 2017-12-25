@@ -74,7 +74,11 @@
     <Compile Include="DesignPattern\StaticFactoryMethod\IDataBase.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\MySql.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\SqlServer.cs" />
-    <Compile Include="DesignPattern\StaticFactoryMethod\User.cs" />
+    <Compile Include="DesignPattern\StaticFactoryMethod\Handler.cs" />
+    <Compile Include="DesignPattern\TemplateMethod\Exam.cs" />
+    <Compile Include="DesignPattern\TemplateMethod\Handler.cs" />
+    <Compile Include="DesignPattern\TemplateMethod\XieCheng.cs" />
+    <Compile Include="DesignPattern\TemplateMethod\XiongWei.cs" />
     <Compile Include="linq\DataClasses1.designer.cs">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -723,6 +727,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
+    <Content Include="DesignPattern\TemplateMethod\info.txt" />
     <Content Include="linq\Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
