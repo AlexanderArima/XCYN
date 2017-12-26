@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.delegates;
+using XCYN.Print.DesignPattern.Prototype.Shallow;
 using XCYN.Print.linq;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.redis;
@@ -17,6 +18,23 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
+            Person p = new Person()
+            {
+                name = "张三",
+                age = 18,
+                address = new Address()
+                {
+                    province = "湖北",
+                    city = "武汉"
+                }
+            };
+
+            Person p2 = (Person)p.Clone();
+            Console.Read();
+        }
+
+        private void HandleSignleton()
+        {
             Console.WriteLine("主线程时间：{0}", DateTime.Now);
             //var db = XCYN.Print.DesignPattern.Singleton.hungry.DB.GetInstance();
             //Console.WriteLine("Show调用的时间：{0}", db.Show());
@@ -26,6 +44,7 @@ namespace XCYN.Print
             //Console.WriteLine("Show调用的时间：{0}", db2.Show());
             //Console.WriteLine("Show调用的时间：{0}", XCYN.Print.DesignPattern.Singleton.hungry.DB.Show());
 
+            //多线程调用单例模式的例子
             Task.Factory.StartNew(() =>
             {
                 var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();

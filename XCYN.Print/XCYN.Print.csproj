@@ -70,6 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="delegates\delegateTest.cs" />
+    <Compile Include="DesignPattern\Prototype\Deep\Address.cs" />
+    <Compile Include="DesignPattern\Prototype\Deep\Person.cs" />
+    <Compile Include="DesignPattern\Prototype\IPrototype.cs" />
+    <Compile Include="DesignPattern\Prototype\Shallow\Address.cs" />
+    <Compile Include="DesignPattern\Prototype\Shallow\Person.cs" />
     <Compile Include="DesignPattern\Singleton\hungry\DB.cs" />
     <Compile Include="DesignPattern\Singleton\lazy\DB.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\DbFactory.cs" />
@@ -728,6 +733,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DesignPattern\Prototype\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
