@@ -17,11 +17,32 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            BasicCommand command = new BasicCommand();
-            var name = command.ListLeftPop("list_name");
-            Console.WriteLine(name);
-            Console.ReadKey();
-            //Consumer.ConsumerWorkQueue();
+            Console.WriteLine("主线程时间：{0}", DateTime.Now);
+            //var db = XCYN.Print.DesignPattern.Singleton.hungry.DB.GetInstance();
+            //Console.WriteLine("Show调用的时间：{0}", db.Show());
+            //Console.WriteLine("Show调用的时间：{0}", XCYN.Print.DesignPattern.Singleton.hungry.DB.Show());
+
+            //var db2 = XCYN.Print.DesignPattern.Singleton.hungry.DB.GetInstance();
+            //Console.WriteLine("Show调用的时间：{0}", db2.Show());
+            //Console.WriteLine("Show调用的时间：{0}", XCYN.Print.DesignPattern.Singleton.hungry.DB.Show());
+
+            Task.Factory.StartNew(() =>
+            {
+                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+            });
+            Task.Factory.StartNew(() =>
+            {
+                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+            });
+            Task.Factory.StartNew(() =>
+            {
+                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+            });
+            Task.Factory.StartNew(() =>
+            {
+                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+            });
+            Console.Read();
         }
     }
 }

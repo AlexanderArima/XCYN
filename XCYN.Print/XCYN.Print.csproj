@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="delegates\delegateTest.cs" />
+    <Compile Include="DesignPattern\Singleton\hungry\DB.cs" />
+    <Compile Include="DesignPattern\Singleton\lazy\DB.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\DbFactory.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\IDataBase.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\MySql.cs" />
@@ -726,6 +728,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DesignPattern\Singleton\info.txt" />
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
     <Content Include="linq\Model\Model.Context.tt">

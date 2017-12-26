@@ -16,8 +16,16 @@ namespace XCYN.Test
         [TestMethod]
         public void TestMethod1()
         {
-            User user = new User();
+            Handler user = new Handler();
             user.Insert();
+        }
+
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            XCYN.Print.DesignPattern.TemplateMethod.Handler handler = new XCYN.Print.DesignPattern.TemplateMethod.Handler();
+            handler.HanderQuestion();
+
         }
     }
 }
