@@ -18,19 +18,7 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            Person p = new Person()
-            {
-                name = "张三",
-                age = 18,
-                address = new Address()
-                {
-                    province = "湖北",
-                    city = "武汉"
-                }
-            };
-
-            Person p2 = (Person)p.Clone();
-            Console.Read();
+            new RedisCommand().DelBeta("username");
         }
 
         private void HandleSignleton()

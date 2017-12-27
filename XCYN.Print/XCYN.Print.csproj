@@ -697,7 +697,10 @@
     </Compile>
     <Compile Include="rabbitmq\Consumer.cs" />
     <Compile Include="rabbitmq\Publish.cs" />
-    <Compile Include="redis\BasicCommand.cs" />
+    <Compile Include="redis\RedisCommand.cs" />
+    <Compile Include="redis\RedisConfig.cs" />
+    <Compile Include="redis\RedisConfigObj.cs" />
+    <Compile Include="redis\RedisManager.cs" />
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>

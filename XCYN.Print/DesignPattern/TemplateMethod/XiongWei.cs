@@ -11,7 +11,17 @@ namespace XCYN.Print.DesignPattern.TemplateMethod
         /// <summary>
         /// 重写会改变的属性
         /// </summary>
-        public override string Name { get => "XiongWei"; }
+        public override string Name
+        {
+            get
+            {
+                return "xiongwei";
+            }
+            set
+            {
+                base.Name = value;
+            }
+        }
 
         /// <summary>
         /// 重写会改变的方法

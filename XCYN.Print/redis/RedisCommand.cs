@@ -1,15 +1,25 @@
 ﻿using StackExchange.Redis;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace XCYN.Print.redis
 {
-    public class BasicCommand
+
+    
+    public class RedisCommand
     {
         private string _conn = "192.168.1.111:6379";
+
+        public static void GetIP()
+        {
+            var redis = RedisConfig.GetInstance();
+            
+        }
 
         #region 通用命令
 
@@ -19,6 +29,16 @@ namespace XCYN.Print.redis
             {
                 return client.GetDatabase().KeyDelete(key);
             }
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool DelBeta(string key)
+        {
+            return RedisManager.WriteDataBase().KeyDelete(key);
         }
 
         public long Del(string[] keys)
@@ -32,6 +52,22 @@ namespace XCYN.Print.redis
             {
                 return client.GetDatabase().KeyDelete(rkeys);
             }
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public long DelBeta(string[] keys)
+        {
+            var rkeys = new RedisKey[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                rkeys[i] = keys[i];
+            }
+            return RedisManager.WriteDataBase().KeyDelete(rkeys);
+            
         }
 
         #endregion
