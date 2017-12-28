@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Prototype.Shallow;
+using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.linq;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.redis;
@@ -18,7 +20,15 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            new RedisCommand().DelBeta("username");
+            HandleService();
+        }
+
+        private static void HandleService()
+        {
+            ServiceHost host = new ServiceHost(typeof(DataService));
+            host.Open();
+            Console.WriteLine("服务启动");
+            Console.Read();
         }
 
         private void HandleSignleton()

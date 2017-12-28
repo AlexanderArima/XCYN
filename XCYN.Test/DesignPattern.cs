@@ -6,6 +6,7 @@ using XCYN.Print.DesignPattern.StaticFactoryMethod;
 using XCYN.Print.DesignPattern.Prototype.Deep;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using XCYN.Test.ServiceReference1;
 
 namespace XCYN.Test
 {
@@ -58,6 +59,14 @@ namespace XCYN.Test
             }
 
 
+        }
+
+        [TestMethod]
+        public void ProxyMethod()
+        {
+            DataServiceClient s = new DataServiceClient();
+            var name = s.GetName(1);
+            
         }
     }
 }

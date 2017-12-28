@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +62,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +77,8 @@
     <Compile Include="DesignPattern\Prototype\IPrototype.cs" />
     <Compile Include="DesignPattern\Prototype\Shallow\Address.cs" />
     <Compile Include="DesignPattern\Prototype\Shallow\Person.cs" />
+    <Compile Include="DesignPattern\Proxy\DataService.cs" />
+    <Compile Include="DesignPattern\Proxy\IDataService.cs" />
     <Compile Include="DesignPattern\Singleton\hungry\DB.cs" />
     <Compile Include="DesignPattern\Singleton\lazy\DB.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\DbFactory.cs" />
@@ -737,6 +741,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\Prototype\info.txt" />
+    <Content Include="DesignPattern\Proxy\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
