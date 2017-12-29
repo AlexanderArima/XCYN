@@ -1,2 +1,9 @@
 # XCYN
-一些程序例子
+XCYN.Common   工具类
+XCYN.EasyUI   EasyUI的例子
+XCYN.Print    封装了redis，rabbitmq的常用接口，一些常用的设计模式例子
+XCYN.Service  WCF的例子
+XCYN.Test     测试项目
+XCYN.Web      KnockOut，Vue，bootStrap的例子
+XCYN.WS       基于SignalR的聊天室客户端
+XCYN.WS.APP   基于SignalR的聊天室服务端
