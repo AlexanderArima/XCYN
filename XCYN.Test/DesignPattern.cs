@@ -25,7 +25,7 @@ namespace XCYN.Test
         }
 
         [TestMethod]
-        public void MyTestMethod()
+        public void TemplateMethod()
         {
             XCYN.Print.DesignPattern.TemplateMethod.Handler handler = new XCYN.Print.DesignPattern.TemplateMethod.Handler();
             handler.HanderQuestion();
