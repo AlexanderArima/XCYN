@@ -72,6 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="delegates\delegateTest.cs" />
+    <Compile Include="DesignPattern\Filter\AgeFilter.cs" />
+    <Compile Include="DesignPattern\Filter\AndFilter.cs" />
+    <Compile Include="DesignPattern\Filter\IFilter.cs" />
+    <Compile Include="DesignPattern\Filter\NameFilter.cs" />
+    <Compile Include="DesignPattern\Filter\OrFilter.cs" />
+    <Compile Include="DesignPattern\Filter\Person.cs" />
+    <Compile Include="DesignPattern\Filter\SexFilter.cs" />
     <Compile Include="DesignPattern\Prototype\Deep\Address.cs" />
     <Compile Include="DesignPattern\Prototype\Deep\Person.cs" />
     <Compile Include="DesignPattern\Prototype\IPrototype.cs" />
@@ -740,6 +747,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DesignPattern\Filter\info.txt" />
     <Content Include="DesignPattern\Prototype\info.txt" />
     <Content Include="DesignPattern\Proxy\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />

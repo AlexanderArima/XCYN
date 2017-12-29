@@ -12,6 +12,7 @@ using XCYN.Print.linq;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.redis;
 using XCYN.Print.yield;
+using XCYN.Print.DesignPattern.Filter;
 
 namespace XCYN.Print
 {
@@ -20,7 +21,52 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleService();
+            HandleFilter();
+        }
+
+        private static void HandleFilter()
+        {
+            List<DesignPattern.Filter.Person> list_person = new List<DesignPattern.Filter.Person>() {
+                new DesignPattern.Filter.Person()
+                {
+                   age = 19,
+                   name = "cheng",
+                   sex = 0
+                },
+                new DesignPattern.Filter.Person()
+                {
+                   age = 18,
+                   name = "xheng",
+                   sex = 0
+                },
+                new DesignPattern.Filter.Person()
+                {
+                   age = 19,
+                   name = "xie",
+                   sex = 0
+                },
+                new DesignPattern.Filter.Person()
+                {
+                   age = 19,
+                   name = "cheng",
+                   sex = 1
+                },
+            };
+            //NameFilter namefilter = new NameFilter();
+            //list_person = namefilter.Filter(list_person);
+            //AndFilter andfilter = new AndFilter(new List<IFilter>()
+            //{
+            //     new NameFilter(),
+            //     new AgeFilter()
+            //});
+            //list_person = andfilter.Filter(list_person);
+            OrFilter orfilter = new OrFilter(new List<IFilter>()
+            {
+                 new NameFilter(),
+                 new AgeFilter()
+            });
+            list_person = orfilter.Filter(list_person);
+
         }
 
         private static void HandleService()
