@@ -31,5 +31,11 @@ namespace XCYN.Test
             Publish.PublishTX();
         }
 
+        [TestMethod]
+        public void PublishPersistent()
+        {
+            Publish.PublishPersistent();
+        }
+
     }
 }

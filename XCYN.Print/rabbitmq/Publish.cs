@@ -516,5 +516,69 @@ namespace XCYN.Print.rabbitmq
             }
         }
 
+        /// <summary>
+        /// 消息持久化
+        /// </summary>
+        public static void PublishPersistent()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //创建交换机
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    //dict.Add("x-queue-mode", "lazy");
+                    //创建Queue
+                    var queue = channel.QueueDeclare("test", true, false, false, null);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好", i));
+                        var properties = channel.CreateBasicProperties();
+                        properties.Persistent = true;//持久化消息
+                        //发送消息
+                        channel.BasicPublish("", "test", basicProperties: properties, body: msg);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 队列懒加载
+        /// </summary>
+        /// <remarks>消息发布后存放在disk中，不占用内存空间。默认的消息发布后会存放在内存中，当内存不足时，才会将消息存放在disk中</remarks>
+        public static void PublishLazy()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.111";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //创建交换机
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("x-queue-mode", "lazy");
+                    //创建Queue
+                    var queue = channel.QueueDeclare("test", true, false, false, dict);
+                    for (int i = 0; i < int.MaxValue; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好", string.Join(",", Enumerable.Range(0, 100000))));
+                        //发送消息
+                        channel.BasicPublish("", "test", basicProperties: null, body: msg);
+                        Console.WriteLine("发布消息,{0}",i);
+                    }
+                }
+            }
+        }
+
     }
 }

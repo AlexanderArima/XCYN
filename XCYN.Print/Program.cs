@@ -21,7 +21,7 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleFilter();
+            Publish.PublishLazy();
         }
 
         private static void HandleFilter()
