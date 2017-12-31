@@ -7,6 +7,7 @@ using XCYN.Print.DesignPattern.Prototype.Deep;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using XCYN.Test.ServiceReference1;
+using XCYN.Print.DesignPattern.Strategy;
 
 namespace XCYN.Test
 {
@@ -61,12 +62,26 @@ namespace XCYN.Test
 
         }
 
+        /// <summary>
+        /// 代理模式
+        /// </summary>
         [TestMethod]
         public void ProxyMethod()
         {
             DataServiceClient s = new DataServiceClient();
             var name = s.GetName(1);
             
+        }
+
+        /// <summary>
+        /// 策略模式
+        /// </summary>
+        [TestMethod]
+        public void StrategyMethod()
+        {
+            StrategyContext context = new StrategyContext();
+            context.Write("aaaaaaaaaaaaaaa");
+            context.Write("aaaaa");
         }
     }
 }

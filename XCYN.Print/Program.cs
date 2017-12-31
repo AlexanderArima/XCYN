@@ -13,6 +13,7 @@ using XCYN.Print.rabbitmq;
 using XCYN.Print.redis;
 using XCYN.Print.yield;
 using XCYN.Print.DesignPattern.Filter;
+using XCYN.Print.DesignPattern.Strategy;
 
 namespace XCYN.Print
 {
@@ -21,7 +22,19 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            Publish.PublishLazy();
+            HandleStrategy();
+        }
+
+        private static void HandleStrategy()
+        {
+            //创建一个策略
+            StrategyContext context = new StrategyContext(new FileLog());
+            context.Write("aaaaaabbbbbb");
+
+            //创建另一个策略
+            context = new StrategyContext(new DBLog());
+            context.Write("aaaaaabbbbbb");
+            Console.Read();
         }
 
         private static void HandleFilter()

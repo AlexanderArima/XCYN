@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignPattern\Strategy\AbstactLog.cs" />
     <Compile Include="delegates\delegateTest.cs" />
     <Compile Include="DesignPattern\Filter\AgeFilter.cs" />
     <Compile Include="DesignPattern\Filter\AndFilter.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="DesignPattern\StaticFactoryMethod\MySql.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\SqlServer.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\Handler.cs" />
+    <Compile Include="DesignPattern\Strategy\DBLog.cs" />
+    <Compile Include="DesignPattern\Strategy\FileLog.cs" />
+    <Compile Include="DesignPattern\Strategy\StrategyContext.cs" />
     <Compile Include="DesignPattern\TemplateMethod\Exam.cs" />
     <Compile Include="DesignPattern\TemplateMethod\Handler.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XieCheng.cs" />
@@ -752,6 +756,7 @@
     <Content Include="DesignPattern\Proxy\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
+    <Content Include="DesignPattern\Strategy\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
     <Content Include="linq\Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
