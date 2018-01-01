@@ -14,6 +14,7 @@ using XCYN.Print.redis;
 using XCYN.Print.yield;
 using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Strategy;
+using XCYN.Print.DesignPattern.Observer;
 
 namespace XCYN.Print
 {
@@ -22,7 +23,22 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleStrategy();
+            HandleObserver();
+        }
+
+        private static void HandleObserver()
+        {
+            ISubject subject = new ConcreteSubject();
+            IObserver observer = new ConcreteObserver1(subject,"观察者1");
+            IObserver observer2 = new ConcreteObserver1(subject, "观察者2");
+
+            subject.Add(observer);
+            subject.Add(observer2);
+
+            subject.SutjectState = "服务器崩溃了!";
+            subject.Notify();
+
+            Console.Read();
         }
 
         private static void HandleStrategy()

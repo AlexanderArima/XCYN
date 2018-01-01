@@ -74,6 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignPattern\Observer\ConcreteObserver1.cs" />
+    <Compile Include="DesignPattern\Observer\ConcreteSubject.cs" />
+    <Compile Include="DesignPattern\Observer\IObserver.cs" />
+    <Compile Include="DesignPattern\Observer\ISubject.cs" />
     <Compile Include="DesignPattern\Strategy\AbstactLog.cs" />
     <Compile Include="delegates\delegateTest.cs" />
     <Compile Include="DesignPattern\Filter\AgeFilter.cs" />
@@ -755,6 +759,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\Filter\info.txt" />
+    <Content Include="DesignPattern\Observer\info.txt" />
     <Content Include="DesignPattern\Prototype\info.txt" />
     <Content Include="DesignPattern\Proxy\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />
