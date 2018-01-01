@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="DesignPattern.cs" />
     <Compile Include="MQTest.cs" />
+    <Compile Include="RedisCommandTest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +88,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
+      <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
+      <Name>XCYN.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XCYN.Print\XCYN.Print.csproj">
       <Project>{b381793e-9506-4a79-84be-91c070afeddc}</Project>
       <Name>XCYN.Print</Name>

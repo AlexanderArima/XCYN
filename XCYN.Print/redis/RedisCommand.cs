@@ -23,43 +23,23 @@ namespace XCYN.Print.redis
 
         #region 通用命令
 
-        public bool Del(string key)
-        {
-            using(var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().KeyDelete(key);
-            }
-        }
-
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public bool DelBeta(string key)
+        public bool Del(string key)
         {
             return RedisManager.WriteDataBase().KeyDelete(key);
         }
 
-        public long Del(string[] keys)
-        {
-            var rkeys = new RedisKey[keys.Length];
-            for (int i = 0; i < keys.Length; i++)
-            {
-                rkeys[i] = keys[i];
-            }
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().KeyDelete(rkeys);
-            }
-        }
 
         /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public long DelBeta(string[] keys)
+        public long Del(string[] keys)
         {
             var rkeys = new RedisKey[keys.Length];
             for (int i = 0; i < keys.Length; i++)
@@ -73,22 +53,22 @@ namespace XCYN.Print.redis
         #endregion
 
         #region String命令
+
+        /// <summary>
+        /// 返回key的value
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool StringSet(string key,string value)
         {
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                //KeyValuePair<string, object> dict = new KeyValuePair<string, object>(key,value);
-                bool flag = client.GetDatabase().StringSet(key: key, value: value);
-                return flag;
-            }
+            bool flag = RedisManager.WriteDataBase().StringSet(key: key, value: value);
+            return flag;
         }
 
         public string StringGet(string key)
         {
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().StringGet(key);
-            }
+            return RedisManager.ReadDataBase().StringGet(key);
         }
 
         #endregion
@@ -97,10 +77,7 @@ namespace XCYN.Print.redis
 
         public long ListLeftPush(string key, string value)
         {
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().ListLeftPush(key, value);
-            }
+            return RedisManager.WriteDataBase().ListLeftPush(key, value);
         }
 
         public long ListLeftPush(string key, string[] values)
@@ -110,18 +87,12 @@ namespace XCYN.Print.redis
             {
                 rvalues[i] = values[i];
             }
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().ListLeftPush(key, rvalues);
-            }
+            return RedisManager.WriteDataBase().ListLeftPush(key, rvalues);
         }
 
         public string ListLeftPop(string key)
         {
-            using(var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                return client.GetDatabase().ListLeftPop(key);
-            }
+            return RedisManager.WriteDataBase().ListLeftPop(key);
         }
 
         /// <summary>
@@ -131,10 +102,7 @@ namespace XCYN.Print.redis
         /// <returns></returns>
         public long ListLength(string key)
         {
-            using (var client = ConnectionMultiplexer.Connect(_conn))
-            {
-                 return client.GetDatabase().ListLength(key);
-            }
+            return RedisManager.ReadDataBase().ListLength(key);
         }
 
         #endregion
