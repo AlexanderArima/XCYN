@@ -49,13 +49,11 @@
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+    <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\packages\StackExchange.Redis.1.2.3\lib\net45\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -719,10 +717,6 @@
     </Compile>
     <Compile Include="rabbitmq\Consumer.cs" />
     <Compile Include="rabbitmq\Publish.cs" />
-    <Compile Include="redis\RedisCommand.cs" />
-    <Compile Include="redis\RedisConfig.cs" />
-    <Compile Include="redis\RedisConfigObj.cs" />
-    <Compile Include="redis\RedisManager.cs" />
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>

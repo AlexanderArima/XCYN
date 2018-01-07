@@ -111,11 +111,23 @@ namespace XCYN.Common.NoSql.redis
 
         #region List命令
 
+        /// <summary>
+        /// 从队列左边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
         public long ListLeftPush(string key, string value)
         {
             return RedisManager.WriteDataBase().ListLeftPush(key, value);
         }
 
+        /// <summary>
+        /// 从队列左边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="values">插入的值数组</param>
+        /// <returns></returns>
         public long ListLeftPush(string key, string[] values)
         {
             var rvalues = new RedisValue[values.Length];
@@ -126,6 +138,11 @@ namespace XCYN.Common.NoSql.redis
             return RedisManager.WriteDataBase().ListLeftPush(key, rvalues);
         }
 
+        /// <summary>
+        /// 往队列左边出队一个元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string ListLeftPop(string key)
         {
             return RedisManager.WriteDataBase().ListLeftPop(key);
@@ -139,6 +156,49 @@ namespace XCYN.Common.NoSql.redis
         public long ListLength(string key)
         {
             return RedisManager.ReadDataBase().ListLength(key);
+        }
+
+        /// <summary>
+        /// 获取指定下标的元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public string ListIndex(string key, int index)
+        {
+            return RedisManager.ReadDataBase().ListGetByIndex(key, index);
+        }
+        
+        public enum RedisCommandDirection
+        {
+            BEFORE = 0,
+            AFTER = 1
+        }
+
+        public long ListLeftInsert(string key, RedisCommandDirection direct,string pivot,string value)
+        {
+            if(direct == RedisCommandDirection.BEFORE)
+            {
+                return RedisManager.WriteDataBase().ListInsertBefore(key, pivot, value);
+            }
+            else if(direct == RedisCommandDirection.AFTER)
+            {
+                return RedisManager.WriteDataBase().ListInsertAfter(key, pivot, value);
+            }
+            else
+            {
+                throw new Exception("插入值的方向错误!");
+            }
+        }
+
+        // <summary>
+        /// 往队列左边出队一个元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string ListRightPop(string key)
+        {
+            return RedisManager.WriteDataBase().ListRightPop(key);
         }
 
         #endregion

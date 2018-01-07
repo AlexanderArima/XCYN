@@ -11,17 +11,15 @@ namespace XCYN.Print.redis
 {
 
     
-    public class RedisCommand
+    class RedisCommand
     {
-        private string _conn = "192.168.1.111:6379";
 
         public static void GetIP()
         {
             var redis = RedisConfig.GetInstance();
-            
         }
 
-        #region 通用命令
+        #region Del命令
 
         /// <summary>
         /// 删除
@@ -47,7 +45,7 @@ namespace XCYN.Print.redis
                 rkeys[i] = keys[i];
             }
             return RedisManager.WriteDataBase().KeyDelete(rkeys);
-            
+
         }
 
         #endregion
@@ -60,7 +58,7 @@ namespace XCYN.Print.redis
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool StringSet(string key,string value)
+        public bool StringSet(string key, string value)
         {
             bool flag = RedisManager.WriteDataBase().StringSet(key: key, value: value);
             return flag;
@@ -75,11 +73,23 @@ namespace XCYN.Print.redis
 
         #region List命令
 
+        /// <summary>
+        /// 从队列左边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
         public long ListLeftPush(string key, string value)
         {
             return RedisManager.WriteDataBase().ListLeftPush(key, value);
         }
 
+        /// <summary>
+        /// 从队列左边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="values">插入的值数组</param>
+        /// <returns></returns>
         public long ListLeftPush(string key, string[] values)
         {
             var rvalues = new RedisValue[values.Length];
@@ -90,6 +100,11 @@ namespace XCYN.Print.redis
             return RedisManager.WriteDataBase().ListLeftPush(key, rvalues);
         }
 
+        /// <summary>
+        /// 往队列左边出队一个元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string ListLeftPop(string key)
         {
             return RedisManager.WriteDataBase().ListLeftPop(key);
@@ -103,6 +118,17 @@ namespace XCYN.Print.redis
         public long ListLength(string key)
         {
             return RedisManager.ReadDataBase().ListLength(key);
+        }
+
+        /// <summary>
+        /// 获取指定下标的元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public string ListIndex(string key, int index)
+        {
+            return RedisManager.ReadDataBase().ListGetByIndex(key, index);
         }
 
         #endregion

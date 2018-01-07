@@ -10,7 +10,6 @@ using XCYN.Print.DesignPattern.Prototype.Shallow;
 using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.linq;
 using XCYN.Print.rabbitmq;
-using XCYN.Print.redis;
 using XCYN.Print.yield;
 using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Strategy;

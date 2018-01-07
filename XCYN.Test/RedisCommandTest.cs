@@ -12,6 +12,9 @@ namespace XCYN.Test
     [TestClass]
     public class RedisCommandTest
     {
+
+        RedisCommand _command = new RedisCommand();
+
         public RedisCommandTest()
         {
             //
@@ -71,11 +74,34 @@ namespace XCYN.Test
         [TestMethod]
         public void StringGetSet()
         {
-            RedisCommand command = new RedisCommand();
-            var str = command.StringGetSet("mycount", "0");
-            Assert.AreEqual("1", str);
-            var str2 = command.StringGet("mycount");
+            var str = _command.StringGetSet("mycount", "0");
+            Assert.AreEqual("0", str);
+            var str2 = _command.StringGet("mycount");
             Assert.AreEqual("0", str2);
+        }
+
+        [TestMethod]
+        public void ListIndex()
+        {
+            var str = _command.ListIndex("mylist", 0);
+
+            Assert.AreEqual("2", str);
+
+            var str2 = _command.ListIndex("mylist", 2);
+
+            Assert.IsNotNull(str2);
+        }
+
+        [TestMethod]
+        public void ListLeftInsert()
+        {
+            var count = _command.ListLeftInsert("mylist", RedisCommand.RedisCommandDirection.AFTER, "1", "4");
+
+            Assert.AreEqual("6", count.ToString());
+
+            var str = _command.ListRightPop("mylist");
+
+            Assert.AreEqual("4", str);
         }
     }
 }
