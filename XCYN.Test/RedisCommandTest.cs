@@ -103,5 +103,36 @@ namespace XCYN.Test
 
             Assert.AreEqual("4", str);
         }
+
+        [TestMethod]
+        public void ListLeftPushX()
+        {
+            _command.ListLeftPushX("mylist2", "10");
+
+            var value = _command.ListIndex("mylist2", 0);
+
+            Assert.IsNull(value);
+
+            _command.ListLeftPop("mylist2");
+        }
+
+        [TestMethod]
+        public void ListRange()
+        {
+            var list = _command.ListRange("mylist", 0, -1);
+
+            Assert.AreEqual(5, list.Count);
+        }
+
+        [TestMethod]
+        public void ListRemove()
+        {
+            var list = new string[2] { "4","4" };
+            var count = _command.ListLeftPush("mylist", list);
+
+            _command.ListRemove("mylist", 0, "4");
+            Assert.AreNotEqual("4", _command.ListIndex("mylist", -1));
+        }
+
     }
 }
