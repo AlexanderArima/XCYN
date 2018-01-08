@@ -128,7 +128,7 @@ namespace XCYN.Common.NoSql.redis
             AFTER = 1
         }
 
-        public long ListLeftInsert(string key, RedisCommandDirection direct, string pivot, string value)
+        public long ListInsert(string key, RedisCommandDirection direct, string pivot, string value)
         {
             if (direct == RedisCommandDirection.BEFORE)
             {
@@ -231,6 +231,40 @@ namespace XCYN.Common.NoSql.redis
         {
             return RedisManager.WriteDataBase().ListRemove(key, value, count);
         }
+
+        /// <summary>
+        /// 设置队列里面一个元素的值
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="index">下标位置</param>
+        /// <param name="value">修改的元素值</param>
+        public void ListSetByIndex(string key,int index,string value)
+        {
+            RedisManager.WriteDataBase().ListSetByIndex(key, index, value);
+        }
+
+        /// <summary>
+        /// 修建一个已存在的list，这样list就只包含指定范围的元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="start">起始下标</param>
+        /// <param name="stop">结束下标</param>
+        public void ListTrim(string key,int start,int stop)
+        {
+            RedisManager.WriteDataBase().ListTrim(key, start, stop);
+        }
+
+        /// <summary>
+        /// 移除source列表中的最后一个元素，添加到destination的第一个元素
+        /// </summary>
+        /// <param name="source">源队列</param>
+        /// <param name="destination">目标队列</param>
+        /// <remarks>可用来做安全的队列，循环列表</remarks>
+        /// <returns></returns>
+        public string ListRightPopLeftPush(string source,string destination)
+        {
+            return RedisManager.WriteDataBase().ListRightPopLeftPush(source, destination);
+        }
         
         /// <summary>
         /// 往队列左边出队一个元素
@@ -242,7 +276,101 @@ namespace XCYN.Common.NoSql.redis
             return RedisManager.WriteDataBase().ListRightPop(key);
         }
 
+        /// <summary>
+        /// 从队列右边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
+        public long ListRightPush(string key, string value)
+        {
+            return RedisManager.WriteDataBase().ListRightPush(key, value);
+        }
+
+        /// <summary>
+        /// 从队列右边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="values">插入的值数组</param>
+        /// <returns></returns>
+        public long ListRightPush(string key, string[] values)
+        {
+            var rvalues = new RedisValue[values.Length];
+            for (int i = 0; i < values.Length; i++)
+            {
+                rvalues[i] = values[i];
+            }
+            return RedisManager.WriteDataBase().ListRightPush(key, rvalues);
+        }
+
+        /// <summary>
+        /// 当队列存在时，从队列右边入队一个元素
+        /// </summary>
+        /// <param name="key">列表名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
+        public long ListRightPushX(string key, string value)
+        {
+            return RedisManager.WriteDataBase().ListRightPush(key, value, When.Exists);
+        }
+
         #endregion
 
+        #region Set命令
+
+        /// <summary>
+        /// 添加一个或多个元素到集合里
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
+        public bool SetAdd(string key,string value)
+        {
+            return RedisManager.WriteDataBase().SetAdd(key, value);
+        }
+
+        /// <summary>
+        /// 添加一个或多个元素到集合里
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="value">插入的值</param>
+        /// <returns></returns>
+        public long SetAdd(string key,string[] values)
+        {
+            var rvalues = new RedisValue[values.Length];
+            for (int i = 0; i < values.Length; i++)
+            {
+                rvalues[i] = values[i];
+            }
+            return RedisManager.WriteDataBase().SetAdd(key, rvalues);
+        }
+
+        /// <summary>
+        /// 返回集合的基数
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <returns></returns>
+        public long SetLength(string key)
+        {
+            return RedisManager.ReadDataBase().SetLength(key);
+        }
+
+        /// <summary>
+        /// 获取集合里面所有的key
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <returns></returns>
+        public ArrayList SetMembers(string key)
+        {
+            var sets = RedisManager.ReadDataBase().SetMembers(key);
+            ArrayList list = new ArrayList();
+            foreach (var item in sets)
+            {
+                list.Add(item.ToString());
+            }
+            return list;
+        }
+
+        #endregion
     }
 }

@@ -107,30 +107,24 @@ namespace XCYN.EasyUI.ashx
         {
             string user_name = context.Request["user_name"];
             string reg_time = context.Request["reg_time"];
-            try
+            
+            using (MeetingSysEntities db = new MeetingSysEntities())
             {
-                using (MeetingSysEntities db = new MeetingSysEntities())
-                {
-                    var user = new user();
-                    user.user_name = user_name;
-                    user.password = "111111";
-                    user.group_id = 0;
-                    user.birthday = DateTime.Now;
-                    user.amount = 0;
-                    user.point = 0;
-                    user.exp = 0;
-                    user.status = 1;
-                    user.reg_time = Convert.ToDateTime(reg_time);
-                    var user_inserted = db.users.Add(user);
-                    db.SaveChanges();
-                    context.Response.Clear();
-                    context.Response.Write("1");
-                    context.Response.End();
-                }
-            }
-            catch(Exception ex)
-            {
-
+                var user = new user();
+                user.user_name = user_name;
+                user.password = "111111";
+                user.group_id = 0;
+                user.birthday = DateTime.Now;
+                user.amount = 0;
+                user.point = 0;
+                user.exp = 0;
+                user.status = 1;
+                user.reg_time = Convert.ToDateTime(reg_time);
+                var user_inserted = db.users.Add(user);
+                db.SaveChanges();
+                context.Response.Clear();
+                context.Response.Write("1");
+                context.Response.End();
             }
         }
 

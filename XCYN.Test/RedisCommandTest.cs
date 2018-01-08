@@ -95,7 +95,7 @@ namespace XCYN.Test
         [TestMethod]
         public void ListLeftInsert()
         {
-            var count = _command.ListLeftInsert("mylist", RedisCommand.RedisCommandDirection.AFTER, "1", "4");
+            var count = _command.ListInsert("mylist", RedisCommand.RedisCommandDirection.AFTER, "1", "4");
 
             Assert.AreEqual("6", count.ToString());
 
@@ -132,6 +132,64 @@ namespace XCYN.Test
 
             _command.ListRemove("mylist", 0, "4");
             Assert.AreNotEqual("4", _command.ListIndex("mylist", -1));
+        }
+
+        [TestMethod]
+        public void ListSetByIndex()
+        {
+            _command.ListLeftPush("mylist", "1");
+            _command.ListSetByIndex("mylist", 0, "7");
+            var str = _command.ListIndex("mylist", 0);
+            Assert.AreEqual("7", str);
+        }
+
+        [TestMethod]
+        public void ListTrim()
+        {
+            _command.ListTrim("mylist", 0, 2);
+
+            var len = _command.ListLength("mylist");
+
+            Assert.AreEqual(3, len);
+        }
+
+        [TestMethod]
+        public void ListRightPopLeftPush()
+        {
+            var len = _command.ListLength("mylist");
+
+            var end = _command.ListIndex("mylist", (int)len - 1);
+
+            _command.ListRightPopLeftPush("mylist", "mylist");
+
+            var start = _command.ListIndex("mylist", 0);
+
+            Assert.AreEqual(start, end);
+        }
+
+        [TestMethod]
+        public void SetAdd()
+        {
+            var myset = _command.SetAdd("myset", "5");
+
+            Assert.AreNotEqual(true, myset);
+
+            var array = new string[2]
+            {
+                "6",
+                "7"
+            };
+            var myset2 = _command.SetAdd("myset", array);
+            Assert.AreEqual(0, myset2);
+            
+        }
+
+        [TestMethod]
+        public void SetLength()
+        {
+            var len = _command.SetLength("myset");
+
+            Assert.AreEqual(8, (int)len);
         }
 
     }

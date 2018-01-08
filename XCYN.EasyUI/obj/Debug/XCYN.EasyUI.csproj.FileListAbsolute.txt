@@ -57,4 +57,3 @@ D:\MyProject\XCYN\XCYN.EasyUI\bin\zh-Hans\EntityFramework.resources.dll
 D:\MyProject\XCYN\XCYN.EasyUI\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
 D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.dll
 D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.pdb
-D:\MyProject\XCYN\XCYN.EasyUI\obj\Debug\XCYN.EasyUI.csprojResolveAssemblyReference.cache

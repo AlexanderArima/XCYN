@@ -506,7 +506,7 @@ namespace XCYN.Print.rabbitmq
                         //消息确认
                         channel.TxCommit();
                     }
-                    catch(Exception ex)
+                    catch
                     {
                         //回滚
                         channel.TxRollback();
