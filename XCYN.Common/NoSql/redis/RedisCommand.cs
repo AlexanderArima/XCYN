@@ -59,14 +59,59 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
+        /// 对key对应的数字做减一操作
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
+        public long StringDecr(string key)
+        {
+            return RedisManager.WriteDataBase().StringDecrement(key);
+        }
+
+        /// <summary>
+        /// 将对应的key减少value
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="value">一次减去的值</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
+        public long StringDecrBy(string key,int value)
+        {
+            return RedisManager.WriteDataBase().StringDecrement(key, value);
+        }
+
+        /// <summary>
         /// 返回key的value
         /// </summary>
+        /// <param name="keys"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>key对应的value，或者nil（key不存在时）</returns>
         public string StringGet(string key)
         {
             return RedisManager.ReadDataBase().StringGet(key);
         }
+
+        /// <summary>
+        /// 获取所有指定key的value，对于不存在的string或者不存在的key，返回null
+        /// </summary>
+        /// <param name="keys"></param>
+        public ArrayList StringGet(string[] keys)
+        {
+            RedisKey[] list = new RedisKey[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list[i] = keys[i];
+            }
+            var sets = RedisManager.ReadDataBase().StringGet(list);
+            ArrayList list_result = new ArrayList();
+            foreach (var item in sets)
+            {
+                list_result.Add(item.ToString());
+            }
+            return list_result;
+        }
+        
 
         /// <summary>
         /// 获取存储在key上的值的一个子字符串
@@ -94,6 +139,40 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
+        /// 对key对应的数字做加一操作
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public long StringIncr(string key)
+        {
+            return RedisManager.WriteDataBase().StringIncrement(key);
+        }
+
+        /// <summary>
+        /// 将对应的key增加value
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="value">一次增加的值</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
+        public long StringIncrBy(string key, int value)
+        {
+            return RedisManager.WriteDataBase().StringIncrement(key, value);
+        }
+
+        /// <summary>
+        /// 将对应的key增加value
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="value">一次增加的值</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
+        public double StringIncrBy(string key, double value)
+        {
+            return RedisManager.WriteDataBase().StringIncrement(key, value);
+        }
+        
+        /// <summary>
         /// 设置一个key的value值
         /// </summary>
         /// <param name="key"></param>
@@ -106,7 +185,51 @@ namespace XCYN.Common.NoSql.redis
             return flag;
         }
 
+        /// <summary>
+        /// 获取指定key对应的value
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="values"></param>
+        public bool StringSet(string[] keys,string[] values)
+        {
+            List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i],values[i]);
+                list.Add(dict);
+            }
+            return RedisManager.WriteDataBase().StringSet(list.ToArray());
+        }
 
+        /// <summary>
+        /// 对应给定的keys到他们相应的values上。只要有一个key已经存在，MSETNX一个操作都不会执行。
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public bool StringSetNX(string[] keys,string[] values)
+        {
+            List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i], values[i]);
+                list.Add(dict);
+            }
+            return RedisManager.WriteDataBase().StringSet(list.ToArray(),When.NotExists);
+        }
+
+        /// <summary>
+        /// 设置key对应字符串value，并且设置key在给定的seconds时间之后超时过期
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="seconds">过期秒数</param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool StringSetEX(string key,int seconds,string value)
+        {
+            return RedisManager.WriteDataBase().StringSet(key, value, TimeSpan.FromSeconds(seconds));
+        }
+        
         #endregion
 
         #region List命令
@@ -356,6 +479,17 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
+        /// 判断成员是否是集合中的成员
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="member">成员的值</param>
+        /// <returns></returns>
+        public bool SetContains(string key,string member)
+        {
+            return RedisManager.ReadDataBase().SetContains(key, member);
+        }
+
+        /// <summary>
         /// 获取集合里面所有的key
         /// </summary>
         /// <param name="key">集合名称</param>
@@ -370,7 +504,7 @@ namespace XCYN.Common.NoSql.redis
             }
             return list;
         }
-
+        
         #endregion
     }
 }
