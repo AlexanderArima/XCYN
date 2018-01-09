@@ -1,5 +1,6 @@
 ﻿using StackExchange.Redis;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,6 +91,30 @@ namespace XCYN.Common.NoSql.redis
         public static IDatabase WriteDataBase()
         {
             return GetWriteInstance().GetDatabase();
+        }
+
+        /// <summary>
+        /// 查找所有符合给定模式 pattern 的 key 。
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList Keys(string key)
+        {
+            //迭代所有的节点
+            var list_endpoint = GetReadInstance().GetEndPoints();
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list_endpoint.Length; i++)
+            {
+                ConfigurationOptions options = new ConfigurationOptions();
+                options.EndPoints.Add(list_endpoint.ElementAt(i));
+                var conn = ConnectionMultiplexer.Connect(options);
+                var list_keys = conn.GetServer(list_endpoint.ElementAt(i)).Keys(pattern:key);
+                //迭代所有的keys
+                for (int j = 0; j < list_keys.Count(); j++)
+                {
+                    list_result.Add(list_keys.ElementAt(j));
+                }
+            }
+            return list_result;
         }
     }
 }

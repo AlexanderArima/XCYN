@@ -74,7 +74,7 @@ namespace XCYN.Test
 
             test._command.StringSet("myCount", "0");
 
-            test._command.Del("myList");
+            test._command.KeyDelete("myList");
             List<string> list = new List<string>();
             for (int i = 0; i < 7; i++)
             {
@@ -82,8 +82,40 @@ namespace XCYN.Test
             }
             test._command.ListLeftPush("myList", list.ToArray());
 
-            test._command.Del("mySet");
+            test._command.KeyDelete("mySet");
             test._command.SetAdd("mySet", list.ToArray());
+        }
+
+        #endregion
+
+        #region 键(key)
+
+        [TestMethod]
+        public void KeyExists()
+        {
+            var str = _command.KeyExists("myStr");
+            Assert.IsTrue(str);
+        }
+
+        [TestMethod]
+        public void KeyExpire()
+        {
+            var flag = _command.KeyExpire("myStr", 10);
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void KeyExpire2()
+        {
+            var flag2 = _command.KeyExpireAt("myStr", DateTime.Now.AddSeconds(20).Ticks);
+            Assert.IsTrue(flag2);
+        }
+
+        [TestMethod]
+        public void Keys()
+        {
+            var keys = _command.Keys("*");
+            Assert.AreEqual(9, keys.Count);
         }
 
         #endregion
@@ -383,6 +415,4 @@ namespace XCYN.Test
         #endregion
 
     }
-
-    
 }

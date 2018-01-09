@@ -13,25 +13,24 @@ namespace XCYN.Common.NoSql.redis
     public class RedisCommand
     {
 
-        #region 通用命令
+        #region Key命令
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public bool Del(string key)
+        public bool KeyDelete(string key)
         {
             return RedisManager.WriteDataBase().KeyDelete(key);
         }
-
-
+        
         /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public long Del(string[] keys)
+        public long KeyDelete(string[] keys)
         {
             var rkeys = new RedisKey[keys.Length];
             for (int i = 0; i < keys.Length; i++)
@@ -40,6 +39,49 @@ namespace XCYN.Common.NoSql.redis
             }
             return RedisManager.WriteDataBase().KeyDelete(rkeys);
             
+        }
+
+        /// <summary>
+        /// 判断Key是否存在
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool KeyExists(string key)
+        {
+            return RedisManager.ReadDataBase().KeyExists(key);
+        }
+
+        /// <summary>
+        /// 查找所有符合pattern的key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public ArrayList Keys(string key)
+        {
+            return RedisManager.Keys("*");
+        }
+
+        /// <summary>
+        /// 为给定 key 设置生存时间，当 key 过期时(生存时间为 0 )，它会被自动删除。
+        /// </summary>
+        /// <param name="key">键名</param>
+        /// <param name="value">过期时间(秒)</param>
+        /// <returns></returns>
+        public bool KeyExpire(string key,double value)
+        {
+            return RedisManager.WriteDataBase().KeyExpire(key, TimeSpan.FromSeconds(value));
+        }
+
+        /// <summary>
+        /// 为给定 key 设置生存时间，当 key 过期时(生存时间为 0 )，它会被自动删除。
+        /// </summary>
+        /// <param name="key">键名</param>
+        /// <param name="value">时间戳</param>
+        /// <returns></returns>
+        public bool KeyExpireAt(string key, long value)
+        {
+            
+            return RedisManager.WriteDataBase().KeyExpire(key,new DateTime(value,DateTimeKind.Local));
         }
 
         #endregion
