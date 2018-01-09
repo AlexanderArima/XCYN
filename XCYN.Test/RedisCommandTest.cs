@@ -84,6 +84,14 @@ namespace XCYN.Test
 
             test._command.KeyDelete("mySet");
             test._command.SetAdd("mySet", list.ToArray());
+
+            List<string> list2 = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                list2.Add(i.ToString());
+            }
+            test._command.KeyDelete("mySet2");
+            test._command.SetAdd("mySet2", list2.ToArray());
         }
 
         #endregion
@@ -383,6 +391,92 @@ namespace XCYN.Test
             var mySet2 = _command.SetAdd("mySet", array);
             Assert.AreEqual(1, mySet2);
             
+        }
+
+        [TestMethod]
+        public void SetDiff()
+        {
+            var list = _command.SetDiff("mySet", "mySet2");
+
+            Assert.AreEqual(4, list.Count);
+        }
+
+        [TestMethod]
+        public void SetDiff2()
+        {
+            string[] list_key = new string[2]
+            {
+                "mySet",
+                "mySet2"
+            };
+
+            var list = _command.SetDiff(list_key);
+
+            Assert.AreEqual(4, list.Count);
+        }
+
+        [TestMethod]
+        public void SetDiffStore()
+        {
+            var num = _command.SetDiffStore("mySet", "mySet2", "mySet3");
+
+            Assert.AreEqual(4, num);
+        }
+
+        [TestMethod]
+        public void SetDiffStore2()
+        {
+            string[] list_key = new string[2]
+           {
+                "mySet",
+                "mySet2"
+           };
+            var num = _command.SetDiffStore(list_key, "mySet3");
+
+            Assert.AreEqual(4, num);
+        }
+
+        [TestMethod]
+        public void SetInter()
+        {
+            var list = _command.SetInter("mySet", "mySet2");
+
+            Assert.AreEqual(3, list.Count);
+        }
+
+        [TestMethod]
+        public void SetInter2()
+        {
+            string[] list_key = new string[2]
+            {
+                "mySet",
+                "mySet2"
+            };
+
+            var list = _command.SetInter(list_key);
+
+            Assert.AreEqual(3, list.Count);
+        }
+
+        [TestMethod]
+        public void SetInterStore()
+        {
+            var num = _command.SetInterStore("mySet", "mySet2", "mySet3");
+
+            Assert.AreEqual(3, num);
+        }
+
+        [TestMethod]
+        public void SetInterStore2()
+        {
+            string[] list_key = new string[2]
+           {
+                "mySet",
+                "mySet2"
+           };
+            var num = _command.SetInterStore(list_key, "mySet3");
+
+            Assert.AreEqual(3, num);
         }
 
         [TestMethod]

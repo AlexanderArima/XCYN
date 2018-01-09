@@ -533,22 +533,145 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
-        /// 返回集合的基数
+        /// 返回一个集合的全部成员，该集合是所有给定集合之间的差集。
         /// </summary>
-        /// <param name="key">集合名称</param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
         /// <returns></returns>
-        public long SetLength(string key)
+        public ArrayList SetDiff(string first,string second)
         {
-            return RedisManager.ReadDataBase().SetLength(key);
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Difference, first, second);
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                list_result.Add(list[i]);
+            }
+            return list_result;
         }
 
         /// <summary>
-        /// 判断成员是否是集合中的成员
+        /// 返回一个集合的全部成员，该集合是所有给定集合之间的差集。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        public ArrayList SetDiff(string[] keys)
+        {
+            List<RedisKey> list_key = new List<RedisKey>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list_key.Add(keys[i]);
+            }
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Difference, keys: list_key.ToArray());
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                list_result.Add(list[i]);
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 将集合之间给定的差集保存在dest集合中，如果集合已存在则将其覆盖
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest">生成的集合</param>
+        /// <returns></returns>
+        public long SetDiffStore(string first, string second, string dest)
+        {
+            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Difference, dest, first, second);
+        }
+
+        /// <summary>
+        /// 将集合之间给定的差集保存在dest集合中，如果集合已存在则将其覆盖
+        /// </summary>
+        /// <param name="keys">集合数组</param>
+        /// <param name="dest">生成的集合</param>
+        /// <returns></returns>
+        public long SetDiffStore(string[] keys, string dest)
+        {
+            List<RedisKey> list_key = new List<RedisKey>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list_key.Add(keys[i]);
+            }
+            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Difference, dest, keys: list_key.ToArray());
+        }
+
+        /// <summary>
+        /// 返回一个集合的全部成员，该集合是所有给定集合之间的交集。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        public ArrayList SetInter(string first,string second)
+        {
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Intersect, first, second);
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list.Length; i++)
+            {
+                list_result.Add(list[i]);
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 返回一个集合的全部成员，该集合是所有给定集合之间的交集。
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public ArrayList SetInter(string[] keys)
+        {
+            List<RedisKey> list_key = new List<RedisKey>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list_key.Add(keys[i]);
+            }
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Intersect, list_key.ToArray());
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list.Length; i++)
+            {
+                list_result.Add(list[i]);
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 将集合之间给定的差集保存在dest集合中，如果集合已存在则将其覆盖
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest">生成的集合</param>
+        /// <returns></returns>
+        public long SetInterStore(string first, string second, string dest)
+        {
+            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Intersect, dest, first, second);
+        }
+
+        /// <summary>
+        /// 将集合之间给定的差集保存在dest集合中，如果集合已存在则将其覆盖
+        /// </summary>
+        /// <param name="keys">集合数组</param>
+        /// <param name="dest">生成的集合</param>
+        /// <returns></returns>
+        public long SetInterStore(string[] keys, string dest)
+        {
+            List<RedisKey> list_key = new List<RedisKey>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list_key.Add(keys[i]);
+            }
+            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Intersect, dest, keys: list_key.ToArray());
+        }
+
+        /// <summary>
+        /// 判断 member 元素是否集合 key 的成员。
         /// </summary>
         /// <param name="key">集合名称</param>
         /// <param name="member">成员的值</param>
         /// <returns></returns>
-        public bool SetContains(string key,string member)
+        public bool SetIsMember(string key,string member)
         {
             return RedisManager.ReadDataBase().SetContains(key, member);
         }
@@ -568,6 +691,28 @@ namespace XCYN.Common.NoSql.redis
             }
             return list;
         }
+
+        /// <summary>
+        /// 返回集合的基数
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <returns></returns>
+        public long SetLength(string key)
+        {
+            return RedisManager.ReadDataBase().SetLength(key);
+        }
+
+        /// <summary>
+        /// 判断成员是否是集合中的成员
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="member">成员的值</param>
+        /// <returns></returns>
+        public bool SetContains(string key,string member)
+        {
+            return RedisManager.ReadDataBase().SetContains(key, member);
+        }
+        
         
         #endregion
     }
