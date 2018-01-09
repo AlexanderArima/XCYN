@@ -61,7 +61,10 @@ namespace XCYN.Test
         // [TestCleanup()]
         // public void MyTestCleanup() { }
         //
-        
+
+        /// <summary>
+        /// 在运行每个测试之前，使用 TestInitialize 来运行代码
+        /// </summary>
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -70,6 +73,17 @@ namespace XCYN.Test
             test._command.StringSet("myStr", "hello world");
 
             test._command.StringSet("myCount", "0");
+
+            test._command.Del("myList");
+            List<string> list = new List<string>();
+            for (int i = 0; i < 7; i++)
+            {
+                list.Add(i.ToString());
+            }
+            test._command.ListLeftPush("myList", list.ToArray());
+
+            test._command.Del("mySet");
+            test._command.SetAdd("mySet", list.ToArray());
         }
 
         #endregion
@@ -215,6 +229,26 @@ namespace XCYN.Test
             Assert.IsNotNull(str);
         }
 
+        [TestMethod]
+        public void StringSetRange()
+        {
+            var len = _command.StringSetRange("myStr", 6, "Redis");
+
+            Assert.AreEqual(11, len);
+
+            var myStr = _command.StringGet("myStr");
+
+            Assert.AreEqual("hello Redis", myStr);
+        }
+
+        [TestMethod]
+        public void StringLength()
+        {
+            var len = _command.StringLength("myStr");
+
+            Assert.AreEqual(11, len);
+        }
+
         #endregion
 
         #region 队列(List)
@@ -222,72 +256,62 @@ namespace XCYN.Test
         [TestMethod]
         public void ListIndex()
         {
-            var str = _command.ListIndex("mylist", 0);
+            var str = _command.ListIndex("myList", 6);
 
-            Assert.AreEqual("2", str);
-
-            var str2 = _command.ListIndex("mylist", 2);
-
-            Assert.IsNotNull(str2);
+            Assert.AreEqual("0", str);
         }
 
         [TestMethod]
         public void ListLeftInsert()
         {
-            var count = _command.ListInsert("mylist", RedisCommand.RedisCommandDirection.AFTER, "1", "4");
+            var count = _command.ListInsert("myList", RedisCommand.RedisCommandDirection.AFTER, "1", "123");
 
-            Assert.AreEqual("6", count.ToString());
+            Assert.AreEqual(8, count);
 
-            var str = _command.ListRightPop("mylist");
+            var str = _command.ListRightPop("myList");
 
-            Assert.AreEqual("4", str);
+            Assert.AreEqual("0", str);
         }
 
         [TestMethod]
         public void ListLeftPushX()
         {
-            _command.ListLeftPushX("mylist2", "10");
+            _command.ListLeftPushX("myList", "10");
 
-            var value = _command.ListIndex("mylist2", 0);
+            var value = _command.ListIndex("myList", 0);
 
-            Assert.IsNull(value);
-
-            _command.ListLeftPop("mylist2");
+            Assert.AreEqual("10", value);
         }
 
         [TestMethod]
         public void ListRange()
         {
-            var list = _command.ListRange("mylist", 0, -1);
+            var list = _command.ListRange("myList", 0, -1);
 
-            Assert.AreEqual(5, list.Count);
+            Assert.AreEqual(7, list.Count);
         }
 
         [TestMethod]
         public void ListRemove()
         {
-            var list = new string[2] { "4","4" };
-            var count = _command.ListLeftPush("mylist", list);
-
-            _command.ListRemove("mylist", 0, "4");
-            Assert.AreNotEqual("4", _command.ListIndex("mylist", -1));
+            _command.ListRemove("myList", "4", 1);
+            Assert.AreEqual(6, _command.ListLength("myList"));
         }
 
         [TestMethod]
         public void ListSetByIndex()
         {
-            _command.ListLeftPush("mylist", "1");
-            _command.ListSetByIndex("mylist", 0, "7");
-            var str = _command.ListIndex("mylist", 0);
-            Assert.AreEqual("7", str);
+            _command.ListSetByIndex("myList", 0, "8");
+            var str = _command.ListIndex("myList", 0);
+            Assert.AreEqual("8", str);
         }
 
         [TestMethod]
         public void ListTrim()
         {
-            _command.ListTrim("mylist", 0, 2);
+            _command.ListTrim("myList", 0, 2);
 
-            var len = _command.ListLength("mylist");
+            var len = _command.ListLength("myList");
 
             Assert.AreEqual(3, len);
         }
@@ -295,13 +319,13 @@ namespace XCYN.Test
         [TestMethod]
         public void ListRightPopLeftPush()
         {
-            var len = _command.ListLength("mylist");
+            var len = _command.ListLength("myList");
 
-            var end = _command.ListIndex("mylist", (int)len - 1);
+            var end = _command.ListIndex("myList", (int)len - 1);
 
-            _command.ListRightPopLeftPush("mylist", "mylist");
+            _command.ListRightPopLeftPush("myList", "myList");
 
-            var start = _command.ListIndex("mylist", 0);
+            var start = _command.ListIndex("myList", 0);
 
             Assert.AreEqual(start, end);
         }
@@ -313,36 +337,38 @@ namespace XCYN.Test
         [TestMethod]
         public void SetAdd()
         {
-            var myset = _command.SetAdd("myset", "5");
+            //Set不能有重复的元素
+            var mySet = _command.SetAdd("mySet", "5");
 
-            Assert.AreNotEqual(true, myset);
+            Assert.AreNotEqual(true, mySet);
 
+            //有一个元素重复，则插入一条
             var array = new string[2]
             {
                 "6",
                 "7"
             };
-            var myset2 = _command.SetAdd("myset", array);
-            Assert.AreEqual(0, myset2);
+            var mySet2 = _command.SetAdd("mySet", array);
+            Assert.AreEqual(1, mySet2);
             
         }
 
         [TestMethod]
         public void SetLength()
         {
-            var len = _command.SetLength("myset");
+            var len = _command.SetLength("mySet");
 
-            Assert.AreEqual(8, (int)len);
+            Assert.AreEqual(7, (int)len);
         }
 
         [TestMethod]
         public void SetContains()
         {
-            var flag = _command.SetContains("myset", "1");
+            var flag = _command.SetContains("mySet", "1");
 
             Assert.IsTrue(flag);
 
-            flag = _command.SetContains("myset", "100");
+            flag = _command.SetContains("mySet", "100");
 
             Assert.IsFalse(flag);
         }
@@ -350,8 +376,8 @@ namespace XCYN.Test
         [TestMethod]
         public void SetMembers()
         {
-            var myset = _command.SetMembers("myset");
-            Assert.AreEqual(8, myset.Count);
+            var mySet = _command.SetMembers("mySet");
+            Assert.AreEqual(7, mySet.Count);
         }
 
         #endregion

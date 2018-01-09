@@ -2,7 +2,7 @@
 <table>
 	<tr>
 		<td>XCYN.Common</td>
-		<td>工具类</td>
+		<td>封装了redis的常用接口</td>
 	</tr>
 	<tr>
 		<td>XCYN.EasyUI</td>
@@ -10,7 +10,7 @@
 	</tr>
 	<tr>
 		<td>XCYN.Print</td>
-		<td>封装了redis，rabbitmq的常用接口，一些常用的设计模式例子</td>
+		<td>一些常用的设计模式例子,rabbitmq的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.Service</td>

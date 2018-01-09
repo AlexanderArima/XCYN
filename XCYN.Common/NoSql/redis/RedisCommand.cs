@@ -229,6 +229,28 @@ namespace XCYN.Common.NoSql.redis
         {
             return RedisManager.WriteDataBase().StringSet(key, value, TimeSpan.FromSeconds(seconds));
         }
+
+        /// <summary>
+        /// 用 value 参数覆盖给定 key 所储存的字符串值，从偏移量 offset 开始。
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="offset">覆盖的起始位置</param>
+        /// <param name="value">覆盖值</param>
+        /// <returns></returns>
+        public long StringSetRange(string key,int offset,string value)
+        {
+            return (long)RedisManager.WriteDataBase().StringSetRange(key, offset, value);
+        }
+
+        /// <summary>
+        /// 返回 key 所储存的字符串值的长度。
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <returns></returns>
+        public long StringLength(string key)
+        {
+            return RedisManager.ReadDataBase().StringLength(key);
+        }
         
         #endregion
 
@@ -350,7 +372,7 @@ namespace XCYN.Common.NoSql.redis
         /// <param name="count">删除元素的个数和方向</param>
         /// <param name="value">删除的元素</param>
         /// <returns></returns>
-        public long ListRemove(string key, int count, string value)
+        public long ListRemove(string key, string value, int count)
         {
             return RedisManager.WriteDataBase().ListRemove(key, value, count);
         }
