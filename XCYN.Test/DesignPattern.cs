@@ -8,6 +8,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using XCYN.Test.ServiceReference1;
 using XCYN.Print.DesignPattern.Strategy;
+using XCYN.Print.DesignPattern.Builder;
 
 namespace XCYN.Test
 {
@@ -82,6 +83,15 @@ namespace XCYN.Test
             StrategyContext context = new StrategyContext();
             context.Write("aaaaaaaaaaaaaaa");
             context.Write("aaaaa");
+        }
+
+        [TestMethod]
+        public void BuilderDirector()
+        {
+            BuilderDirector dir = new BuilderDirector();
+            dir.person = new ThinPerson();
+            var c = dir.Create();
+            Assert.IsTrue(c.Contains("瘦"));
         }
     }
 }

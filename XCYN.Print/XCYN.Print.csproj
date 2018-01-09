@@ -72,6 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignPattern\Builder\AbstractPerson.cs" />
+    <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
+    <Compile Include="DesignPattern\Builder\FatPerson.cs" />
+    <Compile Include="DesignPattern\Builder\ThinPerson.cs" />
     <Compile Include="DesignPattern\Observer\ConcreteObserver1.cs" />
     <Compile Include="DesignPattern\Observer\ConcreteSubject.cs" />
     <Compile Include="DesignPattern\Observer\IObserver.cs" />
@@ -752,6 +756,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
     <Content Include="DesignPattern\Observer\info.txt" />
     <Content Include="DesignPattern\Prototype\info.txt" />
