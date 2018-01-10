@@ -861,5 +861,104 @@ namespace XCYN.Common.NoSql.redis
         }
 
         #endregion
+
+        #region Hash命令
+
+        /// <summary>
+        /// 删除哈希表 key 中的一个指定域，不存在的域将被忽略。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <returns></returns>
+        public bool HashDelete(string key,string field)
+        {
+            return RedisManager.WriteDataBase().HashDelete(key, field);
+        }
+
+        /// <summary>
+        /// 删除哈希表 key 中的一个指定域，不存在的域将被忽略。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <returns></returns>
+        public long HashDelete(string key, string[] fields)
+        {
+            return RedisManager.WriteDataBase().HashDelete(key,Array.ConvertAll<string, RedisValue>(fields,m => (RedisValue)m));
+        }
+
+        /// <summary>
+        /// 返回哈希表 key 中给定域 field 的值。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <returns></returns>
+        public string HashGet(string key,string field)
+        {
+            return RedisManager.ReadDataBase().HashGet(key, field);
+        }
+
+        /// <summary>
+        /// 返回哈希表 key 中，所有的域和值。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <returns></returns>
+        public Dictionary<string, string> HashGetAll(string key)
+        {
+            var entry = RedisManager.ReadDataBase().HashGetAll(key);
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            foreach (var item in entry)
+            {
+                dict.Add(item.Name, item.Value);
+            }
+            return dict;
+        }
+
+        /// <summary>
+        /// 将哈希表 key 中的域 field 的值设为 value 。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <param name="value">域的值</param>
+        /// <returns></returns>
+        public bool HashSet(string key,string field,string value)
+        {
+            return RedisManager.WriteDataBase().HashSet(key, field, value);
+        }
+
+        /// <summary>
+        /// 同时将多个 field-value (域-值)对设置到哈希表 key 中。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="fields">域的名称</param>
+        /// <param name="values">域的值</param>
+        public void HashSet(string key,string[] fields,string[] values)
+        {
+            //判断两个数组的长度是否相等
+            if (fields.Length != values.Length)
+                throw new Exception("域的名称和域的值的数组长度不等!");
+            if (fields.Length <= 0)
+                throw new Exception("域的名称数组长度不能小于0");
+            HashEntry[] hashlist = new HashEntry[fields.Length];
+            for (int i = 0; i < fields.Length; i++)
+            {
+                HashEntry entry = new HashEntry(fields[i], values[i]);
+                hashlist[i] = entry;
+            }
+            RedisManager.WriteDataBase().HashSet(key, hashlist);
+        }
+
+        /// <summary>
+        /// 同时将多个 field-value (域-值)对设置到哈希表 key 中。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field_value">域的名称和值</param>
+        public void HashSet(string key,Dictionary<string,string> field_value)
+        {
+            var fields = field_value.Keys.ToArray();
+            var values = field_value.Values.ToArray();
+            this.HashSet(key, fields, values);
+        }
+        
+        #endregion
     }
 }

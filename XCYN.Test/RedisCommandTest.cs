@@ -97,11 +97,16 @@ namespace XCYN.Test
 
             test._command.KeyDelete("mySet4");
             list = new List<string>();
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 list.Add(i.ToString());
             }
             test._command.SetAdd("mySet4", list.ToArray());
+
+            test._command.KeyDelete("myHash");
+            test._command.HashSet("myHash", "age", "1");
+            test._command.HashSet("myHash", "year", "2017");
+            test._command.HashSet("myHash", "month", "1");
         }
 
         #endregion
@@ -612,5 +617,74 @@ namespace XCYN.Test
 
         #endregion
 
+        #region 哈希表
+
+        [TestMethod]
+        public void HashDelete()
+        {
+            var flag = _command.HashDelete("myHash", "age");
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void HashDelete2()
+        {
+            var len = _command.HashDelete("myHash", new string[] { "age", "year" });
+            Assert.AreEqual(2, (int)len);
+        }
+
+        [TestMethod]
+        public void HashGet()
+        {
+            var age = _command.HashGet("myHash", "age");
+            Assert.AreEqual("1", age);
+        }
+
+        [TestMethod]
+        public void HashGetAll()
+        {
+            var dict = _command.HashGetAll("myHash");
+            Assert.AreEqual("1", dict["age"]);
+        }
+
+        [TestMethod]
+        public void HashSet()
+        {
+            var flag = _command.HashSet("myHash", "name", "xie");
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void HashSet2()
+        {
+            string[] field = new string[]
+            {
+                "name","birthday"
+            };
+            string[] values = new string[]
+            {
+                "xie","1990-04-24"
+            };
+            _command.HashSet("myHash", field, values);
+            var name = _command.HashGet("myHash", "name");
+            Assert.AreEqual("xie", name);
+            var birthday = _command.HashGet("myHash", "birthday");
+            Assert.AreEqual("1990-04-24", birthday);
+        }
+
+        [TestMethod]
+        public void HashSet3()
+        {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("name", "xie");
+            dict.Add("birthday", "1990-04-24");
+            _command.HashSet("myHash", dict);
+            var name = _command.HashGet("myHash", "name");
+            Assert.AreEqual("xie", name);
+            var birthday = _command.HashGet("myHash", "birthday");
+            Assert.AreEqual("1990-04-24", birthday);
+        }
+
+        #endregion
     }
 }
