@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StackExchange.Redis;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -693,6 +694,18 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
+        /// 将 member 元素从 source 集合移动到 destination 集合。
+        /// </summary>
+        /// <param name="source">源集合</param>
+        /// <param name="destination">目标集合</param>
+        /// <param name="value">移动的值</param>
+        /// <returns></returns>
+        public bool SetMove(string source,string destination,string value)
+        {
+            return RedisManager.WriteDataBase().SetMove(source, destination, value);
+        }
+
+        /// <summary>
         /// 返回集合的基数
         /// </summary>
         /// <param name="key">集合名称</param>
@@ -712,8 +725,68 @@ namespace XCYN.Common.NoSql.redis
         {
             return RedisManager.ReadDataBase().SetContains(key, member);
         }
+
+        /// <summary>
+        /// 移除并返回集合中的一个随机元素。
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <returns></returns>
+        public string SetPop(string key)
+        {
+            return RedisManager.WriteDataBase().SetPop(key);
+        }
+
+        /// <summary>
+        /// 随机获取集合中的一个元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <returns></returns>
+        public string SetRandMember(string key)
+        {
+            return RedisManager.ReadDataBase().SetRandomMember(key);
+        }
+
+        /// <summary>
+        /// 随机获取集合中的一组元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="count">取出元素的个数</param>
+        /// <returns></returns>
+        public ArrayList SetRandMembers(string key,int count)
+        {
+            var list = RedisManager.ReadDataBase().SetRandomMembers(key,count);
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                list_result.Add(list[i]);
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 移除集合 key 中的一个元素，不存在的 member 元素会被忽略。
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="value">删除的值</param>
+        /// <returns></returns>
+        public bool SetRemove(string key,string value)
+        {
+            return RedisManager.WriteDataBase().SetRemove(key, value);
+        }
+
+        /// <summary>
+        /// 移除集合 key 中的多个 member 元素，不存在的 member 元素会被忽略。
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="value">删除的值</param>
+        /// <returns></returns>
+        public long SetRemove(string key,string[] value)
+        {
+            var list = Array.ConvertAll<string, RedisValue>(value, s => (RedisValue)s);
+            return RedisManager.WriteDataBase().SetRemove(key, values: list.ToArray());
+        }
         
-        
+
         #endregion
     }
 }

@@ -31,3 +31,5 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\EntityFramework.resources.dll
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csprojResolveAssemblyReference.cache
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll

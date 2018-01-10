@@ -506,6 +506,56 @@ namespace XCYN.Test
             Assert.AreEqual(7, mySet.Count);
         }
 
+        [TestMethod]
+        public void SetMove()
+        {
+            var flag = _command.SetMove("mySet", "mySet2", "3");
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void SetPop()
+        {
+            var value = _command.SetPop("mySet");
+            Assert.IsNotNull(value);
+        }
+
+        [TestMethod]
+        public void SetRandMember()
+        {
+            var str = _command.SetRandMember("mySet");
+            var flag = _command.SetContains("mySet", str);
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void SetRandMembers()
+        {
+            var list = _command.SetRandMembers("mySet", 2);
+            foreach (var item in list)
+            {
+                var flag = _command.SetContains("mySet", item.ToString());
+                Assert.IsTrue(flag);
+            }
+        }
+
+        [TestMethod]
+        public void SetRemove()
+        {
+            var flag = _command.SetRemove("mySet", "0");
+            Assert.IsTrue(flag);
+
+            flag = _command.SetRemove("mySet", "9");
+            Assert.IsFalse(flag);
+        }
+
+        [TestMethod]
+        public void SetRemove2()
+        {
+            var flag = _command.SetRemove("mySet", new string[] { "0","1" });
+            Assert.IsTrue(flag > 0);
+        }
+
         #endregion
 
     }
