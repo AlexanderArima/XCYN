@@ -785,7 +785,80 @@ namespace XCYN.Common.NoSql.redis
             var list = Array.ConvertAll<string, RedisValue>(value, s => (RedisValue)s);
             return RedisManager.WriteDataBase().SetRemove(key, values: list.ToArray());
         }
-        
+
+        /// <summary>
+        /// 返回一个集合的全部成员，该集合是所有给定集合的并集。
+        /// </summary>
+        /// <param name="first">第一个集合</param>
+        /// <param name="second">第二个集合</param>
+        /// <returns></returns>
+        public string[] SetUnion(string first,string second)
+        {
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Union, first, second);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回一个集合的全部成员，该集合是所有给定集合的并集。
+        /// </summary>
+        /// <param name="keys">所有合并的集合名称</param>
+        /// <returns></returns>
+        public string[] SetUnion(string[] keys)
+        {
+            var redisKeys = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
+            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Union, redisKeys);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 但它将结果保存到 destination 集合，该集合是所有给定集合的并集。
+        /// </summary>
+        /// <param name="destination">合并生成的集合</param>
+        /// <param name="first">第一个集合</param>
+        /// <param name="second">第二个集合</param>
+        /// <returns></returns>
+        public long SetUnionStore(string destination, string first, string second)
+        {
+            return RedisManager.ReadDataBase().SetCombineAndStore(SetOperation.Union, destination, first, second);
+        }
+
+        /// <summary>
+        /// 但它将结果保存到 destination 集合，该集合是所有给定集合的并集。
+        /// </summary>
+        /// <param name="destination">合并生成的集合</param>
+        /// <param name="keys">所有合并的集合名称</param>
+        /// <returns></returns>
+        public long SetUnionStore(string destination, string[] keys)
+        {
+            var redisKeys = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
+            return RedisManager.ReadDataBase().SetCombineAndStore(SetOperation.Union, destination, redisKeys);
+        }
+
+        /// <summary>
+        /// 迭代集合键中的元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="pattern">获取的值</param>
+        /// <param name="pagesize">最大结果数</param>
+        /// <returns></returns>
+        public string[] SetScan(string key,string pattern,int pagesize)
+        {
+            var list = RedisManager.ReadDataBase().SetScan(key, pattern, pagesize).ToArray();
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 迭代集合键中的元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="pattern">获取的值</param>
+        /// <param name="pagesize">最大结果数</param>
+        /// <returns></returns>
+        public string[] SetScan(string key, string pattern, int pagesize,int cursor)
+        {
+            var list = RedisManager.ReadDataBase().SetScan(key, pattern, pagesize,cursor).ToArray();
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
 
         #endregion
     }

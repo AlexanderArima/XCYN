@@ -92,6 +92,16 @@ namespace XCYN.Test
             }
             test._command.KeyDelete("mySet2");
             test._command.SetAdd("mySet2", list2.ToArray());
+
+            test._command.KeyDelete("mySet3");
+
+            test._command.KeyDelete("mySet4");
+            list = new List<string>();
+            for (int i = 0; i < 100000; i++)
+            {
+                list.Add(i.ToString());
+            }
+            test._command.SetAdd("mySet4", list.ToArray());
         }
 
         #endregion
@@ -554,6 +564,50 @@ namespace XCYN.Test
         {
             var flag = _command.SetRemove("mySet", new string[] { "0","1" });
             Assert.IsTrue(flag > 0);
+        }
+
+        [TestMethod]
+        public void SetUnion()
+        {
+            var list = _command.SetUnion("mySet", "mySet2");
+            Assert.AreEqual(7, list.Length);
+        }
+
+        [TestMethod]
+        public void SetUnion2()
+        {
+            var list = _command.SetUnion(new string[] { "mySet", "mySet2" });
+            Assert.AreEqual(7, list.Length);
+        }
+
+        [TestMethod]
+        public void SetUnionStore()
+        {
+            var len = _command.SetUnionStore("mySet3", "mySet", "mySet2");
+            Assert.AreEqual(7, len);
+           
+        }
+
+        [TestMethod]
+        public void SetUnionStore2()
+        {
+            var len = _command.SetUnionStore("mySet3", new string[] { "mySet", "mySet2" });
+            Assert.AreEqual(7, len);
+
+        }
+
+        [TestMethod]
+        public void SetScan()
+        {
+            var list = _command.SetScan("mySet4", "*", 10);
+            Assert.AreEqual(100000, list.Length);
+        }
+
+        [TestMethod]
+        public void SetScan2()
+        {
+            var list = _command.SetScan("mySet4", "*", 10,0);
+            Assert.AreEqual(100000, list.Length);
         }
 
         #endregion
