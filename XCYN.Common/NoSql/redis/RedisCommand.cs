@@ -1108,9 +1108,67 @@ namespace XCYN.Common.NoSql.redis
         /// <param name="member"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public double SortedSetIncrBy(string key,string member,int value)
+        public double SortedSetIncrBy(string key, string member, int value)
         {
             return RedisManager.WriteDataBase().SortedSetIncrement(key, member, value);
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中，指定区间内的成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public string[] SortedSetRange(string key,int start,int end)
+        {
+            var list = RedisManager.ReadDataBase().SortedSetRangeByRank(key, start, end);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中，指定区间内的成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public List<Dictionary<string, string>> SortedSetRangeWithScore(string key, int start, int end)
+        {
+            var list = RedisManager.ReadDataBase().SortedSetRangeByRankWithScores(key, start, end);
+            List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("key",list[i].Element);
+                dict.Add("score", list[i].Score.ToString());
+                list_result.Add(dict);
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中，指定区间内的成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public string[] SortedSetRangeByScore(string key, int start, int end)
+        {
+            var list = RedisManager.ReadDataBase().SortedSetRangeByScore(key, start, end);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中成员 member 的排名。其中有序集成员按 score 值递增(从小到大)顺序排列。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public long? SortedSetRank(string key,string member)
+        {
+            return RedisManager.ReadDataBase().SortedSetRank(key, member);
         }
 
         #endregion

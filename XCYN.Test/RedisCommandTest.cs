@@ -792,6 +792,41 @@ namespace XCYN.Test
             Assert.AreEqual(100, score);
         }
 
+        [TestMethod]
+        public void SortedSetRange()
+        {
+            var list = _command.SortedSetRange("mySortedSet", 0, -1);
+            Assert.AreEqual(3, list.Length);
+        }
+
+        [TestMethod]
+        public void SortedSetRangeWithScore()
+        {
+            var list = _command.SortedSetRangeWithScore("mySortedSet", 0, -1);
+            foreach (var item in list)
+            {
+                var list_set = new ArrayList(_command.SortedSetRange("mySortedSet", 0, -1));
+                var flag = list_set.Contains(item["key"]);
+                Assert.IsTrue(flag);
+            }
+        }
+
+        [TestMethod]
+        public void SortedSetRangeByScore()
+        {
+            var list = _command.SortedSetRangeByScore("mySortedSet", 0, 3);
+            Assert.AreEqual(3, list.Length);
+        }
+
+        [TestMethod]
+        public void SortedSetRank()
+        {
+            var rank = _command.SortedSetRank("mySortedSet", "wuhan");
+            Assert.AreEqual(0, rank);
+
+            Assert.IsNull(_command.SortedSetRank("mySortedSet", "shanghai"));
+        }
+
         #endregion
     }
 }
