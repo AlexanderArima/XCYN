@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XCYN.Common.NoSql.redis;
 using System.Threading;
+using System.Collections;
 
 namespace XCYN.Test
 {
@@ -104,6 +105,7 @@ namespace XCYN.Test
             test._command.SetAdd("mySet4", list.ToArray());
 
             test._command.KeyDelete("myHash");
+            test._command.HashSet("myHash", "name", "w");
             test._command.HashSet("myHash", "age", "1");
             test._command.HashSet("myHash", "year", "2017");
             test._command.HashSet("myHash", "month", "1");
@@ -634,6 +636,54 @@ namespace XCYN.Test
         }
 
         [TestMethod]
+        public void HashExists()
+        {
+            var flag = _command.HashExists("myHash", "age");
+            Assert.IsTrue(flag);
+
+            flag = _command.HashExists("myHash", "birthday");
+            Assert.IsFalse(flag);
+        }
+
+        [TestMethod]
+        public void HashIncrement()
+        {
+            var num = _command.HashIncrement("myHash", "age", 1);
+            Assert.AreEqual(2, num);
+
+            num = _command.HashIncrement("myHash", "id", 1);
+            Assert.AreEqual(1, num);
+
+            var num2 = _command.HashIncrement("myHash", "age", 0.1);
+            Assert.AreEqual(2.1, num2);
+        }
+
+        [TestMethod]
+        public void HashKeys()
+        {
+            var keys = _command.HashKeys("myHash");
+            Assert.AreEqual(4, keys.Length);
+        
+        }
+
+        [TestMethod]
+        public void HashLength()
+        {
+            var len = _command.HashLength("myHash");
+            Assert.AreEqual(4, len);
+        }
+
+        [TestMethod]
+        public void HashSetNX()
+        {
+            var flag = _command.HashSetNX("myHash", "year", "2012");
+            Assert.IsTrue(flag);
+
+            flag = _command.HashSetNX("myHash", "birthday", "2012");
+            Assert.IsFalse(flag);
+        }
+
+        [TestMethod]
         public void HashGet()
         {
             var age = _command.HashGet("myHash", "age");
@@ -685,6 +735,19 @@ namespace XCYN.Test
             Assert.AreEqual("1990-04-24", birthday);
         }
 
+        [TestMethod]
+        public void HashValues()
+        {
+            var values = _command.HashValues("myHash");
+            Assert.AreEqual(4, values.Length);
+        }
+
+        [TestMethod]
+        public void HashScan()
+        {
+            var list = _command.HashScan("myHash", "*", 10);
+            Assert.AreEqual(4, list.Count);
+        }
         #endregion
     }
 }

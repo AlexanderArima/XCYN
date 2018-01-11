@@ -887,6 +887,17 @@ namespace XCYN.Common.NoSql.redis
         }
 
         /// <summary>
+        /// 查看哈希表 key 中，给定域 field 是否存在。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <returns></returns>
+        public bool HashExists(string key,string field)
+        {
+            return RedisManager.ReadDataBase().HashExists(key, field);
+        }
+
+        /// <summary>
         /// 返回哈希表 key 中给定域 field 的值。
         /// </summary>
         /// <param name="key">哈希表的名称</param>
@@ -905,12 +916,52 @@ namespace XCYN.Common.NoSql.redis
         public Dictionary<string, string> HashGetAll(string key)
         {
             var entry = RedisManager.ReadDataBase().HashGetAll(key);
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            foreach (var item in entry)
-            {
-                dict.Add(item.Name, item.Value);
-            }
-            return dict;
+            return entry.ToDictionary(m => m.Name.ToString(), n => n.Value.ToString());
+        }
+
+        /// <summary>
+        /// 为哈希表 key 中的域 field 的值加上增量 value 。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <param name="value">增量</param>
+        /// <returns></returns>
+        public long HashIncrement(string key,string field,int value)
+        {
+            return RedisManager.WriteDataBase().HashIncrement(key, field, value);
+        }
+
+        /// <summary>
+        /// 为哈希表 key 中的域 field 的值加上增量 value 。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <param name="field">域的名称</param>
+        /// <param name="value">增量</param>
+        /// <returns></returns>
+        public double HashIncrement(string key, string field, double value)
+        {
+            return RedisManager.WriteDataBase().HashIncrement(key, field, value);
+        }
+
+        /// <summary>
+        /// 返回哈希表 key 中的所有域。
+        /// </summary>
+        /// <param name="key">哈希表的名称</param>
+        /// <returns></returns>
+        public string[] HashKeys(string key)
+        {
+            var list_key = RedisManager.ReadDataBase().HashKeys(key);
+            return Array.ConvertAll<RedisValue, string>(list_key, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回哈希表 key 中域的数量。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public long HashLength(string key)
+        {
+            return RedisManager.ReadDataBase().HashLength(key);
         }
 
         /// <summary>
@@ -958,7 +1009,43 @@ namespace XCYN.Common.NoSql.redis
             var values = field_value.Values.ToArray();
             this.HashSet(key, fields, values);
         }
-        
+
+        /// <summary>
+        /// 当且仅当域 field 不存在时。将哈希表 key 中的域 field 的值设置为 value 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="field"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool HashSetNX(string key,string field,string value)
+        {
+            return RedisManager.WriteDataBase().HashSet(key, false, value, When.NotExists);
+        }
+
+        /// <summary>
+        /// 返回哈希表 key 中所有域的值。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string[] HashValues(string key)
+        {
+            var values = RedisManager.ReadDataBase().HashValues(key);
+            return Array.ConvertAll<RedisValue, string>(values, m => m.ToString());
+
+        }
+
+        /// <summary>
+        /// 增量地迭代哈希表的元素
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="pattern"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> HashScan(string key,string pattern ,int pageSize)
+        {
+            var entrys = RedisManager.ReadDataBase().HashScan(key, pattern, pageSize).ToList();
+            return entrys.ToDictionary(m => m.Name.ToString(), n => n.Value.ToString());
+        }
         #endregion
     }
 }
