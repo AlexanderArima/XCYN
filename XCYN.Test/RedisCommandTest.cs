@@ -109,6 +109,9 @@ namespace XCYN.Test
             test._command.HashSet("myHash", "age", "1");
             test._command.HashSet("myHash", "year", "2017");
             test._command.HashSet("myHash", "month", "1");
+
+            _command.KeyDelete("mySortedSet");
+            var flag = _command.SortedSetAdd("mySortedSet", new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
         }
 
         #endregion
@@ -748,6 +751,47 @@ namespace XCYN.Test
             var list = _command.HashScan("myHash", "*", 10);
             Assert.AreEqual(4, list.Count);
         }
+        #endregion
+
+        #region 有序集合
+
+        [TestMethod]
+        public void SortedSetAdd()
+        {
+            var flag = _command.SortedSetAdd("mySortedSet", new string[] { "wuhan","hangzhou" }, new int[] { 1,2 });
+            Assert.IsTrue(flag == 0);
+        }
+
+        [TestMethod]
+        public void SortedSetLength()
+        {
+            var len = _command.SortedSetLength("mySortedSet");
+            Assert.AreEqual(3, len);
+
+            len = _command.SortedSetLength("mySchool");
+            Assert.AreEqual(0, len);
+        }
+
+        [TestMethod]
+        public void SortedSetCount()
+        {
+            var len = _command.SortedSetCount("mySortedSet", 0, 100);
+            Assert.AreEqual(3, len);
+
+            len = _command.SortedSetCount("mySortedSet", 0, 2);
+            Assert.AreEqual(2, len);
+        }
+
+        [TestMethod]
+        public void SortedSetIncrement()
+        {
+            var score =_command.SortedSetIncrBy("mySortedSet", "wuhan", 100);
+            Assert.AreEqual(101, score);
+
+            score = _command.SortedSetIncrBy("mySortedSet", "tianjing", 100);
+            Assert.AreEqual(100, score);
+        }
+
         #endregion
     }
 }

@@ -1047,5 +1047,72 @@ namespace XCYN.Common.NoSql.redis
             return entrys.ToDictionary(m => m.Name.ToString(), n => n.Value.ToString());
         }
         #endregion
+
+        #region ZSet命令
+
+        /// <summary>
+        /// 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。
+        /// </summary>
+        /// <param name="key">有序集合名称</param>
+        /// <param name="value">值</param>
+        /// <param name="score">分值</param>
+        /// <returns></returns>
+        public bool SortedSetAdd(string key,string value,int score)
+        {
+            return RedisManager.WriteDataBase().SortedSetAdd(key, value, score);
+        }
+
+        /// <summary>
+        /// 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。
+        /// </summary>
+        /// <param name="key">有序集合名称</param>
+        /// <param name="value">值</param>
+        /// <param name="score">分值</param>
+        /// <returns></returns>
+        public long SortedSetAdd(string key,string[] values,int[] score)
+        {
+            List<SortedSetEntry> list = new List<SortedSetEntry>();
+            for(int i = 0;i < values.Length;i++)
+            {
+                SortedSetEntry entry = new SortedSetEntry(values[i],score[i]);
+                list.Add(entry);
+            }
+            return RedisManager.WriteDataBase().SortedSetAdd(key, list.ToArray());
+        }
+
+        /// <summary>
+        /// 返回有序集 key 的基数。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public long SortedSetLength(string key)
+        {
+            return RedisManager.ReadDataBase().SortedSetLength(key);
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中， score 值在 min 和 max 之间(默认包括 score 值等于 min 或 max )的成员的数量。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        public long SortedSetCount(string key,int min,int max)
+        {
+            return RedisManager.ReadDataBase().SortedSetLength(key, min, max);
+        }
+
+        /// <summary>
+        /// 为有序集 key 的成员 member 的 score 值加上增量 increment 。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public double SortedSetIncrBy(string key,string member,int value)
+        {
+            return RedisManager.WriteDataBase().SortedSetIncrement(key, member, value);
+        }
+
+        #endregion
     }
 }
