@@ -110,8 +110,12 @@ namespace XCYN.Test
             test._command.HashSet("myHash", "year", "2017");
             test._command.HashSet("myHash", "month", "1");
 
-            _command.KeyDelete("mySortedSet");
-            var flag = _command.SortedSetAdd("mySortedSet", new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
+            _command.KeyDelete(new string[] { "mySortedSet", "mySortedSet2","mySortedSet3" });
+            _command.SortedSetAdd("mySortedSet", 
+                new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
+
+            _command.SortedSetAdd("mySortedSet2", 
+                new string[] { "wuhan", "shanghai" }, new int[] { 1,4 });
         }
 
         #endregion
@@ -806,7 +810,7 @@ namespace XCYN.Test
             foreach (var item in list)
             {
                 var list_set = new ArrayList(_command.SortedSetRange("mySortedSet", 0, -1));
-                var flag = list_set.Contains(item["key"]);
+                var flag = list_set.Contains(item["member"]);
                 Assert.IsTrue(flag);
             }
         }
@@ -897,6 +901,19 @@ namespace XCYN.Test
             Assert.AreEqual(1.0d, score);
         }
 
+        [TestMethod]
+        public void SortedSetUnionStore()
+        {
+            var num = _command.SortedSetUnionStore("mySortedSet", "mySortedSet2", "mySortedSet3");
+            Assert.AreEqual(4, num);
+        }
+
+        [TestMethod]
+        public void SortedSetInterStore()
+        {
+            var num = _command.SortedSetInterStore("mySortedSet", "mySortedSet2", "mySortedSet3");
+            Assert.AreEqual(1, num);
+        }
         #endregion
     }
 }

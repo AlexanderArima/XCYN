@@ -1140,7 +1140,7 @@ namespace XCYN.Common.NoSql.redis
             for (int i = 0; i < list.Count(); i++)
             {
                 Dictionary<string, string> dict = new Dictionary<string, string>();
-                dict.Add("key",list[i].Element);
+                dict.Add("member",list[i].Element);
                 dict.Add("score", list[i].Score.ToString());
                 list_result.Add(dict);
             }
@@ -1263,6 +1263,103 @@ namespace XCYN.Common.NoSql.redis
         public double? SortedSetScore(string key,string member)
         {
             return RedisManager.ReadDataBase().SortedSetScore(key, member);
+        }
+
+        /// <summary>
+        /// 计算给定的一个或多个有序集的并集，其中给定 key 的数量必须以 numkeys 参数指定，并将该并集(结果集)储存到 destination 。默认情况下，结果集中某个成员的 score 值是所有给定集下该成员 score 值之 和 。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest"></param>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public double? SortedSetUnionStore(string first,string second,string dest)
+        {
+            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Union, dest, first, second);
+        }
+
+        /// <summary>
+        /// 计算给定的一个或多个有序集的并集，其中给定 key 的数量必须以 numkeys 参数指定，并将该并集(结果集)储存到 destination 。默认情况下，结果集中某个成员的 score 值是所有给定集下该成员 score 值之 和 。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest"></param>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public double? SortedSetUnionStore(string[] keys, string dest)
+        {
+            var list = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
+            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Union, dest, list);
+        }
+
+        /// <summary>
+        /// 计算给定的一个或多个有序集的并集，其中给定 key 的数量必须以 numkeys 参数指定，并将该并集(结果集)储存到 destination 。默认情况下，结果集中某个成员的 score 值是所有给定集下该成员 score 值之 和 。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest"></param>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public double? SortedSetInterStore(string first, string second, string dest)
+        {
+            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Intersect, dest, first, second);
+        }
+
+        /// <summary>
+        /// 计算给定的一个或多个有序集的并集，其中给定 key 的数量必须以 numkeys 参数指定，并将该并集(结果集)储存到 destination 。默认情况下，结果集中某个成员的 score 值是所有给定集下该成员 score 值之 和 。
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="dest"></param>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public double? SortedSetInterStore(string[] keys, string dest)
+        {
+            var list = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
+            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Intersect, dest, list);
+        }
+
+        /// <summary>
+        /// 迭代集合键中的元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="pattern">获取的值</param>
+        /// <param name="pagesize">最大结果数</param>
+        /// <returns></returns>
+        public List<Dictionary<string,string>> SortedSetScan(string key, string pattern, int pagesize)
+        {
+            List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
+            var list = RedisManager.ReadDataBase().SortedSetScan(key, pattern, pagesize).ToArray();
+            for (int i = 0; i < list.Length; i++)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("member", list[i].Element);
+                dict.Add("score", list[i].Score.ToString());
+                list_result.Add(dict);
+            }
+            return list_result;
+            //return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 迭代集合键中的元素
+        /// </summary>
+        /// <param name="key">集合名称</param>
+        /// <param name="pattern">获取的值</param>
+        /// <param name="pagesize">最大结果数</param>
+        /// <returns></returns>
+        public List<Dictionary<string, string>> SortedSetScan(string key, string pattern, int pagesize, int cursor)
+        {
+            List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
+            var list = RedisManager.ReadDataBase().SortedSetScan(key, pattern, pagesize, cursor).ToArray();
+            for (int i = 0; i < list.Length; i++)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("member", list[i].Element);
+                dict.Add("score", list[i].Score.ToString());
+                list_result.Add(dict);
+            }
+            return list_result;
         }
         #endregion
     }
