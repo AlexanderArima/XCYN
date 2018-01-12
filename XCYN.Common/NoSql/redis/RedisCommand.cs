@@ -1171,6 +1171,99 @@ namespace XCYN.Common.NoSql.redis
             return RedisManager.ReadDataBase().SortedSetRank(key, member);
         }
 
+        /// <summary>
+        /// 移除有序集 key 中的一个或多个成员，不存在的成员将被忽略。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public bool SortedSetRemove(string key,string member)
+        {
+            return RedisManager.WriteDataBase().SortedSetRemove(key, member);
+        }
+
+        /// <summary>
+        /// 移除有序集 key 中的一个或多个成员，不存在的成员将被忽略。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public long SortedSetRemove(string key, string[] member)
+        {
+            return RedisManager.WriteDataBase().SortedSetRemove(key,Array.ConvertAll<string,RedisValue>(member,m => (RedisValue)m));
+        }
+
+        /// <summary>
+        /// 移除有序集 key 中，指定排名(rank)区间内的所有成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public long SortedSetRemoveRangeByRank(string key,int start,int end)
+        {
+            return RedisManager.WriteDataBase().SortedSetRemoveRangeByRank(key, start, end);
+        }
+
+        /// <summary>
+        /// 移除有序集 key 中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public long SortedSetRemoveRangeByScore(string key,int start,int end)
+        {
+            return RedisManager.WriteDataBase().SortedSetRemoveRangeByScore(key, start, end);
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中，指定区间内的成员。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public string[] SortedSetRevRange(string key, int start, int end)
+        {
+            var list = RedisManager.ReadDataBase().SortedSetRangeByRank(key, start, end,Order.Descending);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中， score 值介于 max 和 min 之间(默认包括等于 max 或 min )的所有的成员。有序集成员按 score 值递减(从大到小)的次序排列。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public string[] SortedSetRevRangeByScore(string key, int start, int end)
+        {
+            var list = RedisManager.WriteDataBase().SortedSetRangeByScore(key, start, end,order:Order.Descending);
+            return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
+        }
+
+        /// <summary>
+        /// 返回有序集 key 中成员 member 的排名。其中有序集成员按 score 值递减(从大到小)排序。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public long? SortedSetRevRank(string key, string member)
+        {
+            return RedisManager.ReadDataBase().SortedSetRank(key, member,Order.Descending);
+        }
+        
+        /// <summary>
+        /// 返回有序集 key 中，成员 member 的 score 值。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public double? SortedSetScore(string key,string member)
+        {
+            return RedisManager.ReadDataBase().SortedSetScore(key, member);
+        }
         #endregion
     }
 }

@@ -827,6 +827,76 @@ namespace XCYN.Test
             Assert.IsNull(_command.SortedSetRank("mySortedSet", "shanghai"));
         }
 
+        [TestMethod]
+        public void SortedSetRemove()
+        {
+            var flag = _command.SortedSetRemove("mySortedSet", "wuhan");
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void SortedSetRemove2()
+        {
+            var flag = _command.SortedSetRemove("mySortedSet",new string[] { "wuhan", "beijing" });
+            Assert.IsTrue(flag > 0);
+
+            flag = _command.SortedSetRemove("mySortedSet", new string[] { "wuhan", "beijing" });
+            Assert.IsFalse(flag > 0);
+        }
+
+        [TestMethod]
+        public void SortedSetRemoveRangeByRank()
+        {
+            var len = _command.SortedSetRemoveRangeByRank("mySortedSet", 0, 1);
+            Assert.AreEqual(2, len);
+
+            len = _command.SortedSetRemoveRangeByRank("mySortedSet", 0, 1);
+            Assert.AreEqual(1, len);
+        }
+
+        [TestMethod]
+        public void SortedSetRemoveRangeByScore()
+        {
+            var len = _command.SortedSetRemoveRangeByScore("mySortedSet",1, 2);
+            Assert.AreEqual(2, len);
+
+            len = _command.SortedSetRemoveRangeByScore("mySortedSet", 1, 3);
+            Assert.AreEqual(1, len);
+        }
+
+        [TestMethod]
+        public void SortedSetRevRange()
+        {
+            var obj = _command.SortedSetRevRange("mySortedSet", 0, 1);
+            Assert.AreEqual("beijing", obj[0]);
+
+            obj = _command.SortedSetRange("mySortedSet", 0, 1);
+            Assert.AreEqual("wuhan", obj[0]);
+        }
+
+        [TestMethod]
+        public void SortedSetRevRangeByScore()
+        {
+            var list = _command.SortedSetRevRangeByScore("mySortedSet", 0, 3);
+            Assert.AreEqual("wuhan", list[2]);
+        }
+
+        [TestMethod]
+        public void SortedSetRevRank()
+        {
+            var rank = _command.SortedSetRevRank("mySortedSet", "wuhan");
+            Assert.AreEqual(2, rank);
+
+            Assert.IsNull(_command.SortedSetRevRank("mySortedSet", "shanghai"));
+        }
+
+        [TestMethod]
+        public void SortedSetScore()
+        {
+            var score = _command.SortedSetScore("mySortedSet", "wuhan");
+            Assert.AreEqual(1.0d, score);
+        }
+
         #endregion
     }
 }
