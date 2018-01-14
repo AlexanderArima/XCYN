@@ -15,6 +15,7 @@ using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.DesignPattern.Observer;
 using XCYN.Print.DesignPattern.Mediator;
+using XCYN.Print.DesignPattern.Factory;
 
 namespace XCYN.Print
 {
@@ -23,9 +24,26 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleMediator();
+            HandleFactory();
         }
 
+        /// <summary>
+        /// 工厂方法
+        /// </summary>
+        private static void HandleFactory()
+        {
+            IFactory sqlserver = new SqlserverFactory();
+            sqlserver.CreateInstance().Create();
+
+            IFactory sqlite = new SqliteFactory();
+            sqlite.CreateInstance().Remove();
+
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 中介者模式
+        /// </summary>
         private static void HandleMediator()
         {
             AbstractMediator mediator = new QQMediator();

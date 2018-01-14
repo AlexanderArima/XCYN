@@ -76,6 +76,12 @@
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
     <Compile Include="DesignPattern\Builder\ThinPerson.cs" />
+    <Compile Include="DesignPattern\Factory\IDataBase.cs" />
+    <Compile Include="DesignPattern\Factory\IFactory.cs" />
+    <Compile Include="DesignPattern\Factory\SqliteDataBase.cs" />
+    <Compile Include="DesignPattern\Factory\SqlServerDataBase.cs" />
+    <Compile Include="DesignPattern\Factory\SqliteFactory.cs" />
+    <Compile Include="DesignPattern\Factory\SqlserverFactory.cs" />
     <Compile Include="DesignPattern\Mediator\AbstractColleague.cs" />
     <Compile Include="DesignPattern\Mediator\AbstractMediator.cs" />
     <Compile Include="DesignPattern\Mediator\Colleague.cs" />
@@ -761,6 +767,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\Builder\info.txt" />
+    <Content Include="DesignPattern\Factory\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
     <Content Include="DesignPattern\Mediator\info.txt" />
     <Content Include="DesignPattern\Observer\info.txt" />
