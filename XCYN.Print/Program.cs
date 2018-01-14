@@ -14,6 +14,7 @@ using XCYN.Print.yield;
 using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.DesignPattern.Observer;
+using XCYN.Print.DesignPattern.Mediator;
 
 namespace XCYN.Print
 {
@@ -22,7 +23,26 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleObserver();
+            HandleMediator();
+        }
+
+        private static void HandleMediator()
+        {
+            AbstractMediator mediator = new QQMediator();
+            
+            AbstractColleague colleague = new Colleague(mediator);
+            colleague.UserName = "紫涵";
+
+            AbstractColleague colleague2 = new Colleague(mediator);
+            colleague2.UserName = "灵儿";
+
+            mediator.Add(colleague);
+            mediator.Add(colleague2);
+
+            //发送消息
+            colleague.Send("灵儿", "你好");
+            colleague.Send("紫涵", "早上好~");
+            Console.Read();
         }
 
         private static void HandleObserver()
