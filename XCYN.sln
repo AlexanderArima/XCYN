@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Service", "XCYN.Service\XCYN.Service.csproj", "{275EF310-C8B8-40F5-8BAD-3A077EB311CC}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Web", "XCYN.Web\XCYN.Web.csproj", "{E9487C4C-F0D4-4F61-9E0B-C05F940C6636}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Common", "XCYN.Common\XCYN.Common.csproj", "{B3C9D415-A7E9-4884-A908-434B9404F696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Winform", "XCYN.Winform\XCYN.Winform.csproj", "{2077EE5A-7110-40DE-B9E5-3505C111AA4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,14 @@ Global
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B3C9D415-A7E9-4884-A908-434B9404F696}.Release|x64.ActiveCfg = Release|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Debug|x64.Build.0 = Debug|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Release|x64.ActiveCfg = Release|Any CPU
+		{2077EE5A-7110-40DE-B9E5-3505C111AA4A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

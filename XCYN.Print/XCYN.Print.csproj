@@ -72,6 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\Calculator.cs" />
+    <Compile Include="Calculator\IStrategy.cs" />
+    <Compile Include="Calculator\StrategyDiv.cs" />
+    <Compile Include="Calculator\StrategyMul.cs" />
+    <Compile Include="Calculator\StrategySub.cs" />
+    <Compile Include="Calculator\StrategyAdd.cs" />
     <Compile Include="DesignPattern\Builder\AbstractPerson.cs" />
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
