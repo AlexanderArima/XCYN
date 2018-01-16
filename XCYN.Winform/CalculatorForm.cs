@@ -18,6 +18,7 @@ namespace XCYN.Winform
 
         private Stack _firstStack = new Stack();
         private Stack _secondStack = new Stack();
+        private string _lastResult = string.Empty;
         private IStrategy _strategy = null;
 
         public CalculatorForm()
@@ -48,7 +49,10 @@ namespace XCYN.Winform
             {
                 label1.Text = string.Join("", _firstStack.ToArray().Reverse());
             }
-            else if()
+            else
+            {
+                label1.Text = string.Join("", _secondStack.ToArray().Reverse());
+            }
             //if(_secondStack == null)
             //{
             //    label1.Text = _firstStack.ToArray();
@@ -80,6 +84,7 @@ namespace XCYN.Winform
                 default:
                     break;
             }
+            Equal();
             //label2.Text = string.Join("", _firstStack.ToArray()) + button.Text;
         }
 
@@ -90,6 +95,11 @@ namespace XCYN.Winform
         /// <param name="e"></param>
         private void Equal_Click(object sender, EventArgs e)
         {
+            Equal();
+        }
+
+        private void Equal()
+        {
             var first = string.Join("", _firstStack.ToArray().Reverse());
             var second = string.Join("", _secondStack.ToArray().Reverse());
             var result = 0m;
@@ -98,7 +108,9 @@ namespace XCYN.Winform
                 result = _strategy.Exec(Decimal.Parse(first), Decimal.Parse(second));
                 StackHelper.Insert(_firstStack, result.ToString());
             }
+            _lastResult = result.ToString();
             label1.Text = result.ToString();
+            _secondStack.Clear();
         }
 
         /// <summary>
@@ -111,6 +123,7 @@ namespace XCYN.Winform
             _firstStack.Clear();
             _secondStack.Clear();
             _strategy = null;
+            label1.Text = string.Empty;
         }
     }
 }
