@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script src="../../Scripts/lodash.js"></script>
+    <script>
+        var array = ['a', 'b', 'c', 'd', 'e'];
+        //chunk方法
+        //将 array 拆分成多个 size 长度的块，把这些块组成一个新数组。 如果 array 无法被分割成全部等长的块，那么最后剩余的元素将组成一个块。
+        var new_array = _.chunk(array, 2);
+        //console.log(new_array);
+
+        //drop方法
+        //将 array 中的前 n 个元素去掉，然后返回剩余的部分。
+        new_array = _.drop(array,3);
+        //console.log(new_array.length == 2);
+        //console.log(array.length == 5);
+
+        //dropRightWhile方法
+        //从尾端查询（右数）数组 array ，从第一个不满足predicate 条件的元素的位置开始截取数组. thisArg为predicate 条件执行上下文对象绑定的参数 . 
+        new_array = _.dropRightWhile(array, function (n) {
+            return n != 'a';
+        })
+        //console.log(new_array.length == 1)
+
+        //dropWhile方法
+        //从开头查询（左数起）数组 array ，从第一个不满足predicate 条件的元素的位置开始截取数组. thisArg为predicate 条件执行上下文对象绑定的参数 . 
+        new_array = _.dropWhile(array, function (n) {
+            return n != 'e';
+        })
+        //console.log(new_array.length == 1)
+
+        array = [1, 2, 3];
+
+        //fill方法
+        //用值填充数组，可以指定范围
+        _.fill(array, 'a');
+        //console.log(array);
+        // => ['a', 'a', 'a']
+
+        var b = _.fill(Array(10), 2);
+        //console.log(b);
+        // => [2, 2, 2]
+
+        var c = _.fill([4, 6, 8], 6, 1, 2);
+        //console.log(c);
+        // => [4, 6, 8]
+
+        var users = [
+          { 'user': 'barney', 'active': false },
+          { 'user': 'fred', 'active': false },
+          { 'user': 'pebbles', 'active': true }
+        ];
+
+        //find方法
+        //方法类似 _.find，区别是该方法返回的是符合 predicate条件的第一个元素的索引，而不是返回元素本身. 
+        var index = _.findIndex(users, function (chr) {
+            return chr.user == 'barney';
+        });
+        
+
+        console.log(index);
+
+        array = [1, 2, 3];
+        //take方法
+        //从数组左侧取元素
+        var take_a = _.take(array, 2);
+        //console.log(take_a);
+        // => [1,2]
+
+        //takeRight方法
+        //从数组右侧取元素
+        var takeRight_a = _.takeRight(array, 2);
+        //console.log(takeRight_a);
+    </script>
+</body>
+</html>

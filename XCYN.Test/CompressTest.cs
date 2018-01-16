@@ -110,8 +110,7 @@ namespace XCYN.Test
             FileInfo file = new FileInfo(@"D:\锋利的SQL.sql.gz");
             CompressHelper.Decompress(file);
         }
-
-
+        
         [TestMethod]
         public void Decompress2()
         {

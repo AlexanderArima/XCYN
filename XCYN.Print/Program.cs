@@ -24,7 +24,12 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleFactory();
+            for (int i = 0; i < 10000000; i++)
+            {
+                Console.WriteLine(i);
+                Console.Read();
+                
+            }
         }
 
         /// <summary>

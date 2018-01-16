@@ -375,6 +375,7 @@
     <Content Include="Pages\knockout\ko8.html" />
     <Content Include="Pages\knockout\ko9.html" />
     <Content Include="Pages\knockout\shop.aspx" />
+    <Content Include="Pages\lodash\Array.html" />
     <Content Include="Pages\vue\test2.html" />
     <Content Include="Pages\vue\test3.html" />
     <Content Include="Scripts\knockout-3.4.2.js" />
