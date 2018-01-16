@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompressHelper.cs" />
     <Compile Include="GetRandomName.cs" />
     <Compile Include="NoSql\redis\RedisCommand.cs" />
     <Compile Include="NoSql\redis\RedisConfig.cs" />

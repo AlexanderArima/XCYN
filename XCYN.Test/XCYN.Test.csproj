@@ -61,6 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CalculatorTest.cs" />
+    <Compile Include="CompressTest.cs" />
     <Compile Include="DesignPattern.cs" />
     <Compile Include="MQTest.cs" />
     <Compile Include="RedisCommandTest.cs" />
