@@ -85,6 +85,33 @@ namespace XCYN.Common.NoSql.redis
             return RedisManager.WriteDataBase().KeyExpire(key,new DateTime(value,DateTimeKind.Local));
         }
 
+        /// <summary>
+        /// 移除键的过期时间
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool KeyPersist(string key)
+        {
+            return RedisManager.WriteDataBase().KeyPersist(key);
+        }
+
+        /// <summary>
+        /// 查看给定键距离过期键有多少秒
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public double KeyTTL(string key)
+        {
+            var flag = RedisManager.ReadDataBase().KeyExists(key);
+            if (!flag)
+                return -2;
+            var time = RedisManager.ReadDataBase().KeyTimeToLive(key);
+            if (time == null)
+                return -1;
+            else
+                return time.Value.TotalSeconds;
+        }
+
         #endregion
 
         #region String命令
@@ -1009,6 +1036,7 @@ namespace XCYN.Common.NoSql.redis
             var values = field_value.Values.ToArray();
             this.HashSet(key, fields, values);
         }
+        
 
         /// <summary>
         /// 当且仅当域 field 不存在时。将哈希表 key 中的域 field 的值设置为 value 
@@ -1057,7 +1085,7 @@ namespace XCYN.Common.NoSql.redis
         /// <param name="value">值</param>
         /// <param name="score">分值</param>
         /// <returns></returns>
-        public bool SortedSetAdd(string key,string value,int score)
+        public bool SortedSetAdd(string key,string value,long score)
         {
             return RedisManager.WriteDataBase().SortedSetAdd(key, value, score);
         }
@@ -1154,7 +1182,7 @@ namespace XCYN.Common.NoSql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string[] SortedSetRangeByScore(string key, int start, int end)
+        public string[] SortedSetRangeByScore(string key, long start, long end)
         {
             var list = RedisManager.ReadDataBase().SortedSetRangeByScore(key, start, end);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
@@ -1362,5 +1390,6 @@ namespace XCYN.Common.NoSql.redis
             return list_result;
         }
         #endregion
+        
     }
 }

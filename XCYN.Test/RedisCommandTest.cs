@@ -150,6 +150,18 @@ namespace XCYN.Test
             Assert.AreEqual(9, keys.Count);
         }
 
+        [TestMethod]
+        public void TTL()
+        {
+            var time = _command.KeyTTL("mySorted");
+            Assert.AreEqual(-2, time);
+            time = _command.KeyTTL("mySorted2");
+            Assert.AreEqual(-1, time);
+            _command.KeyExpire("myList", 1000);
+            time = _command.KeyTTL("myList");
+            Assert.IsTrue(time > 0);
+        }
+
         #endregion
 
         #region 字符串(String)
@@ -741,6 +753,7 @@ namespace XCYN.Test
             var birthday = _command.HashGet("myHash", "birthday");
             Assert.AreEqual("1990-04-24", birthday);
         }
+        
 
         [TestMethod]
         public void HashValues()
@@ -915,5 +928,6 @@ namespace XCYN.Test
             Assert.AreEqual(1, num);
         }
         #endregion
+        
     }
 }
