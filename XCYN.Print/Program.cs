@@ -17,7 +17,7 @@ using XCYN.Print.DesignPattern.Observer;
 using XCYN.Print.DesignPattern.Mediator;
 using XCYN.Print.DesignPattern.Factory;
 using XCYN.Print.DesignPattern.Memento;
-using XCYN.Print.DesignPattern.Memento.RealEnvironment;
+using XCYN.Print.DesignPattern.State;
 
 namespace XCYN.Print
 {
@@ -26,7 +26,14 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleMemento();
+            HandleState();
+        }
+
+        private static void HandleState()
+        {
+            Context context = new Context(9, new MorningState());
+            context.request();
+            Console.Read();
         }
 
         /// <summary>

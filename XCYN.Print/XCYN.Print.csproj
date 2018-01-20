@@ -99,6 +99,11 @@
     <Compile Include="DesignPattern\Observer\ConcreteSubject.cs" />
     <Compile Include="DesignPattern\Observer\IObserver.cs" />
     <Compile Include="DesignPattern\Observer\ISubject.cs" />
+    <Compile Include="DesignPattern\State\AbstractState.cs" />
+    <Compile Include="DesignPattern\State\AfternoonState.cs" />
+    <Compile Include="DesignPattern\State\Context.cs" />
+    <Compile Include="DesignPattern\State\EveningState.cs" />
+    <Compile Include="DesignPattern\State\MorningState.cs" />
     <Compile Include="DesignPattern\Strategy\AbstactLog.cs" />
     <Compile Include="delegates\delegateTest.cs" />
     <Compile Include="DesignPattern\Filter\AgeFilter.cs" />
@@ -784,6 +789,7 @@
     <Content Include="DesignPattern\Prototype\info.txt" />
     <Content Include="DesignPattern\Proxy\info.txt" />
     <Content Include="DesignPattern\Singleton\info.txt" />
+    <Content Include="DesignPattern\State\info.txt" />
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\Strategy\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
