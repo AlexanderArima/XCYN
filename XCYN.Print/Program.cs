@@ -16,6 +16,8 @@ using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.DesignPattern.Observer;
 using XCYN.Print.DesignPattern.Mediator;
 using XCYN.Print.DesignPattern.Factory;
+using XCYN.Print.DesignPattern.Memento;
+using XCYN.Print.DesignPattern.Memento.RealEnvironment;
 
 namespace XCYN.Print
 {
@@ -24,12 +26,35 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            for (int i = 0; i < 10000000; i++)
+            HandleMemento();
+        }
+
+        /// <summary>
+        /// 备忘录模式
+        /// </summary>
+        private static void HandleMemento()
+        {
+            //初始化
+            Originator o = new Originator();
+            o.msg = "Hello World";
+
+            //创建一个备份
+            Memento backup = o.CreateMemento();
+            //将备份保存到Caretaker中去
+            Caretaker c = new Caretaker()
             {
-                Console.WriteLine(i);
-                Console.Read();
-                
-            }
+                memento = backup,
+            };
+            Console.WriteLine("备份中:"+o.msg);
+
+            //修改
+            o.msg = "Good Bye";
+            Console.WriteLine("修改中:" + o.msg);
+
+            //恢复
+            o.RecoverMemento(c.memento);
+            Console.WriteLine("恢复中:" + o.msg);
+            Console.Read();
         }
 
         /// <summary>

@@ -92,6 +92,9 @@
     <Compile Include="DesignPattern\Mediator\AbstractMediator.cs" />
     <Compile Include="DesignPattern\Mediator\Colleague.cs" />
     <Compile Include="DesignPattern\Mediator\QQMediator.cs" />
+    <Compile Include="DesignPattern\Memento\Caretaker.cs" />
+    <Compile Include="DesignPattern\Memento\Memento.cs" />
+    <Compile Include="DesignPattern\Memento\Originator.cs" />
     <Compile Include="DesignPattern\Observer\ConcreteObserver1.cs" />
     <Compile Include="DesignPattern\Observer\ConcreteSubject.cs" />
     <Compile Include="DesignPattern\Observer\IObserver.cs" />
@@ -776,6 +779,7 @@
     <Content Include="DesignPattern\Factory\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
     <Content Include="DesignPattern\Mediator\info.txt" />
+    <Content Include="DesignPattern\Memento\info.txt" />
     <Content Include="DesignPattern\Observer\info.txt" />
     <Content Include="DesignPattern\Prototype\info.txt" />
     <Content Include="DesignPattern\Proxy\info.txt" />

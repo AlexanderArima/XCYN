@@ -58,3 +58,14 @@ SELECT name,sum(pages_kb) FROM SYS.dm_os_memory_cache_counters
 WHERE NAME IN ('SQL Plans','Object Plans','Bound Trees')
 GROUP BY name
 order BY SUM(pages_kb) desc
+
+--性能计数器诊断实例
+--1.如果Lazy writes/sec值远远低于Checkpoint pages/sec或为一个很小的值,可粗劣判断内存压力并不高
+--2.使用Page reads/sec和Page writes/sec值来粗略判断数据库读写比
+SELECT TOP 312 * FROM  sys.dm_os_performance_counters
+where object_name ='SQLServer:Buffer Manager' order by counter_name
+
+SELECT T.dbid,T.objectid,P.objtype,P.cacheobjtype,T.text 
+FROM SYS.dm_exec_cached_plans AS P
+CROSS APPLY SYS.dm_exec_sql_text(P.plan_handle) AS T
+--WHERE P.usecounts > 5
