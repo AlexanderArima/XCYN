@@ -18,6 +18,7 @@ using XCYN.Print.DesignPattern.Mediator;
 using XCYN.Print.DesignPattern.Factory;
 using XCYN.Print.DesignPattern.Memento;
 using XCYN.Print.DesignPattern.State;
+using XCYN.Print.DesignPattern.Command;
 
 namespace XCYN.Print
 {
@@ -26,7 +27,27 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleState();
+            HandleCommand();
+        }
+
+        private static void HandleCommand()
+        {
+            Received recieved = new Received();
+            //创建命令
+            ICommand add = new AddCommand(recieved);
+            ICommand remove = new RemoveCommand(recieved);
+            //添加命令
+            Invoker invoker = new Invoker();
+            invoker.SetCommand(add);
+            invoker.SetCommand(remove);
+            invoker.SetCommand(add);
+            invoker.SetCommand(add);
+
+            //撤销
+            invoker.Redo();
+            //执行
+            invoker.execute();
+            Console.Read();
         }
 
         private static void HandleState()

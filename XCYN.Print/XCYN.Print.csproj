@@ -82,6 +82,11 @@
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
     <Compile Include="DesignPattern\Builder\ThinPerson.cs" />
+    <Compile Include="DesignPattern\Command\AddCommand.cs" />
+    <Compile Include="DesignPattern\Command\ICommand.cs" />
+    <Compile Include="DesignPattern\Command\Invoker.cs" />
+    <Compile Include="DesignPattern\Command\Received.cs" />
+    <Compile Include="DesignPattern\Command\RemoveCommand.cs" />
     <Compile Include="DesignPattern\Factory\IDataBase.cs" />
     <Compile Include="DesignPattern\Factory\IFactory.cs" />
     <Compile Include="DesignPattern\Factory\SqliteDataBase.cs" />
@@ -781,6 +786,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\Builder\info.txt" />
+    <Content Include="DesignPattern\Command\info.txt" />
     <Content Include="DesignPattern\Factory\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
     <Content Include="DesignPattern\Mediator\info.txt" />
