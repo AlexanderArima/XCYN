@@ -1,16 +1,8 @@
-﻿using StackExchange.Redis;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
-using XCYN.Print.delegates;
-using XCYN.Print.DesignPattern.Prototype.Shallow;
 using XCYN.Print.DesignPattern.Proxy;
-using XCYN.Print.linq;
-using XCYN.Print.rabbitmq;
-using XCYN.Print.yield;
 using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.DesignPattern.Observer;
@@ -19,6 +11,7 @@ using XCYN.Print.DesignPattern.Factory;
 using XCYN.Print.DesignPattern.Memento;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Command;
+using XCYN.Print.DesignPattern.ChainOfResponsibility;
 
 namespace XCYN.Print
 {
@@ -27,9 +20,28 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            HandleCommand();
+            ChainCommand();
         }
 
+        /// <summary>
+        /// 责任链模式
+        /// </summary>
+        private static void ChainCommand()
+        {
+            AbstractHandler handler = new ConcreteHander1();
+            AbstractHandler handler2 = new ConcreteHander2();
+            AbstractHandler handler3 = new ConcreteHander3();
+            //链式调用 handler1保存handler2的引用，handler2保存handler3的引用，这样就能逐级调用
+            handler.SetHandler(handler2);
+            handler2.SetHandler(handler3);
+            //执行
+            handler.Request(2);
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 命令模式
+        /// </summary>
         private static void HandleCommand()
         {
             Received recieved = new Received();
@@ -50,6 +62,9 @@ namespace XCYN.Print
             Console.Read();
         }
 
+        /// <summary>
+        /// 状态模式
+        /// </summary>
         private static void HandleState()
         {
             Context context = new Context(9, new MorningState());

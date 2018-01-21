@@ -82,6 +82,10 @@
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
     <Compile Include="DesignPattern\Builder\ThinPerson.cs" />
+    <Compile Include="DesignPattern\ChainOfResponsibility\AbstractHandler.cs" />
+    <Compile Include="DesignPattern\ChainOfResponsibility\ConcreteHander3.cs" />
+    <Compile Include="DesignPattern\ChainOfResponsibility\ConcreteHander2.cs" />
+    <Compile Include="DesignPattern\ChainOfResponsibility\ConcreteHander1.cs" />
     <Compile Include="DesignPattern\Command\AddCommand.cs" />
     <Compile Include="DesignPattern\Command\ICommand.cs" />
     <Compile Include="DesignPattern\Command\Invoker.cs" />
@@ -786,6 +790,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="DesignPattern\Builder\info.txt" />
+    <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />
     <Content Include="DesignPattern\Command\info.txt" />
     <Content Include="DesignPattern\Factory\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
