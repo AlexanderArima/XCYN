@@ -378,6 +378,7 @@
     <Content Include="Pages\lodash\Array.html" />
     <Content Include="Pages\vue\test2.html" />
     <Content Include="Pages\vue\test3.html" />
+    <Content Include="Pages\webform\PostList.aspx" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\lodash.js" />
@@ -792,6 +793,13 @@
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\webform\PostList.aspx.cs">
+      <DependentUpon>PostList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\webform\PostList.aspx.designer.cs">
+      <DependentUpon>PostList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -986,6 +994,10 @@
     <TypeScriptCompile Include="Plugins\vue\types\vue.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
+      <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
+      <Name>XCYN.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XCYN.EasyUI\XCYN.EasyUI.csproj">
       <Project>{0a216883-62cb-45da-a76f-f6e419aaaa9d}</Project>
       <Name>XCYN.EasyUI</Name>
