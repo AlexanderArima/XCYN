@@ -378,7 +378,8 @@
     <Content Include="Pages\lodash\Array.html" />
     <Content Include="Pages\vue\test2.html" />
     <Content Include="Pages\vue\test3.html" />
-    <Content Include="Pages\webform\PostList.aspx" />
+    <Content Include="Pages\webform\RoomEdit.aspx" />
+    <Content Include="Pages\webform\RoomList.aspx" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\lodash.js" />
@@ -793,12 +794,19 @@
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\webform\PostList.aspx.cs">
-      <DependentUpon>PostList.aspx</DependentUpon>
+    <Compile Include="Pages\webform\RoomEdit.aspx.cs">
+      <DependentUpon>RoomEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\webform\PostList.aspx.designer.cs">
-      <DependentUpon>PostList.aspx</DependentUpon>
+    <Compile Include="Pages\webform\RoomEdit.aspx.designer.cs">
+      <DependentUpon>RoomEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\webform\RoomList.aspx.cs">
+      <DependentUpon>RoomList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\webform\RoomList.aspx.designer.cs">
+      <DependentUpon>RoomList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

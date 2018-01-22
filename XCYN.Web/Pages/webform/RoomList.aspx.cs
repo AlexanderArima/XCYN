@@ -13,8 +13,7 @@ namespace XCYN.Web.Pages.webform
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            GridView1.DataSource = DbHelperSQL.GetDataTable("SELECT TOP 10 title FROM zcp_post");
+            GridView1.DataSource = DbHelperSQL.GetDataTable("SELECT TOP 10 TypeID,TypeName,TypePrice,AddBedPrice,IsAddBed,Remark FROM RoomType");
             GridView1.DataBind();
         }
     }
