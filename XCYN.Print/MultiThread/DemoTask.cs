@@ -64,6 +64,7 @@ namespace XCYN.Print.MultiThread
         {
             CancellationTokenSource tks = new CancellationTokenSource();
             CancellationToken token = tks.Token;
+            token.Register(() => { Console.WriteLine("停止执行的回调方法"); });
             long i = 0;
             Task t = new Task(() => {
                 while (true)
@@ -84,6 +85,97 @@ namespace XCYN.Print.MultiThread
             Console.ReadLine();
             tks.Cancel();
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// 要挂起当前线程，等待一个线程执行完成，可以使用执行线程的Wait（）方法，Wait方法有一些重载方法，可以指定等待的时间等。
+        /// 要等到多个线程都执行完可以使用Task.WaitAll方法
+        /// 还有一个Task.WaitAny,可以等待一组线程中的任何一个方法执行完毕，用法类似。
+        /// </summary>
+        public void Fun5()
+        {
+            Task t1 = new Task(() => {
+                Console.WriteLine("Task1 is Begin");
+                Thread.Sleep(3000);
+                Console.WriteLine("Task1 is End");
+            });
+            t1.Start();
+
+            Task t2 = new Task(()=> {
+                Console.WriteLine("Task2 is Begin");
+                t1.Wait();
+                Console.WriteLine("Task2 is End");
+            });
+
+            Task t3 = new Task(()=> {
+                Console.WriteLine("Task3 is Begin");
+                t1.Wait(1000);
+                Console.WriteLine("Task3 is End");
+            });
+
+            Task t4 = new Task(() => {
+                Console.WriteLine("Task4 is Begin");
+                Task.WaitAll(t1, t2, t3);
+                Console.WriteLine("Task4 is End");
+            });
+
+            Task t5 = new Task(()=> {
+                Console.WriteLine("Task5 is Begin");
+                Task.WaitAny(t1, t2, t3);
+                Console.WriteLine("Task5 is End");
+            });
+            t2.Start();
+            t3.Start();
+            t4.Start();
+            t5.Start();
+            Console.Read();
+
+        }
+
+        /// <summary>
+        /// 下面介绍Task中的异常处理，通常情况下，线程委托中的异常会导致线程终止，但异常并不会被抛出.
+        /// 当调用Wait,WaitAll,WaitAny,Task.Result的时候，会抛出AggerateException ,在AggerateExcepiton中可以处理所有线程抛出的异常:
+        /// </summary>
+        public void Fun6()
+        {
+            Task t1 = new Task(() =>
+            {
+                throw new Exception();
+                Console.WriteLine("T1 Ends");
+            });
+
+            Task t2 = new Task(() =>
+            {
+                throw new ArgumentException();
+                Console.WriteLine("T2 Ends");
+            });
+            t1.Start();
+            t2.Start();
+            try
+            {
+                Task.WaitAll(t1, t2);
+            }
+            catch (AggregateException ex)
+            {
+                foreach (var inner in ex.InnerExceptions)
+                {
+                    Console.WriteLine(inner.GetType() + " " + inner.Source);
+                }
+                //有时候需要区分对待某些异常，一些异常直接处理掉，一些异常需要再次抛出，
+                //AggregateException提供一个Handle方法，接收一个Func<Exception,bool>委托作为参数，如果不需要再次抛出则返回true，否则返回false。
+                ex.Handle((e) =>
+                {
+                    if (e is ArgumentException)
+                    {
+                        Console.WriteLine("Argument Exception is captured");
+                        return true;
+                    }
+                    else
+                        return false;
+                });
+            }
+            Console.WriteLine("Main Ends");
+            Console.Read();
         }
     }
 }

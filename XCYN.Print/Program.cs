@@ -21,8 +21,8 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoTask demo = new DemoTask();
-            demo.Fun4();
+            //DemoTask demo = new DemoTask();
+            //demo.Fun6();
             //for (int i = 0; i < 1000; i++)
             //{
             //    Task task = new Task(obj => Console.WriteLine(obj), i);
