@@ -9,7 +9,7 @@ namespace XCYN.Common
 	/// <summary>
 	/// Request操作类
 	/// </summary>
-	public class DTRequest
+	public class RequestHelper
 	{
 		/// <summary>
 		/// 判断当前页面是否接收到了Post请求

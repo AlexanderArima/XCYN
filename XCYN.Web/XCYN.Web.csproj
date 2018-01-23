@@ -370,6 +370,7 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
+    <Content Include="Pages\test\RequestTest.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
     <Content Include="Plugins\easyui\demo\accordion\ajax.html" />
@@ -1354,9 +1355,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\User.cs" />
     <Compile Include="Pages\knockout\shop.aspx.cs">
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\RequestHandler.ashx.cs">
+      <DependentUpon>RequestHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\RequestTest.aspx.cs">
+      <DependentUpon>RequestTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\RequestTest.aspx.designer.cs">
+      <DependentUpon>RequestTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\webform\RoomEdit.aspx.cs">
       <DependentUpon>RoomEdit.aspx</DependentUpon>
@@ -1375,7 +1387,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Css\bootstrap\.editorconfig" />
     <Content Include="Css\bootstrap\.hound.yml" />
@@ -1569,6 +1580,7 @@
     <Content Include="Pages\easyui\34_data.json" />
     <Content Include="Pages\easyui\nav.json" />
     <Content Include="Pages\easyui\tree.json" />
+    <Content Include="Pages\test\RequestHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1578,8 +1590,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Plugins\vue\types\index.d.ts" />

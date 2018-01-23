@@ -18,7 +18,7 @@ namespace XCYN.Common
         /// <returns></returns>
         public static string Encrypt(string Text)
         {
-            return Encrypt(Text, "DTcms");
+            return Encrypt(Text, "Cheng");
         }
         /// <summary> 
         /// 加密数据 
@@ -56,7 +56,7 @@ namespace XCYN.Common
         /// <returns></returns>
         public static string Decrypt(string Text)
         {
-            return Decrypt(Text, "DTcms");
+            return Decrypt(Text, "Cheng");
         }
         /// <summary> 
         /// 解密数据 

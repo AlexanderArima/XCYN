@@ -54,7 +54,7 @@
     <Compile Include="ChinaDate.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="DTKeys.cs" />
-    <Compile Include="DTRequest.cs" />
+    <Compile Include="RequestHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="Performance\CacheHelper.cs" />
