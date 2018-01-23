@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace XCYN.Common
 {
+    /// <summary>
+    /// 压缩类库
+    /// </summary>
     public class CompressHelper
     {
         /// <summary>
