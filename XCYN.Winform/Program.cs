@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XCYN.Winform.Demo;
 
 namespace XCYN.Winform
 {
@@ -16,7 +17,7 @@ namespace XCYN.Winform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FileSearch());
+            Application.Run(new MyThreadState());
         }
     }
 }

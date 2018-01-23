@@ -85,27 +85,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="18.html" />
-    <Content Include="17.html" />
-    <Content Include="15.html" />
-    <Content Include="14.html" />
-    <Content Include="11.html" />
-    <Content Include="22.html" />
-    <Content Include="27.html" />
-    <Content Include="26.html" />
-    <Content Include="23.html" />
-    <Content Include="33.html" />
-    <Content Include="32.html" />
-    <Content Include="38.html" />
-    <Content Include="35.html" />
-    <Content Include="34.html" />
-    <Content Include="46.html" />
-    <Content Include="admin.html" />
     <Content Include="css\admin.css" />
     <Content Include="css\login.css" />
     <Content Include="default.html" />
     <Content Include="easyui\themes\icons\login.png" />
-    <Content Include="login.html" />
     <Content Include="model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -137,32 +120,11 @@
     <Content Include="easyui\demo\tree\tree_data1.json" />
     <Content Include="easyui\demo\tree\tree_data2.json" />
     <Content Include="easyui\themes\icons\Thumbs.db" />
-    <Content Include="script\18.js" />
-    <Content Include="script\17.js" />
-    <Content Include="script\15.js" />
-    <Content Include="script\14.js" />
-    <Content Include="script\11.js" />
-    <Content Include="script\22.js" />
-    <Content Include="script\38.js" />
-    <Content Include="script\35.js" />
-    <Content Include="script\34.js" />
-    <Content Include="script\33.js" />
-    <Content Include="script\32.js" />
-    <Content Include="script\27.js" />
-    <Content Include="script\26.js" />
-    <Content Include="script\23.js" />
-    <Content Include="script\46.js" />
-    <Content Include="script\admin.js" />
-    <Content Include="script\login.js" />
     <Content Include="WebService1.asmx" />
     <Content Include="Handler1.ashx" />
     <Content Include="ashx\LoginHandler.ashx" />
-    <Content Include="nav.json" />
     <Content Include="ashx\TreeHandler.ashx" />
-    <Content Include="tree.json" />
     <Content Include="RegisterHandler.ashx" />
-    <Content Include="33_data.json" />
-    <Content Include="34_data.json" />
     <Content Include="ashx\UserHandler.ashx" />
     <EntityDeploy Include="model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -179,7 +141,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="9.html" />
     <Content Include="easyui\changelog.txt" />
     <Content Include="easyui\demo\accordion\actions.html" />
     <Content Include="easyui\demo\accordion\ajax.html" />
@@ -707,7 +668,6 @@
     <Content Include="easyui\themes\metro\tree.css" />
     <Content Include="easyui\themes\metro\validatebox.css" />
     <Content Include="easyui\themes\metro\window.css" />
-    <Content Include="script\9.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1334,7 +1294,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="script\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

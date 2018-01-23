@@ -177,5 +177,20 @@ namespace XCYN.Print.MultiThread
             Console.WriteLine("Main Ends");
             Console.Read();
         }
+
+        /// <summary>
+        /// Join方法相当于Wait方法
+        /// </summary>
+        public void Fun7()
+        {
+            Thread t = new Thread(new ThreadStart(new Action(()=> {
+                Thread.Sleep(5000);
+                Console.WriteLine("Thread...");
+            })));
+            t.Start();
+            //t.Join(3000);//最多等待3s钟
+            t.Join();//一直等待线程执行完成
+            Console.WriteLine("Main Thread");
+        }
     }
 }

@@ -21,37 +21,9 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            //DemoTask demo = new DemoTask();
-            //demo.Fun6();
-            //for (int i = 0; i < 1000; i++)
-            //{
-            //    Task task = new Task(obj => Console.WriteLine(obj), i);
-            //    task.Start();
-            //}
-            //Console.WriteLine("Main Thread");
-            //Console.Read();
-
-            //Task.Factory.StartNew(() => {
-            //    for (int i = 0; i < 10000; i++)
-            //    {
-            //        Console.WriteLine(i);
-            //    }
-            //});
-            //Console.WriteLine("Main Thread");
-            //Console.Read();
-
-            //Task<int> t = new Task<int>(() => {
-            //    var sum = 0;
-            //    for (int i = 0; i < 100000; i++)
-            //    {
-            //        sum += i;
-            //    }
-            //    return sum;
-            //});
-            //t.Start();
-            //Console.WriteLine("Main Thread");
-            //Console.WriteLine(t.Result);
-            //Console.Read();
+            DemoTask t = new DemoTask();
+            t.Fun7();
+            Console.Read();
         }
 
         /// <summary>
