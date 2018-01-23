@@ -1,12 +1,8 @@
-<h2>简要概述</h2>
+﻿<h2>简要概述</h2>
 <table>
 	<tr>
 		<td>XCYN.Common</td>
 		<td>封装了redis的常用接口</td>
-	</tr>
-	<tr>
-		<td>XCYN.EasyUI</td>
-		<td>EasyUI的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.Print</td>
@@ -22,7 +18,7 @@
 	</tr>
 	<tr>
 		<td>XCYN.Web</td>
-		<td>KnockOut，Vue，bootStrap的例子</td>
+		<td>KnockOut，Vue，bootStrap，EasyUI的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.WS</td>
