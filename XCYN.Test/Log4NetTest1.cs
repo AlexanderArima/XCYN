@@ -8,14 +8,14 @@ using XCYN.Print.rabbitmq;
 namespace XCYN.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class Log4NetTest1
     {
         [TestMethod]
         public void TestMethod1()
         {
             InitLog4Net();
 
-            var logger = LogManager.GetLogger(typeof(UnitTest1));
+            var logger = LogManager.GetLogger(typeof(Log4NetTest1));
             Console.WriteLine(logger.IsDebugEnabled);
             logger.Info("消息");
             logger.Warn("警告");

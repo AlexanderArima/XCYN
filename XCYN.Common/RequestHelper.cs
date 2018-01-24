@@ -29,12 +29,80 @@ namespace XCYN.Common
 			return HttpContext.Current.Request.HttpMethod.Equals("GET");
 		}
 
-		/// <summary>
+        public enum ServerVar
+        {
+            ALL_HTTP = 0,
+            ALL_RAW = 1,
+            APPL_MD_PATH = 2,
+            APPL_PHYSICAL_PATH = 3,
+            AUTH_TYPE = 4,
+            AUTH_USER = 5,
+            AUTH_PASSWORD = 6,
+            LOGON_USER = 7,
+            REMOTE_USER = 8,
+            CERT_COOKIE = 9,
+            CERT_FLAGS = 10,
+            CERT_ISSUER = 11,
+            CERT_KEYSIZE = 12,
+            CERT_SECRETKEYSIZE = 13,
+            CERT_SERIALNUMBER = 14,
+            CERT_SERVER_ISSUER = 15,
+            CERT_SERVER_SUBJECT = 16,
+            CERT_SUBJECT = 17,
+            CONTENT_LENGTH = 18,
+            CONTENT_TYPE = 19,
+            GATEWAY_INTERFACE = 20,
+            HTTPS = 21,
+            HTTPS_KEYSIZE = 22,
+            HTTPS_SECRETKEYSIZE = 23,
+            HTTPS_SERVER_ISSUER = 24,
+            HTTPS_SERVER_SUBJECT = 25,
+            INSTANCE_ID = 26,
+            INSTANCE_META_PATH = 27,
+            LOCAL_ADDR = 28,
+            PATH_INFO = 29,
+            PATH_TRANSLATED = 30,
+            QUERY_STRING = 31,
+            REMOTE_ADDR = 32,
+            REMOTE_HOST = 33,
+            REMOTE_PORT = 34,
+            REQUEST_METHOD = 35,
+            SCRIPT_NAME = 36,
+            SERVER_NAME = 37,
+            SERVER_PORT = 38,
+            SERVER_PORT_SECURE = 39,
+            SERVER_PROTOCOL = 40,
+            SERVER_SOFTWARE = 41,
+            URL = 42,
+            HTTP_CONNECTION = 43,
+            HTTP_ACCEPT = 44,
+            HTTP_ACCEPT_ENCODING = 45,
+            HTTP_ACCEPT_LANGUAGE = 46,
+            HTTP_HOST = 47,
+            HTTP_USER_AGENT = 48,
+            HTTP_UPGRADE_INSECURE_REQUESTS = 49
+        }
+
+        /// <summary>
 		/// 返回指定的服务器变量信息
 		/// </summary>
 		/// <param name="strName">服务器变量名</param>
 		/// <returns>服务器变量信息</returns>
-		public static string GetServerString(string strName)
+		public static string GetServerString(ServerVar strName)
+        {
+            
+            if (HttpContext.Current.Request.ServerVariables[strName.ToString()] == null)
+                return "";
+
+            return HttpContext.Current.Request.ServerVariables[strName.ToString()].ToString();
+        }
+
+        /// <summary>
+        /// 返回指定的服务器变量信息
+        /// </summary>
+        /// <param name="strName">服务器变量名</param>
+        /// <returns>服务器变量信息</returns>
+        public static string GetServerString(string strName)
 		{
 			if (HttpContext.Current.Request.ServerVariables[strName] == null)
 				return "";
@@ -90,6 +158,7 @@ namespace XCYN.Common
         {
             return HttpContext.Current.Request.Url.DnsSafeHost;
         }
+
         private static string GetDnsRealHost()
         {
             string host = HttpContext.Current.Request.Url.DnsSafeHost;
@@ -116,8 +185,9 @@ namespace XCYN.Common
 		/// <returns>当前访问是否来自浏览器软件</returns>
 		public static bool IsBrowserGet()
 		{
-			string[] BrowserName = {"ie", "opera", "netscape", "mozilla", "konqueror", "firefox"};
-			string curBrowser = HttpContext.Current.Request.Browser.Type.ToLower();
+			string[] BrowserName = {"ie", "opera", "netscape", "mozilla", "konqueror", "firefox","chrome"};
+
+            string curBrowser = HttpContext.Current.Request.Browser.Type.ToLower();
 			for (int i = 0; i < BrowserName.Length; i++)
 			{
 				if (curBrowser.IndexOf(BrowserName[i]) >= 0)

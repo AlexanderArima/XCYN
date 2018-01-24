@@ -92,7 +92,7 @@ namespace XCYN.Common
                 string str = expression;
                 if (str.Length > 0 && str.Length <= 11 && Regex.IsMatch(str, @"^[-]?[0-9]*[.]?[0-9]*$"))
                 {
-                    if ((str.Length < 10) || (str.Length == 10 && str[0] == '1') || (str.Length == 11 && str[0] == '-' && str[1] == '1'))
+                    if ((str.Length < 10) || (str.Length == 10 && (str[0] == '2'|| str[0] == '1')) || (str.Length == 11 && str[0] == '-' && (str[0] == '1' || str[1] == '2')))
                         return true;
                 }
             }
@@ -124,7 +124,7 @@ namespace XCYN.Common
         public static bool IsDouble(object expression)
         {
             if (expression != null)
-                return Regex.IsMatch(expression.ToString(), @"^([0-9])[0-9]*(\.\w*)?$");
+                return Regex.IsMatch(expression.ToString(), @"^([0-9])[0-9]*(\.\d*)?$");
 
             return false;
         }

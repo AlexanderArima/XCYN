@@ -21,8 +21,8 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoTask t = new DemoTask();
-            t.Fun7();
+            DemoSolt t = new DemoSolt();
+            t.Fun2();
             Console.Read();
         }
 

@@ -192,5 +192,7 @@ namespace XCYN.Print.MultiThread
             t.Join();//一直等待线程执行完成
             Console.WriteLine("Main Thread");
         }
+
+        
     }
 }

@@ -12,9 +12,19 @@ namespace XCYN.Web.Pages.test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var isGet = RequestHelper.IsGet();
+            var url_refer = RequestHelper.GetUrlReferrer();
 
-            var isPost = RequestHelper.IsPost();
+            var is_browser = RequestHelper.IsBrowserGet();
+
+            var url = RequestHelper.GetUrl();
+
+            var queryString = RequestHelper.GetQueryString("id", true);
+
+            var queryInt = RequestHelper.GetQueryInt("id");
+
+            var pageName = RequestHelper.GetPageName();
+
+            
         }
     }
 }

@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <a href="http://localhost:4923/Pages/test/RequestTest.aspx" >跳转</a>
         <div>
             <input type="button" value="发送Get请求" onclick="IsGetTest()" />
         </div>

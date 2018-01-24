@@ -14,6 +14,7 @@ namespace XCYN.Web.Pages.test
 
         public void ProcessRequest(HttpContext context)
         {
+            var s1 = RequestHelper.GetServerString(RequestHelper.ServerVar.ALL_HTTP);
             var action = context.Request["action"];
             switch (action)
             {
