@@ -745,8 +745,11 @@
     <Compile Include="linq\Model\zcp_whan_attr_table.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
     <Compile Include="MultiThread\DemoSolt.cs" />
     <Compile Include="MultiThread\DemoTask.cs" />
+    <Compile Include="MultiThread\DemoThreadPool.cs" />
+    <Compile Include="MultiThread\DemoTimer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -756,6 +759,7 @@
     </Compile>
     <Compile Include="rabbitmq\Consumer.cs" />
     <Compile Include="rabbitmq\Publish.cs" />
+    <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -789,7 +793,12 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
+      <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
+      <Name>XCYN.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />

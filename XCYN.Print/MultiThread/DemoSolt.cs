@@ -9,6 +9,9 @@ namespace XCYN.Print.MultiThread
 {
     public class DemoSolt
     {
+        /// <summary>
+        /// 为所有线程分配存储的数据槽
+        /// </summary>
         public void Fun1()
         {
             var solt = Thread.AllocateDataSlot();
@@ -54,6 +57,51 @@ namespace XCYN.Print.MultiThread
             var name = Thread.GetData(solt);
 
             
+        }
+
+        [ThreadStatic]
+        static string username = "Hello World";
+        /// <summary>
+        /// ThreadStatic是一种高性能的数据存储
+        /// </summary>
+        public void Fun3()
+        {
+            Thread t = new Thread(() =>
+            {
+                Console.WriteLine("当前工作线程:"+username);
+            });
+            t.Start();
+            Console.WriteLine("当前主线程:"+username);
+            Console.Read();
+        }
+
+        /// <summary>
+        /// ThreadLocal存储线程本地数据
+        /// </summary>
+        public void Fun4()
+        {
+            ThreadLocal<string> local = new ThreadLocal<string>();
+            local.Value = "Hello World";
+            Thread t = new Thread(()=> {
+                Console.WriteLine("当前工作线程"+local.Value);
+            });
+            t.Start();
+            Thread.Sleep(100);
+            Console.WriteLine("当前主线程:"+local.Value);
+            Console.Read();
+        }
+
+        public void Fun5()
+        {
+            ThreadLocal<string> local = new ThreadLocal<string>();
+            Thread t = new Thread(() => {
+                local.Value = "Hello World";
+                Console.WriteLine("当前工作线程" + local.Value);
+            });
+            t.Start();
+            Thread.Sleep(100);
+            Console.WriteLine("当前主线程:" + local.Value);
+            Console.Read();
         }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Log4NetTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EncryptTest.cs" />
+    <Compile Include="RedisBenchTest.cs" />
     <Compile Include="UtilTest.cs" />
     <Compile Include="User.cs" />
     <Compile Include="YieldTest.cs" />

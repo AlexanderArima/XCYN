@@ -63,7 +63,6 @@ namespace XCYN.Print.linq
                 //列出用户111111购买公式的总价
                 var query4 = query3.Sum(i => i.point);
                 Console.WriteLine(query4);
-
             }
         }
 

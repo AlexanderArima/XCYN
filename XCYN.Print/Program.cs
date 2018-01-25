@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using XCYN.Print.DesignPattern.Proxy;
-using XCYN.Print.DesignPattern.Filter;
-using XCYN.Print.DesignPattern.Strategy;
-using XCYN.Print.DesignPattern.Observer;
-using XCYN.Print.DesignPattern.Mediator;
-using XCYN.Print.DesignPattern.Factory;
-using XCYN.Print.DesignPattern.Memento;
-using XCYN.Print.DesignPattern.State;
-using XCYN.Print.DesignPattern.Command;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
+using XCYN.Print.DesignPattern.Command;
+using XCYN.Print.DesignPattern.Factory;
+using XCYN.Print.DesignPattern.Filter;
+using XCYN.Print.DesignPattern.Mediator;
+using XCYN.Print.DesignPattern.Memento;
+using XCYN.Print.DesignPattern.Observer;
+using XCYN.Print.DesignPattern.Proxy;
+using XCYN.Print.DesignPattern.State;
+using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.MultiThread;
 
 namespace XCYN.Print
@@ -21,9 +22,10 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoSolt t = new DemoSolt();
-            t.Fun2();
-            Console.Read();
+            //DemoTimer p = new DemoTimer();
+            //p.Fun1();
+            //Console.Read();
+            
         }
 
         /// <summary>
