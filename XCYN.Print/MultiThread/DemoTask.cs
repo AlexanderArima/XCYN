@@ -27,11 +27,10 @@ namespace XCYN.Print.MultiThread
         /// </summary>
         public void Fun2()
         {
-            for (int i = 0; i < 10000; i++)
-            {
-                Task t = new Task(obj => Console.WriteLine("Thread No " + obj), i);
-                t.Start();
-            }
+            Task t = Task.Factory.StartNew(() => {
+                Console.WriteLine("子线程");
+            });
+            Console.WriteLine("主线程");
             Console.ReadLine();
         }
 
@@ -193,6 +192,31 @@ namespace XCYN.Print.MultiThread
             Console.WriteLine("Main Thread");
         }
 
+        /// <summary>
+        /// Task通过Run方法执行异步线程
+        /// </summary>
+        public void Fun8()
+        {
+            Task.Run(() => {
+                Thread.Sleep(2000);
+                Console.WriteLine("执行子线程");
+            });
+            Console.WriteLine("执行主线程");
+        }
+
+        /// <summary>
+        /// Task调用S
+        /// </summary>
+        public void Fun9()
+        {
+            Task t = new Task(()=> {
+                Thread.Sleep(2000);
+                Console.WriteLine("执行子线程");
+            });
+            t.RunSynchronously();
+            Console.WriteLine("执行主线程");
+
+        }
         
     }
 }

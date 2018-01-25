@@ -11,10 +11,19 @@ namespace XCYN.Print.MultiThread
     {
         public void Fun1()
         {
-            ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(true), new WaitOrTimerCallback((obj, b) => {
-                Console.WriteLine("obj:{0},ThreadID:{1},DateTime:{2}",obj,Thread.CurrentThread.ManagedThreadId,DateTime.Now);
+            ThreadPool.RegisterWaitForSingleObject(new AutoResetEvent(true), new WaitOrTimerCallback((obj, b) =>
+            {
+                Console.WriteLine("obj:{0},ThreadID:{1},DateTime:{2}", obj, Thread.CurrentThread.ManagedThreadId, DateTime.Now);
             }), "hello World", 1000, false);
-            
+
+        }
+
+        public void Fun2()
+        {
+            Timer t = new Timer(new TimerCallback((obj) => {
+                Console.WriteLine("obj:{0},ThreadID:{1},DateTime:{2}", obj, Thread.CurrentThread.ManagedThreadId, DateTime.Now);
+            }), "hello world", 1000, 1000);
+
         }
     }
 }

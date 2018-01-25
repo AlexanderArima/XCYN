@@ -325,6 +325,25 @@ namespace XCYN.Test
             Assert.AreEqual(11, len);
         }
 
+        [TestMethod]
+        public void StringGetAsync()
+        {
+            var str = _command.StringGetAsync("myStr");
+            Assert.AreEqual("hello world", str);
+        }
+
+        [TestMethod]
+        public void StringSetAsync()
+        {
+            var flag = _command.StringSetAsync("myStr", "123");
+
+            Assert.IsTrue(flag);
+
+            var str = _command.StringGetAsync("myStr");
+
+            Assert.AreEqual("123", str);
+        }
+
         #endregion
 
         #region 队列(List)

@@ -22,10 +22,10 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            //DemoTimer p = new DemoTimer();
-            //p.Fun1();
-            //Console.Read();
-            
+            DemoTask p = new DemoTask();
+            p.Fun8();
+            Console.Read();
+
         }
 
         /// <summary>

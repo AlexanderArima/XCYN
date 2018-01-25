@@ -168,9 +168,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>key对应的value，或者nil（key不存在时）</returns>
-        public Task StringGetAsync(string key)
+        public string StringGetAsync(string key)
         {
-            return RedisManager.ReadDataBase().StringGetAsync(key);
+            return RedisManager.ReadDataBase().StringGetAsync(key).Result;
         }
 
         /// <summary>
@@ -273,9 +273,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
-        public Task StringSetAsync(string key, string value)
+        public bool StringSetAsync(string key, string value)
         {
-            return RedisManager.WriteDataBase().StringSetAsync(key: key, value: value);
+            return RedisManager.WriteDataBase().StringSetAsync(key: key, value: value).Result;
         }
 
         /// <summary>
