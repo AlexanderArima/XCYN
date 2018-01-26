@@ -748,6 +748,8 @@
     <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
     <Compile Include="MultiThread\DemoSolt.cs" />
     <Compile Include="MultiThread\DemoTask.cs" />
+    <Compile Include="MultiThread\DemoTaskContinuationOptions.cs" />
+    <Compile Include="MultiThread\DemoTaskCreationOptions.cs" />
     <Compile Include="MultiThread\DemoThreadPool.cs" />
     <Compile Include="MultiThread\DemoTimer.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />

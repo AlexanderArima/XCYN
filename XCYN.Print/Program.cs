@@ -23,8 +23,8 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoWait p = new DemoWait();
-            p.Fun8();
+            DemoTaskContinuationOptions p = new DemoTaskContinuationOptions();
+            p.Fun4();
             Console.Read();
 
         }

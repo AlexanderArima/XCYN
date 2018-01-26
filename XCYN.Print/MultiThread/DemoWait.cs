@@ -94,7 +94,7 @@ namespace XCYN.Print.MultiThread
 
             t1.Start();
             t2.Start();
-
+            
             t2.ContinueWith((obj) => {
                 Console.WriteLine("工作线程3:{0}", DateTime.Now);
             });
@@ -200,6 +200,8 @@ namespace XCYN.Print.MultiThread
             });
 
             Console.WriteLine("主线程:{0}", DateTime.Now);
+
+            
         }
     }
 }
