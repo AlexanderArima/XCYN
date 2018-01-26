@@ -102,5 +102,22 @@ namespace XCYN.Print.Redis
 
            
         }
+
+        public void Fun1()
+        {
+            RedisCommand command = new RedisCommand();
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            var b = RedisManager.ReadDataBase().CreateBatch();
+            for (int i = 0; i < 10000; i++)
+            {
+                //批量插入数据
+                command.StringSetAsync("id:" + i, "1");
+            }
+            b.Execute();
+            s.Stop();
+            var t = s.ElapsedMilliseconds / 1000d;
+            Console.WriteLine("GET: {0} requests per second", 10000/t);
+        }
     }
 }

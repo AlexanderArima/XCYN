@@ -14,6 +14,7 @@ using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.MultiThread;
+using XCYN.Print.Redis;
 
 namespace XCYN.Print
 {
@@ -22,7 +23,7 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoTask p = new DemoTask();
+            DemoWait p = new DemoWait();
             p.Fun8();
             Console.Read();
 
