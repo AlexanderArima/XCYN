@@ -23,7 +23,7 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoTaskContinuationOptions p = new DemoTaskContinuationOptions();
+            DemoCancellationToken p = new DemoCancellationToken();
             p.Fun4();
             Console.Read();
 

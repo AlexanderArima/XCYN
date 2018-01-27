@@ -17,7 +17,6 @@ namespace XCYN.Print.MultiThread
         public void Fun1()
         {
             var isStop = false;
-
             var t = new Thread(() =>
             {
                 var isSuccess = false;

@@ -745,6 +745,7 @@
     <Compile Include="linq\Model\zcp_whan_attr_table.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="MultiThread\DemoCancellationToken.cs" />
     <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
     <Compile Include="MultiThread\DemoSolt.cs" />
     <Compile Include="MultiThread\DemoTask.cs" />
