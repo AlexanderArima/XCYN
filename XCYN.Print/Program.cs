@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
 using XCYN.Print.DesignPattern.Factory;
@@ -23,10 +24,22 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoCancellationToken p = new DemoCancellationToken();
-            p.Fun4();
-            Console.Read();
+            BridgeCommand();
 
+        }
+
+        /// <summary>
+        /// 桥接模式
+        /// </summary>
+        private static void BridgeCommand()
+        {
+            PhoneBrand xiaomi = new PhoneXiaoMi();
+            Soft map = new Map();
+            Soft game = new Game();
+            xiaomi.AddSoft(map);
+            xiaomi.AddSoft(game);
+            xiaomi.run();
+            Console.Read();
         }
 
         /// <summary>

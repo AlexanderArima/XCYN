@@ -78,6 +78,12 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
+    <Compile Include="DesignPattern\Bridge\Game.cs" />
+    <Compile Include="DesignPattern\Bridge\Map.cs" />
+    <Compile Include="DesignPattern\Bridge\PhoneBrand.cs" />
+    <Compile Include="DesignPattern\Bridge\PhoneHuaWei.cs" />
+    <Compile Include="DesignPattern\Bridge\PhoneXiaoMi.cs" />
+    <Compile Include="DesignPattern\Bridge\Soft.cs" />
     <Compile Include="DesignPattern\Builder\AbstractPerson.cs" />
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
@@ -804,6 +810,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />
     <Content Include="DesignPattern\Command\info.txt" />
