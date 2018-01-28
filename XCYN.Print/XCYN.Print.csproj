@@ -759,6 +759,7 @@
     <Compile Include="MultiThread\DemoTaskCreationOptions.cs" />
     <Compile Include="MultiThread\DemoThreadPool.cs" />
     <Compile Include="MultiThread\DemoTimer.cs" />
+    <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

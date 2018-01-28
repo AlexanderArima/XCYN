@@ -24,8 +24,9 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            BridgeCommand();
-
+            DemoTResult d = new DemoTResult();
+            d.Fun2();
+            Console.Read();
         }
 
         /// <summary>
