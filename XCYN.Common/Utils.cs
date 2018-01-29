@@ -427,6 +427,35 @@ namespace XCYN.Common
         #endregion
 
         #region 分割字符串
+
+        /// <summary>
+        /// 截取字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
+        public static string SubStr(string str, int startIndex, int endIndex)
+        {
+            if (startIndex >= endIndex)
+            {
+                throw new Exception("起始位置大于结束位置");
+            }
+            else if (string.IsNullOrEmpty(str))
+            {
+                throw new Exception("字符串不能为空");
+            }
+            else if (str.Length - 1 < startIndex || str.Length < endIndex)
+            {
+                throw new Exception("索引下标超过字符长度");
+            }
+            else
+            {
+                int length = endIndex - startIndex;
+                return str.Substring(startIndex, length);
+            }
+        }
+
         /// <summary>
         /// 分割字符串
         /// </summary>
