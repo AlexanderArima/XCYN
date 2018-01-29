@@ -2,11 +2,11 @@
 <table>
 	<tr>
 		<td>XCYN.Common</td>
-		<td>封装了redis的常用接口</td>
+		<td>封装了SQLServer工具类，redis的常用接口，缓存，农历，加密/解密，邮件，JSON，XML，Request，验证，字符串转换等工具类</td>
 	</tr>
 	<tr>
 		<td>XCYN.Print</td>
-		<td>一些常用的设计模式例子,rabbitmq的例子</td>
+		<td>一些常用的设计模式,rabbitmq，多线程的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.Service</td>

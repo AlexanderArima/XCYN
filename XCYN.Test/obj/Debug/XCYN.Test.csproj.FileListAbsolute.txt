@@ -21,9 +21,7 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Common.pdb
-D:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Common.dll.config
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Print.pdb
-D:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Print.exe.config
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\log4net.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\StackExchange.Redis.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.xml
@@ -31,6 +29,8 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\EntityFramework.resources.dll
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csprojResolveAssemblyReference.cache
-D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CoreCompileInputs.cache
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\IBM.Data.DB2.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\IBM.Data.DB2.Entity.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\IBM.Data.Informix.dll
