@@ -753,6 +753,7 @@
     </Compile>
     <Compile Include="MultiThread\DemoCancellationToken.cs" />
     <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
+    <Compile Include="MultiThread\DemoParallel.cs" />
     <Compile Include="MultiThread\DemoSolt.cs" />
     <Compile Include="MultiThread\DemoTask.cs" />
     <Compile Include="MultiThread\DemoTaskContinuationOptions.cs" />

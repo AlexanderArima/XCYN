@@ -11,8 +11,17 @@ namespace XCYN.Web
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //this.AddOnBeginRequestAsync((o, e, a, ob)=>{
+            //    return null;
+            //},(r)=> {
+
+            //});
+            //this.BeginRequest += MvcApplication_BeginRequest;
         }
+
+        //private void MvcApplication_BeginRequest(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
