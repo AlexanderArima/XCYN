@@ -13,7 +13,7 @@ namespace XCYN.Common
         /// <summary>
         /// 行为
         /// </summary>
-        public string ac { get; }
+        public string ac { get; set; }
 
         /// <summary>
         /// 账户

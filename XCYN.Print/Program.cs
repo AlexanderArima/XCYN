@@ -24,8 +24,8 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoParallel d = new DemoParallel();
-            d.Fun5();
+            DemoPLinq d = new DemoPLinq();
+            d.Fun6();
             Console.Read();
         }
 

@@ -28,6 +28,9 @@ namespace XCYN.Print.MultiThread
             var name = Thread.GetData(solt);
         }
 
+        /// <summary>
+        /// 有名字的数据插槽
+        /// </summary>
         public void Fun2()
         {
             var solt = Thread.AllocateNamedDataSlot("name");

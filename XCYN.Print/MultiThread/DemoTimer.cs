@@ -18,6 +18,9 @@ namespace XCYN.Print.MultiThread
 
         }
 
+        /// <summary>
+        /// Timer定时器
+        /// </summary>
         public void Fun2()
         {
             Timer t = new Timer(new TimerCallback((obj) => {
