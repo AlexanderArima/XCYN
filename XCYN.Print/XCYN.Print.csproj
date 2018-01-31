@@ -103,6 +103,10 @@
     <Compile Include="DesignPattern\Factory\SqlServerDataBase.cs" />
     <Compile Include="DesignPattern\Factory\SqliteFactory.cs" />
     <Compile Include="DesignPattern\Factory\SqlserverFactory.cs" />
+    <Compile Include="DesignPattern\Flyweight\ConcreteFlyWeight.cs" />
+    <Compile Include="DesignPattern\Flyweight\Factory.cs" />
+    <Compile Include="DesignPattern\Flyweight\FlyWeight.cs" />
+    <Compile Include="DesignPattern\Flyweight\UnSharedConcreteFlyWeight.cs" />
     <Compile Include="DesignPattern\Mediator\AbstractColleague.cs" />
     <Compile Include="DesignPattern\Mediator\AbstractMediator.cs" />
     <Compile Include="DesignPattern\Mediator\Colleague.cs" />
@@ -819,6 +823,7 @@
     <Content Include="DesignPattern\Command\info.txt" />
     <Content Include="DesignPattern\Factory\info.txt" />
     <Content Include="DesignPattern\Filter\info.txt" />
+    <Content Include="DesignPattern\Flyweight\info.txt" />
     <Content Include="DesignPattern\Mediator\info.txt" />
     <Content Include="DesignPattern\Memento\info.txt" />
     <Content Include="DesignPattern\Observer\info.txt" />

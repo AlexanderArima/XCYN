@@ -8,6 +8,7 @@ using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
 using XCYN.Print.DesignPattern.Factory;
 using XCYN.Print.DesignPattern.Filter;
+using XCYN.Print.DesignPattern.Flyweight;
 using XCYN.Print.DesignPattern.Mediator;
 using XCYN.Print.DesignPattern.Memento;
 using XCYN.Print.DesignPattern.Observer;
@@ -24,9 +25,21 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            DemoPLinq d = new DemoPLinq();
-            d.Fun6();
+            FlyWeightCommand();
             Console.Read();
+        }
+
+        private static void FlyWeightCommand()
+        {
+            var model = Factory.GetInstance(1);
+
+            var model2 = Factory.GetInstance(1);
+
+            var model3 = Factory.GetInstance(2);
+
+            Console.WriteLine("model1 == model2?{0}",model.Equals(model2));
+
+            Console.WriteLine("model2 == model3?{0}", model2.Equals(model3));
         }
 
         /// <summary>
