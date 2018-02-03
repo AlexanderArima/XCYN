@@ -407,7 +407,7 @@ namespace XCYN.Print.rabbitmq
             factory.UserName = "root";
             factory.Password = "900424";
             factory.HostName = "192.168.1.111";
-            //创建connection
+            //创建connectionBasicAck
             using (var connection = factory.CreateConnection())
             {
                 //创建channel
@@ -451,6 +451,44 @@ namespace XCYN.Print.rabbitmq
             }
         }
 
+        /// <summary>
+        /// 限制接收端接收数据的大小，避免一次接收大量数据导致内存暴涨，消费端挂掉
+        /// Qos = quality-of-service
+        /// </summary>
+        public static void ComsumerBasicQos()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "900424";
+            factory.HostName = "192.168.1.107";
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //第一个参数是可接收消息的大小的，但是似乎在客户端2.8.6版本中它必须为0，即使：不受限制。如果不输0，程序会在运行到这一行的时候报错，说还没有实现不为0的情况。
+                    //第二个参数是处理消息最大的数量。举个例子，如果输入1，那如果接收一个消息，但是没有应答，则客户端不会收到下一个消息，消息只会在队列中阻塞。如果输入3，那么可以最多有3个消息不应答，如果到达了3个，则发送端发给这个接收方得消息只会在队列中，而接收方不会有接收到消息的事件产生。总结说，就是在下一次发送应答消息前，客户端可以收到的消息最大数量。
+                    //第三个参数则设置了是不是针对整个Connection的，因为一个Connection可以有多个Channel，如果是false则说明只是针对于这个Channel的。
+                    //这种数量的设置，也为我们在多个客户端监控同一个queue的这种负载均衡环境下提供了更多的选择。
+                    channel.BasicQos(0, 1, false);
+                    //获取消息
+                    var consumer = new EventingBasicConsumer(channel);
+                    
+                    consumer.Received += (sender, e) =>
+                    {
+                        Thread.Sleep(1000);
+                        var msg = Encoding.UTF8.GetString(e.Body);
+                        Console.WriteLine(msg);
+                        channel.BasicAck(e.DeliveryTag, false);
+                    };
+                    channel.BasicConsume("test", false, consumer);
+                    Console.ReadKey();
+                    //var result = channel.BasicGet("test", true);
+                    //var msg = Encoding.UTF8.GetString(result.Body);
+                }
+            }
+        }
 
     }
 }

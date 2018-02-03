@@ -17,6 +17,7 @@ using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.MultiThread;
+using XCYN.Print.rabbitmq;
 using XCYN.Print.Redis;
 
 namespace XCYN.Print
@@ -26,8 +27,9 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            Composite();
-            Console.Read();
+            //Publish.PublishLazy();
+            
+            Consumer.ComsumerBasicQos();
         }
 
         /// <summary>

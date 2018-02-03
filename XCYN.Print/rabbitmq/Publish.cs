@@ -557,7 +557,7 @@ namespace XCYN.Print.rabbitmq
             ConnectionFactory factory = new ConnectionFactory();
             factory.UserName = "root";
             factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.HostName = "192.168.1.107";
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -571,7 +571,7 @@ namespace XCYN.Print.rabbitmq
                     var queue = channel.QueueDeclare("test", true, false, false, dict);
                     for (int i = 0; i < int.MaxValue; i++)
                     {
-                        var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好", string.Join(",", Enumerable.Range(0, 100000))));
+                        var msg = Encoding.UTF8.GetBytes(string.Format("{0}", string.Join(",", Enumerable.Range(0, 10000))));
                         //发送消息
                         channel.BasicPublish("", "test", basicProperties: null, body: msg);
                         Console.WriteLine("发布消息,{0}",i);
