@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
+using XCYN.Print.DesignPattern.Composite;
 using XCYN.Print.DesignPattern.Factory;
 using XCYN.Print.DesignPattern.Filter;
 using XCYN.Print.DesignPattern.Flyweight;
@@ -25,10 +26,32 @@ namespace XCYN.Print
         
         static void Main(string[] args)
         {
-            FlyWeightCommand();
+            Composite();
             Console.Read();
         }
 
+        /// <summary>
+        /// 组合模式
+        /// </summary>
+        private static void Composite()
+        {
+            var root = new Composite("root");
+            var net = new Composite("net");
+            var program = new Composite("program");
+            root.Add(net);
+            root.Add(program);
+            var c = new Composite("c#");
+            var core = new Composite("core");
+            net.Add(c);
+            net.Add(core);
+            var java = new Composite("java");
+            program.Add(java);
+            root.Display(1);
+        }
+
+        /// <summary>
+        /// 享元模式
+        /// </summary>
         private static void FlyWeightCommand()
         {
             var model = Factory.GetInstance(1);
