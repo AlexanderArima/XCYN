@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
@@ -24,12 +25,13 @@ namespace XCYN.Print
 {
     class Program
     {
-        
+        [STAThread]
         static void Main(string[] args)
         {
-            //Publish.PublishLazy();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new DemoTaskScheduler());
             
-            Consumer.ComsumerBasicQos();
         }
 
         /// <summary>

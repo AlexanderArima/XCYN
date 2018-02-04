@@ -60,10 +60,12 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -766,6 +768,12 @@
     <Compile Include="MultiThread\DemoTask.cs" />
     <Compile Include="MultiThread\DemoTaskContinuationOptions.cs" />
     <Compile Include="MultiThread\DemoTaskCreationOptions.cs" />
+    <Compile Include="MultiThread\DemoTaskScheduler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultiThread\DemoTaskScheduler.Designer.cs">
+      <DependentUpon>DemoTaskScheduler.cs</DependentUpon>
+    </Compile>
     <Compile Include="MultiThread\DemoThreadPool.cs" />
     <Compile Include="MultiThread\DemoTimer.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
@@ -848,6 +856,11 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MultiThread\DemoTaskScheduler.resx">
+      <DependentUpon>DemoTaskScheduler.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
