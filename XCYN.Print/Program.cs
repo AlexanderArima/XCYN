@@ -20,16 +20,29 @@ using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.MultiThread;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.Redis;
+using XCYN.Print;
 
 namespace XCYN.Print
 {
     class Program
     {
-        [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //var crawler = new Crawler("https://www.cnblogs.com/");
+
+            //crawler.DownLoad();
+
+            //show 一下我们爬到的链接
+            //foreach (var item in Crawler.visited)
+            //{
+            //    Console.WriteLine(item);
+            //}、
+
+            //DemoTMP d = new DemoTMP();
+            //var f = d.Fun3();
+            //Console.WriteLine("f:"+f.Result);
+            //Console.WriteLine("Hello World3");
+            //Console.Read();
             Application.Run(new DemoTaskScheduler());
             
         }

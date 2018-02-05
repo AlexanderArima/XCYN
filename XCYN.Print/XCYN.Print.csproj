@@ -80,6 +80,7 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
+    <Compile Include="Crawler\Crawler.cs" />
     <Compile Include="DesignPattern\Bridge\Game.cs" />
     <Compile Include="DesignPattern\Bridge\Map.cs" />
     <Compile Include="DesignPattern\Bridge\PhoneBrand.cs" />
@@ -776,6 +777,7 @@
     </Compile>
     <Compile Include="MultiThread\DemoThreadPool.cs" />
     <Compile Include="MultiThread\DemoTimer.cs" />
+    <Compile Include="MultiThread\DemoTMP.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
     <Compile Include="Program.cs" />

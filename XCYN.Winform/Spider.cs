@@ -62,7 +62,6 @@ namespace XCYN.Winform
             }
         }
         
-
         public CookieContainer _CookieContainer { get; set; }//定义cookie容器
         public string _PageSource { get; set; } //网页源代码
 
