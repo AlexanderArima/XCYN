@@ -12,7 +12,7 @@ namespace XCYN.Winform.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -30,6 +30,28 @@ namespace XCYN.Winform.Properties {
         public string MeituanConnectionString {
             get {
                 return ((string)(this["MeituanConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\MSSQL2008R2;Initial Catalog=MeetingSys;Integrated Security=True;Mul" +
+            "tipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string MeetingSysConnectionString {
+            get {
+                return ((string)(this["MeetingSysConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\MSSQL2008R2;Initial Catalog=Book;Persist Security Info=True;User ID" +
+            "=sa;Password=111111")]
+        public string BookConnectionString {
+            get {
+                return ((string)(this["BookConnectionString"]));
             }
         }
     }

@@ -17,7 +17,7 @@ namespace XCYN.Winform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Spider());
+            Application.Run(new ReportForm());
         }
     }
 }
