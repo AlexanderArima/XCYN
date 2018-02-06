@@ -90,6 +90,7 @@
     <Compile Include="DesignPattern.cs" />
     <Compile Include="MQTest.cs" />
     <Compile Include="RedisCommandTest.cs" />
+    <Compile Include="ReportConfigTest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,6 +134,10 @@
     <ProjectReference Include="..\XCYN.Print\XCYN.Print.csproj">
       <Project>{b381793e-9506-4a79-84be-91c070afeddc}</Project>
       <Name>XCYN.Print</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCYN.Winform\XCYN.Winform.csproj">
+      <Project>{2077EE5A-7110-40DE-B9E5-3505C111AA4A}</Project>
+      <Name>XCYN.Winform</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

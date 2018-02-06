@@ -1,4 +1,4 @@
-﻿namespace XCYN.Winform
+﻿namespace XCYN.Winform.Report
 {
 
 
@@ -6,6 +6,7 @@
     {
         partial class T_WireDataTable
         {
+
         }
     }
 }
