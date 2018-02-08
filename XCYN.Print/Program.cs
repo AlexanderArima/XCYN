@@ -21,6 +21,9 @@ using XCYN.Print.MultiThread;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.Redis;
 using XCYN.Print;
+using System.Net.Http;
+using System.Web.Http.SelfHost;
+using System.Web.Http;
 
 namespace XCYN.Print
 {
@@ -28,23 +31,50 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            //var crawler = new Crawler("https://www.cnblogs.com/");
+           
+        }
 
-            //crawler.DownLoad();
+        /// <summary>
+        /// WebAPI宿主(服务器)
+        /// </summary>
+        private void WebAPIHost()
+        {
+            //宿主
+            var config = new HttpSelfHostConfiguration(new Uri("http://localhost:55890"));
 
-            //show 一下我们爬到的链接
-            //foreach (var item in Crawler.visited)
-            //{
-            //    Console.WriteLine(item);
-            //}、
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
 
-            //DemoTMP d = new DemoTMP();
-            //var f = d.Fun3();
-            //Console.WriteLine("f:"+f.Result);
-            //Console.WriteLine("Hello World3");
-            //Console.Read();
+            var host = new HttpSelfHostServer(config);
+            host.OpenAsync().Wait();
+            Console.WriteLine("Press any key to exit");
+            Console.Read();
+            host.CloseAsync().Wait();
+        }
+        
+        /// <summary>
+        /// WebAPI客户端
+        /// </summary>
+        private void WebAPIClient()
+        {
+            var greetingServiceAddress = new Uri("http://localhost:55898/api/greeting");
+
+            var client = new HttpClient();
+
+            var result = client.GetAsync(greetingServiceAddress).Result;
+
+            var greeting = result.Content.ReadAsStringAsync().Result;
+
+            Console.WriteLine(greeting);
+
+            Console.Read();
+        }
+
+        private void RunTaskScheduler()
+        {
             Application.Run(new DemoTaskScheduler());
-            
         }
 
         /// <summary>
