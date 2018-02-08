@@ -90,6 +90,7 @@ namespace XCYN.Winform
             CrystalReport1 c = new CrystalReport1();
             c.SetDataSource(table);
             crystalReportViewer1.ReportSource = c;
+            
             this.crystalReportViewer1.Refresh();
         }
 
