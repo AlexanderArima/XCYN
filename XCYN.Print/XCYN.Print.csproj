@@ -776,6 +776,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="MultiThread\DemoCancellationToken.cs" />
+    <Compile Include="MultiThread\DemoLock.cs" />
     <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
     <Compile Include="MultiThread\DemoParallel.cs" />
     <Compile Include="MultiThread\DemoPLinq.cs" />

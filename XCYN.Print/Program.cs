@@ -31,16 +31,23 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-           
+            DemoLock demo = new DemoLock();
+            Task.Factory.StartNew(() => {
+                for (int i = 0; i < 5; i++)
+                {
+                    demo.Fun3();
+                }
+            });
+            Console.Read();
         }
 
         /// <summary>
-        /// WebAPI宿主(服务器)
+        /// WebAPI托管(Windows自托管)
         /// </summary>
-        private void WebAPIHost()
+        private static void WebAPIHost()
         {
             //宿主
-            var config = new HttpSelfHostConfiguration(new Uri("http://localhost:55890"));
+            var config = new HttpSelfHostConfiguration(new Uri("http://localhost:55898"));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -57,7 +64,7 @@ namespace XCYN.Print
         /// <summary>
         /// WebAPI客户端
         /// </summary>
-        private void WebAPIClient()
+        private static void WebAPIClient()
         {
             var greetingServiceAddress = new Uri("http://localhost:55898/api/greeting");
 
