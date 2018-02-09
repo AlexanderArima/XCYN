@@ -24,6 +24,7 @@ using XCYN.Print;
 using System.Net.Http;
 using System.Web.Http.SelfHost;
 using System.Web.Http;
+using System.Threading;
 
 namespace XCYN.Print
 {
@@ -31,13 +32,20 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            DemoLock();
+        }
+
+        private static void DemoLock()
+        {
             DemoLock demo = new DemoLock();
-            Task.Factory.StartNew(() => {
-                for (int i = 0; i < 5; i++)
-                {
-                    demo.Fun3();
-                }
-            });
+            
+            for (int i = 0; i < 5; i++)
+            {
+                Task.Factory.StartNew(() => {
+                    demo.Fun7();
+                });
+            }
+
             Console.Read();
         }
 

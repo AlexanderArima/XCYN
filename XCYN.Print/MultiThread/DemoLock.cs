@@ -85,5 +85,101 @@ namespace XCYN.Print.MultiThread
         }
 
         #endregion
+
+        #region 事件锁
+
+        static AutoResetEvent auto_lock = new AutoResetEvent(true);
+
+        /// <summary>
+        /// 自动事件锁 【AutoResetEvent】
+        /// 场景：可以用此锁实现多线程环境下某个变量的自增
+        /// true：表示终止状态   false：表示非终止
+        /// </summary>
+        public void Fun4()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                try
+                {
+                    auto_lock.WaitOne();
+                    Console.WriteLine(num++);
+                    auto_lock.Set();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        static ManualResetEvent manual_lock = new ManualResetEvent(true);
+
+        /// <summary>
+        /// 手动事件锁【ManualResetEvent】
+        /// </summary>
+        public void Fun5()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                try
+                {
+                    manual_lock.WaitOne();
+                    Console.WriteLine(num++);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            manual_lock.Set();
+        }
+
+        static Semaphore sema_lock = new Semaphore(2,10);
+
+        /// <summary>
+        /// 信号量，可以控制线程的个数
+        /// </summary>
+        public void Fun6()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                try
+                {
+                    sema_lock.WaitOne();
+                    Console.WriteLine(num++);
+                    sema_lock.Release();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+        }
+
+        Mutex mutex_lock = new Mutex();
+
+        /// <summary>
+        /// 互斥锁
+        /// </summary>
+        public void Fun7()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                try
+                {
+                    mutex_lock.WaitOne();
+                    Console.WriteLine(num++);
+                    mutex_lock.ReleaseMutex();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        #endregion
     }
 }
