@@ -32,7 +32,25 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoLock();
+            DemoCountdownEvent();
+        }
+
+        private static void DemoCountdownEvent()
+        {
+            DemoCountdownEvent demo = new MultiThread.DemoCountdownEvent();
+            demo.Fun1();
+        }
+
+        /// <summary>
+        /// 读写锁
+        /// </summary>
+        private static void DemoReadWriteLock()
+        {
+            DemoReadWriteLock demo = new MultiThread.DemoReadWriteLock();
+            //demo.Fun1();
+            //demo.Fun2();
+            demo.Fun3();
+            Console.Read();
         }
 
         private static void DemoLock()
