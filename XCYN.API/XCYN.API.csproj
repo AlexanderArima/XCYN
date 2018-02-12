@@ -191,6 +191,7 @@
     <Compile Include="Areas\Lottery\Controllers\BBSController.cs" />
     <Compile Include="Areas\Lottery\LotteryAreaRegistration.cs" />
     <Compile Include="Areas\Lottery\Models\BBS\ArticleCategoryViewModel.cs" />
+    <Compile Include="Areas\Lottery\Models\BBS\DetailViewModel.cs" />
     <Compile Include="Areas\Lottery\Models\BBS\IndexViewModel.cs" />
     <Compile Include="Areas\Lottery\Models\Common\AbstractModel.cs" />
     <Compile Include="Areas\Lottery\Models\Common\ListModel.cs" />
@@ -1867,6 +1868,7 @@
     <Content Include="plugin\swiper\dist\js\swiper.jquery.umd.min.js" />
     <Content Include="plugin\swiper\dist\js\swiper.js" />
     <Content Include="plugin\vue\vue.js" />
+    <Content Include="Scripts\BBS\detail.js" />
     <Content Include="Scripts\BBS\index.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -2220,6 +2222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
+      <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
+      <Name>XCYN.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

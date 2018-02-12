@@ -6,13 +6,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta charset="utf-8" />
     <link href="../../plugin/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div class="layui-container" id="div_container">
 
-        <nav-component></nav-component>
+        <nav-component v-bind:my-message="Controller"></nav-component>
 
         <div class="layui-row" style="height:33px;line-height:33px;font-size: 15px;">
             <div class="layui-col-md12" id="div_category">
@@ -49,65 +48,7 @@
     <script src="../../plugin/vue/vue.js"></script>
     <script src="../../plugin/layui/layui.all.js"></script>
     <script src="../../plugin/lodash/lodash.js"></script>
-    <script>
-        window.onload = function () {
-
-            Vue.component('nav-component', {
-                template: '<div>\
-                            <ul class="layui-nav" lay-filter="">\
-                                <li class="layui-nav-item"><a href="">首页</a></li>\
-                                <li class="layui-nav-item layui-this"><a href="index.html">论坛</a></li>\
-                                <li class="layui-nav-item"><a href="">大数据</a></li>\
-                                <li class="layui-nav-item">\
-                                    <a href="javascript:;">解决方案</a>\
-                                    <dl class="layui-nav-child">\
-                                        <dd><a href="">移动模块</a></dd>\
-                                        <dd><a href="">后台模版</a></dd>\
-                                        <dd><a href="">电商平台</a></dd>\
-                                    </dl>\
-                                </li>\
-                            </ul>\
-                        </div>'
-            });
-
-            var v = new Vue({
-                el: "#div_container",
-                data: {
-                    list_category: null,
-                    list_hot: null,
-                    list_top: null
-                },
-
-            })
-
-            layer.load(2,{time:10 * 1000});
-
-            $.get("http://localhost:55898/Lottery/BBS/GetIndex", function (data) {
-                var obj = eval("(" + data + ")");
-                console.log(obj.obj)
-                if (obj.result == 1) {
-                    //论坛类别
-                    v.$data.list_category = obj.obj.list_category;
-                    //热门推荐
-                    var list_hot = obj.obj.list_hot;
-                    _.forEach(list_hot, function (value, key) {
-                        value.avatar = "../../" + value.avatar;
-                        value.detail_href = "detail.html?id="+value.id
-                    });
-                    v.$data.list_hot = list_hot;
-                    //最新更新
-                    var list_top = obj.obj.list_top;
-                    v.$data.list_top = list_top;
-                    _.forEach(list_top, function (value, key) {
-                        value.avatar = "../../" + value.avatar;
-                    });
-                }
-                else {
-                    console.log(obj.message);
-                }
-                layer.closeAll();
-            });
-        }
-    </script>
+    <script src="../../Scripts/Common/nav.js"></script>
+    <script src="../../Scripts/BBS/detail.js"></script>
 </body>
 </html>
