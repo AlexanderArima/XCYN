@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,7 +26,7 @@ namespace XCYN.API.Areas.Lottery.Controllers
                 {
                     var query = from a in db.article_category
                                 where a.channel_id == 14
-                                select new ArticleCategoryViewModel
+                                select new
                                 {
                                     category_id = a.id,
                                     category_name = a.title
@@ -73,7 +74,10 @@ namespace XCYN.API.Areas.Lottery.Controllers
                     dict.Add("list_top", list_top);
 
                     result_model.result = 1;
-                    return JsonConvert.SerializeObject(result_model);
+
+                    Newtonsoft.Json.Converters.IsoDateTimeConverter iso = new Newtonsoft.Json.Converters.IsoDateTimeConverter();
+                    iso.DateTimeFormat = "yyyy-MM-dd HH:mm";
+                    return JsonConvert.SerializeObject(result_model,iso);
                 }
             }
             catch (Exception ex)
