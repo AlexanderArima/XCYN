@@ -1,4 +1,5 @@
-﻿window.onload = function () {
+﻿
+window.onload = function () {
 
     var v = new Vue({
         el: "#div_container",
@@ -8,6 +9,7 @@
             list_top: null,
             Controller: GetController()
         },
+
     })
 
     layer.load(2, { time: 10 * 1000 });
@@ -37,4 +39,4 @@
         }
         layer.closeAll();
     });
-}
+};

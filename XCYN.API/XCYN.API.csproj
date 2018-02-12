@@ -1129,7 +1129,9 @@
     <Content Include="images\src\wei.png" />
     <Content Include="images\src\yanzhengma1.png" />
     <Content Include="images\src\zhi.png" />
+    <Content Include="Pages\BBS\detail.html" />
     <Content Include="Pages\BBS\index.html" />
+    <Content Include="Pages\Home\index.html" />
     <Content Include="plugin\bootstrap\css\bootstrap-theme.css" />
     <Content Include="plugin\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="plugin\bootstrap\css\bootstrap.css" />
@@ -2123,6 +2125,8 @@
     <Content Include="plugin\swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="plugin\swiper\dist\js\maps\swiper.jquery.umd.min.js.map" />
     <Content Include="plugin\swiper\dist\js\maps\swiper.min.js.map" />
+    <Content Include="Scripts\Common\nav.js" />
+    <Content Include="Scripts\Home\index.js" />
     <Content Include="upload\201610\imagepath\20161010052746.jpg" />
     <Content Include="upload\201610\imagepath\20161012041018.jpg" />
     <Content Include="upload\201610\imagepath\20161014103657.jpg" />
