@@ -33,8 +33,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            PrimaryOperators u = new PrimaryOperators();
-            u.Fun8();
+            UnaryOperators u = new UnaryOperators();
+            u.Fun6();
         }
 
         private static void DemoCountdownEvent()
