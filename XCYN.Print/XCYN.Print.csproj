@@ -797,6 +797,7 @@
     <Compile Include="MultiThread\DemoTMP.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
+    <Compile Include="Operators\PrimaryOperators.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -881,6 +882,7 @@
       <DependentUpon>DemoTaskScheduler.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -25,6 +25,7 @@ using System.Net.Http;
 using System.Web.Http.SelfHost;
 using System.Web.Http;
 using System.Threading;
+using XCYN.Print.Operators;
 
 namespace XCYN.Print
 {
@@ -32,7 +33,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoCountdownEvent();
+            PrimaryOperators u = new PrimaryOperators();
+            u.Fun5();
         }
 
         private static void DemoCountdownEvent()
