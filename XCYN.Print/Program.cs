@@ -34,7 +34,7 @@ namespace XCYN.Print
         static void Main(string[] args)
         {
             PrimaryOperators u = new PrimaryOperators();
-            u.Fun5();
+            u.Fun8();
         }
 
         private static void DemoCountdownEvent()

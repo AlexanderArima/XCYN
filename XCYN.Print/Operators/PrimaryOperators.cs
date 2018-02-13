@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace XCYN.Print.Operators
@@ -87,6 +88,9 @@ namespace XCYN.Print.Operators
             */
         }
 
+        /// <summary>
+        /// new运算符
+        /// </summary>
         public void Fun4()
         {
             //new运算符用于创建对象和调用构造函数
@@ -135,6 +139,54 @@ namespace XCYN.Print.Operators
             {
                 Console.WriteLine(item);
             }
+            Console.Read();
+        }
+
+        /// <summary>
+        /// check和unchecked运算符
+        /// </summary>
+        public void Fun6()
+        {
+            byte b = 255;
+            //执行后会抛出异常
+            checked
+            {
+                b++;
+            }
+            //不会抛出异常，但会丢失数据，因为byte类型不包含256，溢出的位会被丢弃，所得到的变量是0
+            //unchecked
+            //{
+            //    b++;
+            //}
+            Console.WriteLine("b:"+b);
+            Console.Read();
+        }
+
+        /// <summary>
+        /// default表达式
+        /// </summary>
+        public void Fun7()
+        {
+            //默认值表达式生成类型的默认值。 默认值表达式在泛型类和泛型方法中非常有用。 
+            //使用泛型类和泛型方法时出现的一个问题是，如何在无法提前知道以下内容的情况下将默认值赋值给参数化类型
+            var s = default(string);
+            var d = default(dynamic);
+            var i = default(int);
+            var n = default(int?); // n is a Nullable int where HasValue is false.
+        }
+        
+        /// <summary>
+        /// delegate关键字
+        /// </summary>
+        public void Fun8()
+        {
+            //由于使用匿名方法无需创建单独的方法，因此可减少对委托进行实例化的编码开销。
+            Thread thread = new Thread(delegate() {
+                Thread.Sleep(500);
+                Console.WriteLine("工作线程");
+            });
+            thread.Start();
+            Console.WriteLine("主线程");
             Console.Read();
         }
 
