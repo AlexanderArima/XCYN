@@ -33,8 +33,13 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            UnaryOperators u = new UnaryOperators();
-            u.Fun6();
+            DemoMultiplicationOperations();
+        }
+
+        private static void DemoMultiplicationOperations()
+        {
+            MultiplicationOperators operators = new MultiplicationOperators();
+            operators.Fun3();
         }
 
         private static void DemoCountdownEvent()

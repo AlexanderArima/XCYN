@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -797,6 +798,7 @@
     <Compile Include="MultiThread\DemoTMP.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
+    <Compile Include="Operators\MultiplicationOperators.cs" />
     <Compile Include="Operators\PrimaryOperators.cs" />
     <Compile Include="Operators\UnaryOperators.cs" />
     <Compile Include="Program.cs" />
@@ -877,6 +879,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Operators\info.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MultiThread\DemoTaskScheduler.resx">
