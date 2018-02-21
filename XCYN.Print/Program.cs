@@ -33,7 +33,32 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoMultiplicationOperations();
+            DemoMonitor();
+        }
+
+        private static void DemoMonitor()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Task.Factory.StartNew(() => {
+                    XCYN.Print.MultiThread.DemoMonitor.Fun2();
+                });
+            }
+            
+            
+            Console.Read();
+        }
+
+        private static void RelationOperators()
+        {
+            RelationOperators operators = new Operators.RelationOperators();
+            operators.Fun1();
+        }
+
+        private static void DemoShiftOperators()
+        {
+            ShiftOperators operators = new ShiftOperators();
+            operators.Fun2();
         }
 
         private static void DemoMultiplicationOperations()

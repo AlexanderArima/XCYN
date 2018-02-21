@@ -780,6 +780,7 @@
     <Compile Include="MultiThread\DemoCountdownEvent.cs" />
     <Compile Include="MultiThread\DemoLock.cs" />
     <Compile Include="MultiThread\DemoMemoryBarrier.cs" />
+    <Compile Include="MultiThread\DemoMonitor.cs" />
     <Compile Include="MultiThread\DemoParallel.cs" />
     <Compile Include="MultiThread\DemoPLinq.cs" />
     <Compile Include="MultiThread\DemoReadWriteLock.cs" />
@@ -800,6 +801,8 @@
     <Compile Include="MultiThread\DemoWait.cs" />
     <Compile Include="Operators\MultiplicationOperators.cs" />
     <Compile Include="Operators\PrimaryOperators.cs" />
+    <Compile Include="Operators\RelationOperators.cs" />
+    <Compile Include="Operators\ShiftOperators.cs" />
     <Compile Include="Operators\UnaryOperators.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
