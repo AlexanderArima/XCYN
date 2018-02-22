@@ -34,6 +34,9 @@ namespace XCYN.Print.MultiThread
 
         public void Fun2()
         {
+            string s = "a";
+            string ss = $"s = {s.ToLower()}";
+            
             for (int i = 0; i < 100; i++)
             {
                 try
