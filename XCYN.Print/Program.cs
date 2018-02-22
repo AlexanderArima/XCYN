@@ -33,9 +33,9 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoMonitor();
+            RelationOperators();
         }
-
+        
         private static void DemoMonitor()
         {
             for (int i = 0; i < 5; i++)
@@ -44,15 +44,13 @@ namespace XCYN.Print
                     XCYN.Print.MultiThread.DemoMonitor.Fun2();
                 });
             }
-            
-            
             Console.Read();
         }
 
         private static void RelationOperators()
         {
             RelationOperators operators = new Operators.RelationOperators();
-            operators.Fun1();
+            operators.Fun6();
         }
 
         private static void DemoShiftOperators()

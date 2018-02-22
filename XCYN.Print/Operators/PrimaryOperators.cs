@@ -147,17 +147,17 @@ namespace XCYN.Print.Operators
         /// </summary>
         public void Fun6()
         {
-            byte b = 255;
+            byte b = byte.MaxValue;
             //执行后会抛出异常
-            checked
+            //checked
+            //{
+            //b++;
+            //}
+            //不会抛出异常，但会丢失数据，因为byte类型不包含256，溢出的位会被丢弃，所得到的变量是0
+            unchecked
             {
                 b++;
             }
-            //不会抛出异常，但会丢失数据，因为byte类型不包含256，溢出的位会被丢弃，所得到的变量是0
-            //unchecked
-            //{
-            //    b++;
-            //}
             Console.WriteLine("b:"+b);
             Console.Read();
         }
