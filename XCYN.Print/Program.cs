@@ -33,15 +33,18 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            RelationOperators();
+            DemoMonitor();
         }
+
+        public static object sync = new object();
         
         private static void DemoMonitor()
         {
             for (int i = 0; i < 5; i++)
             {
                 Task.Factory.StartNew(() => {
-                    XCYN.Print.MultiThread.DemoMonitor.Fun2();
+                    DemoMonitor demo = new MultiThread.DemoMonitor();
+                    demo.Fun3();
                 });
             }
             Console.Read();

@@ -801,6 +801,7 @@
     <Compile Include="MultiThread\DemoParallel.cs" />
     <Compile Include="MultiThread\DemoPLinq.cs" />
     <Compile Include="MultiThread\DemoReadWriteLock.cs" />
+    <Compile Include="MultiThread\DemoSlim.cs" />
     <Compile Include="MultiThread\DemoSolt.cs" />
     <Compile Include="MultiThread\DemoTask.cs" />
     <Compile Include="MultiThread\DemoTaskContinuationOptions.cs" />

@@ -39,6 +39,7 @@ namespace XCYN.Print.MultiThread
             }
         }
 
+
         /// <summary>
         /// Lock语法糖，等同于上个方法，不需要再写try...catch和if判断了
         /// </summary>
@@ -50,6 +51,38 @@ namespace XCYN.Print.MultiThread
                 {
                     Console.WriteLine(num++);
                 }
+            }
+        }
+
+        public void Fun3()
+        {
+            bool flag = false;
+            Monitor.TryEnter(lockMe, 500, ref flag);
+            if(flag)
+            {
+                try
+                {
+                    Thread.Sleep(1000);
+                    //被锁定，同步访问对象
+                    for (int i = 0; i < 2000; i++)
+                    {
+                        Console.WriteLine(num++);
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+                finally
+                {
+                    Monitor.Exit(lockMe);
+                    Console.WriteLine("释放锁");
+                }
+            }
+            else
+            {
+                //没有被锁定，超时了，执行其他操作
+                Console.WriteLine("未被锁定，或者超时");
             }
         }
     }
