@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace XCYN.Print.delegates
 {
-    public class delegateTest
+    public class DelegateTest
     {
         delegate void MyAction(string str);
 
@@ -20,7 +20,7 @@ namespace XCYN.Print.delegates
 
         public static void DelegateFun()
         {
-            goto myCase;
+            //goto myCase;
             //调用委托
             MyAction ac1 = SayHello;
             ac1("ac1");
@@ -58,7 +58,7 @@ namespace XCYN.Print.delegates
             };
             Console.WriteLine(ac5(5, 3));
 
-            myCase:
+            //myCase:
             Predicate<int> ac6 = (str) =>
             {
                 return str % 2 == 0 ? true : false;

@@ -389,7 +389,7 @@ namespace XCYN.Common
         /// <returns></returns>
         public static int ObjToInt(object obj)
         {
-            if (isNumber(obj))
+            if (IsNumber(obj))
             {
                 return int.Parse(obj.ToString());
             }
@@ -404,7 +404,7 @@ namespace XCYN.Common
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public static bool isNumber(object o)
+        public static bool IsNumber(object o)
         {
             int tmpInt;
             if (o == null)
@@ -1401,7 +1401,7 @@ namespace XCYN.Common
                     reader.Close();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 throw;
             }
@@ -1901,7 +1901,7 @@ namespace XCYN.Common
                 int imageheight = tempimage.Height;//高
                 return imagewidth + "px * " + imageheight + "px";
             }
-            catch (Exception ex)
+            catch 
             {
                 return "0px * 0px";
             }

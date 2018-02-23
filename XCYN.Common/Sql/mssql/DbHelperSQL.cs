@@ -1229,7 +1229,7 @@ namespace XCYN.Common
         }
 
 
-        public static bool fresh_superiors_rank(string sql,string field_name)
+        public static bool Fresh_superiors_rank(string sql,string field_name)
         {
             SqlConnection conn = null;
             DataTable dt = new DataTable();
@@ -1271,7 +1271,7 @@ namespace XCYN.Common
                 sda.Update(dt);
                 dt.AcceptChanges();
             }
-            catch (SqlException ex)
+            catch
             {
                 return false;
             }

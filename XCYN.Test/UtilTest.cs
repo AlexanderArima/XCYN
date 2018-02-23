@@ -30,19 +30,19 @@ namespace XCYN.Test
         [TestMethod]
         public void IsNumber()
         {
-            var flag = Utils.isNumber("1234");
+            var flag = Utils.IsNumber("1234");
 
             Assert.IsTrue(flag);
 
-            flag = Utils.isNumber("abc");
+            flag = Utils.IsNumber("abc");
 
             Assert.IsFalse(flag);
 
-            flag = Utils.isNumber("-56952");
+            flag = Utils.IsNumber("-56952");
 
             Assert.IsTrue(flag);
 
-            flag = Utils.isNumber("1.2");
+            flag = Utils.IsNumber("1.2");
 
             Assert.IsFalse(flag);
         }

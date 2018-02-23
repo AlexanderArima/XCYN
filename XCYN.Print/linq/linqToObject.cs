@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace XCYN.Print.linq
 {
-    public class linqToObject
+    public class LinqToObject
     {
-        public void get()
+        public void Get()
         {
-            goto myCase;
+            //goto myCase;
             Dictionary<int, List<int>> dic = new Dictionary<int, List<int>>();
             dic.Add(1, new List<int> { 10, 20, 30, 40 });
             dic.Add(2, new List<int> { 10, 20, 30, 40 });
@@ -28,7 +28,7 @@ namespace XCYN.Print.linq
             var query2 = num1.SequenceEqual(num2);
             Console.WriteLine(query2);
 
-            myCase:
+            //myCase:
             int[] num3 = new int[] { 10, 20, 30, 40, 50 };
             int[] num4 = new int[] { 10, 20, 30, 40 };
             int[] num5 = new int[] { 10, 20, 30 };

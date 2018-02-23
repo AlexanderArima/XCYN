@@ -28,7 +28,7 @@ namespace XCYN.Print.MultiThread
                     Console.WriteLine(num++);
                     //Monitor.Exit(lockMe);
                 }
-                catch(Exception ex)
+                catch
                 {
 
                 }
@@ -69,7 +69,7 @@ namespace XCYN.Print.MultiThread
                         Console.WriteLine(num++);
                     }
                 }
-                catch(Exception ex)
+                catch
                 {
 
                 }

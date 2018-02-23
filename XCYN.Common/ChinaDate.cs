@@ -82,9 +82,9 @@ namespace XCYN.Common
         public static string GetYear(DateTime dt)
         {
             int yearIndex = china.GetSexagenaryYear(dt);
-            string yearTG = " 甲乙丙丁戊己庚辛壬癸";
-            string yearDZ = " 子丑寅卯辰巳午未申酉戌亥";
-            string yearSX = " 鼠牛虎兔龙蛇马羊猴鸡狗猪";
+            //string yearTG = " 甲乙丙丁戊己庚辛壬癸";
+            //string yearDZ = " 子丑寅卯辰巳午未申酉戌亥";
+            //string yearSX = " 鼠牛虎兔龙蛇马羊猴鸡狗猪";
             int year = china.GetYear(dt);
             int yTG = china.GetCelestialStem(yearIndex);
             int yDZ = china.GetTerrestrialBranch(yearIndex);
@@ -265,7 +265,7 @@ namespace XCYN.Common
         /// 是否在立春之前
         /// </summary>
         /// <returns></returns>
-        public static bool isBeforeLiChun(DateTime date)
+        public static bool IsBeforeLiChun(DateTime date)
         {
             //当年的立春日期
             DateTime lc_date = GetLiChunDate(date.Year);

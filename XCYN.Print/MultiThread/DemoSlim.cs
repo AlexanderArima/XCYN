@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG
+//#undef DEBUG
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +26,11 @@ namespace XCYN.Print.MultiThread
             for (int i = 0; i < 100; i++)
             {
                 semaphoreSlim.Wait();
-                Thread.Sleep(2000);
+                Thread.Sleep(100);
+#if DEBUG
+#warning Debug is define  
                 Console.WriteLine(num++);
+#endif
                 semaphoreSlim.Release();
             }
         }
@@ -60,9 +65,9 @@ namespace XCYN.Print.MultiThread
         {
             for (int i = 0; i < 500000; i++)
             {
-                int age = p.age;
+                int age = p.Age;
             }
-            Console.WriteLine(p.age);
+            Console.WriteLine(p.Age);
         }
     }
 
@@ -70,7 +75,7 @@ namespace XCYN.Print.MultiThread
     {
         private int _age;
 
-        public int age { get { return Interlocked.Increment(ref _age); } set { age = _age; } }
+        public int Age { get { return Interlocked.Increment(ref _age); } set { Age = value; } }
 
         public static object sync = new object();
     }

@@ -33,7 +33,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoMonitor();
+            DemoSlim demo = new DemoSlim();
+            demo.Fun1();
         }
 
         public static object sync = new object();

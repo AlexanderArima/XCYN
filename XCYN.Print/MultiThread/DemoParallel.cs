@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG
+//#undef DEBUG
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +23,11 @@ namespace XCYN.Print.MultiThread
                     loop.Break();
                     return;
                 }
+                //#warning常用于#if条件语句中
+#if DEBUG
+#warning Debug is define
                 Console.WriteLine(item);
+#endif
             });
         }
 

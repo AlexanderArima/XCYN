@@ -139,13 +139,13 @@ namespace XCYN.Print.MultiThread
         {
             Task t1 = new Task(() =>
             {
-                throw new Exception();
+               // throw new Exception();
                 Console.WriteLine("T1 Ends");
             });
 
             Task t2 = new Task(() =>
             {
-                throw new ArgumentException();
+                //throw new ArgumentException();
                 Console.WriteLine("T2 Ends");
             });
             t1.Start();

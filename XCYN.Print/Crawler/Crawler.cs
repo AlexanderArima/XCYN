@@ -56,7 +56,7 @@ namespace XCYN.Print
                     //提取url，将未访问的放入todo表中
                     RefineUrl(sr.ReadToEnd());
                 }
-                catch(Exception ex)
+                catch
                 {
 
                 }
