@@ -13,17 +13,90 @@ namespace XCYN.Print.delegates
 
         delegate int MyAction2(string str);
 
-        public static void SayHello(string str)
+        /// <summary>
+        /// 普通方法
+        /// </summary>
+        /// <param name="str"></param>
+        public void Fun1(string str)
         {
-            Console.WriteLine(str);
+            Console.WriteLine($"Fun1:{str}");
         }
 
+        /// <summary>
+        /// 委托也可以调用static方法
+        /// </summary>
+        /// <param name="str"></param>
+        public static void Fun2(string str)
+        {
+            Console.WriteLine($"Fun2:{str}");
+        }
+
+        /// <summary>
+        /// 冒泡排序
+        /// </summary>
+        /// <param name="sortArray"></param>
+        /// <returns></returns>
+        public static int[] BubbleSorter(int[] sortArray)
+        {
+            bool flag = true;
+            do
+            {
+                flag = false;
+                for (int i = 0; i < sortArray.Length - 1; i++)
+                {
+                    if(sortArray[i] > sortArray[i + 1])
+                    {
+                        //交换位置
+                        var temp = sortArray[i];
+                        sortArray[i] = sortArray[i + 1];
+                        sortArray[i + 1] = temp;
+                        flag = true;
+                    }
+                }
+            } while (flag);
+            return sortArray;
+        }
+
+        /// <summary>
+        /// 冒泡排序(不仅仅能对数组进行排序，还能对对象中的数组进行排序)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sortArray"></param>
+        /// <param name="comparison"></param>
+        /// <returns></returns>
+        public static IList<T> BubbliSorter<T>(IList<T> sortArray,Func<T,T,bool> comparison)
+        {
+            bool flag = true;
+            do
+            {
+                flag = false;
+                for (int i = 0; i < sortArray.Count - 1; i++)
+                {
+                    if (comparison(sortArray[i],sortArray[i + 1]))
+                    {
+                        //交换位置
+                        var temp = sortArray[i];
+                        sortArray[i] = sortArray[i + 1];
+                        sortArray[i + 1] = temp;
+                        flag = true;
+                    }
+                }
+            } while (flag);
+            return sortArray;
+        }
+        
+        /// <summary>
+        /// 调用委托的类
+        /// </summary>
         public static void DelegateFun()
         {
-            //goto myCase;
-            //调用委托
-            MyAction ac1 = SayHello;
-            ac1("ac1");
+            //声明一个委托
+            MyAction ac1 = Fun2;
+            ac1("ac1");//调用委托
+            DelegateTest test = new DelegateTest();
+            MyAction ac_fun1 = test.Fun1;
+            ac_fun1.Invoke("hello world");//Invoke方法也可以调用委托
+            return;
 
             //匿名委托
             MyAction2 ac2 = delegate (string str)
@@ -67,5 +140,22 @@ namespace XCYN.Print.delegates
 
         }
 
+    }
+
+    public class Employee
+    {
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+
+        public Employee(string name,int age)
+        {
+            Name = name;
+            Age = age;
+        }
+
+        public override string ToString() => $"{Name}，{Age:C}";
+
+        public static bool CompareSalary(Employee e1, Employee e2) => e1.Age > e2.Age;
     }
 }

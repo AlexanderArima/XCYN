@@ -26,6 +26,7 @@ using System.Web.Http.SelfHost;
 using System.Web.Http;
 using System.Threading;
 using XCYN.Print.Operators;
+using XCYN.Print.delegates;
 
 namespace XCYN.Print
 {
@@ -33,8 +34,34 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoSlim demo = new DemoSlim();
-            demo.Fun1();
+            NullOperators operators = new NullOperators();
+            //operators.Fun3(null);
+            //operators.Fun3(new XCYN.Print.Operators.Person() { Name = "王大锤" });
+            operators.Fun4(null);
+            operators.Fun4(new XCYN.Print.Operators.Person() { Age = 12 });
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 测试冒泡排序
+        /// </summary>
+        private static void DelegateBubble()
+        {
+            //var array = DelegateTest.BubbleSorter(new int[5] {
+            //    1,3,5,2,4
+            //});
+            //Console.WriteLine(string.Join(",",array));
+
+            var array = DelegateTest.BubbliSorter<Employee>(new Employee[5]
+            {
+                new Employee("a",1),
+                new Employee("a",2),
+                new Employee("a",5),
+                new Employee("a",4),
+                new Employee("a",3),
+            }, Employee.CompareSalary);
+            Console.WriteLine(string.Join("\n", array));
+            Console.Read();
         }
 
         public static object sync = new object();

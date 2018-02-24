@@ -114,6 +114,8 @@
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
     <Compile Include="Crawler\Crawler.cs" />
+    <Compile Include="delegates\LambdaTest.cs" />
+    <Compile Include="delegates\MulticastDelegateTest.cs" />
     <Compile Include="DesignPattern\Bridge\Game.cs" />
     <Compile Include="DesignPattern\Bridge\Map.cs" />
     <Compile Include="DesignPattern\Bridge\PhoneBrand.cs" />
@@ -163,7 +165,7 @@
     <Compile Include="DesignPattern\State\EveningState.cs" />
     <Compile Include="DesignPattern\State\MorningState.cs" />
     <Compile Include="DesignPattern\Strategy\AbstactLog.cs" />
-    <Compile Include="delegates\delegateTest.cs" />
+    <Compile Include="delegates\DelegateTest.cs" />
     <Compile Include="DesignPattern\Filter\AgeFilter.cs" />
     <Compile Include="DesignPattern\Filter\AndFilter.cs" />
     <Compile Include="DesignPattern\Filter\IFilter.cs" />
@@ -819,6 +821,7 @@
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
     <Compile Include="Operators\MultiplicationOperators.cs" />
+    <Compile Include="Operators\NullOperators.cs" />
     <Compile Include="Operators\PrimaryOperators.cs" />
     <Compile Include="Operators\RelationOperators.cs" />
     <Compile Include="Operators\ShiftOperators.cs" />
