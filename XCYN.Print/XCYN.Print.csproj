@@ -114,6 +114,7 @@
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
     <Compile Include="Crawler\Crawler.cs" />
+    <Compile Include="delegates\EventTest.cs" />
     <Compile Include="delegates\LambdaTest.cs" />
     <Compile Include="delegates\MulticastDelegateTest.cs" />
     <Compile Include="DesignPattern\Bridge\Game.cs" />

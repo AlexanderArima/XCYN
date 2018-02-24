@@ -34,6 +34,13 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            EventTest test = new EventTest();
+            test.Fun1();
+            Console.Read();
+        }
+
+        private static void NullOperators()
+        {
             NullOperators operators = new NullOperators();
             //operators.Fun3(null);
             //operators.Fun3(new XCYN.Print.Operators.Person() { Name = "王大锤" });
