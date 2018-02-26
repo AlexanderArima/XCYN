@@ -195,6 +195,9 @@
     <Compile Include="DesignPattern\TemplateMethod\Handler.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XieCheng.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XiongWei.cs" />
+    <Compile Include="Generics\DocumentManager.cs" />
+    <Compile Include="Generics\GenericsFunc.cs" />
+    <Compile Include="Generics\LinkedListNode.cs" />
     <Compile Include="linq\DataClasses1.designer.cs">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
       <DesignTime>True</DesignTime>

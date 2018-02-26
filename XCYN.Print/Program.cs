@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.SelfHost;
 using System.Windows.Forms;
+using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
@@ -17,16 +20,9 @@ using XCYN.Print.DesignPattern.Observer;
 using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
+using XCYN.Print.Generics;
 using XCYN.Print.MultiThread;
-using XCYN.Print.rabbitmq;
-using XCYN.Print.Redis;
-using XCYN.Print;
-using System.Net.Http;
-using System.Web.Http.SelfHost;
-using System.Web.Http;
-using System.Threading;
 using XCYN.Print.Operators;
-using XCYN.Print.delegates;
 
 namespace XCYN.Print
 {
@@ -34,9 +30,65 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            EventTest test = new EventTest();
-            test.Fun1();
+            GenericsFuncTest();
+        }
+
+        private static void GenericsFuncTest2()
+        {
+
+        }
+
+        /// <summary>
+        /// 泛型方法
+        /// </summary>
+        private static void GenericsFuncTest()
+        {
+            //调用泛型方法
+            GenericsFunc f = new GenericsFunc();
+            int x = 0;
+            int y = 100;
+            f.Swap<int>(ref x,ref y);
+            Console.WriteLine($"x:{x},y:{y}");
             Console.Read();
+        }
+
+        /// <summary>
+        /// 泛型类
+        /// </summary>
+        private static void GenericsTest()
+        {
+            /*
+            LinkedList list = new LinkedList();
+            list.AddList(2);
+            list.AddList(4);
+            list.AddList("6");//不会报错
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.Read();
+            */
+
+            /*
+            XCYN.Print.Generics.LinkedList<int> list = new XCYN.Print.Generics.LinkedList<int>();
+            list.AddList(2);
+            list.AddList(4);
+            list.AddList("6");//在编码期间就会报错
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.Read();
+            */
+
+            /*
+            DocumentManager<Document> documentManager = new DocumentManager<Document>();
+            documentManager.AddDocument(new Document("Java",""));
+            documentManager.AddDocument(new Document("C#", ""));
+            documentManager.DisplayAllDocument();
+            Console.Read();
+            */
+            
         }
 
         private static void NullOperators()
