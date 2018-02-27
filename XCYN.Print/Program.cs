@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using System.Windows.Forms;
+using XCYN.Print.Dapper;
 using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
@@ -31,8 +32,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            LinqToObject linqToObject = new LinqToObject();
-            linqToObject.Fun9();
+            ExampleSample sample = new ExampleSample();
+            sample.Fun6(1,10);
             Console.Read();
         }
 
