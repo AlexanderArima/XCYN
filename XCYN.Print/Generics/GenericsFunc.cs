@@ -16,6 +16,7 @@ namespace XCYN.Print.Generics
         }
     }
 
+    //普通类
     public class Account
     {
         public string Name { get; set; }
@@ -26,6 +27,54 @@ namespace XCYN.Print.Generics
         {
             Name = name;
             Balance = balance;
+        }
+    }
+
+    //实现接口
+    public class GnrAccount : IAccount
+    {
+        public string Name { get; set; }
+        public decimal Balance { get ; set; }
+        public GnrAccount(string name, decimal balance)
+        {
+            Name = name;
+            Balance = balance;
+        }
+    }
+
+    /// <summary>
+    /// 泛型接口
+    /// </summary>
+    public interface IAccount
+    {
+        string Name { get; set; }
+
+        decimal Balance { get; set; }
+    }
+
+    public static class Algorithms
+    {
+        //不使用泛型接口实现，只能处理Account这一个对象
+        public static decimal AccumlateSimple(IEnumerable<Account> source)
+        {
+            decimal sum = 0;
+            foreach (var item in source)
+            {
+                sum += item.Balance;
+            }
+            return sum;
+        }
+
+        //使用泛型接口实现，只要实现了IAccount接口都能通用
+        public static decimal AccumlateSimple<TAccount>(IEnumerable<TAccount> source)
+            where TAccount : IAccount
+        {
+            decimal sum = 0;
+            foreach (var item in source)
+            {
+                sum += item.Balance;
+            }
+            return sum;
         }
     }
 

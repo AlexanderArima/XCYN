@@ -21,6 +21,7 @@ using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.Generics;
+using XCYN.Print.linq;
 using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
 
@@ -30,12 +31,41 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            GenericsFuncTest();
+            LinqToObject linqToObject = new LinqToObject();
+            linqToObject.Fun9();
+            Console.Read();
+        }
+
+        private static void GenericsFuncTest3()
+        {
+            var account = new List<GnrAccount>
+            {
+                new GnrAccount("aaa",111),
+                new GnrAccount("bbb",222),
+                new GnrAccount("ccc",333),
+                new GnrAccount("ddd",444),
+                new GnrAccount("eee",555),
+            };
+
+            var sum = Algorithms.AccumlateSimple(account);
+            Console.WriteLine($"sum:{sum}");
+            Console.Read();
         }
 
         private static void GenericsFuncTest2()
         {
+            var account = new List<Account>
+            {
+                new Account("aaa",111),
+                new Account("bbb",222),
+                new Account("ccc",333),
+                new Account("ddd",444),
+                new Account("eee",555),
+            };
 
+            var sum = Algorithms.AccumlateSimple(account);
+            Console.WriteLine($"sum:{sum}");
+            Console.Read();
         }
 
         /// <summary>
