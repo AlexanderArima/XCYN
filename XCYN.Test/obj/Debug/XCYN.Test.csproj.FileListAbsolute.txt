@@ -95,3 +95,5 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.xml
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\Dapper.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\Dapper.xml

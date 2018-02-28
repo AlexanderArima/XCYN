@@ -9,8 +9,14 @@ namespace XCYN.API.Areas.Lottery.Models.Common
     {
         public object obj { get; set; }
 
-        public int result { get; set; }
+        public JSONResult result { get; set; }
 
         public string message { get; set; }
+    }
+
+    public enum JSONResult
+    {
+        fail = 0,
+        success = 1
     }
 }

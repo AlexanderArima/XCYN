@@ -41,7 +41,7 @@ namespace XCYN.Test
         public void PrototypeMethod()
         {
             //深拷贝
-            Person p = new Person()
+            XCYN.Print.DesignPattern.Prototype.Deep.Person p = new XCYN.Print.DesignPattern.Prototype.Deep.Person()
             {
                 name = "张三",
                 age = 18,

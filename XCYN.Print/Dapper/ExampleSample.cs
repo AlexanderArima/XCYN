@@ -24,6 +24,7 @@ namespace XCYN.Print.Dapper
             using (IDbConnection conn = new SqlConnection(connectionString))
             {
                 var dog = conn.Query<user>("select user_name from users where id > @id",new { id = 200 } );
+                
                 foreach (var item in dog)
                 {
                     Console.WriteLine($"{item.user_name}");

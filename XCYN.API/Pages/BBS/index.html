@@ -7,6 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../../plugin/layui/css/layui.css" rel="stylesheet" />
+    <style>
+        /* 论坛类型 */
+        .is_active label:nth-child(1) {
+            color: #FF5722;
+        }
+        /* 头像 */
+        .table_hot img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .table_last img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <div class="layui-container" id="div_container">
@@ -15,7 +32,10 @@
 
         <div class="layui-row" style="height:33px;line-height:33px;font-size: 15px;">
             <div class="layui-col-md12" id="div_category">
-                <a href="#" v-for="category in list_category">{{category.category_name}} |  </a>
+                <a href="#" v-bind:class="category.is_active" v-on:click="GetCategory(category.category_id)" v-for="category in list_category">
+                    <label>{{category.category_name}}</label> 
+                    <label> | </label>
+                </a>
             </div>
         </div>
 
@@ -24,19 +44,20 @@
         <fieldset class="layui-elem-field layui-field-title">
             <legend>热门推荐</legend>
             <div class="layui-field-box">
-                <table class="layui-table" lay-size="lg" lay-skin="line">
+                <table class="layui-table table_hot" lay-size="lg" lay-skin="line">
                     <colgroup>
                         <col width="70">
                         <col>
                     </colgroup>
                     <tbody>
                         <tr v-for="item in list_hot">
-                            <td><img v-bind:src="item.avatar" style="width:46px; height:46px; border-radius:50%;" /></td>
+                            <td><img v-bind:src="item.avatar" /></td>
                             <td>
                                 <div style="width:970px;padding-bottom: 10px;">
-                                    <div style="color:white;background-color:red;width:40px;float:left" v-if="item.title_type == 2">&nbsp;转&nbsp;载&nbsp;</div>
-                                    <div style="color:white;background-color:blue;width:40px;float:left" v-if="item.title_type == 1">&nbsp;原&nbsp;创&nbsp;</div>
-                                    <a v-bind:href="item.detail_href">&nbsp;&nbsp;{{item.title}}</a> 置顶
+                                    <div style="color:white;background-color:#FF5722;width:40px;float:left" v-if="item.title_type == 2">&nbsp;转&nbsp;载&nbsp;</div>
+                                    <div style="color:white;background-color:#01AAED;width:40px;float:left" v-if="item.title_type == 1">&nbsp;原&nbsp;创&nbsp;</div>
+                                    <a v-bind:href="item.detail_href">&nbsp;&nbsp;{{item.title}}</a>
+                                    <div style="color:white;background-color:#FF5722;width:40px;float:right" v-if="item.is_top == 1">&nbsp;置&nbsp;顶&nbsp;</div>
                                 </div>
                                 <div>
                                     {{item.nick_name}} 于{{item.add_time}}发表
@@ -54,20 +75,22 @@
         <fieldset class="layui-elem-field layui-field-title">
             <legend>最新更新</legend>
             <div class="layui-field-box">
-                <table class="layui-table" lay-size="lg" lay-skin="line">
+                <table class="layui-table table_last" lay-size="lg" lay-skin="line">
                     <colgroup>
                         <col width="70">
                         <col>
                     </colgroup>
                     <tbody>
                         <tr v-for="item in list_top">
-                            <td><img v-bind:src="item.avatar" style="width:46px; height:46px; border-radius:50%;" /></td>
+                            <td><img v-bind:src="item.avatar" /></td>
                             <td>
 
                                 <div style="width:970px;padding-bottom: 10px;">
-                                    <div style="color:white;background-color:red;width:40px;float:left" v-if="item.title_type == 2">&nbsp;转&nbsp;载&nbsp;</div>
-                                    <div style="color:white;background-color:blue;width:40px;float:left" v-if="item.title_type == 1">&nbsp;原&nbsp;创&nbsp;</div>
-                                    <a href="#">&nbsp;&nbsp;{{item.title}}</a> 置顶
+                                    <div style="color:white;background-color:#FF5722;width:40px;float:left" v-if="item.title_type == 2">&nbsp;转&nbsp;载&nbsp;</div>
+                                    <div style="color:white;background-color:#01AAED;width:40px;float:left" v-if="item.title_type == 1">&nbsp;原&nbsp;创&nbsp;</div>
+                                    <a v-bind:href="item.detail_href">&nbsp;&nbsp;{{item.title}}</a>
+                                    <div style="color:white;background-color:#FF5722;width:40px;float:right" v-if="item.is_top == 1">&nbsp;置&nbsp;顶&nbsp;</div>
+                                    
                                 </div>
 
                                 <div>

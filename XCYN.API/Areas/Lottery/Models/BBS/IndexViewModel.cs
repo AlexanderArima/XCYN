@@ -79,5 +79,29 @@ namespace XCYN.API.Areas.Lottery.Models.BBS
         public string avatar { get; set; }
 
         public DateTime? hotTopic_time { get; set; }
+
+        private string Content;
+
+        /// <summary>
+        /// 帖子内容
+        /// </summary>
+        public string content {
+            get {
+                return HttpUtility.HtmlDecode(Content);
+            }
+            set {
+                Content = HttpUtility.HtmlEncode(value);
+            }
+        }
     }
+
+    public class IndexCategoryViewModel
+    {
+        public int is_active { get; set; }
+
+        public int category_id { get; set; }
+
+        public string category_name { get; set; }
+    }
+
 }

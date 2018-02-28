@@ -32,10 +32,22 @@ namespace XCYN.API.Areas.Lottery.Models.BBS
         /// </summary>
         public string avatar { get; set; }
 
+        private string Content;
+
         /// <summary>
         /// 回帖内容
         /// </summary>
-        public string content { get; set; }
+        public string content
+        {
+            get
+            {
+                return HttpUtility.HtmlDecode(Content);
+            }
+            set
+            {
+                Content = HttpUtility.HtmlEncode(value);
+            }
+        }
 
         /// <summary>
         /// 回帖时间
