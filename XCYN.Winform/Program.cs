@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Windows;
+using System.Windows.Forms;
+using XCYN.Winform.MeiTuan;
 
 namespace XCYN.Winform
 {
-    public class Program:Application
+    public class Program
     {
         /// <summary>
         /// 应用程序的主入口点。
@@ -11,11 +12,14 @@ namespace XCYN.Winform
         [STAThread]
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ChangeCity());
 
             //方式1
-            Application app = new Application();
-            MainWindow userControl1 = new MainWindow();
-            app.Run(userControl1);
+            //Application app = new Application();
+            //MainWindow userControl1 = new MainWindow();
+            //app.Run(userControl1);
 
             //方式2
             //Application app = new Application();

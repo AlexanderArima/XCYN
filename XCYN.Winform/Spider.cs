@@ -23,44 +23,6 @@ namespace XCYN.Winform
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// 导入T_Category表
-        /// </summary>
-        private void ImportCategory()
-        {
-            var s = File.ReadAllText(@"D:\MyProject\XCYN\XCYN.Winform\Model\Spider\meishi.html");
-            var list = Regex.Matches(s, @"<a class="""" href=""\S*c\d*/"" data-reactid=""\d*"">\S*</a>", RegexOptions.IgnoreCase);
-            try
-            {
-                using (TransactionScope scope = new TransactionScope())
-                {
-                    using (DataClasses1DataContext db = new DataClasses1DataContext())
-                    {
-                        List<T_Category> list_category = new List<T_Category>();
-                        foreach (Match item in list)
-                        {
-                            var name = Utils.SubStr(item.Value, item.Value.IndexOf('>') + ">".Length, item.Value.IndexOf('<', 10));
-                            var url = Utils.SubStr(item.Value, item.Value.IndexOf(@"href=""") + @"href=""".Length, item.Value.IndexOf(@""" data-reactid"));
-                            var model = new T_Category()
-                            {
-                                name = name,
-                                url = url
-                            };
-                            list_category.Add(model);
-
-                        }
-                        db.T_Category.InsertAllOnSubmit(list_category);
-                        db.SubmitChanges();
-                        scope.Complete();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
         
         public CookieContainer _CookieContainer { get; set; }//定义cookie容器
         public string _PageSource { get; set; } //网页源代码
