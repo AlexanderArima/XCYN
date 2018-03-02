@@ -13,7 +13,7 @@ namespace XCYN.Common.Dapper
     public class DapperManager
     {
 
-        public static string connectionString = ConfigurationManager.ConnectionStrings["MeetingSys"].ConnectionString;
+        public static string connectionString = ConfigurationManager.ConnectionStrings["MeiTuan"].ConnectionString;
 
         private static IDbConnection _instance = null;
 

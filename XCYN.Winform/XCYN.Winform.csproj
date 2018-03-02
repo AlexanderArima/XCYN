@@ -55,9 +55,15 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="HtmlAgilityPack, Version=1.7.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.7.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -95,6 +101,16 @@
       <DependentUpon>ChangeCity.cs</DependentUpon>
     </Compile>
     <Compile Include="MeiTuan\City.cs" />
+    <Compile Include="MeiTuan\MeiShi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeiTuan\MeiShi.Designer.cs">
+      <DependentUpon>MeiShi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MeiTuan\Filters.cs" />
+    <Compile Include="Model\MeiTuan\Meta.cs" />
+    <Compile Include="Model\MeiTuan\PoiInfo.cs" />
+    <Compile Include="Model\MeiTuan\PoiList.cs" />
     <Compile Include="Model\Report\AbstractState.cs" />
     <Compile Include="Model\Report\Context.cs" />
     <Compile Include="Model\Report\ReportConfig.cs" />
@@ -165,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MeiTuan\ChangeCity.resx">
       <DependentUpon>ChangeCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeiTuan\MeiShi.resx">
+      <DependentUpon>MeiShi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

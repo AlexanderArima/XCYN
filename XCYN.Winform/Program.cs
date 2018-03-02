@@ -14,7 +14,7 @@ namespace XCYN.Winform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChangeCity());
+            Application.Run(new MeiShi());
 
             //方式1
             //Application app = new Application();
