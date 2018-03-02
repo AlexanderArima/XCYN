@@ -37,26 +37,27 @@ namespace XCYN.Winform.MeiTuan
                     State = 1
                 });
             Task task = new Task(() => {
+
                 for (int i = 0; i < list.Count; i++)
                 {
+                    if (list[i].MeiShiURL == null) continue;
                     var document = webClient.Load(list[i].MeiShiURL);
                     hrefList = document.DocumentNode.SelectNodes("//script");
                     for (int j = 0; j < hrefList.Count; j++)
                     {
                         var item = hrefList[j].InnerHtml;
-                        if(item.Contains("window._appState"))
+                        if (item.Contains("window._appState"))
                         {
                             //获取Json数据
                             var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
                             var obj = JsonConvert.DeserializeObject<Meta>(data);
-                            //if(j == 0)
-                            //{
-                                //如果是首次循环
-                                obj.filters.Insert();
-                            //}
+                            var count = obj.filters.Insert<string>();
+                            listBox1.Invoke(new Action(()=> {
+                                listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
+                            }));
                             break;
-                        }
-                    }
+                         }
+                     }
                 }
             });
             task.Start();

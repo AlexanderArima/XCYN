@@ -107,6 +107,7 @@
     <Compile Include="MeiTuan\MeiShi.Designer.cs">
       <DependentUpon>MeiShi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\MeiTuan\Dict.cs" />
     <Compile Include="Model\MeiTuan\Filters.cs" />
     <Compile Include="Model\MeiTuan\Meta.cs" />
     <Compile Include="Model\MeiTuan\PoiInfo.cs" />

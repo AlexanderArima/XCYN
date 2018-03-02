@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define Debug
+//#undef Debug
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,7 +35,12 @@ namespace XCYN.Common.Dapper
             catch(Exception ex)
             {
                 //封装异常处理
-                return -1;
+#if Debug
+#warning "Debug is define!"
+                throw ex;
+#else
+                return 0;
+#endif
             }
         }
 
@@ -57,8 +64,12 @@ namespace XCYN.Common.Dapper
             }
             catch(Exception ex)
             {
-                //封装异常处理
+#if Debug
+#warning "Debug is define!"
+                throw ex;
+#else
                 return null;
+#endif
             }
         }
 
@@ -79,8 +90,38 @@ namespace XCYN.Common.Dapper
             }
             catch (Exception ex)
             {
-                //封装异常处理
+#if Debug
+#warning "Debug is define!"
+                throw ex;
+#else
                 return null;
+#endif
+            }
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
+        public static int ExecuteScalar(string sql, object param = null, IDbTransaction transaction = null)
+        {
+            try
+            {
+                var conn = Dapper.DapperManager.GetConnection();
+                var obj = conn.ExecuteScalar<int>(sql, param, transaction);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+#if Debug
+#warning "Debug is define!"
+                throw ex;
+#else
+                return 0;
+#endif
             }
         }
 
