@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XCYN.Common.Dapper;
+using Dapper;
+using XCYN.Winform.Model.MeiTuan.EF;
 using XCYN.Winform.Model.MeiTuan;
 
 namespace XCYN.Winform.MeiTuan
@@ -18,7 +21,7 @@ namespace XCYN.Winform.MeiTuan
 
         Common.Sql.redis.RedisCommand _command = new Common.Sql.redis.RedisCommand();
 
-        
+        public static object index = 0;
         
         public MeiShi()
         {
@@ -32,36 +35,85 @@ namespace XCYN.Winform.MeiTuan
             listBox1.Items.Add($"{DateTime.Now.ToShortTimeString()} 开始抓取数据...");
             HtmlWeb webClient = new HtmlWeb();
             HtmlNodeCollection hrefList = null;
-            var list = Common.Dapper.DapperHelper.Query<City>("SELECT ID,Name,URL,MeiShiURL FROM T_City WHERE State = @State",
-                new {
-                    State = 1
-                });
-            Task task = new Task(() => {
-
-                for (int i = 0; i < list.Count; i++)
+            try
+            {
+                using (MeiTuanEntities db = new MeiTuanEntities())
                 {
-                    if (list[i].MeiShiURL == null) continue;
-                    var document = webClient.Load(list[i].MeiShiURL);
-                    hrefList = document.DocumentNode.SelectNodes("//script");
-                    for (int j = 0; j < hrefList.Count; j++)
-                    {
-                        var item = hrefList[j].InnerHtml;
-                        if (item.Contains("window._appState"))
+                    var query = from a in db.T_City
+                                where a.State == true
+                                select new T_City
+                                {
+                                    ID = a.ID,
+                                    Name = a.Name,
+                                    URL = a.URL,
+                                    MeiShiURL = a.MeiShiURL
+                                };
+
+                    var list = query;
+                    Task task = new Task(() => {
+
+                        for (int i = 0; i < list.Count(); i = i + 2)
                         {
-                            //获取Json数据
-                            var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
-                            var obj = JsonConvert.DeserializeObject<Meta>(data);
-                            var count = obj.filters.Insert<string>();
-                            listBox1.Invoke(new Action(()=> {
-                                listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
-                            }));
-                            break;
-                         }
-                     }
+                            if (list.ElementAt(i).MeiShiURL == null) continue;
+                            var document = webClient.Load(list.ElementAt(i).MeiShiURL);
+                            hrefList = document.DocumentNode.SelectNodes("//script");
+                            for (int j = 0; j < hrefList.Count; j++)
+                            {
+                                var item = hrefList[j].InnerHtml;
+                                if (item.Contains("window._appState"))
+                                {
+                                    //获取Json数据
+                                    var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
+                                    var obj = JsonConvert.DeserializeObject<Meta>(data);
+                                    //var count = obj.filters.Insert<string>();
+                                    var count = obj.filters?.Insert<string>();
+                                    listBox1.Invoke(new Action(() => {
+                                        listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
+                                    }));
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                    task.Start();
+                    //Task task2 = new Task(() => {
+
+                    //    for (int i = 1; i < list.Count(); i += 2)
+                    //    {
+                    //        if (list.ElementAt(i).MeiShiURL == null) continue;
+                    //        var document = webClient.Load(list.ElementAt(i).MeiShiURL);
+                    //        hrefList = document.DocumentNode.SelectNodes("//script");
+                    //        for (int j = 0; j < hrefList.Count; j++)
+                    //        {
+                    //            var item = hrefList[j].InnerHtml;
+                    //            if (item.Contains("window._appState"))
+                    //            {
+                    //                //获取Json数据
+                    //                var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
+                    //                var obj = JsonConvert.DeserializeObject<Meta>(data);
+                    //                //var count = obj.filters.Insert<string>();
+                    //                var count = obj.filters?.Insert<string>();
+                    //                listBox1.Invoke(new Action(() => {
+                    //                    listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
+                    //                }));
+                    //                break;
+                    //            }
+                    //        }
+
+                    //    }
+                    //});
+                    //task2.Start();
                 }
-            });
-            task.Start();
-            //_command.ListLeftPush("ListCity",list.Select(i =>))
+                    
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                //conn.Close();
+            }
         }
 
 

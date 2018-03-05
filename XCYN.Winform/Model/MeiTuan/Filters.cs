@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XCYN.Winform.Model.MeiTuan.EF;
+using Dapper;
+using XCYN.Common.Dapper;
 
 namespace XCYN.Winform.Model.MeiTuan
 {
@@ -49,10 +53,13 @@ namespace XCYN.Winform.Model.MeiTuan
 
         public int Delete()
         {
-             return Common.Dapper.DapperHelper.Execute(@" TRUNCATE TABLE T_Areas
-                                                          TRUNCATE TABLE T_Cate
-                                                          TRUNCATE TABLE T_DinnerCountsAttr
-                                                          TRUNCATE TABLE T_SortTypesAttr");
+            using (MeiTuanEntities db = new MeiTuanEntities())
+            {
+                return db.Database.ExecuteSqlCommand(@" TRUNCATE TABLE T_Areas
+                                TRUNCATE TABLE T_Cate
+                                TRUNCATE TABLE T_DinnerCountsAttr
+                                TRUNCATE TABLE T_SortTypesAttr");
+            }
         }
     }
 
@@ -69,46 +76,50 @@ namespace XCYN.Winform.Model.MeiTuan
         public static int Insert(List<Areas> areas)
         {
             int sum = 0;
-            int is_exist = 0;
-            for (int i = 0; i < areas.Count; i++)
+            using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                if (areas[i].subAreas.Count > 0)
+                for (int i = 0; i < areas.Count; i++)
                 {
-                    for (int j = 0; j < areas[i].subAreas.Count; j++)
+                    if (areas[i].subAreas.Count > 0)
                     {
-                        if (j == 0) continue;
-                        is_exist = Common.Dapper.DapperHelper.ExecuteScalar("SELECT COUNT(*) FROM T_Areas WHERE ID = @ID", new { id = areas[i].subAreas[j].id });
-                        if (is_exist <= 0)
+                        for (int j = 0; j < areas[i].subAreas.Count; j++)
                         {
-                            var count = Common.Dapper.DapperHelper.Execute("INSERT INTO T_Areas(ID,Name,URL,P_ID) Values(@id,@name,@url,@p_id)",
-                             new
-                             {
-                                 id = areas[i].subAreas[j].id,
-                                 name = areas[i].subAreas[j].name,
-                                 url = areas[i].subAreas[j].url,
-                                 p_id = areas[i].id
-                             });
-                            Interlocked.Add(ref sum, count);
+                            if (j == 0) continue;
+                            var query2 = from a in db.T_Areas
+                                        where a.ID == areas[i].subAreas[j].id
+                                        select a;
+                            if (query2.Count() <= 0)
+                            {
+                                T_Areas are = new T_Areas()
+                                {
+                                    ID = areas[i].subAreas[j].id,
+                                    Name = areas[i].subAreas[j].name,
+                                    URL = areas[i].subAreas[j].url,
+                                    P_ID = areas[i].id
+                                };
+                                db.T_Areas.Add(are);//插入二级目录
+                                Interlocked.Add(ref sum, 1);
+                            }
                         }
                     }
+                    var query = from a in db.T_Areas
+                                where a.ID == areas[i].id
+                                select a;
+                    if (query.Count() <= 0)
+                    {
+                        T_Areas are = new T_Areas()
+                        {
+                            ID = areas[i].id,
+                            Name = areas[i].name,
+                            URL = areas[i].url,
+                            P_ID = 0
+                        };
+                        db.T_Areas.Add(are);//插入一级目录
+                        Interlocked.Add(ref sum, 1);
+                    }
                 }
-                is_exist = Common.Dapper.DapperHelper.ExecuteScalar("SELECT COUNT(*) AS Count FROM T_Areas WHERE ID = @ID", new { id = areas[i].id });
-                if (is_exist <= 0)
-                {
-                    var c = Common.Dapper.DapperHelper.Execute("INSERT INTO T_Areas(ID,Name,URL,P_ID) Values(@id,@name,@url,@p_id)",
-                       new
-                       {
-                           id = areas[i].id,
-                           name = areas[i].name,
-                           url = areas[i].url,
-                           p_id = 0
-                       });
-                    Interlocked.Add(ref sum, c);
-                }
-
             }
             return sum;
-
         }
     }
 
@@ -127,20 +138,24 @@ namespace XCYN.Winform.Model.MeiTuan
         public static int Insert(List<Cate> list)
         {
             int sum = 0;
-            int is_exist = 0;
-            for (int i = 0; i < list.Count; i++)
+            using(MeiTuanEntities db = new MeiTuanEntities())
             {
-                is_exist = Common.Dapper.DapperHelper.ExecuteScalar("SELECT COUNT(*) AS Count FROM T_Cate WHERE ID = @id", new { id = list[i].id });
-                if (is_exist <= 0)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var c = Common.Dapper.DapperHelper.Execute("INSERT INTO T_Cate(ID,Name,URL) Values(@id,@name,@url)",
-                       new
-                       {
-                           id = list[i].id,
-                           name = list[i].name,
-                           url = list[i].url
-                       });
-                    Interlocked.Add(ref sum, c);
+                    var query = from a in db.T_Cate
+                                where a.ID == list[i].id
+                                select a;
+                    if(query.Count() <= 0)
+                    {
+                        var model = new T_Cate()
+                        {
+                            ID = list[i].id,
+                            Name = list[i].name,
+                            URL = list[i].url
+                        };
+                        db.T_Cate.Add(model);
+                        Interlocked.Add(ref sum, 1);
+                    }
                 }
             }
             return sum;
@@ -162,20 +177,24 @@ namespace XCYN.Winform.Model.MeiTuan
         public static int Insert(List<DinnerCountsAttr> list)
         {
             int sum = 0;
-            int is_exist = 0;
-            for (int i = 0; i < list.Count; i++)
+            using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                is_exist = Common.Dapper.DapperHelper.ExecuteScalar("SELECT COUNT(*) AS Count FROM T_DinnerCountsAttr WHERE ID = @id", new { id = list[i].id });
-                if (is_exist <= 0)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var c = Common.Dapper.DapperHelper.Execute("INSERT INTO T_DinnerCountsAttr(ID,Name,URL) Values(@id,@name,@url)",
-                       new
-                       {
-                           id = list[i].id,
-                           name = list[i].name,
-                           url = list[i].url
-                       });
-                    Interlocked.Add(ref sum, c);
+                    var query = from a in db.T_DinnerCountsAttr
+                                where a.ID == list[i].id
+                                select a;
+                    if (query.Count() <= 0)
+                    {
+                        var model = new T_DinnerCountsAttr()
+                        {
+                            ID = list[i].id,
+                            Name = list[i].name,
+                            URL = list[i].url
+                        };
+                        db.T_DinnerCountsAttr.Add(model);
+                        Interlocked.Add(ref sum, 1);
+                    }
                 }
             }
             return sum;
@@ -197,20 +216,24 @@ namespace XCYN.Winform.Model.MeiTuan
         public static int Insert(List<SortTypesAttr> list)
         {
             int sum = 0;
-            int is_exist = 0;
-            for (int i = 0; i < list.Count; i++)
+            using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                is_exist = Common.Dapper.DapperHelper.ExecuteScalar("SELECT COUNT(*) AS Count FROM T_SortTypesAttr WHERE ID = @id", new { id = list[i].id });
-                if (is_exist <= 0)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var c = Common.Dapper.DapperHelper.Execute("INSERT INTO T_SortTypesAttr(ID,Name,URL) Values(@id,@name,@url)",
-                       new
-                       {
-                           id = list[i].id,
-                           name = list[i].name,
-                           url = list[i].url
-                       });
-                    Interlocked.Add(ref sum, c);
+                    var query = from a in db.T_SortTypesAttr
+                                where a.ID == list[i].id
+                                select a;
+                    if (query.Count() <= 0)
+                    {
+                        var model = new T_SortTypesAttr()
+                        {
+                            ID = list[i].id,
+                            Name = list[i].name,
+                            URL = list[i].url
+                        };
+                        db.T_SortTypesAttr.Add(model);
+                        Interlocked.Add(ref sum, 1);
+                    }
                 }
             }
             return sum;

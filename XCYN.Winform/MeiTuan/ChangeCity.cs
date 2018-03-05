@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XCYN.Common.Dapper;
+using Dapper;
 
 namespace XCYN.Winform.MeiTuan
 {
@@ -81,13 +83,28 @@ namespace XCYN.Winform.MeiTuan
         /// </summary>
         public void Fun2()
         {
+            int count = 0;
             listBox1.Invoke(new Action(() =>
             {
                 listBox1.Items.Insert(0, $"{DateTime.Now.ToShortTimeString()} 导入数据中...");
             }));
-            var list_source = Common.Dapper.DapperHelper.Query<City>("SELECT Name,URL FROM T_City");
-            var list_except = _list_target.Except(list_source);
-            int count = Common.Dapper.DapperHelper.Execute("INSERT INTO T_City(Name,URL) VALUES(@Name,@URL)", list_except);
+            IDbConnection conn = null;
+            try
+            {
+                conn = DapperManager.GetConnection();
+                conn.Open();
+                var list_source = conn.Query<City>("SELECT Name,URL FROM T_City");
+                var list_except = _list_target.Except(list_source);
+                count = conn.Execute("INSERT INTO T_City(Name,URL) VALUES(@Name,@URL)", list_except);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
 
             listBox1.Invoke(new Action(() =>
             {
@@ -98,40 +115,55 @@ namespace XCYN.Winform.MeiTuan
         public void Fun3()
         {
             HtmlAgilityPack.HtmlDocument doc = null;
-            var list_source = Common.Dapper.DapperHelper.Query<City>("SELECT ID,Name,URL,MeiShiURL FROM T_City WHERE State = @State", new { State = 1 });
-            //一个一个访问URL，并获取美食模块的URL
-            for (int i = 0; i < list_source.Count; i++)
+            IDbConnection conn = null;
+            try
             {
-                if (list_source[i].MeiShiURL != null)
-                    continue;
-                try
+                conn = DapperManager.GetConnection();
+                conn.Open();
+                var list_source = conn.Query<City>("SELECT ID,Name,URL,MeiShiURL FROM T_City WHERE State = @State", new { State = 1 });
+                //一个一个访问URL，并获取美食模块的URL
+                for (int i = 0; i < list_source.Count(); i++)
                 {
-                    doc = webClient.Load(list_source[i].URL);
-                }
-                catch (System.Net.WebException webEx)
-                {
-                    listBox1.Invoke(new Action(() =>
+                    if (list_source.ElementAt(i).MeiShiURL != null)
+                        continue;
+                    try
                     {
-                        listBox1.Items.Insert(0, webEx.Message);
-                    }));
-                    continue;
-                }
-                var hrefList = doc.DocumentNode.SelectNodes("//div[@class='category-nav-content-wrapper']//a[@href]");
-                foreach (var item in hrefList)
-                {
-                    if (item.InnerText.Equals("美食"))
+                        doc = webClient.Load(list_source.ElementAt(i).URL);
+                    }
+                    catch (System.Net.WebException webEx)
                     {
-                        var MeiShiURL = item.Attributes["href"].Value;
-                        list_source[i].MeiShiURL = MeiShiURL;
-                        var count = Common.Dapper.DapperHelper.Execute("UPDATE T_City SET MeiShiURL = @MeiShiURL WHERE ID = @ID", list_source[i]);
                         listBox1.Invoke(new Action(() =>
                         {
-                            listBox1.Items.Insert(0, $"{DateTime.Now } 更新了{list_source[i].Name}的美食地址");
+                            listBox1.Items.Insert(0, webEx.Message);
                         }));
-                        break;
+                        continue;
+                    }
+                    var hrefList = doc.DocumentNode.SelectNodes("//div[@class='category-nav-content-wrapper']//a[@href]");
+                    foreach (var item in hrefList)
+                    {
+                        if (item.InnerText.Equals("美食"))
+                        {
+                            var MeiShiURL = item.Attributes["href"].Value;
+                            list_source.ElementAt(i).MeiShiURL = MeiShiURL;
+                            var count = conn.Execute("UPDATE T_City SET MeiShiURL = @MeiShiURL WHERE ID = @ID", list_source.ElementAt(i));
+                            listBox1.Invoke(new Action(() =>
+                            {
+                                listBox1.Items.Insert(0, $"{DateTime.Now } 更新了{list_source.ElementAt(i).Name}的美食地址");
+                            }));
+                            break;
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+           
             //hrefList = doc.DocumentNode.SelectNodes("//div[@id='app']//a[@href]");
         }
 

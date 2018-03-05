@@ -26,9 +26,11 @@ namespace XCYN.Common.Dapper
         public static int Execute(string sql,object param = null,IDbTransaction transaction = null)
         {
             int count = 0;
+            IDbConnection conn = null;
             try
             {
-                var conn = Dapper.DapperManager.GetConnection();
+                conn = Dapper.DapperManager.GetConnection();
+                conn.Open();
                 count = conn.Execute(sql, param, transaction);
                 return count;
             }
@@ -41,6 +43,10 @@ namespace XCYN.Common.Dapper
 #else
                 return 0;
 #endif
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -56,9 +62,11 @@ namespace XCYN.Common.Dapper
         /// <returns></returns>
         public static List<T> Query<T>(string sql, object param = null, IDbTransaction transaction = null)
         {
+            IDbConnection conn = null;
             try
             {
-                var conn = Dapper.DapperManager.GetConnection();
+                conn = Dapper.DapperManager.GetConnection();
+                conn.Open();
                 var list = conn.Query<T>(sql, param, transaction);
                 return list as List<T>;
             }
@@ -71,6 +79,10 @@ namespace XCYN.Common.Dapper
                 return null;
 #endif
             }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         /// <summary>
@@ -82,9 +94,10 @@ namespace XCYN.Common.Dapper
         /// <returns></returns>
         public static IEnumerable<dynamic> Query(string sql, object param = null, IDbTransaction transaction = null)
         {
+            IDbConnection conn = null;
             try
             {
-                var conn = Dapper.DapperManager.GetConnection();
+                conn = Dapper.DapperManager.GetConnection();
                 var list = conn.Query(sql, param, transaction);
                 return list;
             }
@@ -97,6 +110,10 @@ namespace XCYN.Common.Dapper
                 return null;
 #endif
             }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         /// <summary>
@@ -108,9 +125,10 @@ namespace XCYN.Common.Dapper
         /// <returns></returns>
         public static int ExecuteScalar(string sql, object param = null, IDbTransaction transaction = null)
         {
+            IDbConnection conn = null;
             try
             {
-                var conn = Dapper.DapperManager.GetConnection();
+                conn = Dapper.DapperManager.GetConnection();
                 var obj = conn.ExecuteScalar<int>(sql, param, transaction);
                 return obj;
             }
@@ -122,6 +140,10 @@ namespace XCYN.Common.Dapper
 #else
                 return 0;
 #endif
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 

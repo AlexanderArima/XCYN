@@ -39,7 +39,6 @@ namespace XCYN.Common.Dapper
                         _instance = new SqlConnection(connectionString);
                     }
                 }
-
             }
             return _instance;
         }
