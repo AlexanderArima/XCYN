@@ -17,13 +17,13 @@ namespace XCYN.Winform.Model.MeiTuan
     public class Filters
     {
         
-        public List<Areas> areas { get; set; }
+        public List<T_Areas> areas { get; set; }
 
-        public List<Cate> cates { get; set; }
+        public List<T_Areas> cates { get; set; }
 
-        public List<DinnerCountsAttr> dinnerCountsAttr { get; set; }
+        public List<T_Areas> dinnerCountsAttr { get; set; }
 
-        public List<SortTypesAttr> sortTypesAttr { get; set; }
+        public List<T_Areas> sortTypesAttr { get; set; }
         
         /// <summary>
         /// 批量导入数据
@@ -33,19 +33,46 @@ namespace XCYN.Winform.Model.MeiTuan
             var typeName = typeof(T).Name;
             if (typeName.Equals(typeof(int).Name))
             {
-                int count = Areas.Insert(areas);
-                int count2 = Cate.Insert(cates);
-                int count3 = DinnerCountsAttr.Insert(dinnerCountsAttr);
-                int count4 = SortTypesAttr.Insert(sortTypesAttr);
-                return (T)(object)(count + count2 + count3 + count4);
+                int count = 0;
+                using (MeiTuanEntities db = new MeiTuanEntities())
+                {
+                    var query = from a in db.T_Areas
+                                where a.State == true
+                                select a;
+                    List<T_Areas> list = new List<T_Areas>();
+                    //默认值
+                    for (int i = 0; i < areas.Count; i++)
+                    {
+                        areas[i].State = true;
+                        areas[i].P_ID = 0;
+                        areas[i].AddTime = DateTime.Now;
+                        var subAreas = areas[i].subAreas;
+                        for (int j = 0; j < subAreas.Count; j++)
+                        {
+                            subAreas[j].State = true;
+                            subAreas[j].P_ID = areas[i].ID;
+                            subAreas[j].AddTime = DateTime.Now;
+                        }
+                        subAreas.Remove(subAreas.Find(m => m.Name.Equals("全部")));
+                        list.AddRange(subAreas);
+                        //db.T_Areas.AddRange(subAreas);
+                    }
+                    list.AddRange(areas);
+                    //var temp_areas = db.T_Areas.AddRange(areas);
+                    List<int> list_id_source = query.Select(m => m.ID).ToList();
+                    List<int> list_id_target = list.Select(m => m.ID).ToList();
+                    //找出需要插入的值
+                    List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
+                    var list_inserted = list.FindAll(m => list_id_insert.Contains(m.ID));
+                    db.T_Areas.AddRange(list_inserted);
+                    db.SaveChanges();
+                }
+                return (T)(object)(count);
             }
             else if (typeName.Equals(typeof(string).Name))
             {
-                int count = Areas.Insert(areas);
-                int count2 = Cate.Insert(cates);
-                int count3 = DinnerCountsAttr.Insert(dinnerCountsAttr);
-                int count4 = SortTypesAttr.Insert(sortTypesAttr);
-                return (T)(object)$"导入地区:{count}条，类别:{count2}，用餐人数:{count3}，排序规则:{count4}";// count + count2 + count3 + count4;
+                return (T)(object)$"";
+                //return (T)(object)$"导入地区:{count}条，类别:{count2}，用餐人数:{count3}，排序规则:{count4}";// count + count2 + count3 + count4;
             }
             else
                 return default(T);
@@ -73,13 +100,17 @@ namespace XCYN.Winform.Model.MeiTuan
         /// <summary>
         /// 批量导入数据
         /// </summary>
-        public static int Insert(List<Areas> areas)
+        public static int Insert(List<T_Areas> areas)
         {
+            /*
             int sum = 0;
             using (MeiTuanEntities db = new MeiTuanEntities())
             {
+                db.T_Areas.AddRange(areas);
                 for (int i = 0; i < areas.Count; i++)
                 {
+
+
                     if (areas[i].subAreas.Count > 0)
                     {
                         for (int j = 0; j < areas[i].subAreas.Count; j++)
@@ -102,6 +133,7 @@ namespace XCYN.Winform.Model.MeiTuan
                             }
                         }
                     }
+
                     var query = from a in db.T_Areas
                                 where a.ID == areas[i].id
                                 select a;
@@ -120,7 +152,11 @@ namespace XCYN.Winform.Model.MeiTuan
                 }
             }
             return sum;
+              */
+            return 0;
         }
+      
+           
     }
 
     /// <summary>

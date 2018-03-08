@@ -97,3 +97,9 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\Dapper.dll
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\Dapper.xml
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.SqlServer.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.dll
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.SqlServer.xml
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.pdb
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.xml
+D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

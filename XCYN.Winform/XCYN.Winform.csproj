@@ -207,12 +207,6 @@
     <Compile Include="Service1.Designer.cs">
       <DependentUpon>Service1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Spider.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Spider.Designer.cs">
-      <DependentUpon>Spider.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -250,9 +244,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Spider.resx">
-      <DependentUpon>Spider.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model\MeiTuan\EF\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

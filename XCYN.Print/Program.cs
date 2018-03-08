@@ -21,10 +21,12 @@ using XCYN.Print.DesignPattern.Observer;
 using XCYN.Print.DesignPattern.Proxy;
 using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
+using XCYN.Print.FileSystem;
 using XCYN.Print.Generics;
 using XCYN.Print.linq;
 using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
+using XCYN.Print.Redis;
 
 namespace XCYN.Print
 {
@@ -32,8 +34,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            ExampleSample sample = new ExampleSample();
-            sample.Fun6(1,10);
+            RecentLog log = new RecentLog();
+            log.Fun2();
             Console.Read();
         }
 

@@ -370,6 +370,7 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
+    <Content Include="Pages\log\Main.aspx" />
     <Content Include="Pages\test\RequestTest.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1359,6 +1360,16 @@
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\log\ashx\LogHandler.ashx.cs">
+      <DependentUpon>LogHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\log\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\log\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\test\RequestHandler.ashx.cs">
       <DependentUpon>RequestHandler.ashx</DependentUpon>
     </Compile>
@@ -1580,6 +1591,7 @@
     <Content Include="Pages\easyui\nav.json" />
     <Content Include="Pages\easyui\tree.json" />
     <Content Include="Pages\test\RequestHandler.ashx" />
+    <Content Include="Pages\log\ashx\LogHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1601,6 +1613,10 @@
     <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
       <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
       <Name>XCYN.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCYN.Print\XCYN.Print.csproj">
+      <Project>{b381793e-9506-4a79-84be-91c070afeddc}</Project>
+      <Name>XCYN.Print</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

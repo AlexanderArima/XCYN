@@ -20,5 +20,6 @@ namespace XCYN.Winform.Model.MeiTuan.EF
         public Nullable<int> P_ID { get; set; }
         public Nullable<bool> State { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
+        public List<T_Areas> subAreas { get; set; }
     }
 }

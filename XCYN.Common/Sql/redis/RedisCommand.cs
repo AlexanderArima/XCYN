@@ -59,7 +59,7 @@ namespace XCYN.Common.Sql.redis
         /// <returns></returns>
         public ArrayList Keys(string key)
         {
-            return RedisManager.Keys("*");
+            return RedisManager.Keys(key);
         }
 
         /// <summary>

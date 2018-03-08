@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XCYN.Common;
 using XCYN.Print.Generics;
+using XCYN.Winform.Model.MeiTuan.EF;
+using System.Linq;
 
 namespace XCYN.Test
 {
@@ -21,6 +23,18 @@ namespace XCYN.Test
         {
             var num = TStudent<string>.num;
             Assert.AreEqual(2, num);
+        }
+
+        [TestMethod]
+        public void MyTestMethod2()
+        {
+            using (MeiTuanEntities db = new MeiTuanEntities())
+            {
+                var query = from a in db.T_City
+                            where a.State == true
+                            select a; 
+                var list = query.ToList();
+            }
         }
     }
 }

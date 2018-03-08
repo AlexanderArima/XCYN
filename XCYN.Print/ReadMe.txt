@@ -2,6 +2,7 @@
 Crawler			爬虫程序的模型
 delegates		委托的Demo(一般委托，匿名委托，泛型委托)
 DesignPattern	设计模式的Demo
+Generics		泛型类
 linq			Linq的一些Demo
 MultiThread		多线程的Demo(Task，Continue，Wait，Lock等)
 Operators		各种运算符的Demo

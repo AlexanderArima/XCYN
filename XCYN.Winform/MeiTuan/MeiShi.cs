@@ -41,7 +41,7 @@ namespace XCYN.Winform.MeiTuan
                 {
                     var query = from a in db.T_City
                                 where a.State == true
-                                select new T_City
+                                select new
                                 {
                                     ID = a.ID,
                                     Name = a.Name,
@@ -49,7 +49,7 @@ namespace XCYN.Winform.MeiTuan
                                     MeiShiURL = a.MeiShiURL
                                 };
 
-                    var list = query;
+                    var list = query.ToList();
                     Task task = new Task(() => {
 
                         for (int i = 0; i < list.Count(); i = i + 2)
@@ -65,8 +65,9 @@ namespace XCYN.Winform.MeiTuan
                                     //获取Json数据
                                     var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
                                     var obj = JsonConvert.DeserializeObject<Meta>(data);
-                                    //var count = obj.filters.Insert<string>();
-                                    var count = obj.filters?.Insert<string>();
+                                    //插入地区
+                                    int count = obj.filters.Insert<int>();
+                                    
                                     listBox1.Invoke(new Action(() => {
                                         listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
                                     }));
@@ -76,35 +77,7 @@ namespace XCYN.Winform.MeiTuan
                         }
                     });
                     task.Start();
-                    //Task task2 = new Task(() => {
-
-                    //    for (int i = 1; i < list.Count(); i += 2)
-                    //    {
-                    //        if (list.ElementAt(i).MeiShiURL == null) continue;
-                    //        var document = webClient.Load(list.ElementAt(i).MeiShiURL);
-                    //        hrefList = document.DocumentNode.SelectNodes("//script");
-                    //        for (int j = 0; j < hrefList.Count; j++)
-                    //        {
-                    //            var item = hrefList[j].InnerHtml;
-                    //            if (item.Contains("window._appState"))
-                    //            {
-                    //                //获取Json数据
-                    //                var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
-                    //                var obj = JsonConvert.DeserializeObject<Meta>(data);
-                    //                //var count = obj.filters.Insert<string>();
-                    //                var count = obj.filters?.Insert<string>();
-                    //                listBox1.Invoke(new Action(() => {
-                    //                    listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
-                    //                }));
-                    //                break;
-                    //            }
-                    //        }
-
-                    //    }
-                    //});
-                    //task2.Start();
                 }
-                    
             }
             catch(Exception ex)
             {
