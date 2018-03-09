@@ -24,7 +24,7 @@ namespace XCYN.Print.linq.DataLib
     public string Country { get; set; }
     public int Wins { get; set; }
     public int Starts { get; set; }
-    public IEnumerable<string> Cars { get; }
+    public IEnumerable<string> Cars { get; set; }
     public IEnumerable<int> Years { get; }
 
     public override string ToString() => $"{FirstName} {LastName}";

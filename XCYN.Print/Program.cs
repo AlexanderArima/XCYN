@@ -1,5 +1,8 @@
-﻿using System;
+﻿using log4net;
+using log4net.Config;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -34,9 +37,22 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            RecentLog log = new RecentLog();
-            log.Fun2();
-            Console.Read();
+            InitLog4Net();
+
+            var logger = LogManager.GetLogger(typeof(Program));
+            logger.Info("消息");
+            logger.Warn("警告");
+            logger.Error("异常");
+            logger.Fatal("错误");
+            logger.Debug("调试");
+            GenericsFuncTest();
+            Console.ReadLine();
+        }
+
+        private static void InitLog4Net()
+        {
+            var logCfg = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config");
+            XmlConfigurator.ConfigureAndWatch(logCfg);
         }
 
         private static void GenericsFuncTest3()
@@ -81,6 +97,7 @@ namespace XCYN.Print
             int x = 0;
             int y = 100;
             f.Swap<int>(ref x,ref y);
+            Console.WriteLine();
             Console.WriteLine($"x:{x},y:{y}");
             Console.Read();
         }

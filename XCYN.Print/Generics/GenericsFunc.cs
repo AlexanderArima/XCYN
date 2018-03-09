@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace XCYN.Print.Generics
     {
         public void Swap<T>(ref T x, ref T y)
         {
+            var logger = LogManager.GetLogger(typeof(GenericsFunc));
+            logger.Info("哈哈哈");
             T temp = x;
             x = y;
             y = temp;
