@@ -37,6 +37,14 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        private static void InvokeLog4Net()
+        {
             InitLog4Net();
 
             var logger = LogManager.GetLogger(typeof(Program));
