@@ -373,6 +373,8 @@
     <Content Include="Pages\log\Main.aspx" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
+    <Content Include="Pages\test\DateTest.aspx" />
+    <Content Include="Pages\test\DateTest2.aspx" />
     <Content Include="Pages\test\RequestTest.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1385,6 +1387,20 @@
     </Compile>
     <Compile Include="Pages\test\ArrayTest2.aspx.designer.cs">
       <DependentUpon>ArrayTest2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\DateTest.aspx.cs">
+      <DependentUpon>DateTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\DateTest.aspx.designer.cs">
+      <DependentUpon>DateTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\DateTest2.aspx.cs">
+      <DependentUpon>DateTest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\DateTest2.aspx.designer.cs">
+      <DependentUpon>DateTest2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\test\RequestHandler.ashx.cs">
       <DependentUpon>RequestHandler.ashx</DependentUpon>
