@@ -12,13 +12,14 @@ namespace XCYN.Winform.Model.MeiTuan.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class T_Areas
+    public partial class Log
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string URL { get; set; }
-        public Nullable<int> P_ID { get; set; }
-        public Nullable<bool> State { get; set; }
-        public Nullable<System.DateTime> AddTime { get; set; }
+        public int Id { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Thread { get; set; }
+        public string Level { get; set; }
+        public string Logger { get; set; }
+        public string Message { get; set; }
+        public string Exception { get; set; }
     }
 }

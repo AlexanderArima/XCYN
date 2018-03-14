@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MeiTuanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MeiTuan.dbo.Log”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MeiTuan.dbo.T_Areas”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="T_Areas">
           <Key>
             <PropertyRef Name="ID" />
@@ -16,6 +37,8 @@
           <Property Name="State" Type="bit" />
           <Property Name="AddTime" Type="date" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MeiTuan.dbo.T_Cate”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="T_Cate">
           <Key>
             <PropertyRef Name="ID" />
@@ -37,6 +60,8 @@
           <Property Name="State" Type="bit" />
           <Property Name="AddTime" Type="date" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MeiTuan.dbo.T_DinnerCountsAttr”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="T_DinnerCountsAttr">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,6 +72,8 @@
           <Property Name="State" Type="bit" />
           <Property Name="AddTime" Type="date" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MeiTuan.dbo.T_SortTypesAttr”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="T_SortTypesAttr">
           <Key>
             <PropertyRef Name="ID" />
@@ -58,17 +85,89 @@
           <Property Name="AddTime" Type="date" />
         </EntityType>
         <EntityContainer Name="MeiTuanModelStoreContainer">
-          <EntitySet Name="T_Areas" EntityType="Self.T_Areas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_Cate" EntityType="Self.T_Cate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_City" EntityType="Self.T_City" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_DinnerCountsAttr" EntityType="Self.T_DinnerCountsAttr" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_SortTypesAttr" EntityType="Self.T_SortTypesAttr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log].[Id] AS [Id], 
+    [Log].[Date] AS [Date], 
+    [Log].[Thread] AS [Thread], 
+    [Log].[Level] AS [Level], 
+    [Log].[Logger] AS [Logger], 
+    [Log].[Message] AS [Message], 
+    [Log].[Exception] AS [Exception]
+    FROM [dbo].[Log] AS [Log]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Areas" EntityType="Self.T_Areas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_Areas].[ID] AS [ID], 
+    [T_Areas].[Name] AS [Name], 
+    [T_Areas].[URL] AS [URL], 
+    [T_Areas].[P_ID] AS [P_ID], 
+    [T_Areas].[State] AS [State], 
+    [T_Areas].[AddTime] AS [AddTime]
+    FROM [dbo].[T_Areas] AS [T_Areas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Cate" EntityType="Self.T_Cate" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_Cate].[ID] AS [ID], 
+    [T_Cate].[Name] AS [Name], 
+    [T_Cate].[URL] AS [URL], 
+    [T_Cate].[State] AS [State], 
+    [T_Cate].[AddTime] AS [AddTime]
+    FROM [dbo].[T_Cate] AS [T_Cate]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_DinnerCountsAttr" EntityType="Self.T_DinnerCountsAttr" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_DinnerCountsAttr].[ID] AS [ID], 
+    [T_DinnerCountsAttr].[Name] AS [Name], 
+    [T_DinnerCountsAttr].[URL] AS [URL], 
+    [T_DinnerCountsAttr].[State] AS [State], 
+    [T_DinnerCountsAttr].[AddTime] AS [AddTime]
+    FROM [dbo].[T_DinnerCountsAttr] AS [T_DinnerCountsAttr]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_SortTypesAttr" EntityType="Self.T_SortTypesAttr" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_SortTypesAttr].[ID] AS [ID], 
+    [T_SortTypesAttr].[Name] AS [Name], 
+    [T_SortTypesAttr].[URL] AS [URL], 
+    [T_SortTypesAttr].[State] AS [State], 
+    [T_SortTypesAttr].[AddTime] AS [AddTime]
+    FROM [dbo].[T_SortTypesAttr] AS [T_SortTypesAttr]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MeiTuanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MeiShiURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="AddTime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="T_Areas">
           <Key>
             <PropertyRef Name="ID" />
@@ -87,17 +186,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="Boolean" />
-          <Property Name="AddTime" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="T_City">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="MeiShiURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="State" Type="Boolean" />
           <Property Name="AddTime" Type="DateTime" Precision="0" />
         </EntityType>
@@ -122,9 +210,10 @@
           <Property Name="AddTime" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityContainer Name="MeiTuanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_City" EntityType="Self.T_City" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
           <EntitySet Name="T_Areas" EntityType="Self.T_Areas" />
           <EntitySet Name="T_Cate" EntityType="Self.T_Cate" />
-          <EntitySet Name="T_City" EntityType="Self.T_City" />
           <EntitySet Name="T_DinnerCountsAttr" EntityType="Self.T_DinnerCountsAttr" />
           <EntitySet Name="T_SortTypesAttr" EntityType="Self.T_SortTypesAttr" />
         </EntityContainer>
@@ -134,6 +223,31 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MeiTuanModelStoreContainer" CdmEntityContainer="MeiTuanEntities">
+          <EntitySetMapping Name="T_City">
+            <EntityTypeMapping TypeName="MeiTuanModel.T_City">
+              <MappingFragment StoreEntitySet="T_City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="MeiShiURL" ColumnName="MeiShiURL" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="MeiTuanModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="T_Areas">
             <EntityTypeMapping TypeName="MeiTuanModel.T_Areas">
               <MappingFragment StoreEntitySet="T_Areas">
@@ -152,18 +266,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_City">
-            <EntityTypeMapping TypeName="MeiTuanModel.T_City">
-              <MappingFragment StoreEntitySet="T_City">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="MeiShiURL" ColumnName="MeiShiURL" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
               </MappingFragment>

@@ -25,9 +25,10 @@ namespace XCYN.Winform.Model.MeiTuan.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<T_City> T_City { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<T_Areas> T_Areas { get; set; }
         public virtual DbSet<T_Cate> T_Cate { get; set; }
-        public virtual DbSet<T_City> T_City { get; set; }
         public virtual DbSet<T_DinnerCountsAttr> T_DinnerCountsAttr { get; set; }
         public virtual DbSet<T_SortTypesAttr> T_SortTypesAttr { get; set; }
     }

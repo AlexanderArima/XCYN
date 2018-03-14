@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using XCYN.Winform.Model.MeiTuan.EF;
 using Dapper;
 using XCYN.Common.Dapper;
+using System.Data.SqlClient;
 
 namespace XCYN.Winform.Model.MeiTuan
 {
@@ -17,67 +18,26 @@ namespace XCYN.Winform.Model.MeiTuan
     public class Filters
     {
         
-        public List<T_Areas> areas { get; set; }
+        public List<Areas> areas { get; set; }
 
-        public List<T_Areas> cates { get; set; }
+        public List<Cate> cates { get; set; }
 
-        public List<T_Areas> dinnerCountsAttr { get; set; }
+        public List<DinnerCountsAttr> dinnerCountsAttr { get; set; }
 
-        public List<T_Areas> sortTypesAttr { get; set; }
+        public List<SortTypesAttr> sortTypesAttr { get; set; }
         
         /// <summary>
         /// 批量导入数据
         /// </summary>
-        public T Insert<T>()
+        public int Insert()
         {
-            var typeName = typeof(T).Name;
-            if (typeName.Equals(typeof(int).Name))
-            {
-                int count = 0;
-                using (MeiTuanEntities db = new MeiTuanEntities())
-                {
-                    var query = from a in db.T_Areas
-                                where a.State == true
-                                select a;
-                    List<T_Areas> list = new List<T_Areas>();
-                    //默认值
-                    for (int i = 0; i < areas.Count; i++)
-                    {
-                        areas[i].State = true;
-                        areas[i].P_ID = 0;
-                        areas[i].AddTime = DateTime.Now;
-                        var subAreas = areas[i].subAreas;
-                        for (int j = 0; j < subAreas.Count; j++)
-                        {
-                            subAreas[j].State = true;
-                            subAreas[j].P_ID = areas[i].ID;
-                            subAreas[j].AddTime = DateTime.Now;
-                        }
-                        subAreas.Remove(subAreas.Find(m => m.Name.Equals("全部")));
-                        list.AddRange(subAreas);
-                        //db.T_Areas.AddRange(subAreas);
-                    }
-                    list.AddRange(areas);
-                    //var temp_areas = db.T_Areas.AddRange(areas);
-                    List<int> list_id_source = query.Select(m => m.ID).ToList();
-                    List<int> list_id_target = list.Select(m => m.ID).ToList();
-                    //找出需要插入的值
-                    List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
-                    var list_inserted = list.FindAll(m => list_id_insert.Contains(m.ID));
-                    db.T_Areas.AddRange(list_inserted);
-                    db.SaveChanges();
-                }
-                return (T)(object)(count);
-            }
-            else if (typeName.Equals(typeof(string).Name))
-            {
-                return (T)(object)$"";
-                //return (T)(object)$"导入地区:{count}条，类别:{count2}，用餐人数:{count3}，排序规则:{count4}";// count + count2 + count3 + count4;
-            }
-            else
-                return default(T);
+            int count = Areas.Insert(areas);
+            int count2 = Cate.Insert(cates);
+            int count3 = DinnerCountsAttr.Insert(dinnerCountsAttr);
+            int count4 = SortTypesAttr.Insert(sortTypesAttr);
+            return count + count2 + count3 + count4;
         }
-
+      
         public int Delete()
         {
             using (MeiTuanEntities db = new MeiTuanEntities())
@@ -90,73 +50,75 @@ namespace XCYN.Winform.Model.MeiTuan
         }
     }
 
+    /// <summary>
+    /// 城市
+    /// </summary>
     public class Areas
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string URL { get; set; }
+        public int P_ID { get; set; }
+        public bool State { get; set; }
+        public DateTime AddTime { get; set; }
         public List<Areas> subAreas { get; set; }
 
-        /// <summary>
-        /// 批量导入数据
-        /// </summary>
-        public static int Insert(List<T_Areas> areas)
+        public static int Insert(List<Areas> areas)
         {
-            /*
-            int sum = 0;
             using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                db.T_Areas.AddRange(areas);
+                var query = from a in db.T_Areas
+                            where a.State == true
+                            select a;
+                List<Areas> list = new List<Areas>();
+                //默认值
                 for (int i = 0; i < areas.Count; i++)
                 {
-
-
-                    if (areas[i].subAreas.Count > 0)
+                    areas[i].State = true;
+                    areas[i].P_ID = 0;
+                    areas[i].AddTime = DateTime.Now;
+                    var subAreas = areas[i].subAreas;
+                    for (int j = 0; j < subAreas.Count; j++)
                     {
-                        for (int j = 0; j < areas[i].subAreas.Count; j++)
-                        {
-                            if (j == 0) continue;
-                            var query2 = from a in db.T_Areas
-                                        where a.ID == areas[i].subAreas[j].id
-                                        select a;
-                            if (query2.Count() <= 0)
-                            {
-                                T_Areas are = new T_Areas()
-                                {
-                                    ID = areas[i].subAreas[j].id,
-                                    Name = areas[i].subAreas[j].name,
-                                    URL = areas[i].subAreas[j].url,
-                                    P_ID = areas[i].id
-                                };
-                                db.T_Areas.Add(are);//插入二级目录
-                                Interlocked.Add(ref sum, 1);
-                            }
-                        }
+                        subAreas[j].State = true;
+                        subAreas[j].P_ID = areas[i].ID;
+                        subAreas[j].AddTime = DateTime.Now;
                     }
-
-                    var query = from a in db.T_Areas
-                                where a.ID == areas[i].id
-                                select a;
-                    if (query.Count() <= 0)
-                    {
-                        T_Areas are = new T_Areas()
-                        {
-                            ID = areas[i].id,
-                            Name = areas[i].name,
-                            URL = areas[i].url,
-                            P_ID = 0
-                        };
-                        db.T_Areas.Add(are);//插入一级目录
-                        Interlocked.Add(ref sum, 1);
-                    }
+                    subAreas.Remove(subAreas.Find(m => m.Name.Equals("全部")));
+                    list.AddRange(subAreas);
+                    //db.T_Areas.AddRange(subAreas);
                 }
+                list.AddRange(areas);
+                //var temp_areas = db.T_Areas.AddRange(areas);
+                List<int> list_id_source = query.Select(m => m.ID).ToList();
+                List<int> list_id_target = list.Select(m => m.ID).ToList();
+                //找出需要插入的值
+                List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
+                var list_inserted = list.FindAll(m => list_id_insert.Contains(m.ID)).Select(i => {
+                    return new T_Areas
+                    {
+                        ID = i.ID,
+                        Name = i.Name,
+                        URL = i.URL,
+                        P_ID = i.P_ID,
+                        State = i.State,
+                        AddTime = i.AddTime,
+                    };
+                });
+                foreach (var item in list_inserted)
+                {
+                    db.Database.ExecuteSqlCommand("INSERT INTO T_Areas(ID,Name,URL,P_ID,State,AddTime) VALUES(@ID,@Name,@URL,@P_ID,@State,@AddTime)",
+                        new SqlParameter("@ID", item.ID),
+                        new SqlParameter("@Name", item.Name),
+                        new SqlParameter("@URL", item.URL),
+                        new SqlParameter("@P_ID", item.P_ID),
+                        new SqlParameter("@State", item.State),
+                        new SqlParameter("@AddTime", item.AddTime));
+                }
+                db.SaveChanges();
+                return list_inserted.Count();
             }
-            return sum;
-              */
-            return 0;
         }
-      
-           
     }
 
     /// <summary>
@@ -167,35 +129,49 @@ namespace XCYN.Winform.Model.MeiTuan
         public int id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+        public bool State { get; set; }
+        public DateTime AddTime { get; set; }
 
         /// <summary>
-        /// 批量导入数据
+        /// 导入数据
         /// </summary>
-        public static int Insert(List<Cate> list)
+        public static int Insert(List<Cate> cate)
         {
-            int sum = 0;
-            using(MeiTuanEntities db = new MeiTuanEntities())
+            using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var query = from a in db.T_Cate
-                                where a.ID == list[i].id
-                                select a;
-                    if(query.Count() <= 0)
+                var query = from a in db.T_Cate
+                            where a.State == true
+                            select a;
+                List<Cate> list = new List<Cate>();
+                list.AddRange(cate);
+                List<int> list_id_source = query.Select(m => m.ID).ToList();
+                List<int> list_id_target = list.Select(m => m.id).ToList();
+                //找出需要插入的值
+                List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
+                var list_inserted = list.FindAll(m => list_id_insert.Contains(m.id)).Select(i => {
+                    return new Cate
                     {
-                        var model = new T_Cate()
-                        {
-                            ID = list[i].id,
-                            Name = list[i].name,
-                            URL = list[i].url
-                        };
-                        db.T_Cate.Add(model);
-                        Interlocked.Add(ref sum, 1);
-                    }
+                        id = i.id,
+                        name = i.name,
+                        url = string.Empty,
+                        State = true,
+                        AddTime = DateTime.Now
+                    };
+                });
+                foreach (var item in list_inserted)
+                {
+                    db.Database.ExecuteSqlCommand("INSERT INTO T_Cate(ID,Name,URL,State,AddTime) VALUES(@ID,@Name,@URL,@State,@AddTime)",
+                        new SqlParameter("@ID", item.id),
+                        new SqlParameter("@Name", item.name),
+                        new SqlParameter("@URL", item.url),
+                        new SqlParameter("@State", item.State),
+                        new SqlParameter("@AddTime", item.AddTime));
                 }
+                db.SaveChanges();
+                return list_inserted.Count();
             }
-            return sum;
         }
+        
     }
 
     /// <summary>
@@ -206,34 +182,47 @@ namespace XCYN.Winform.Model.MeiTuan
         public int id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+        public bool State { get; set; }
+        public DateTime AddTime { get; set; }
 
         /// <summary>
-        /// 批量导入数据
+        /// 导入数据
         /// </summary>
-        public static int Insert(List<DinnerCountsAttr> list)
+        public static int Insert(List<DinnerCountsAttr> cate)
         {
-            int sum = 0;
             using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var query = from a in db.T_DinnerCountsAttr
-                                where a.ID == list[i].id
-                                select a;
-                    if (query.Count() <= 0)
+                var query = from a in db.T_DinnerCountsAttr
+                            where a.State == true
+                            select a;
+                List<DinnerCountsAttr> list = new List<DinnerCountsAttr>();
+                list.AddRange(cate);
+                List<int> list_id_source = query.Select(m => m.ID).ToList();
+                List<int> list_id_target = list.Select(m => m.id).ToList();
+                //找出需要插入的值
+                List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
+                var list_inserted = list.FindAll(m => list_id_insert.Contains(m.id)).Select(i => {
+                    return new DinnerCountsAttr
                     {
-                        var model = new T_DinnerCountsAttr()
-                        {
-                            ID = list[i].id,
-                            Name = list[i].name,
-                            URL = list[i].url
-                        };
-                        db.T_DinnerCountsAttr.Add(model);
-                        Interlocked.Add(ref sum, 1);
-                    }
+                        id = i.id,
+                        name = i.name,
+                        url = string.Empty,
+                        State = true,
+                        AddTime = DateTime.Now
+                    };
+                });
+                foreach (var item in list_inserted)
+                {
+                    db.Database.ExecuteSqlCommand("INSERT INTO T_DinnerCountsAttr(ID,Name,URL,State,AddTime) VALUES(@ID,@Name,@URL,@State,@AddTime)",
+                        new SqlParameter("@ID", item.id),
+                        new SqlParameter("@Name", item.name),
+                        new SqlParameter("@URL", item.url),
+                        new SqlParameter("@State", item.State),
+                        new SqlParameter("@AddTime", item.AddTime));
                 }
+                db.SaveChanges();
+                return list_inserted.Count();
             }
-            return sum;
         }
     }
 
@@ -245,34 +234,47 @@ namespace XCYN.Winform.Model.MeiTuan
         public int id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+        public bool State { get; set; }
+        public DateTime AddTime { get; set; }
 
         /// <summary>
-        /// 批量导入数据
+        /// 导入数据
         /// </summary>
-        public static int Insert(List<SortTypesAttr> list)
+        public static int Insert(List<SortTypesAttr> cate)
         {
-            int sum = 0;
             using (MeiTuanEntities db = new MeiTuanEntities())
             {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var query = from a in db.T_SortTypesAttr
-                                where a.ID == list[i].id
-                                select a;
-                    if (query.Count() <= 0)
+                var query = from a in db.T_SortTypesAttr
+                            where a.State == true
+                            select a;
+                List<SortTypesAttr> list = new List<SortTypesAttr>();
+                list.AddRange(cate);
+                List<int> list_id_source = query.Select(m => m.ID).ToList();
+                List<int> list_id_target = list.Select(m => m.id).ToList();
+                //找出需要插入的值
+                List<int> list_id_insert = list_id_target.Except(list_id_source).Distinct().OrderBy(m => m).ToList();
+                var list_inserted = list.FindAll(m => list_id_insert.Contains(m.id)).Select(i => {
+                    return new SortTypesAttr
                     {
-                        var model = new T_SortTypesAttr()
-                        {
-                            ID = list[i].id,
-                            Name = list[i].name,
-                            URL = list[i].url
-                        };
-                        db.T_SortTypesAttr.Add(model);
-                        Interlocked.Add(ref sum, 1);
-                    }
+                        id = i.id,
+                        name = i.name,
+                        url = string.Empty,
+                        State = true,
+                        AddTime = DateTime.Now
+                    };
+                });
+                foreach (var item in list_inserted)
+                {
+                    db.Database.ExecuteSqlCommand("INSERT INTO T_SortTypesAttr(ID,Name,URL,State,AddTime) VALUES(@ID,@Name,@URL,@State,@AddTime)",
+                        new SqlParameter("@ID", item.id),
+                        new SqlParameter("@Name", item.name),
+                        new SqlParameter("@URL", item.url),
+                        new SqlParameter("@State", item.State),
+                        new SqlParameter("@AddTime", item.AddTime));
                 }
+                db.SaveChanges();
+                return list_inserted.Count();
             }
-            return sum;
         }
     }
 }

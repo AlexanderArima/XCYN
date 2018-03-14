@@ -13,6 +13,7 @@ using XCYN.Common.Dapper;
 using Dapper;
 using XCYN.Winform.Model.MeiTuan.EF;
 using XCYN.Winform.Model.MeiTuan;
+using System.Threading;
 
 namespace XCYN.Winform.MeiTuan
 {
@@ -20,6 +21,7 @@ namespace XCYN.Winform.MeiTuan
     {
 
         Common.Sql.redis.RedisCommand _command = new Common.Sql.redis.RedisCommand();
+        HtmlWeb _webClient = new HtmlWeb();
 
         public static object index = 0;
         
@@ -34,14 +36,14 @@ namespace XCYN.Winform.MeiTuan
             //进入美食列表页后，依次访问不同的分类，将美食的名称，评分，地址，人均消费记录到数据库中
             listBox1.Items.Add($"{DateTime.Now.ToShortTimeString()} 开始抓取数据...");
             HtmlWeb webClient = new HtmlWeb();
-            HtmlNodeCollection hrefList = null;
+           
             try
             {
                 using (MeiTuanEntities db = new MeiTuanEntities())
                 {
                     var query = from a in db.T_City
                                 where a.State == true
-                                select new
+                                select new CityViewModel
                                 {
                                     ID = a.ID,
                                     Name = a.Name,
@@ -50,33 +52,27 @@ namespace XCYN.Winform.MeiTuan
                                 };
 
                     var list = query.ToList();
+                    int offset = list.Count / 4;
                     Task task = new Task(() => {
-
-                        for (int i = 0; i < list.Count(); i = i + 2)
-                        {
-                            if (list.ElementAt(i).MeiShiURL == null) continue;
-                            var document = webClient.Load(list.ElementAt(i).MeiShiURL);
-                            hrefList = document.DocumentNode.SelectNodes("//script");
-                            for (int j = 0; j < hrefList.Count; j++)
-                            {
-                                var item = hrefList[j].InnerHtml;
-                                if (item.Contains("window._appState"))
-                                {
-                                    //获取Json数据
-                                    var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
-                                    var obj = JsonConvert.DeserializeObject<Meta>(data);
-                                    //插入地区
-                                    int count = obj.filters.Insert<int>();
-                                    
-                                    listBox1.Invoke(new Action(() => {
-                                        listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}");
-                                    }));
-                                    break;
-                                }
-                            }
-                        }
+                        var list_offset = list.Take(offset).ToList();
+                        InsertData(list_offset);
                     });
                     task.Start();
+                    Task task2 = new Task(() => {
+                        var list_offset = list.Skip(offset).Take(offset).ToList();
+                        InsertData(list_offset);
+                    });
+                    task2.Start();
+                    Task task3 = new Task(() => {
+                        var list_offset = list.Skip(offset * 2).Take(offset).ToList();
+                        InsertData(list_offset);
+                    });
+                    task3.Start();
+                    Task task4 = new Task(() => {
+                        var list_offset = list.Skip(offset * 3).ToList();
+                        InsertData(list_offset);
+                    });
+                    task4.Start();
                 }
             }
             catch(Exception ex)
@@ -86,6 +82,42 @@ namespace XCYN.Winform.MeiTuan
             finally
             {
                 //conn.Close();
+            }
+        }
+
+        class CityViewModel
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public string URL { get; set; }
+            public string MeiShiURL { get; set; }
+        }
+
+        void InsertData(List<CityViewModel> list)
+        {
+            HtmlNodeCollection hrefList = null;
+            for (int i = 0; i < list.Count(); i = i + 2)
+            {
+                if (list.ElementAt(i).MeiShiURL == null) continue;
+                var document = _webClient.Load(list.ElementAt(i).MeiShiURL);
+                hrefList = document.DocumentNode.SelectNodes("//script");
+                for (int j = 0; j < hrefList.Count; j++)
+                {
+                    var item = hrefList[j].InnerHtml;
+                    if (item.Contains("window._appState"))
+                    {
+                        //获取Json数据
+                        var data = item.Substring("window._appState =".Length, item.Length - "window._appState =".Length - 1);
+                        var obj = JsonConvert.DeserializeObject<Meta>(data);
+                        //插入地区
+                        int count = obj.filters.Insert();
+                        int T_ID = Thread.CurrentThread.ManagedThreadId;
+                        listBox1.Invoke(new Action(() => {
+                            listBox1.Items.Insert(0, $"导入{obj.cityName}的{count}条数据,线程ID:{T_ID}");
+                        }));
+                        break;
+                    }
+                }
             }
         }
 
