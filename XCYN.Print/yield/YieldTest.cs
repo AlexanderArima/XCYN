@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,20 @@ namespace XCYN.Print.yield
                 if (i > 2)
                     yield return i;
             }
+        }
+
+        
+    }
+
+    [AttributeUsage(AttributeTargets.All)]
+    public class BookAttribute : Attribute
+    {
+        private string BookName;
+
+        public BookAttribute(string BookName)
+        {
+            this.BookName = BookName;
+            Console.WriteLine(BookName);
         }
     }
 }

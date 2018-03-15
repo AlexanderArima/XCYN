@@ -31,59 +31,7 @@ namespace XCYN.Print.delegates
             Console.WriteLine($"Fun2:{str}");
         }
 
-        /// <summary>
-        /// 冒泡排序
-        /// </summary>
-        /// <param name="sortArray"></param>
-        /// <returns></returns>
-        public static int[] BubbleSorter(int[] sortArray)
-        {
-            bool flag = true;
-            do
-            {
-                flag = false;
-                for (int i = 0; i < sortArray.Length - 1; i++)
-                {
-                    if(sortArray[i] > sortArray[i + 1])
-                    {
-                        //交换位置
-                        var temp = sortArray[i];
-                        sortArray[i] = sortArray[i + 1];
-                        sortArray[i + 1] = temp;
-                        flag = true;
-                    }
-                }
-            } while (flag);
-            return sortArray;
-        }
-
-        /// <summary>
-        /// 冒泡排序(不仅仅能对数组进行排序，还能对对象中的数组进行排序)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sortArray"></param>
-        /// <param name="comparison"></param>
-        /// <returns></returns>
-        public static IList<T> BubbliSorter<T>(IList<T> sortArray,Func<T,T,bool> comparison)
-        {
-            bool flag = true;
-            do
-            {
-                flag = false;
-                for (int i = 0; i < sortArray.Count - 1; i++)
-                {
-                    if (comparison(sortArray[i],sortArray[i + 1]))
-                    {
-                        //交换位置
-                        var temp = sortArray[i];
-                        sortArray[i] = sortArray[i + 1];
-                        sortArray[i + 1] = temp;
-                        flag = true;
-                    }
-                }
-            } while (flag);
-            return sortArray;
-        }
+        
         
         /// <summary>
         /// 调用委托的类

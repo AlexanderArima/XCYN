@@ -103,3 +103,4 @@ D:\MyProject\XCYN\XCYN.Test\bin\Debug\EntityFramework.SqlServer.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.pdb
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.xml
 D:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CopyComplete

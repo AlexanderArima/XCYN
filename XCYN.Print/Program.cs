@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using System.Windows.Forms;
+using XCYN.Common;
 using XCYN.Print.Dapper;
 using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Bridge;
@@ -27,9 +28,11 @@ using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.FileSystem;
 using XCYN.Print.Generics;
 using XCYN.Print.linq;
+using XCYN.Print.MianShiTi;
 using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
 using XCYN.Print.Redis;
+using XCYN.Print.yield;
 
 namespace XCYN.Print
 {
@@ -37,7 +40,9 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            
+            Algorithm.Fibonacci();
+            //Algorithm.Fun2();
+            Console.Read();
         }
 
         /// <summary>
@@ -169,7 +174,7 @@ namespace XCYN.Print
             //});
             //Console.WriteLine(string.Join(",",array));
 
-            var array = DelegateTest.BubbliSorter<Employee>(new Employee[5]
+            var array = Utils.BubbliSorter<Employee>(new Employee[5]
             {
                 new Employee("a",1),
                 new Employee("a",2),
