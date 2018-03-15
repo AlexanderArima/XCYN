@@ -40,9 +40,35 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            Algorithm.Fibonacci();
-            //Algorithm.Fun2();
-            Console.Read();
+            TanXin();
+        }
+
+        private static void TanXin()
+        {
+            while(true)
+            {
+                Console.WriteLine("请输入找零金额:");
+                var money = Convert.ToDecimal(Console.ReadLine());
+                var dict = Algorithm.ExChange(money);
+                foreach (var item in dict)
+                {
+                    Console.WriteLine($"{item.Key}元纸币{item.Value}张");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 算法题
+        /// </summary>
+        private static void AlgroithmTest()
+        {
+            while (true)
+            {
+                Console.WriteLine("请输入一个求阶乘的整数");
+                var n = Console.ReadLine();
+                var num = Algorithm.Fact(Convert.ToInt32(n));
+                Console.WriteLine($"{n}的阶乘为:{num}");
+            }
         }
 
         /// <summary>
