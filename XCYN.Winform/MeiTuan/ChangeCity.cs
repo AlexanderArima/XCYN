@@ -20,14 +20,10 @@ namespace XCYN.Winform.MeiTuan
         {
             InitializeComponent();
         }
-
-        static string _url = "http://www.meituan.com/changecity/";
-
-        HtmlWeb webClient = new HtmlWeb();
-
-        HtmlNodeCollection hrefList = null;
         
-        List<City> _list_target = new List<City>();
+        HtmlWeb webClient = new HtmlWeb();
+        
+        
 
         public static object sync = new object();
 
@@ -35,22 +31,14 @@ namespace XCYN.Winform.MeiTuan
         {
            
             listBox1.Items.Insert(0,$"{DateTime.Now.ToShortTimeString()} 请求数据中...");
-            
-            //var command = new Common.Sql.redis.RedisCommand();          
+                   
             try
             {
                 Task task = new Task(() => {
-                    Fun1();
+                    LoadCity();
+                    UpdateMeiShi();
                 });
                 task.Start();
-                var task2 = task.ContinueWith((obj) => {
-                    Fun2();
-                });
-                
-                task2.ContinueWith((obj) => {
-                    Fun3();
-                });
-                
             }
             catch (Exception ex)
             {
@@ -62,10 +50,21 @@ namespace XCYN.Winform.MeiTuan
         /// <summary>
         /// 获取所有城市列表
         /// </summary>
-        public void Fun1()
+        public void LoadCity()
         {
-            var doc = webClient.Load(_url);
-            hrefList = doc.DocumentNode.SelectNodes("//div[@id='app']//a[@href]");
+            List<City> list_target = new List<City>();
+            HtmlAgilityPack.HtmlDocument doc = null;
+            try
+            {
+                //加载城市列表
+                doc = webClient.Load(Global.uri_city);
+            }
+            catch(Exception ex)
+            {
+                MyLog.logger.Error(ex.Message);
+            }
+            //Dom节点获取列表
+            HtmlNodeCollection hrefList = doc.DocumentNode.SelectNodes("//div[@id='app']//a[@href]");
             foreach (var item in hrefList)
             {
                 var url = item.Attributes["href"];
@@ -74,15 +73,9 @@ namespace XCYN.Winform.MeiTuan
                     listBox1.Items.Insert(0, url.Value);
                 }));
                 var name = item.InnerText;
-                _list_target.Add(new City() { URL = url.Value.Insert(0, "http:"), Name = name });
+                list_target.Add(new City() { URL = url.Value.Insert(0, "http:"), Name = name });
             }
-        }
-
-        /// <summary>
-        /// 将列表导入数据库
-        /// </summary>
-        public void Fun2()
-        {
+            
             int count = 0;
             listBox1.Invoke(new Action(() =>
             {
@@ -94,12 +87,12 @@ namespace XCYN.Winform.MeiTuan
                 conn = DapperManager.GetConnection();
                 conn.Open();
                 var list_source = conn.Query<City>("SELECT Name,URL FROM T_City");
-                var list_except = _list_target.Except(list_source);
+                var list_except = list_target.Except(list_source);
                 count = conn.Execute("INSERT INTO T_City(Name,URL) VALUES(@Name,@URL)", list_except);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                MyLog.logger.Error(ex.Message);
             }
             finally
             {
@@ -111,8 +104,11 @@ namespace XCYN.Winform.MeiTuan
                 listBox1.Items.Insert(0, $"{DateTime.Now.ToShortTimeString()} 解析完毕，导入{count}条数据...");
             }));
         }
-
-        public void Fun3()
+        
+        /// <summary>
+        /// 更新美食模块的URL
+        /// </summary>
+        public void UpdateMeiShi()
         {
             HtmlAgilityPack.HtmlDocument doc = null;
             IDbConnection conn = null;
@@ -157,7 +153,7 @@ namespace XCYN.Winform.MeiTuan
             }
             catch(Exception ex)
             {
-
+                MyLog.logger.Error(ex.Message);
             }
             finally
             {

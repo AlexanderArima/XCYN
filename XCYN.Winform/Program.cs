@@ -1,4 +1,6 @@
-﻿using System;
+﻿using log4net.Config;
+using System;
+using System.IO;
 using System.Windows.Forms;
 using XCYN.Winform.MeiTuan;
 
@@ -12,6 +14,7 @@ namespace XCYN.Winform
         [STAThread]
         static void Main(string[] args)
         {
+            InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MeiShi());
@@ -32,6 +35,12 @@ namespace XCYN.Winform
             //Application app = new Application();
             //app.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
             //app.Run();
+        }
+
+        private static void InitLog4Net()
+        {
+            var logCfg = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config");
+            XmlConfigurator.ConfigureAndWatch(logCfg);
         }
     }
 }

@@ -113,6 +113,7 @@
       <DependentUpon>ChangeCity.cs</DependentUpon>
     </Compile>
     <Compile Include="MeiTuan\City.cs" />
+    <Compile Include="MeiTuan\Global.cs" />
     <Compile Include="MeiTuan\MeiShi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +163,7 @@
     <Compile Include="Model\Report\ReportConfig.cs" />
     <Compile Include="Model\Report\ReportState1.cs" />
     <Compile Include="Model\Report\ReportState2.cs" />
+    <Compile Include="MyLog.cs" />
     <Compile Include="Report\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -255,6 +257,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Model\MeiTuan\EF\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>

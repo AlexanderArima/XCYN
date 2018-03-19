@@ -51,7 +51,7 @@ namespace XCYN.Winform.Model.MeiTuan
     }
 
     /// <summary>
-    /// 城市
+    /// 地区
     /// </summary>
     public class Areas
     {
