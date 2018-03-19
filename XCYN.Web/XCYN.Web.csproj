@@ -373,8 +373,10 @@
     <Content Include="Pages\log\Main.aspx" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
+    <Content Include="Pages\test\BoxTypeTest.aspx" />
     <Content Include="Pages\test\DateTest.aspx" />
     <Content Include="Pages\test\DateTest2.aspx" />
+    <Content Include="Pages\test\FuncTest.aspx" />
     <Content Include="Pages\test\RegExpTest.aspx" />
     <Content Include="Pages\test\RequestTest.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
@@ -1389,6 +1391,13 @@
     <Compile Include="Pages\test\ArrayTest2.aspx.designer.cs">
       <DependentUpon>ArrayTest2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\test\BoxTypeTest.aspx.cs">
+      <DependentUpon>BoxTypeTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\BoxTypeTest.aspx.designer.cs">
+      <DependentUpon>BoxTypeTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\test\DateTest.aspx.cs">
       <DependentUpon>DateTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1402,6 +1411,13 @@
     </Compile>
     <Compile Include="Pages\test\DateTest2.aspx.designer.cs">
       <DependentUpon>DateTest2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\FuncTest.aspx.cs">
+      <DependentUpon>FuncTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\FuncTest.aspx.designer.cs">
+      <DependentUpon>FuncTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\test\RegExpTest.aspx.cs">
       <DependentUpon>RegExpTest.aspx</DependentUpon>

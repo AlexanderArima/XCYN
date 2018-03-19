@@ -200,14 +200,14 @@ namespace XCYN.Print
             //});
             //Console.WriteLine(string.Join(",",array));
 
-            var array = Utils.BubbliSorter<Employee>(new Employee[5]
+            var array = Utils.BubbliSorter<delegates.Employee>(new delegates.Employee[5]
             {
-                new Employee("a",1),
-                new Employee("a",2),
-                new Employee("a",5),
-                new Employee("a",4),
-                new Employee("a",3),
-            }, Employee.CompareSalary);
+                new delegates.Employee("a",1),
+                new delegates.Employee("a",2),
+                new delegates.Employee("a",5),
+                new delegates.Employee("a",4),
+                new delegates.Employee("a",3),
+            }, delegates.Employee.CompareSalary);
             Console.WriteLine(string.Join("\n", array));
             Console.Read();
         }

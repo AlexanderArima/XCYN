@@ -65,7 +65,22 @@ namespace XCYN.Print.MianShiTi
             {
                 Console.WriteLine((int)item);
             }
+
+            Employee e = new Employee();
+            
         }
+    }
+
+    public struct Employee
+    {
+        public string UserName;
+        public BasicPrgLng obj; 
+    }
+
+
+    public struct Person
+    {
+        public int Age;
     }
 
     [AttributeUsage(AttributeTargets.All)]
