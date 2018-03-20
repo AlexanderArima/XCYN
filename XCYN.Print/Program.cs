@@ -40,7 +40,9 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            TanXin();
+            DriveDemo demo = new DriveDemo();
+            demo.Fun5();
+            Console.Read();
         }
 
         private static void TanXin()

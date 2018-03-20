@@ -1,9 +1,12 @@
 ﻿Calculator		计算器程序的策略模式实现类及接口
 Crawler			爬虫程序的模型
+Dapper			Dapper的一些Demo
 delegates		委托的Demo(一般委托，匿名委托，泛型委托)
 DesignPattern	设计模式的Demo
+FileSystem		文件系统
 Generics		泛型类
 linq			Linq的一些Demo
+MianShiTi		面试题
 MultiThread		多线程的Demo(Task，Continue，Wait，Lock等)
 Operators		各种运算符的Demo
 rabbitmq		RabbitMQ一种消息队列的消费者和生产者的例子
