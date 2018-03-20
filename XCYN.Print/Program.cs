@@ -40,9 +40,17 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DriveDemo demo = new DriveDemo();
+            MyDirectory myDirectory = new MyDirectory();
+            myDirectory.Fun5(Path.Combine(@"D:\迅雷下载", @"ReadMe.txt"),Path.Combine(@"D:\迅雷下载", @"Copy.txt"));
+            Console.Read();
+        }
+
+        private static void FileDemo()
+        {
+            MyFile demo = new MyFile();
             demo.Fun5();
             Console.Read();
+            
         }
 
         private static void TanXin()

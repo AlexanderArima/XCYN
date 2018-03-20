@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace XCYN.Print.FileSystem
 {
-    public class DriveDemo
+    public class MyFile
     {
 
         /// <summary>

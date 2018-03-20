@@ -202,7 +202,8 @@
     <Compile Include="DesignPattern\TemplateMethod\Handler.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XieCheng.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XiongWei.cs" />
-    <Compile Include="FileSystem\DriveDemo.cs" />
+    <Compile Include="FileSystem\MyFile.cs" />
+    <Compile Include="FileSystem\MyDirectory.cs" />
     <Compile Include="Generics\DocumentManager.cs" />
     <Compile Include="Generics\GenericsFunc.cs" />
     <Compile Include="Generics\LinkedListNode.cs" />
