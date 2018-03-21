@@ -77,6 +77,8 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
@@ -105,14 +107,17 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.5.2.3\lib\net45\System.Web.Http.SelfHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncProgram\Class1.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
     <Compile Include="Calculator\StrategyDiv.cs" />
@@ -204,6 +209,7 @@
     <Compile Include="DesignPattern\TemplateMethod\XiongWei.cs" />
     <Compile Include="FileSystem\MyFile.cs" />
     <Compile Include="FileSystem\MyDirectory.cs" />
+    <Compile Include="FileSystem\MyStream.cs" />
     <Compile Include="Generics\DocumentManager.cs" />
     <Compile Include="Generics\GenericsFunc.cs" />
     <Compile Include="Generics\LinkedListNode.cs" />

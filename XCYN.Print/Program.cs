@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.SelfHost;
 using System.Windows.Forms;
 using XCYN.Common;
+using XCYN.Print.AsyncProgram;
 using XCYN.Print.Dapper;
 using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Bridge;
@@ -33,6 +34,7 @@ using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
 using XCYN.Print.Redis;
 using XCYN.Print.yield;
+using System.Windows;
 
 namespace XCYN.Print
 {
@@ -40,8 +42,19 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            System.Windows.Application app = new System.Windows.Application();
+            app.StartupUri = new Uri("UserControl1.xaml", UriKind.Relative);
+            app.Run();
+        }
+
+        private static void DirectoryDemo()
+        {
             MyDirectory myDirectory = new MyDirectory();
-            myDirectory.Fun5(Path.Combine(@"D:\迅雷下载", @"ReadMe.txt"),Path.Combine(@"D:\迅雷下载", @"Copy.txt"));
+            //myDirectory.Fun5(Path.Combine(@"D:\迅雷下载", @"ReadMe.txt"), Path.Combine(@"D:\迅雷下载", @"Copy.txt"));
+            //Console.Read();
+            //string[] array = {"中国第一","美国第一"};
+            //myDirectory.Fun7(array);
+            //myDirectory.Fun9(Path.Combine(@"D:\迅雷下载", "ReadMe.txt"), Path.Combine(@"D:\迅雷下载", "Compress.txt"));
             Console.Read();
         }
 
@@ -326,7 +339,7 @@ namespace XCYN.Print
 
         private void RunTaskScheduler()
         {
-            Application.Run(new DemoTaskScheduler());
+            System.Windows.Forms.Application.Run(new DemoTaskScheduler());
         }
 
         /// <summary>
