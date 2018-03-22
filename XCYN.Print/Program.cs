@@ -42,9 +42,9 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            System.Windows.Application app = new System.Windows.Application();
-            app.StartupUri = new Uri("UserControl1.xaml", UriKind.Relative);
-            app.Run();
+            DelayQuery d = new DelayQuery();
+            d.Fun3();
+
         }
 
         private static void DirectoryDemo()

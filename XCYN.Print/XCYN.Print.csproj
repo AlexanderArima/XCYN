@@ -222,6 +222,7 @@
     <Compile Include="linq\DataLib\Formula1.cs" />
     <Compile Include="linq\DataLib\Racer.cs" />
     <Compile Include="linq\DataLib\Team.cs" />
+    <Compile Include="linq\DelayQuery.cs" />
     <Compile Include="linq\ExtenLinq.cs" />
     <Compile Include="linq\linqToEntities.cs" />
     <Compile Include="linq\linqToObject.cs" />
@@ -925,7 +926,6 @@
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\Strategy\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
-    <Content Include="linq\DataLib\DataLib.csproj" />
     <Content Include="linq\Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
