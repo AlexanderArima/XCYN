@@ -224,6 +224,7 @@
     <Compile Include="linq\DataLib\Team.cs" />
     <Compile Include="linq\DelayQuery.cs" />
     <Compile Include="linq\ExtenLinq.cs" />
+    <Compile Include="linq\GroupByQuery.cs" />
     <Compile Include="linq\linqToEntities.cs" />
     <Compile Include="linq\linqToObject.cs" />
     <Compile Include="linq\linqToXML.cs" />

@@ -42,8 +42,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DelayQuery d = new DelayQuery();
-            d.Fun3();
+            GroupByQuery d = new GroupByQuery();
+            d.Fun4();
 
         }
 
