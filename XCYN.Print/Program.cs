@@ -35,6 +35,7 @@ using XCYN.Print.Operators;
 using XCYN.Print.Redis;
 using XCYN.Print.yield;
 using System.Windows;
+using XCYN.Print.XmlAndJson;
 
 namespace XCYN.Print
 {
@@ -42,9 +43,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            GroupByQuery d = new GroupByQuery();
-            d.Fun4();
-
+            XmlFuns xml = new XmlFuns();
+            xml.Fun7();
         }
 
         private static void DirectoryDemo()

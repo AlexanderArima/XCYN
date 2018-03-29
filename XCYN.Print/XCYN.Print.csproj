@@ -866,6 +866,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="XmlAndJson\XmlFuns.cs" />
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -939,6 +940,9 @@
     </Content>
     <Content Include="Operators\info.txt" />
     <Content Include="ReadMe.txt" />
+    <Content Include="XmlAndJson\books.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MultiThread\DemoTaskScheduler.resx">
