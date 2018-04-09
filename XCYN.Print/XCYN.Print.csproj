@@ -866,6 +866,11 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="XmlAndJson\BookProduct.cs" />
+    <Compile Include="XmlAndJson\Inventory.cs" />
+    <Compile Include="XmlAndJson\MyXmlSerializer.cs" />
+    <Compile Include="XmlAndJson\Person.cs" />
+    <Compile Include="XmlAndJson\Product.cs" />
     <Compile Include="XmlAndJson\XmlFuns.cs" />
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>

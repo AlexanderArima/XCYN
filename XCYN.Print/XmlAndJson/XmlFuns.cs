@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.XPath;
 
 namespace XCYN.Print.XmlAndJson
 {
@@ -209,5 +211,67 @@ namespace XCYN.Print.XmlAndJson
                 Console.Read();
             }
         }
+
+        /// <summary>
+        /// 使用XPathNavigator类
+        /// </summary>
+        public void Fun8()
+        {
+            var doc = new XPathDocument(bookFile);
+
+            var xPathNavigator = doc.CreateNavigator();
+
+            var iter = xPathNavigator.Select("/bookstore/book[@genre='novel']");
+
+            while(iter.MoveNext())
+            {
+                var newiter = iter.Current.SelectDescendants(XPathNodeType.Element, false);
+                while(newiter.MoveNext())
+                {
+                    Console.WriteLine($"{newiter.Current.Name} {newiter.Current.Value}");
+                }
+            }
+            Console.Read();
+        }
+
+        public void Fun9()
+        {
+            var product = new Product()
+            {
+                ProductID = 10,
+                ProductName = "联想笔记本",
+                SupplierID = 2,
+            };
+
+            var book = new BookProduct()
+            {
+                ProductID = 101,
+                ProductName = "钢铁是怎样炼成的",
+                SupplierID = 10,
+                ISBN = "985034592834732"
+            };
+
+            var person = new Person
+            {
+                Age = 12
+            };
+
+            Product[] item = { product, book, person };
+
+            Inventory inventory = new Inventory
+            {
+                InventoryItems = item
+            };
+
+            using (FileStream stream = File.Create("Inventory.xml"))
+            {
+                var serilizer = new XmlSerializer(typeof(Inventory));
+                serilizer.Serialize(stream, inventory);
+            }
+
+            Console.Read();
+        }
+
+       
     }
 }

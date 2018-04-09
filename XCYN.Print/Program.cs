@@ -43,8 +43,12 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            XmlFuns xml = new XmlFuns();
-            xml.Fun7();
+            //MyXmlSerializer xml = new MyXmlSerializer();
+            //xml.Fun1();
+
+            XmlFuns funs = new XmlFuns();
+            funs.Fun9();
+
         }
 
         private static void DirectoryDemo()
