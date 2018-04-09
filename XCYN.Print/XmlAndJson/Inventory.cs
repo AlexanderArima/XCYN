@@ -9,7 +9,7 @@ namespace XCYN.Print.XmlAndJson
 {
     public class Inventory
     {
-        [XmlArrayItem("Product",typeof(Product)),XmlArrayItem("Book",typeof(BookProduct)), XmlArrayItem("Person", typeof(Person))]
+        [XmlArrayItem("Product",typeof(Product)),XmlArrayItem("Book",typeof(BookProduct))]
         public Product[] InventoryItems { get; set; }
 
         public override string ToString()

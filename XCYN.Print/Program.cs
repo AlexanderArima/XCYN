@@ -46,9 +46,11 @@ namespace XCYN.Print
             //MyXmlSerializer xml = new MyXmlSerializer();
             //xml.Fun1();
 
-            XmlFuns funs = new XmlFuns();
-            funs.Fun9();
+            //XmlFuns funs = new XmlFuns();
+            //funs.Fun9();
 
+            LinqToXML linq = new LinqToXML();
+            linq.Fun2();
         }
 
         private static void DirectoryDemo()

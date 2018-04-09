@@ -213,14 +213,14 @@ namespace XCYN.Print.XmlAndJson
         }
 
         /// <summary>
-        /// 使用XPathNavigator类
+        /// 使用XPathNavigator类读取元素
         /// </summary>
         public void Fun8()
         {
             var doc = new XPathDocument(bookFile);
 
             var xPathNavigator = doc.CreateNavigator();
-
+            //选择和设置一组重复节点
             var iter = xPathNavigator.Select("/bookstore/book[@genre='novel']");
 
             while(iter.MoveNext())
@@ -231,14 +231,52 @@ namespace XCYN.Print.XmlAndJson
                     Console.WriteLine($"{newiter.Current.Name} {newiter.Current.Value}");
                 }
             }
+
+            //var iter_price = xPathNavigator.Select("/bookstore/book[@genre='novel']");
+            //while (iter_price.MoveNext())
+            //{
+            //    var newiter = iter_price.Current.SelectDescendants(XPathNodeType.Element, false);
+            //    while (newiter.MoveNext())
+            //    {
+            //        if(newiter.Current.Name == "price")
+            //        {
+            //            newiter.Current.SetValue("100");
+            //        }
+            //        //newiter.Current.SetValue("100");
+            //    }
+            //}
             Console.Read();
+        }
+
+        /// <summary>
+        /// 使用XPathDocument修改元素
+        /// </summary>
+        public void Fun10()
+        {
+            //注意：只有XmlDocument才能修改XML元素!
+            XmlDocument doc = new XmlDocument();
+            doc.Load(bookFile);
+            XPathNavigator xPathNavigator = doc.CreateNavigator();
+
+            //选择和设置一组重复节点
+            var iter = xPathNavigator.Select("/bookstore/book[@genre='novel']");
+
+            while (iter.MoveNext())
+            {
+                var iter_items = iter.Current.SelectDescendants(XPathNodeType.Element, false);
+                while (iter_items.MoveNext())
+                {
+                    var value = iter_items.Current.Value;
+                    iter_items.Current.SetValue("100");
+                }
+             }
+            doc.Save("book2.xml");
         }
 
         public void Fun9()
         {
             var product = new Product()
             {
-                ProductID = 10,
                 ProductName = "联想笔记本",
                 SupplierID = 2,
             };
@@ -250,13 +288,8 @@ namespace XCYN.Print.XmlAndJson
                 SupplierID = 10,
                 ISBN = "985034592834732"
             };
-
-            var person = new Person
-            {
-                Age = 12
-            };
-
-            Product[] item = { product, book, person };
+            
+            Product[] item = { product, book };
 
             Inventory inventory = new Inventory
             {

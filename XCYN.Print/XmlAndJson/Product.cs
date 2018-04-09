@@ -11,7 +11,7 @@ namespace XCYN.Print.XmlAndJson
         [XmlAttribute(AttributeName = "Discount")]
         public int Discount { get; set; }
 
-        [XmlElement]
+        [XmlElement(ElementName = "ID",Namespace ="http://org.com")]
         public int ProductID { get; set; }
 
         [XmlElement]
