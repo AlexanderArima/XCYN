@@ -179,5 +179,66 @@ namespace XCYN.Print.MianShiTi
             return money;
         }
 
+        /// <summary>
+        /// 树的先序遍历
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tree"></param>
+        public void TreeDRT<T>(ChainTree<T> tree)
+        {
+            if (tree == null)
+                return;
+
+            if(tree.data != null)
+                Console.WriteLine(tree.data.ToString());
+            else
+                Console.WriteLine("");
+
+            TreeDRT(tree.left);
+
+            TreeDRT(tree.right);
+        }
+
+
+        /// <summary>
+        /// 树的中序遍历
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tree"></param>
+        public void TreeLRT<T>(ChainTree<T> tree)
+        {
+            if (tree == null)
+                return;
+
+            TreeLRT(tree.left);
+
+            if (tree.data != null)
+                Console.WriteLine(tree.data.ToString());
+            else
+                Console.WriteLine("");
+
+            TreeLRT(tree.right);
+        }
+
+        /// <summary>
+        /// 树的后序遍历
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tree"></param>
+        public void TreeLRD<T>(ChainTree<T> tree)
+        {
+            if (tree == null)
+                return;
+
+            TreeLRD(tree.left);
+
+            if (tree.data != null)
+                Console.WriteLine(tree.data.ToString());
+            else
+                Console.WriteLine("");
+
+            TreeLRD(tree.right);
+        }
+
     }
 }

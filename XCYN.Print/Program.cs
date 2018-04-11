@@ -43,14 +43,34 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            Algorithm a = new Algorithm();
+            ChainTree<string> root = new ChainTree<string>();
+            root.left = new ChainTree<string>();
+            root.data = "根节点";
+            root.left.data = "左子树";
+            root.left.left = new ChainTree<string>();
+            root.left.left.data = "左子树的左子树";
+            root.right = new ChainTree<string>();
+            root.right.data = "右子树";
+            //a.TreeDRT(root);//先序遍历
+            //a.TreeLRT(root);//中序遍历
+            a.TreeLRD(root);//后序遍历
+            Console.Read();
+        }
+
+        private static void XMLAndJson()
+        {
             //MyXmlSerializer xml = new MyXmlSerializer();
             //xml.Fun1();
 
             //XmlFuns funs = new XmlFuns();
             //funs.Fun9();
 
-            LinqToXML linq = new LinqToXML();
-            linq.Fun2();
+            //LinqToXML linq = new LinqToXML();
+            //linq.Fun2();
+
+            //JsonFuns json = new JsonFuns();
+            //json.Fun1();
         }
 
         private static void DirectoryDemo()

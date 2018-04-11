@@ -119,6 +119,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADONET\ConnectDataBase.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
@@ -827,6 +828,7 @@
     <Compile Include="linq\ParallelLinq.cs" />
     <Compile Include="MianShiTi\Algorithm.cs" />
     <Compile Include="MianShiTi\BasicPrgLng.cs" />
+    <Compile Include="MianShiTi\ChainTree.cs" />
     <Compile Include="MultiThread\DemoCancellationToken.cs" />
     <Compile Include="MultiThread\DemoCountdownEvent.cs" />
     <Compile Include="MultiThread\DemoLock.cs" />
@@ -870,6 +872,7 @@
     <Compile Include="Redis\RecentLog.cs" />
     <Compile Include="XmlAndJson\BookProduct.cs" />
     <Compile Include="XmlAndJson\Inventory.cs" />
+    <Compile Include="XmlAndJson\JsonFuns.cs" />
     <Compile Include="XmlAndJson\LinqToXML.cs" />
     <Compile Include="XmlAndJson\MyXmlSerializer.cs" />
     <Compile Include="XmlAndJson\Person.cs" />
@@ -878,6 +881,7 @@
     <Compile Include="yield\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ADONET\config.json" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
