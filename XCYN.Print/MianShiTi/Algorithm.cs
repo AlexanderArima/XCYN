@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace XCYN.Print.MianShiTi
 {
     public class Algorithm
     {
+
+        #region 经典算法
+
         /// <summary>
         /// 求素数
         /// </summary>
@@ -54,7 +58,58 @@ namespace XCYN.Print.MianShiTi
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 洗牌问题
+        /// </summary>
+        public static List<Card> NewCard()
+        {
+            List<Card> list = new List<Card>();
+            string[] num = { "A","2","3","4","5","6","7","8","9","J","Q","K" };
+            string[] suit = { "黑桃", "红桃", "梅花" ,"方片"};
+            for (int j = 0; j < num.Length; j++)
+            {
+                for (int i = 0; i < suit.Count(); i++)
+                {
+                    var card = new Card();
+                    card.num = num[j];
+                    card.suit = suit[i];
+                    list.Add(card);
+
+                }
+            }
+            return list;
+            for (int i = 0; i < list.Count(); i++)
+            {
+                Console.WriteLine(list[i].ToString());
+            }
+            Console.Read();
+        }
+
+        public static void Shuffle(List<Card> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                //生成随机位置，然后交换
+                var random = new Random().Next(0,list.Count - 1);
+                Thread.Sleep(1);
+                var temp = list[i];
+                list[i] = list[random];
+                list[random] = temp;
+
+            }
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i].ToString());
+            }
+
+            Console.Read();
+        }
+
+        #endregion
+
+        #region 递推思想
+
         /// <summary>
         /// 斐波那契数列
         /// </summary>
@@ -99,19 +154,9 @@ namespace XCYN.Print.MianShiTi
             
         }
 
-        /// <summary>
-        /// 求阶乘
-        /// </summary>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        public static int Fact(int n)
-        {
-            if(n == 1)
-            {
-                return 1;
-            }
-            return n * Fact(n - 1);
-        }
+        #endregion
+
+        #region 贪心思想
 
         /// <summary>
         /// 贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。
@@ -179,6 +224,39 @@ namespace XCYN.Print.MianShiTi
             return money;
         }
 
+        #endregion
+
+        #region 递归思想
+
+
+        /// <summary>
+        /// 求阶乘
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static int Fact(int n)
+        {
+            if (n == 1)
+            {
+                return 1;
+            }
+            return n * Fact(n - 1);
+        }
+
+        /// <summary>
+        /// 十进制转二进制
+        /// </summary>
+        /// <param name="rtn"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static string Convert10To2(ref string rtn, int num)
+        {
+            if (num == 0)
+                return string.Empty;
+            Convert10To2(ref rtn, num / 2);
+            return rtn += num % 2;
+        }
+
         /// <summary>
         /// 树的先序遍历
         /// </summary>
@@ -239,6 +317,119 @@ namespace XCYN.Print.MianShiTi
 
             TreeLRD(tree.right);
         }
+
+        #endregion
+
+        #region 枚举思想
+
+        /**
+         下面是一个填写数字的模板，其中每个字都代表数字中的”0~9“，那么要求我们输入的数字能够满足此模板。
+             算 法 洗 脑 题
+          X              算
+          -----------------
+          题 题 题 题 题 题
+         */
+
+        /// <summary>
+        /// 初始版
+        /// </summary>
+        public void EnumIdea()
+        {
+            int count = 0;
+
+            //“算”字的取值范围
+            for (int i1 = 1; i1 < 10; i1++)
+            {
+                //“法”字的取值范围
+                for (int i2 = 0; i2 < 10; i2++)
+                {
+                    //“洗”字的取值范围
+                    for (int i3 = 0; i3 < 10; i3++)
+                    {
+                        //"脑"字的取值范围
+                        for (int i4 = 0; i4 < 10; i4++)
+                        {
+                            //"题"字的取值范围
+                            for (int i5 = 1; i5 < 10; i5++)
+                            {
+                                count++;
+
+                                //一个猜想值
+                                var guess = (i1 * 10000 + i2 * 1000 + i3 * 100 + i4 * 10 + i5) * i1;
+
+                                //最终结果值
+                                var result = i5 * 100000 + i5 * 10000 + i5 * 1000 + i5 * 100 + i5 * 10 + i5;
+
+                                if (guess == result)
+                                {
+                                    Console.WriteLine("\n\n不简单啊，费了我  {0}次,才tmd的找出来\n\n", count);
+
+                                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}", i1, i2, i3, i4, i5);
+                                    Console.WriteLine("\n\n\tX\t\t\t\t{0}", i1);
+                                    Console.WriteLine("—————————————————————————————");
+                                    Console.WriteLine("\n{0}\t{1}\t{2}\t{3}\t{4}\t{5}", i5, i5, i5, i5, i5, i5);
+
+                                    Console.Read();
+                                }
+
+                                Console.WriteLine("第{0}搜索", count);
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 进阶版
+        /// </summary>
+        public void EnumIdea2()
+        {
+            //商
+            int[] resultArr = { 111111, 222222, 333333, 444444, 555555, 666666, 777777, 888888, 999999 };
+
+            //除数
+            int[] numArr = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            int count = 0;
+
+            for (int i = 0; i < resultArr.Count(); i++)
+            {
+                for (int j = 0; j < numArr.Count(); j++)
+                {
+                    count++;
+
+                    var result = resultArr[i].ToString();
+
+                    var num = numArr[j].ToString();
+
+                    var origin = (resultArr[i] / numArr[j]).ToString();
+
+                    if (origin.LastOrDefault() == result.FirstOrDefault()
+                        && origin.FirstOrDefault() == num.FirstOrDefault()
+                        && result.Length - 1 == origin.Length)
+                    {
+                        Console.WriteLine("\n\n费了{0} 次，tmd找出来了", count);
+                        Console.WriteLine("\n\n感谢一楼同学的回答。现在的时间复杂度已经降低到O(n2)，相比之前方案已经是秒杀级别\n");
+
+                        Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}", origin.ElementAt(0), origin.ElementAt(1), origin.ElementAt(2), origin.ElementAt(3), origin.ElementAt(4));
+                        Console.WriteLine("\n\n\tX\t\t\t\t{0}", num);
+                        Console.WriteLine("—————————————————————————————");
+                        Console.WriteLine("\n{0}\t{1}\t{2}\t{3}\t{4}\t{5}", result.ElementAt(0), result.ElementAt(0), result.ElementAt(0), result.ElementAt(0), result.ElementAt(0), result.ElementAt(0));
+
+                        Console.Read();
+                    }
+                    Console.WriteLine("第{0}搜索", count);
+                }
+            }
+            Console.WriteLine("无解");
+            Console.Read();
+        }
+
+        #endregion
 
     }
 }

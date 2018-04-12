@@ -828,6 +828,7 @@
     <Compile Include="linq\ParallelLinq.cs" />
     <Compile Include="MianShiTi\Algorithm.cs" />
     <Compile Include="MianShiTi\BasicPrgLng.cs" />
+    <Compile Include="MianShiTi\Card.cs" />
     <Compile Include="MianShiTi\ChainTree.cs" />
     <Compile Include="MultiThread\DemoCancellationToken.cs" />
     <Compile Include="MultiThread\DemoCountdownEvent.cs" />

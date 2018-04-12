@@ -8,11 +8,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
-using System.Windows.Forms;
 using XCYN.Common;
-using XCYN.Print.AsyncProgram;
-using XCYN.Print.Dapper;
-using XCYN.Print.delegates;
 using XCYN.Print.DesignPattern.Bridge;
 using XCYN.Print.DesignPattern.ChainOfResponsibility;
 using XCYN.Print.DesignPattern.Command;
@@ -28,20 +24,22 @@ using XCYN.Print.DesignPattern.State;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.FileSystem;
 using XCYN.Print.Generics;
-using XCYN.Print.linq;
 using XCYN.Print.MianShiTi;
 using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
-using XCYN.Print.Redis;
-using XCYN.Print.yield;
-using System.Windows;
-using XCYN.Print.XmlAndJson;
+using System.Linq;
 
 namespace XCYN.Print
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            var list = XCYN.Print.MianShiTi.Algorithm.NewCard();
+            XCYN.Print.MianShiTi.Algorithm.Shuffle(list);
+        }
+
+        private static void Algorithm()
         {
             Algorithm a = new Algorithm();
             ChainTree<string> root = new ChainTree<string>();
@@ -98,7 +96,7 @@ namespace XCYN.Print
             {
                 Console.WriteLine("请输入找零金额:");
                 var money = Convert.ToDecimal(Console.ReadLine());
-                var dict = Algorithm.ExChange(money);
+                var dict = XCYN.Print.MianShiTi.Algorithm.ExChange(money);
                 foreach (var item in dict)
                 {
                     Console.WriteLine($"{item.Key}元纸币{item.Value}张");
@@ -115,7 +113,7 @@ namespace XCYN.Print
             {
                 Console.WriteLine("请输入一个求阶乘的整数");
                 var n = Console.ReadLine();
-                var num = Algorithm.Fact(Convert.ToInt32(n));
+                var num = XCYN.Print.MianShiTi.Algorithm.Fact(Convert.ToInt32(n));
                 Console.WriteLine($"{n}的阶乘为:{num}");
             }
         }
