@@ -276,8 +276,7 @@ namespace XCYN.Print.MianShiTi
 
             TreeDRT(tree.right);
         }
-
-
+        
         /// <summary>
         /// 树的中序遍历
         /// </summary>

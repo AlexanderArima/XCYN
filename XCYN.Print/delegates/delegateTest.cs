@@ -88,6 +88,70 @@ namespace XCYN.Print.delegates
 
         }
 
+        #region 如何操作多个DAL方法，并使用事务提交
+        //原文:http://www.cnblogs.com/1996V/p/7798111.html
+
+        /// <summary>
+        /// 处理数据库操作
+        /// </summary>
+        public static void TestTransScope()
+        {
+            Action action = () => { };
+            action += () => {
+                Console.WriteLine("往A表中增加一条数据");
+            };
+            action += () => {
+                Console.WriteLine("往B表中增加两条数据");
+            };
+            ExecTransScope(action);
+        }
+
+        /// <summary>
+        /// 用Task实现
+        /// </summary>
+        public static void TestTransScope2()
+        {
+            Task task = new Task(() => {
+                Console.WriteLine("往A表中增加一条数据");
+            });
+            Task task2 = new Task(() => {
+                Console.WriteLine("往B表中增加两条数据");
+            });
+            Task task3 = new Task(() => {
+                try
+                {
+                    Task.WaitAll(task, task2);
+                    Console.WriteLine("提交");
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("回滚");
+                }
+            });
+            task.Start();
+            task2.Start();
+            task3.Start();
+        }
+
+        /// <summary>
+        /// 事务提交
+        /// </summary>
+        /// <param name="action"></param>
+        public static void ExecTransScope(Action action)
+        {
+            try
+            {
+                action.Invoke();
+                Console.WriteLine("提交");
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("回滚");
+            }
+        }
+
+        #endregion
+
     }
 
     public class Employee

@@ -28,6 +28,8 @@ using XCYN.Print.MianShiTi;
 using XCYN.Print.MultiThread;
 using XCYN.Print.Operators;
 using System.Linq;
+using System.Text.RegularExpressions;
+using XCYN.Print.delegates;
 
 namespace XCYN.Print
 {
@@ -35,8 +37,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            var list = XCYN.Print.MianShiTi.Algorithm.NewCard();
-            XCYN.Print.MianShiTi.Algorithm.Shuffle(list);
+            DelegateTest.TestTransScope2();
+            Console.Read();
         }
 
         private static void Algorithm()
