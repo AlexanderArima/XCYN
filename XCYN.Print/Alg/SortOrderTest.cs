@@ -125,5 +125,42 @@ namespace XCYN.Print.Alg
 
             }
         }
+
+        /// <summary>
+        /// 堆排序 vs 快速排序
+        /// </summary>
+        public static void HeapSortVsQuick()
+        {
+            //5次比较
+            for (int j = 1; j <= 5; j++)
+            {
+                List<int> list = new List<int>();
+
+                //插入2w个数字
+                for (int i = 0; i < 20000; i++)
+                {
+                    Thread.Sleep(1);//休眠一毫秒生成随机地数字
+                    var seek = DateTime.Now.Ticks.ToString();
+                    int number = new Random(Convert.ToInt32(seek.Substring(seek.Length - 7, 7))).Next(0, 100000);
+                    list.Add(number);
+                }
+
+                Console.WriteLine("\n第" + j + "次比较：");
+
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+                var result = list.OrderBy(single => single).ToList();
+                watch.Stop();
+                Console.WriteLine("\n快速排序耗费时间:" + watch.ElapsedMilliseconds);
+                Console.WriteLine("输出前十个数" + string.Join(",", result.Take(10).ToList()));
+
+                watch = new Stopwatch();
+                watch.Start();
+                SortOrder.HeapSort(list);
+                watch.Stop();
+                Console.WriteLine("\n堆排序耗费时间:" + watch.ElapsedMilliseconds);
+                Console.WriteLine("输出前十个数" + string.Join(",", list.Take(10).ToList()));
+            }
+        }
     }
 }
