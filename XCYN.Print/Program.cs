@@ -38,7 +38,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            SortOrderTest.BubbleVsQuickSort();
+            SortOrderTest.SelectionVsQuick();
             Console.Read();
         }
 
