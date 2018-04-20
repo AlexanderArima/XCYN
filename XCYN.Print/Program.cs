@@ -30,6 +30,7 @@ using XCYN.Print.Operators;
 using System.Linq;
 using System.Text.RegularExpressions;
 using XCYN.Print.delegates;
+using XCYN.Print.Alg;
 
 namespace XCYN.Print
 {
@@ -37,7 +38,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DelegateTest.TestTransScope2();
+            SortOrderTest.BubbleVsQuickSort();
             Console.Read();
         }
 
