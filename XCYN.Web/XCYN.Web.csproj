@@ -377,8 +377,11 @@
     <Content Include="Pages\test\DateTest.aspx" />
     <Content Include="Pages\test\DateTest2.aspx" />
     <Content Include="Pages\test\FuncTest.aspx" />
+    <Content Include="Pages\test\LocalStorage.aspx" />
+    <Content Include="Pages\test\LocalStorage2.aspx" />
     <Content Include="Pages\test\RegExpTest.aspx" />
     <Content Include="Pages\test\RequestTest.aspx" />
+    <Content Include="Pages\test\SessionStorage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
     <Content Include="Plugins\easyui\demo\accordion\ajax.html" />
@@ -1419,6 +1422,20 @@
     <Compile Include="Pages\test\FuncTest.aspx.designer.cs">
       <DependentUpon>FuncTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\test\LocalStorage.aspx.cs">
+      <DependentUpon>LocalStorage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\LocalStorage.aspx.designer.cs">
+      <DependentUpon>LocalStorage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\LocalStorage2.aspx.cs">
+      <DependentUpon>LocalStorage2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\LocalStorage2.aspx.designer.cs">
+      <DependentUpon>LocalStorage2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\test\RegExpTest.aspx.cs">
       <DependentUpon>RegExpTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1435,6 +1452,13 @@
     </Compile>
     <Compile Include="Pages\test\RequestTest.aspx.designer.cs">
       <DependentUpon>RequestTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\SessionStorage.aspx.cs">
+      <DependentUpon>SessionStorage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\SessionStorage.aspx.designer.cs">
+      <DependentUpon>SessionStorage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\webform\RoomEdit.aspx.cs">
       <DependentUpon>RoomEdit.aspx</DependentUpon>
