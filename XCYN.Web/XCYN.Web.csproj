@@ -374,6 +374,8 @@
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
     <Content Include="Pages\test\BoxTypeTest.aspx" />
+    <Content Include="Pages\test\CacheTest.aspx" />
+    <Content Include="Pages\test\CacheTest2.aspx" />
     <Content Include="Pages\test\DateTest.aspx" />
     <Content Include="Pages\test\DateTest2.aspx" />
     <Content Include="Pages\test\FuncTest.aspx" />
@@ -1400,6 +1402,20 @@
     </Compile>
     <Compile Include="Pages\test\BoxTypeTest.aspx.designer.cs">
       <DependentUpon>BoxTypeTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\CacheTest.aspx.cs">
+      <DependentUpon>CacheTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\CacheTest.aspx.designer.cs">
+      <DependentUpon>CacheTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\CacheTest2.aspx.cs">
+      <DependentUpon>CacheTest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\test\CacheTest2.aspx.designer.cs">
+      <DependentUpon>CacheTest2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\test\DateTest.aspx.cs">
       <DependentUpon>DateTest.aspx</DependentUpon>
