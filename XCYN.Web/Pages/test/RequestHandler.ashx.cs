@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using System.Web.Caching;
 using XCYN.Common;
 
 namespace XCYN.Web.Pages.test
@@ -32,12 +34,51 @@ namespace XCYN.Web.Pages.test
                 case "ClearCache":
                     ClearCache(context);
                     break;
+                case "MoveOrder":
+                    MoveOrder(context);
+                    break;
                 default:
                     break;
             }
             var isGet = RequestHelper.IsGet();
 
             var isPost = RequestHelper.IsPost();
+        }
+        
+
+        /// <summary>
+        /// 移动栏目的顺序
+        /// </summary>
+        /// <param name="context"></param>
+        private void MoveOrder(HttpContext context)
+        {
+            var direct = context.Request["direct"];
+            HttpRuntime.Cache.Insert("direct", direct, null, 
+                System.Web.Caching.Cache.NoAbsoluteExpiration, 
+                TimeSpan.FromMinutes(1),CacheItemPriority.NotRemovable, delegate (string key,object value, CacheItemRemovedReason reason) {
+                    if (reason == CacheItemRemovedReason.Removed)
+                        return;        // 忽略后续调用HttpRuntime.Cache.Insert()所触发的操作
+
+                    // 最后发一次邮件。整个延迟发邮件的过程就处理完了。
+                    Debug.WriteLine($"发送邮件,Key:{key},value:{value},reason:{reason}");
+                });
+           
+        }
+
+        private void MoveRecInfoRemovedCallback(string key, object value, CacheItemRemovedReason reason)
+        {
+            if (reason == CacheItemRemovedReason.Removed)
+                return;        // 忽略后续调用HttpRuntime.Cache.Insert()所触发的操作
+
+            // 能运行到这里，就表示是肯定是缓存过期了。
+            // 换句话说就是：用户2分钟再也没操作过了。
+
+            // 从参数value取回操作信息
+            // MoveRecInfo info = (MoveRecInfo)value;
+            // 这里可以对info做其它的处理。
+
+            // 最后发一次邮件。整个延迟发邮件的过程就处理完了。
+            // MailSender.SendMail(info);
         }
 
         /// <summary>
