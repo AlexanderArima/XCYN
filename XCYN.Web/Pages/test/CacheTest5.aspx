@@ -11,6 +11,9 @@
     <form id="form1" runat="server">
         <div>
             动态网页缓存加速
+            <br />
+            用ab做压力测试的命令：
+            C:\>ab -n1000 -c100 -H "If-Modified-Since: 过期时间" xxx地址
         </div>
     </form>
 </body>
