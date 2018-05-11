@@ -26,6 +26,7 @@
     <script src="../../Plugins/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
 
+        //巧用缓存移除后的回调事件，定时发送邮件
         var order = 0;
 
         function MoveClick(direct) {

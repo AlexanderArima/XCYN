@@ -12,6 +12,9 @@
         <div>
             <table>
                 <tr>
+                    <td colspan="2">缓存依赖</td>
+                </tr>
+                <tr>
                     <td>
                         <input type="button" value="缓存1" onclick="ButtonClick(1)" />
                     </td>

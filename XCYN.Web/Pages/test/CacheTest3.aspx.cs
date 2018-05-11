@@ -11,8 +11,7 @@ namespace XCYN.Web.Pages.test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HttpRuntime.Cache.Insert("key1", "cheng", null,
-                System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromHours(2));
+            
         }
     }
 }

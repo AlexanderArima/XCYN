@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CacheTest.aspx.cs" Inherits="XCYN.Web.Pages.test.CacheTest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CacheTest5.aspx.cs" Inherits="XCYN.Web.Pages.test.CacheTest5" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            介绍了三种缓存，滑动过期和绝对过期两种缓存释放策略
+            动态网页缓存加速
         </div>
     </form>
 </body>

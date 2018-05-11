@@ -47,7 +47,7 @@ namespace XCYN.Web.Pages.test
         
 
         /// <summary>
-        /// 移动栏目的顺序
+        /// 移动栏目的顺序后，一段时间不操作即发送邮件
         /// </summary>
         /// <param name="context"></param>
         private void MoveOrder(HttpContext context)

@@ -10,7 +10,7 @@
 namespace XCYN.Web.Pages.test {
     
     
-    public partial class CacheTest {
+    public partial class CacheTest5 {
         
         /// <summary>
         /// form1 控件。
