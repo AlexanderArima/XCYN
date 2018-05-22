@@ -5,10 +5,10 @@ using XCYN.Print.Generics;
 using XCYN.Winform.Model.MeiTuan.EF;
 using System.Linq;
 
-namespace XCYN.Test
+namespace XCYN.Test.Common
 {
     [TestClass]
-    public class EncryptTest
+    public class EncryptTestCase
     {
         [TestMethod]
         public void Encrypt()

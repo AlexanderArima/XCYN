@@ -2,17 +2,17 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XCYN.Winform.Model.Report;
+using XCYN.Common;
 
-namespace XCYN.Test
+namespace XCYN.Test.Common
 {
     /// <summary>
-    /// ReportConfigTest 的摘要说明
+    /// CacheTest 的摘要说明
     /// </summary>
     [TestClass]
-    public class ReportConfigTest
+    public class CacheTestCase
     {
-        public ReportConfigTest()
+        public CacheTestCase()
         {
             //
             //TODO:  在此处添加构造函数逻辑
@@ -60,10 +60,9 @@ namespace XCYN.Test
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void Insert()
         {
-            var list = ReportConfig.GetInstance().GetList();
-
+            CacheHelper.Insert("id", 1);
         }
     }
 }

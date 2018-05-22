@@ -5,15 +5,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XCYN.Common;
 using System.IO;
 
-namespace XCYN.Test
+namespace XCYN.Test.Common
 {
     /// <summary>
     /// CompressTest 的摘要说明
     /// </summary>
     [TestClass]
-    public class CompressTest
+    public class CompressTestCase
     {
-        public CompressTest()
+        public CompressTestCase()
         {
             //
             //TODO:  在此处添加构造函数逻辑

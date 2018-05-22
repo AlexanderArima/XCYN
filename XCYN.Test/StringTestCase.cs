@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace XCYN.Test
 {
     [TestClass]
-    public class StringTest
+    public class StringTestCase
     {
         /// <summary>
         /// 字符串查找下标

@@ -103,34 +103,30 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="APITest.cs" />
-    <Compile Include="CacheTest.cs" />
-    <Compile Include="CalculatorTest.cs" />
-    <Compile Include="CompressTest.cs" />
-    <Compile Include="DapperTest.cs" />
+    <Compile Include="APITestCase.cs" />
+    <Compile Include="Commom\CacheTestCase.cs" />
+    <Compile Include="Print\CalculatorTestCase.cs" />
+    <Compile Include="Commom\CompressTestCase.cs" />
+    <Compile Include="Commom\DapperTestCase.cs" />
     <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DB2Test.cs" />
-    <Compile Include="DesignPattern.cs" />
-    <Compile Include="MQTest.cs" />
-    <Compile Include="RedisCommandTest.cs" />
-    <Compile Include="ReportConfigTest.cs" />
+    <Compile Include="Print\DesignPatternTestCase.cs" />
+    <Compile Include="Print\MQTestCase.cs" />
+    <Compile Include="Commom\RedisCommandTest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Log4NetTest1.cs" />
+    <Compile Include="Log4NetTestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EncryptTest.cs" />
-    <Compile Include="RedisBenchTest.cs" />
-    <Compile Include="StringTest.cs" />
-    <Compile Include="UtilTest.cs" />
+    <Compile Include="Commom\EncryptTestCase.cs" />
+    <Compile Include="StringTestCase.cs" />
+    <Compile Include="Commom\UtilTestCase.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -206,6 +202,7 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

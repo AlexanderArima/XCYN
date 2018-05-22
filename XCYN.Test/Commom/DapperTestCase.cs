@@ -2,17 +2,22 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IBM.Data.DB2;
+using XCYN.Common.Dapper;
+using XCYN.Linq.Model;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using Dapper;
 
-namespace XCYN.Test
+namespace XCYN.Test.Common
 {
     /// <summary>
-    /// DB2Test 的摘要说明
+    /// DapperTest 的摘要说明
     /// </summary>
     [TestClass]
-    public class DB2Test
+    public class DapperTestCase
     {
-        public DB2Test()
+        public DapperTestCase()
         {
             //
             //TODO:  在此处添加构造函数逻辑
@@ -60,11 +65,33 @@ namespace XCYN.Test
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void SelectInsert()
         {
-            //DB2Connection conn = new DB2Connection("Server=127.0.0.1:50000;Database=TEST;UID=db2admin;PWD=111111");
-            DB2Connection conn = new DB2Connection("Database=TEST;UID=db2admin;PWD=111111");
-            conn.Open();
+            //不带参数
+            var list = DapperHelper.Query<user>("SELECT * FROM users");
+            Assert.AreNotEqual(0, list.Count);
+
+            //带上参数
+            var list2 = DapperHelper.Query<user>("SELECT * FROM users WHERE ID = @id",new { id = 2 });
+            Assert.AreEqual(1, list2.Count);
+
+            //join操作
+            var list3 = DapperHelper.Query("SELECT * FROM users left join zcp_users on users.id = zcp_users.user_id");
+            Assert.AreNotEqual(0, list3.AsList().Count);
+        }
+
+        public static string connectionString = ConfigurationManager.ConnectionStrings["MeetingSys"].ConnectionString;
+
+        [TestMethod]
+        public void SelectInsert2()
+        {
+            using (IDbConnection conn = new SqlConnection(connectionString))
+            {
+                var list = conn.Query<user>("select * from users");
+                Assert.AreNotEqual(0, list.AsList().Count);
+                var list2 = conn.Query<user>("SELECT * FROM users WHERE ID = @id", new { id = 2 });
+                Assert.AreEqual(1, list2.AsList().Count);
+            }
         }
     }
 }

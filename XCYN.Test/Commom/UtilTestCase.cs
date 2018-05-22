@@ -2,10 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XCYN.Common;
 
-namespace XCYN.Test
+namespace XCYN.Test.Common
 {
     [TestClass]
-    public class UtilTest
+    public class UtilTestCase
     {
         [TestMethod]
         public void IsNumeric()

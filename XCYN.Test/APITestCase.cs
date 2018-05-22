@@ -2,22 +2,18 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XCYN.Common.Dapper;
-using XCYN.Linq.Model;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using Dapper;
+using System.Net.Http;
+using XCYN.API.Controllers;
 
 namespace XCYN.Test
 {
     /// <summary>
-    /// DapperTest 的摘要说明
+    /// APITest 的摘要说明
     /// </summary>
     [TestClass]
-    public class DapperTest
+    public class APITestCase
     {
-        public DapperTest()
+        public APITestCase()
         {
             //
             //TODO:  在此处添加构造函数逻辑
@@ -63,35 +59,36 @@ namespace XCYN.Test
         // public void MyTestCleanup() { }
         //
         #endregion
-
+        
+        /// <summary>
+        /// 第一个控制器单元测试
+        /// </summary>
         [TestMethod]
-        public void SelectInsert()
+        public void TestNewGreetingAdd()
         {
-            //不带参数
-            var list = DapperHelper.Query<user>("SELECT * FROM users");
-            Assert.AreNotEqual(0, list.Count);
-
-            //带上参数
-            var list2 = DapperHelper.Query<user>("SELECT * FROM users WHERE ID = @id",new { id = 2 });
-            Assert.AreEqual(1, list2.Count);
-
-            //join操作
-            var list3 = DapperHelper.Query("SELECT * FROM users left join zcp_users on users.id = zcp_users.user_id");
-            Assert.AreNotEqual(0, list3.AsList().Count);
-        }
-
-        public static string connectionString = ConfigurationManager.ConnectionStrings["MeetingSys"].ConnectionString;
-
-        [TestMethod]
-        public void SelectInsert2()
-        {
-            using (IDbConnection conn = new SqlConnection(connectionString))
+            //准备
+            var greetingName = "newgreeting";
+            var greetingMessage = "Hello Test!";
+            var fakeRequest = new HttpRequestMessage(HttpMethod.Post,
+                "http://localhost:55898/api/greeting");
+            var greeting = new Greeting
             {
-                var list = conn.Query<user>("select * from users");
-                Assert.AreNotEqual(0, list.AsList().Count);
-                var list2 = conn.Query<user>("SELECT * FROM users WHERE ID = @id", new { id = 2 });
-                Assert.AreEqual(1, list2.AsList().Count);
-            }
+                Name = greetingName,
+                Message = greetingMessage,
+            };
+            var service = new GreetingController();
+            service.Request = fakeRequest;
+
+            //操作
+            var response = service.PostGreeting(greeting);
+
+            //断言
+            Assert.IsNotNull(response);
+            Assert.AreEqual(System.Net.HttpStatusCode.Created, response.StatusCode);
+            Assert.AreEqual(new Uri("http://localhost:55898/api/greeting/newgreeting"),
+                response.Headers.Location);
+
+            
         }
     }
 }

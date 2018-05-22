@@ -5,7 +5,7 @@ using XCYN.Print.rabbitmq;
 namespace XCYN.Test
 {
     [TestClass]
-    public class MQTest
+    public class MQTestCase
     {
         [TestMethod]
         public void PublishBasic()

@@ -10,13 +10,13 @@ using XCYN.Test.ServiceReference1;
 using XCYN.Print.DesignPattern.Strategy;
 using XCYN.Print.DesignPattern.Builder;
 
-namespace XCYN.Test
+namespace XCYN.Test.Print
 {
     /// <summary>
     /// DesignPattern 的摘要说明
     /// </summary>
     [TestClass]
-    public class DesignPattern
+    public class DesignPatternTestCase
     {
 
         [TestMethod]
