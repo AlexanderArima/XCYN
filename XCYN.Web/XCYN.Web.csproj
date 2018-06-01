@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptModuleKind>
+    </TypeScriptModuleKind>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
@@ -370,7 +371,6 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
-    <Content Include="Pages\log\Main.aspx" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
     <Content Include="Pages\test\BoxTypeTest.aspx" />
@@ -1375,16 +1375,6 @@
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\log\ashx\LogHandler.ashx.cs">
-      <DependentUpon>LogHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\log\Main.aspx.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\log\Main.aspx.designer.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\test\ArrayTest.aspx.cs">
       <DependentUpon>ArrayTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1711,7 +1701,6 @@
     <Content Include="Pages\easyui\nav.json" />
     <Content Include="Pages\easyui\tree.json" />
     <Content Include="Pages\test\RequestHandler.ashx" />
-    <Content Include="Pages\log\ashx\LogHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1721,6 +1710,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Pages\log\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Plugins\vue\types\index.d.ts" />

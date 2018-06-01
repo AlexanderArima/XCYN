@@ -55,7 +55,7 @@ namespace XCYN.Print.Operators
         /// </summary>
         public void Fun5()
         {
-            Console.WriteLine(1 is 1);
+            //Console.WriteLine(1 is 1);
             Console.WriteLine(1 is Int32);
             Console.WriteLine(1 is object);
             /*

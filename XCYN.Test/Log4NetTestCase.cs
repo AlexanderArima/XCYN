@@ -34,17 +34,17 @@ namespace XCYN.Test
         [TestMethod]
         public void YieldTest()
         {
-            YieldTest y = new Test.YieldTest();
-            y.WithYield();
-            Console.ReadLine();
+            //YieldTest y = new Test.YieldTest();
+            //y.WithYield();
+            //Console.ReadLine();
         }
 
         [TestMethod]
         public void NoYieldTest()
         {
-            YieldTest y = new Test.YieldTest();
-            y.WithNoYield();
-            Console.ReadLine();
+            //YieldTest y = new Test.YieldTest();
+            //y.WithNoYield();
+            //Console.ReadLine();
         }
 
         [TestMethod]
