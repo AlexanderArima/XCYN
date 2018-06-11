@@ -61,6 +61,7 @@
             <tr>
                 <td colspan="2">
                     <input type="submit" value="提交" />
+                    <input type="button" value="跨域提交" id="buttonJsonp" />
                 </td>
             </tr>
         </table>
@@ -69,6 +70,25 @@
     <script type="text/javascript">
 
         var form1 = $("#form1");
+
+        form1.find("#buttonJsonp").on('click', function () {
+            $.ajax({
+                type: "POST",
+                dataType: "jsonp",
+                url: "http://localhost:4418/api/User",
+                data: form1.serialize(),
+                jsonpCallback:"cb"
+            }).success(function (data) {
+                console.log("请求成功1");
+                console.log(data);
+            }).error(function (data) {
+                console.log("请求失败1");
+                console.log(data);
+            }).complete(function (data) {
+                console.log("请求完成1");
+                console.log(data);
+            });;
+        });
 
         form1.find(":input[type='submit']").on('click', function () {
             try
