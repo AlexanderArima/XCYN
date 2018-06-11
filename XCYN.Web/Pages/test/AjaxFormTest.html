@@ -62,6 +62,7 @@
                 <td colspan="2">
                     <input type="submit" value="提交" />
                     <input type="button" value="跨域提交" id="buttonJsonp" />
+                    <input type="button" value="跨域提交1" id="buttonCors" />
                 </td>
             </tr>
         </table>
@@ -88,6 +89,24 @@
                 console.log("请求完成1");
                 console.log(data);
             });;
+        });
+
+        form1.find("#buttonCors").on('click', function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "http://localhost:4418/api/User",
+                data: form1.serialize()
+            }).success(function (data) {
+                console.log("请求成功");
+                console.log(data);
+            }).error(function (data) {
+                console.log("请求失败");
+                console.log(data);
+            }).complete(function (data) {
+                console.log("请求完成");
+                console.log(data);
+            });
         });
 
         form1.find(":input[type='submit']").on('click', function () {
