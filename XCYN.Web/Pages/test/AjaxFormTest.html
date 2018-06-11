@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <form id="form1" name="form1">
+        <input type="hidden" name="action" value="AddUser" />
+        <table>
+            <tr>
+                <td>
+                    用户名：
+                </td>
+                <td>
+                    <input type="text" name="UserName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    密码：
+                </td>
+                <td>
+                    <input type="password" name="PassWord" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    性别：
+                </td>
+                <td>
+                    <label for="radioMale">男：</label>
+                    <input type="radio" id="radioMale" checked="checked" name="Sex" value="male" />
+                    <label for="radioFemale">女：</label>
+                    <input type="radio" id="radioFemale" name="Sex" value="female" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    出生日期
+                </td>
+                <td>
+                    <select name="Year">
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                    </select>
+                    <select name="Month">
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                    </select>
+                    <select name="Day">
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="提交" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script src="../../Plugins/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+
+        var form1 = $("#form1");
+
+        form1.find(":input[type='submit']").on('click', function () {
+            try
+            {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "RequestHandler.ashx",
+                    data: form1.serialize()
+                }).success(function (data) {
+                    console.log("请求成功");
+                    console.log(data);
+                }).error(function (data) {
+                    console.log("请求失败");
+                    console.log(data);
+                }).complete(function (data) {
+                    console.log("请求完成");
+                    console.log(data);
+                });
+                console.log(form1.serialize());
+            }
+            catch(e)
+            {
+                console.log(e);
+            }
+            finally
+            {
+                return false;
+            }
+            
+        });
+        
+    </script>
+</body>
+</html>

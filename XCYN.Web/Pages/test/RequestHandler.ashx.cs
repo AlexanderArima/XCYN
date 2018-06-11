@@ -37,6 +37,9 @@ namespace XCYN.Web.Pages.test
                 case "MoveOrder":
                     MoveOrder(context);
                     break;
+                case "AddUser":
+                    AddUser(context);
+                    break;
                 default:
                     break;
             }
@@ -63,6 +66,27 @@ namespace XCYN.Web.Pages.test
                     Debug.WriteLine($"发送邮件,Key:{key},value:{value},reason:{reason}");
                 });
            
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="context"></param>
+        private void AddUser(HttpContext context)
+        { 
+            var UserName = context.Request["UserName"];
+            var PassWord = context.Request["PassWord"];
+            var Sex = context.Request["Sex"];
+            var Year = context.Request["Year"];
+            var Month = context.Request["Month"];
+            var Day = context.Request["Day"];
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("resultCode", 1);
+
+            context.Response.Clear();
+            context.Response.ContentType = "text/json";
+            context.Response.Write(JsonConvert.SerializeObject(dict));
+            context.Response.End();
         }
 
         private void MoveRecInfoRemovedCallback(string key, object value, CacheItemRemovedReason reason)
