@@ -151,10 +151,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XCYN.API\XCYN.API.csproj">
-      <Project>{7BA8A41F-20A5-41F9-B84F-64FA0573BC12}</Project>
-      <Name>XCYN.API</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
       <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
       <Name>XCYN.Common</Name>

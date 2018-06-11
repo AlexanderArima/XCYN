@@ -1,8 +1,8 @@
 ﻿<h2>简要概述</h2>
 <table>
 	<tr>
-		<td>XCYN.API</td>
-		<td>Web API项目</td>
+		<td>XCYN.WebAPI</td>
+		<td>API接口</td>
 	</tr>
 	<tr>
 		<td>XCYN.Common</td>
