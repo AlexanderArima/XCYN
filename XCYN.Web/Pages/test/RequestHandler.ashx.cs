@@ -40,6 +40,9 @@ namespace XCYN.Web.Pages.test
                 case "AddUser":
                     AddUser(context);
                     break;
+                case "ReceiveError":
+                    ReceiveError(context);
+                    break;
                 default:
                     break;
             }
@@ -47,7 +50,27 @@ namespace XCYN.Web.Pages.test
 
             var isPost = RequestHelper.IsPost();
         }
-        
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="context"></param>
+        private void ReceiveError(HttpContext context)
+        {
+            var UserName = context.Request["UserName"];
+            var PassWord = context.Request["PassWord"];
+            var Sex = context.Request["Sex"];
+            var Year = context.Request["Year"];
+            var Month = context.Request["Month"];
+            var Day = context.Request["Day"];
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("resultCode", 1);
+            throw new Exception("");
+            context.Response.Clear();
+            //context.Response.ContentType = "text/json";
+            context.Response.Write(JsonConvert.SerializeObject(dict));
+            context.Response.End();
+        }
 
         /// <summary>
         /// 移动栏目的顺序后，一段时间不操作即发送邮件

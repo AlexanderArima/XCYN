@@ -1,13 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
     <title></title>
-	<meta charset="utf-8" />
 </head>
 <body>
-    <form id="form1" name="form1">
-        <input type="hidden" name="action" value="AddUser" />
+    <form id="form1" name="form1" >
+        <input type="hidden" name="action" value="ReceiveError" />
         <table>
             <tr>
                 <td>
@@ -71,53 +70,11 @@
     <script type="text/javascript">
 
         var form1 = $("#form1");
-
-        //用Jsonp实现跨域提交，只支持Get请求，支持低版本的浏览器
-        form1.find("#buttonJsonp").on('click', function () {
-            $.ajax({
-                type: "GET",
-                dataType: "jsonp",
-                url: "http://localhost:4418/api/User",
-                data: form1.serialize(),
-                jsonpCallback:"cb"
-            }).success(function (data) {
-                console.log("请求成功1");
-                console.log(data);
-            }).error(function (data) {
-                console.log("请求失败1");
-                console.log(data);
-            }).complete(function (data) {
-                console.log("请求完成1");
-                console.log(data);
-            });;
-        });
-
-        //用Cors实现跨域提交，支持Get，Post
-        form1.find("#buttonCors").on('click', function () {
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "http://localhost:4418/api/User",
-                data: form1.serialize()
-            }).success(function (data) {
-                console.log("请求成功");
-                console.log(data);
-            }).error(function (data) {
-                console.log("请求失败");
-                console.log(data);
-            }).complete(function (data) {
-                console.log("请求完成");
-                console.log(data);
-            });
-        });
-
         //同源提交请求
         form1.find(":input[type='submit']").on('click', function () {
-            try
-            {
+            try {
                 $.ajax({
                     type: "POST",
-                    dataType: "json",
                     url: "RequestHandler.ashx",
                     data: form1.serialize()
                 }).success(function (data) {
@@ -132,17 +89,13 @@
                 });
                 console.log(form1.serialize());
             }
-            catch(e)
-            {
+            catch (e) {
                 console.log(e);
             }
-            finally
-            {
+            finally {
                 return false;
             }
-            
         });
-        
     </script>
 </body>
 </html>

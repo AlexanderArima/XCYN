@@ -16,21 +16,22 @@ namespace XCYN.WebApi.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/User/5
-        public IDictionary<string,object> Get(User user)
+        //处理Jsonp的请求
+        public IDictionary<string,object> Get(string action, string UserName, string PassWord,
+            string Sex,string Year,string Month,string Day)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict.Add("stateCode", 1);
             return dict;
         }
         
-        // POST: api/User
+        //处理Cors的请求
         //public IDictionary<string,object> Post(string action,string UserName,string PassWord,
         //    string Sex,string Year,string Month,string Day)
         public IDictionary<string,object> Post(User user)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict.Add("stateCode", 1);
+            dict.Add("stateCode", 2);
             return dict;
         }
 

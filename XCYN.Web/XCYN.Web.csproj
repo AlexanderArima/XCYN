@@ -19,7 +19,7 @@
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
@@ -386,6 +386,7 @@
     <Content Include="Pages\test\LocalStorage2.aspx" />
     <Content Include="Pages\test\RegExpTest.aspx" />
     <Content Include="Pages\test\RequestTest.aspx" />
+    <Content Include="Pages\test\ResponseTest.html" />
     <Content Include="Pages\test\SessionStorage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1371,6 +1372,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
+    <Compile Include="Module\FileGZipModule.cs" />
     <Compile Include="Pages\knockout\shop.aspx.cs">
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
