@@ -15,6 +15,25 @@ namespace XCYN.Service
 
         static void Main(string[] args)
         {
+            HandleStockService();
+        }
+
+        /// <summary>
+        /// 调用服务
+        /// </summary>
+        public static void HandleStockService()
+        {
+            ServiceHost host = new ServiceHost(typeof(StockService), new Uri("http://localhost:8000/StockService"));
+            host.AddServiceEndpoint(typeof(IStockService), new BasicHttpBinding(), "");
+            host.Open();
+            Console.WriteLine("服务地址：http://localhost:8000/StockService");
+            Console.WriteLine("点击回车键关闭服务");
+            Console.ReadLine();
+            host.Close();
+        }
+
+        public static void HandleServiceFly()
+        {
             ServiceHost host = new ServiceHost(typeof(ServiceFly));
             //host.Description.Endpoints[0].EndpointBehaviors.Add(new MyEndpointBehavior());
             host.Open();

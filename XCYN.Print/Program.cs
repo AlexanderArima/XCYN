@@ -31,6 +31,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using XCYN.Print.delegates;
 using XCYN.Print.Alg;
+using XCYN.Print.WCF;
 
 namespace XCYN.Print
 {
@@ -38,8 +39,10 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            SortOrderTest.HeapSortVsQuick();
-            Console.Read();
+            HandleStockService service = new HandleStockService();
+            service.Fun1();
+            //SortOrderTest.HeapSortVsQuick();
+            //Console.Read();
         }
 
         private static void Algorithm()

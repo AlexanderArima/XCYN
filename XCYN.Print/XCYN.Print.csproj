@@ -129,6 +129,11 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
+    <Compile Include="Connected Services\StockServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Crawler\Crawler.cs" />
     <Compile Include="Dapper\ExampleSample.cs" />
     <Compile Include="delegates\EventTest.cs" />
@@ -873,6 +878,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="WCF\HandleStockService.cs" />
     <Compile Include="XmlAndJson\BookProduct.cs" />
     <Compile Include="XmlAndJson\Inventory.cs" />
     <Compile Include="XmlAndJson\JsonFuns.cs" />
@@ -886,6 +892,13 @@
   <ItemGroup>
     <None Include="ADONET\config.json" />
     <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\StockServiceReference\StockService.wsdl" />
+    <None Include="Connected Services\StockServiceReference\StockService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\StockServiceReference\StockService1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="linq\DataClasses1.dbml">
@@ -922,6 +935,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\StockServiceReference\StockService.disco" />
+    <None Include="Connected Services\StockServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\StockServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\StockServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />
@@ -972,6 +992,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
