@@ -7,6 +7,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
+using XCYN.Service.WCF;
 
 namespace XCYN.Service
 {
@@ -15,11 +16,24 @@ namespace XCYN.Service
 
         static void Main(string[] args)
         {
-            HandleStockService();
+            HandleOrderService();
         }
 
         /// <summary>
-        /// 调用服务
+        /// 使用代码和配置文件编写WCF
+        /// </summary>
+        public static void HandleOrderService()
+        {
+            ServiceHost host = new ServiceHost(typeof(OrderService));
+            host.Open();
+            Console.WriteLine("服务地址：http://localhost:8733/OrderService/");
+            Console.WriteLine("点击回车键关闭服务");
+            Console.ReadLine();
+            host.Close();
+        }
+
+        /// <summary>
+        /// 完全用代码编写WCF
         /// </summary>
         public static void HandleStockService()
         {

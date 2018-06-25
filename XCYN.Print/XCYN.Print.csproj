@@ -129,6 +129,11 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
+    <Compile Include="Connected Services\OrderServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\StockServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -878,6 +883,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="WCF\HandleOrderService.cs" />
     <Compile Include="WCF\HandleStockService.cs" />
     <Compile Include="XmlAndJson\BookProduct.cs" />
     <Compile Include="XmlAndJson\Inventory.cs" />
@@ -894,6 +900,13 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderServiceReference\OrderService.wsdl" />
     <None Include="Connected Services\StockServiceReference\StockService.wsdl" />
     <None Include="Connected Services\StockServiceReference\StockService.xsd">
       <SubType>Designer</SubType>
@@ -939,6 +952,13 @@
     <None Include="Connected Services\StockServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\StockServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\StockServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\OrderServiceReference\item.disco" />
+    <None Include="Connected Services\OrderServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\OrderServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\OrderServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -997,6 +1017,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\OrderServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
