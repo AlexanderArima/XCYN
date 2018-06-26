@@ -16,7 +16,7 @@ namespace XCYN.Service.WCF
 
         public double GetPrice(string ticker)
         {
-            return 2.22;
+            return 0.00;
         }
     }
 }

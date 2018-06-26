@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c99b6d08-4344-4713-ab14-4edc108658a8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4bde18c5-94fe-434b-806e-a3914856c550" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8733/OrderService/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="3208d3c8-a582-4a71-8ec6-df962bb85bf5" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?xsd=xsd0" />
-    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="8b277d67-ec5c-4025-bdb9-86c88fdce118" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?wsdl" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="5749da7a-0070-4a90-a00b-6997852bc90e" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?disco" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="2c439932-1d78-4664-8b1b-e1c8234a49e6" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?xsd=xsd1" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="c20bb37a-6b8b-4719-bcee-3f9acafdbf71" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?xsd=xsd0" />
+    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="09ce7e0f-a71c-4c38-a7e6-181742d4fbdb" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="6ff566ae-3874-4cc3-9423-b4e714358bb6" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="d86b17e8-dd86-4d98-a876-fe517b8eac7c" SourceId="1" SourceUrl="http://localhost:8733/OrderService/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

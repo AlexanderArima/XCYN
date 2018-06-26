@@ -24,6 +24,7 @@
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +63,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1365,6 +1369,7 @@
     <Content Include="Plugins\select2\vendor\jquery-2.1.0.js" />
     <Content Include="Plugins\jquery\jquery-1.10.2.js" />
     <Content Include="Plugins\jquery\jquery-1.10.2.min.js" />
+    <Content Include="Service\OrderService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1507,6 +1512,9 @@
       <DependentUpon>RoomList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\OrderService.svc.cs">
+      <DependentUpon>OrderService.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

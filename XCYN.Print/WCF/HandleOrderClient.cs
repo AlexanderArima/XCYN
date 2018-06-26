@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace XCYN.Print.WCF
 {
-    public class HandleStockService
+    public class HandleOrderClient
     {
         public void Fun1()
         {
-            StockServiceReference.StockServiceClient proxy = new Print.StockServiceReference.StockServiceClient();
+            OrderServiceReference.OrderServiceClient proxy = new OrderServiceReference.OrderServiceClient();
             var price = proxy.GetPrice("x1");
-            Console.WriteLine("price:"+price);
+            Console.WriteLine("price:" + price);
             Console.Read();
         }
     }

@@ -16,7 +16,7 @@ namespace XCYN.Service
 
         static void Main(string[] args)
         {
-            HandleOrderService();
+            HandleStockService();
         }
 
         /// <summary>

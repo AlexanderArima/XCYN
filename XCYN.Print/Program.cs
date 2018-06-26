@@ -39,10 +39,10 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            HandleOrderService service = new HandleOrderService();
-            service.Fun1();
-            //HandleStockService service = new HandleStockService();
+            //HandleOrderClient service = new HandleOrderClient();
             //service.Fun1();
+            HandleStockClient service = new HandleStockClient();
+            service.Fun2();
             //SortOrderTest.HeapSortVsQuick();
             //Console.Read();
         }
