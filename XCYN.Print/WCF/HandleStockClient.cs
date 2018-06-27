@@ -13,6 +13,9 @@ namespace XCYN.Print.WCF
     /// </summary>
     public class HandleStockClient
     {
+        /// <summary>
+        /// 使用代码和配置文件编写WCF客户端
+        /// </summary>
         public void Fun1()
         {
             StockServiceReference.StockServiceClient proxy = new Print.StockServiceReference.StockServiceClient();

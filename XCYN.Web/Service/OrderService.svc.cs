@@ -25,12 +25,6 @@ namespace XCYN.Web.Service
             return;
         }
 
-        [OperationContract]
-        public double GetPrice()
-        {
-            return 2.22;
-        }
-
         // 在此处添加更多操作并使用 [OperationContract] 标记它们
     }
 }
