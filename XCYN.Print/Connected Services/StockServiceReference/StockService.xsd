@@ -24,4 +24,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DoBigAnalysisFast">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoBigAnslysisSlow">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoBigAnslysisSlowResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

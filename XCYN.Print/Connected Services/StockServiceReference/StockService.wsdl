@@ -18,6 +18,15 @@
   <wsdl:message name="IStockService_GetPrice_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPriceResponse" />
   </wsdl:message>
+  <wsdl:message name="IStockService_DoBigAnalysisFast_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoBigAnalysisFast" />
+  </wsdl:message>
+  <wsdl:message name="IStockService_DoBigAnslysisSlow_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoBigAnslysisSlow" />
+  </wsdl:message>
+  <wsdl:message name="IStockService_DoBigAnslysisSlow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoBigAnslysisSlowResponse" />
+  </wsdl:message>
   <wsdl:portType name="IStockService">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockService/DoWork" message="tns:IStockService_DoWork_InputMessage" />
@@ -26,6 +35,13 @@
     <wsdl:operation name="GetPrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockService/GetPrice" message="tns:IStockService_GetPrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStockService/GetPriceResponse" message="tns:IStockService_GetPrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoBigAnalysisFast">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockService/DoBigAnalysisFast" message="tns:IStockService_DoBigAnalysisFast_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoBigAnslysisSlow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockService/DoBigAnslysisSlow" message="tns:IStockService_DoBigAnslysisSlow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockService/DoBigAnslysisSlowResponse" message="tns:IStockService_DoBigAnslysisSlow_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IStockService" type="tns:IStockService">
@@ -41,6 +57,21 @@
     </wsdl:operation>
     <wsdl:operation name="GetPrice">
       <soap:operation soapAction="http://tempuri.org/IStockService/GetPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoBigAnalysisFast">
+      <soap:operation soapAction="http://tempuri.org/IStockService/DoBigAnalysisFast" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DoBigAnslysisSlow">
+      <soap:operation soapAction="http://tempuri.org/IStockService/DoBigAnslysisSlow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

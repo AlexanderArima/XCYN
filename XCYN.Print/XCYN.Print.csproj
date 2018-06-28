@@ -952,17 +952,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\StockServiceReference\StockService.disco" />
-    <None Include="Connected Services\StockServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\StockServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\StockServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Connected Services\OrderServiceReference\item.disco" />
     <None Include="Connected Services\OrderServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\OrderServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\OrderServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\StockServiceReference\StockService.disco" />
+    <None Include="Connected Services\StockServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\StockServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\StockServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

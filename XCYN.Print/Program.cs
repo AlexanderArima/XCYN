@@ -42,7 +42,7 @@ namespace XCYN.Print
             //HandleOrderClient service = new HandleOrderClient();
             //service.Fun1();
             HandleStockClient service = new HandleStockClient();
-            service.Fun2();
+            service.Fun5();
             //SortOrderTest.HeapSortVsQuick();
             //Console.Read();
         }

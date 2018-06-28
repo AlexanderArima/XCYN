@@ -16,5 +16,14 @@ namespace XCYN.Service.WCF
 
         [OperationContract]
         double GetPrice(string ticker);
+
+        /// <summary>
+        /// 单向操作，客户端调用服务后即刻返回结果
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        void DoBigAnalysisFast();
+
+        [OperationContract(IsOneWay = false)]
+        void DoBigAnslysisSlow();
     }
 }

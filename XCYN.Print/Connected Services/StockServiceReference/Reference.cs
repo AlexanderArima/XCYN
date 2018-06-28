@@ -18,14 +18,34 @@ namespace XCYN.Print.StockServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/DoWork", ReplyAction="http://tempuri.org/IStockService/DoWorkResponse")]
         void DoWork();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/DoWork", ReplyAction="http://tempuri.org/IStockService/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/DoWork", ReplyAction="http://tempuri.org/IStockService/DoWorkResponse")]
+        System.IAsyncResult BeginDoWork(System.AsyncCallback callback, object asyncState);
+        
+        void EndDoWork(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/GetPrice", ReplyAction="http://tempuri.org/IStockService/GetPriceResponse")]
         double GetPrice(string ticker);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/GetPrice", ReplyAction="http://tempuri.org/IStockService/GetPriceResponse")]
-        System.Threading.Tasks.Task<double> GetPriceAsync(string ticker);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/GetPrice", ReplyAction="http://tempuri.org/IStockService/GetPriceResponse")]
+        System.IAsyncResult BeginGetPrice(string ticker, System.AsyncCallback callback, object asyncState);
+        
+        double EndGetPrice(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IStockService/DoBigAnalysisFast")]
+        void DoBigAnalysisFast();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IStockService/DoBigAnalysisFast")]
+        System.IAsyncResult BeginDoBigAnalysisFast(System.AsyncCallback callback, object asyncState);
+        
+        void EndDoBigAnalysisFast(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/DoBigAnslysisSlow", ReplyAction="http://tempuri.org/IStockService/DoBigAnslysisSlowResponse")]
+        void DoBigAnslysisSlow();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/DoBigAnslysisSlow", ReplyAction="http://tempuri.org/IStockService/DoBigAnslysisSlowResponse")]
+        System.IAsyncResult BeginDoBigAnslysisSlow(System.AsyncCallback callback, object asyncState);
+        
+        void EndDoBigAnslysisSlow(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -34,7 +54,50 @@ namespace XCYN.Print.StockServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetPriceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetPriceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public double Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((double)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class StockServiceClient : System.ServiceModel.ClientBase<XCYN.Print.StockServiceReference.IStockService>, XCYN.Print.StockServiceReference.IStockService {
+        
+        private BeginOperationDelegate onBeginDoWorkDelegate;
+        
+        private EndOperationDelegate onEndDoWorkDelegate;
+        
+        private System.Threading.SendOrPostCallback onDoWorkCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetPriceDelegate;
+        
+        private EndOperationDelegate onEndGetPriceDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetPriceCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDoBigAnalysisFastDelegate;
+        
+        private EndOperationDelegate onEndDoBigAnalysisFastDelegate;
+        
+        private System.Threading.SendOrPostCallback onDoBigAnalysisFastCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDoBigAnslysisSlowDelegate;
+        
+        private EndOperationDelegate onEndDoBigAnslysisSlowDelegate;
+        
+        private System.Threading.SendOrPostCallback onDoBigAnslysisSlowCompletedDelegate;
         
         public StockServiceClient() {
         }
@@ -55,20 +118,203 @@ namespace XCYN.Print.StockServiceReference {
                 base(binding, remoteAddress) {
         }
         
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoWorkCompleted;
+        
+        public event System.EventHandler<GetPriceCompletedEventArgs> GetPriceCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoBigAnalysisFastCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoBigAnslysisSlowCompleted;
+        
         public void DoWork() {
             base.Channel.DoWork();
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDoWork(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDoWork(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndDoWork(System.IAsyncResult result) {
+            base.Channel.EndDoWork(result);
+        }
+        
+        private System.IAsyncResult OnBeginDoWork(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginDoWork(callback, asyncState);
+        }
+        
+        private object[] OnEndDoWork(System.IAsyncResult result) {
+            this.EndDoWork(result);
+            return null;
+        }
+        
+        private void OnDoWorkCompleted(object state) {
+            if ((this.DoWorkCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DoWorkCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DoWorkAsync() {
+            this.DoWorkAsync(null);
+        }
+        
+        public void DoWorkAsync(object userState) {
+            if ((this.onBeginDoWorkDelegate == null)) {
+                this.onBeginDoWorkDelegate = new BeginOperationDelegate(this.OnBeginDoWork);
+            }
+            if ((this.onEndDoWorkDelegate == null)) {
+                this.onEndDoWorkDelegate = new EndOperationDelegate(this.OnEndDoWork);
+            }
+            if ((this.onDoWorkCompletedDelegate == null)) {
+                this.onDoWorkCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDoWorkCompleted);
+            }
+            base.InvokeAsync(this.onBeginDoWorkDelegate, null, this.onEndDoWorkDelegate, this.onDoWorkCompletedDelegate, userState);
         }
         
         public double GetPrice(string ticker) {
             return base.Channel.GetPrice(ticker);
         }
         
-        public System.Threading.Tasks.Task<double> GetPriceAsync(string ticker) {
-            return base.Channel.GetPriceAsync(ticker);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetPrice(string ticker, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetPrice(ticker, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public double EndGetPrice(System.IAsyncResult result) {
+            return base.Channel.EndGetPrice(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetPrice(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string ticker = ((string)(inValues[0]));
+            return this.BeginGetPrice(ticker, callback, asyncState);
+        }
+        
+        private object[] OnEndGetPrice(System.IAsyncResult result) {
+            double retVal = this.EndGetPrice(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetPriceCompleted(object state) {
+            if ((this.GetPriceCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetPriceCompleted(this, new GetPriceCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetPriceAsync(string ticker) {
+            this.GetPriceAsync(ticker, null);
+        }
+        
+        public void GetPriceAsync(string ticker, object userState) {
+            if ((this.onBeginGetPriceDelegate == null)) {
+                this.onBeginGetPriceDelegate = new BeginOperationDelegate(this.OnBeginGetPrice);
+            }
+            if ((this.onEndGetPriceDelegate == null)) {
+                this.onEndGetPriceDelegate = new EndOperationDelegate(this.OnEndGetPrice);
+            }
+            if ((this.onGetPriceCompletedDelegate == null)) {
+                this.onGetPriceCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetPriceCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetPriceDelegate, new object[] {
+                        ticker}, this.onEndGetPriceDelegate, this.onGetPriceCompletedDelegate, userState);
+        }
+        
+        public void DoBigAnalysisFast() {
+            base.Channel.DoBigAnalysisFast();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDoBigAnalysisFast(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDoBigAnalysisFast(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndDoBigAnalysisFast(System.IAsyncResult result) {
+            base.Channel.EndDoBigAnalysisFast(result);
+        }
+        
+        private System.IAsyncResult OnBeginDoBigAnalysisFast(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginDoBigAnalysisFast(callback, asyncState);
+        }
+        
+        private object[] OnEndDoBigAnalysisFast(System.IAsyncResult result) {
+            this.EndDoBigAnalysisFast(result);
+            return null;
+        }
+        
+        private void OnDoBigAnalysisFastCompleted(object state) {
+            if ((this.DoBigAnalysisFastCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DoBigAnalysisFastCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DoBigAnalysisFastAsync() {
+            this.DoBigAnalysisFastAsync(null);
+        }
+        
+        public void DoBigAnalysisFastAsync(object userState) {
+            if ((this.onBeginDoBigAnalysisFastDelegate == null)) {
+                this.onBeginDoBigAnalysisFastDelegate = new BeginOperationDelegate(this.OnBeginDoBigAnalysisFast);
+            }
+            if ((this.onEndDoBigAnalysisFastDelegate == null)) {
+                this.onEndDoBigAnalysisFastDelegate = new EndOperationDelegate(this.OnEndDoBigAnalysisFast);
+            }
+            if ((this.onDoBigAnalysisFastCompletedDelegate == null)) {
+                this.onDoBigAnalysisFastCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDoBigAnalysisFastCompleted);
+            }
+            base.InvokeAsync(this.onBeginDoBigAnalysisFastDelegate, null, this.onEndDoBigAnalysisFastDelegate, this.onDoBigAnalysisFastCompletedDelegate, userState);
+        }
+        
+        public void DoBigAnslysisSlow() {
+            base.Channel.DoBigAnslysisSlow();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDoBigAnslysisSlow(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDoBigAnslysisSlow(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndDoBigAnslysisSlow(System.IAsyncResult result) {
+            base.Channel.EndDoBigAnslysisSlow(result);
+        }
+        
+        private System.IAsyncResult OnBeginDoBigAnslysisSlow(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginDoBigAnslysisSlow(callback, asyncState);
+        }
+        
+        private object[] OnEndDoBigAnslysisSlow(System.IAsyncResult result) {
+            this.EndDoBigAnslysisSlow(result);
+            return null;
+        }
+        
+        private void OnDoBigAnslysisSlowCompleted(object state) {
+            if ((this.DoBigAnslysisSlowCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DoBigAnslysisSlowCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DoBigAnslysisSlowAsync() {
+            this.DoBigAnslysisSlowAsync(null);
+        }
+        
+        public void DoBigAnslysisSlowAsync(object userState) {
+            if ((this.onBeginDoBigAnslysisSlowDelegate == null)) {
+                this.onBeginDoBigAnslysisSlowDelegate = new BeginOperationDelegate(this.OnBeginDoBigAnslysisSlow);
+            }
+            if ((this.onEndDoBigAnslysisSlowDelegate == null)) {
+                this.onEndDoBigAnslysisSlowDelegate = new EndOperationDelegate(this.OnEndDoBigAnslysisSlow);
+            }
+            if ((this.onDoBigAnslysisSlowCompletedDelegate == null)) {
+                this.onDoBigAnslysisSlowCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDoBigAnslysisSlowCompleted);
+            }
+            base.InvokeAsync(this.onBeginDoBigAnslysisSlowDelegate, null, this.onEndDoBigAnslysisSlowDelegate, this.onDoBigAnslysisSlowCompletedDelegate, userState);
         }
     }
 }

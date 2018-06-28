@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using XCYN.Print.StockServiceReference;
 using XCYN.Service.WCF;
 
 namespace XCYN.Print.WCF
@@ -29,13 +30,48 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun2()
         {
-            ChannelFactory<XCYN.Service.WCF.IStockService> channel = new ChannelFactory<IStockService>(
+            ChannelFactory<XCYN.Service.WCF.IStockService> channel = new ChannelFactory<XCYN.Service.WCF.IStockService>(
                 new BasicHttpBinding(),
                 new EndpointAddress("http://localhost:8000/StockService"));
 
             var client = channel.CreateChannel();
             var price = client.GetPrice("Hello World");
             Console.WriteLine("price:" + price);
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 采用异步的方式访问WCF服务
+        /// </summary>
+        public void Fun3()
+        {
+            StockServiceClient client = new StockServiceClient();
+            var result = client.BeginGetPrice("cheng", m => {
+                double price = ((StockServiceClient)m.AsyncState).EndGetPrice(m);
+                Console.WriteLine("price:" + price);
+            }, client);
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 调用单向操作，不用等待10s
+        /// </summary>
+        public void Fun4()
+        {
+            StockServiceClient client = new StockServiceClient();
+            client.DoBigAnalysisFast();
+            Console.WriteLine("调用单向操作完成");
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 不调用单向操作，需要等待10s
+        /// </summary>
+        public void Fun5()
+        {
+            StockServiceClient client = new StockServiceClient();
+            client.DoBigAnslysisSlow();
+            Console.WriteLine("不调用单向操作完成");
             Console.Read();
         }
     }
