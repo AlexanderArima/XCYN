@@ -10,19 +10,19 @@
 	</tr>
 	<tr>
 		<td>XCYN.Print</td>
-		<td>运算符，委托，泛型，Linq，设计模式，rabbitmq，多线程的Demo</td>
+		<td>作为客户端调用服务，运算符，委托，泛型，Linq，设计模式，rabbitmq，多线程的Demo</td>
 	</tr>
 	<tr>
 		<td>XCYN.Service</td>
-		<td>WCF的例子</td>
+		<td>WCF的服务端</td>
 	</tr>
 	<tr>
 		<td>XCYN.Test</td>
-		<td>测试项目</td>
+		<td>测试用例</td>
 	</tr>
 	<tr>
 		<td>XCYN.Web</td>
-		<td>KnockOut，Vue，bootStrap，EasyUI的例子</td>
+		<td>JavaScript，KnockOut，Vue，bootStrap，EasyUI例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.WS</td>
