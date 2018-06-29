@@ -16,7 +16,23 @@ namespace XCYN.Service
 
         static void Main(string[] args)
         {
-            HandleStockService();
+            HandleAllService();
+        }
+
+        public static void HandleAllService()
+        {
+            var type = typeof(AllService);
+            var methods = ((System.Reflection.TypeInfo)type).DeclaredMembers;
+            ServiceHost host = new ServiceHost(type);
+            host.Open();
+            Console.WriteLine("服务地址：http://localhost:8733/AllService/");
+            for (int i = 0; i < methods.Count(); i++)
+            {
+                Console.WriteLine("契约方法："+methods.ElementAt(i).Name);
+            }
+            Console.WriteLine("点击回车键关闭服务");
+            Console.ReadLine();
+            host.Close();
         }
 
         /// <summary>

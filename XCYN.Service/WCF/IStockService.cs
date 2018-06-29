@@ -11,8 +11,6 @@ namespace XCYN.Service.WCF
     [ServiceContract]
     public interface IStockService
     {
-        [OperationContract]
-        void DoWork();
 
         [OperationContract]
         double GetPrice(string ticker);

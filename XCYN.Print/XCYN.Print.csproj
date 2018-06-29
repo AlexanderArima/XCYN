@@ -129,6 +129,11 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
+    <Compile Include="Connected Services\AllServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\OrderServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -883,6 +888,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="WCF\HandleAllClient.cs" />
     <Compile Include="WCF\HandleOrderClient.cs" />
     <Compile Include="WCF\HandleStockClient.cs" />
     <Compile Include="XmlAndJson\BookProduct.cs" />
@@ -898,6 +904,13 @@
   <ItemGroup>
     <None Include="ADONET\config.json" />
     <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AllServiceReference\service.wsdl" />
+    <None Include="Connected Services\AllServiceReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AllServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\OrderServiceReference\item.xsd">
@@ -966,6 +979,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\AllServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\AllServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\AllServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />
@@ -1021,6 +1040,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AllServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\OrderServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>

@@ -20,11 +20,7 @@ namespace XCYN.Service.WCF
         {
             Thread.Sleep(10000);
         }
-
-        public void DoWork()
-        {
-        }
-
+        
         public double GetPrice(string ticker)
         {
             return 0.00;

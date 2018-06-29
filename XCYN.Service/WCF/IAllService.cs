@@ -7,11 +7,9 @@ using System.Text;
 
 namespace XCYN.Service.WCF
 {
-    //使用代码和配置文件编写WCF服务
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码和配置文件中的接口名“IIAllService”。
     [ServiceContract]
-    public interface IOrderService
+    public interface IAllService: IStockService,IOrderService
     {
-        [OperationContract]
-        double GetOrder(string ticker);
     }
 }

@@ -53,6 +53,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="WCF\AllService.cs" />
+    <Compile Include="WCF\IAllService.cs" />
     <Compile Include="WCF\IOrderService.cs" />
     <Compile Include="WCF\IServiceFly.cs" />
     <Compile Include="WCF\IStockService.cs" />
