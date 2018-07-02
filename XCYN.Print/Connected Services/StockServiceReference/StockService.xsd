@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="DoWork">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DoWorkResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
+  <xs:import schemaLocation="http://localhost:8000/StockService?xsd=xsd2" namespace="http://XCYNService" />
   <xs:element name="GetPrice">
     <xs:complexType>
       <xs:sequence>
@@ -20,7 +11,21 @@
   <xs:element name="GetPriceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetPriceResult" type="xs:double" />
+        <xs:element xmlns:q1="http://XCYNService" minOccurs="0" name="GetPriceResult" nillable="true" type="q1:StockPrice" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://XCYNService" minOccurs="0" name="price" nillable="true" type="q2:StockPrice" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetPriceResult" type="xs:double" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

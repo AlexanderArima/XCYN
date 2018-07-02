@@ -21,9 +21,26 @@ namespace XCYN.Service.WCF
             Thread.Sleep(10000);
         }
         
-        public double GetPrice(string ticker)
+        public StockPrice GetPrice(string ticker)
         {
-            return 0.00;
+            var price = new StockPrice()
+            {
+                theTickerSymbol = ticker,
+                theCurrentPriceNow = 100,
+                theCurrentTimeNow = DateTime.Now,
+                theDailyVolumeSoFar = 450000,
+                theDailyChangeSoFar = .123456
+            };
+            return price;
         }
+        
+        public double SetPrice(StockPrice price)
+        {
+            return price.theCurrentPriceNow;
+        }
+
+
+       
+
     }
 }

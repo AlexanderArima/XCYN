@@ -13,7 +13,10 @@ namespace XCYN.Service.WCF
     {
 
         [OperationContract]
-        double GetPrice(string ticker);
+        StockPrice GetPrice(string ticker);
+
+        [OperationContract]
+        double SetPrice(StockPrice price);
 
         /// <summary>
         /// 单向操作，客户端调用服务后即刻返回结果

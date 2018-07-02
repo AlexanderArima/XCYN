@@ -4,19 +4,20 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8000/StockService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8000/StockService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8000/StockService?xsd=xsd2" namespace="http://XCYNService" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IStockService_DoWork_InputMessage">
-    <wsdl:part name="parameters" element="tns:DoWork" />
-  </wsdl:message>
-  <wsdl:message name="IStockService_DoWork_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
-  </wsdl:message>
   <wsdl:message name="IStockService_GetPrice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPrice" />
   </wsdl:message>
   <wsdl:message name="IStockService_GetPrice_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockService_SetPrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPrice" />
+  </wsdl:message>
+  <wsdl:message name="IStockService_SetPrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPriceResponse" />
   </wsdl:message>
   <wsdl:message name="IStockService_DoBigAnalysisFast_InputMessage">
     <wsdl:part name="parameters" element="tns:DoBigAnalysisFast" />
@@ -28,13 +29,13 @@
     <wsdl:part name="parameters" element="tns:DoBigAnslysisSlowResponse" />
   </wsdl:message>
   <wsdl:portType name="IStockService">
-    <wsdl:operation name="DoWork">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStockService/DoWork" message="tns:IStockService_DoWork_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStockService/DoWorkResponse" message="tns:IStockService_DoWork_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetPrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockService/GetPrice" message="tns:IStockService_GetPrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStockService/GetPriceResponse" message="tns:IStockService_GetPrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockService/SetPrice" message="tns:IStockService_SetPrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockService/SetPriceResponse" message="tns:IStockService_SetPrice_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DoBigAnalysisFast">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockService/DoBigAnalysisFast" message="tns:IStockService_DoBigAnalysisFast_InputMessage" />
@@ -46,8 +47,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IStockService" type="tns:IStockService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="DoWork">
-      <soap:operation soapAction="http://tempuri.org/IStockService/DoWork" style="document" />
+    <wsdl:operation name="GetPrice">
+      <soap:operation soapAction="http://tempuri.org/IStockService/GetPrice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -55,8 +56,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPrice">
-      <soap:operation soapAction="http://tempuri.org/IStockService/GetPrice" style="document" />
+    <wsdl:operation name="SetPrice">
+      <soap:operation soapAction="http://tempuri.org/IStockService/SetPrice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

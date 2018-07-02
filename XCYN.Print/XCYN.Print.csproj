@@ -927,6 +927,9 @@
     <None Include="Connected Services\StockServiceReference\StockService1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\StockServiceReference\StockService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="linq\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
@@ -940,6 +943,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\XCYN.Service.WCF.StockPrice.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -15,21 +15,21 @@ namespace XCYN.Print.StockServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StockServiceReference.IStockService")]
     public interface IStockService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/DoWork", ReplyAction="http://tempuri.org/IStockService/DoWorkResponse")]
-        void DoWork();
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/DoWork", ReplyAction="http://tempuri.org/IStockService/DoWorkResponse")]
-        System.IAsyncResult BeginDoWork(System.AsyncCallback callback, object asyncState);
-        
-        void EndDoWork(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/GetPrice", ReplyAction="http://tempuri.org/IStockService/GetPriceResponse")]
-        double GetPrice(string ticker);
+        XCYN.Service.WCF.StockPrice GetPrice(string ticker);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/GetPrice", ReplyAction="http://tempuri.org/IStockService/GetPriceResponse")]
         System.IAsyncResult BeginGetPrice(string ticker, System.AsyncCallback callback, object asyncState);
         
-        double EndGetPrice(System.IAsyncResult result);
+        XCYN.Service.WCF.StockPrice EndGetPrice(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/SetPrice", ReplyAction="http://tempuri.org/IStockService/SetPriceResponse")]
+        double SetPrice(XCYN.Service.WCF.StockPrice price);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStockService/SetPrice", ReplyAction="http://tempuri.org/IStockService/SetPriceResponse")]
+        System.IAsyncResult BeginSetPrice(XCYN.Service.WCF.StockPrice price, System.AsyncCallback callback, object asyncState);
+        
+        double EndSetPrice(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IStockService/DoBigAnalysisFast")]
         void DoBigAnalysisFast();
@@ -63,6 +63,25 @@ namespace XCYN.Print.StockServiceReference {
             this.results = results;
         }
         
+        public XCYN.Service.WCF.StockPrice Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((XCYN.Service.WCF.StockPrice)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SetPriceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SetPriceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
         public double Result {
             get {
                 base.RaiseExceptionIfNecessary();
@@ -75,17 +94,17 @@ namespace XCYN.Print.StockServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class StockServiceClient : System.ServiceModel.ClientBase<XCYN.Print.StockServiceReference.IStockService>, XCYN.Print.StockServiceReference.IStockService {
         
-        private BeginOperationDelegate onBeginDoWorkDelegate;
-        
-        private EndOperationDelegate onEndDoWorkDelegate;
-        
-        private System.Threading.SendOrPostCallback onDoWorkCompletedDelegate;
-        
         private BeginOperationDelegate onBeginGetPriceDelegate;
         
         private EndOperationDelegate onEndGetPriceDelegate;
         
         private System.Threading.SendOrPostCallback onGetPriceCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSetPriceDelegate;
+        
+        private EndOperationDelegate onEndSetPriceDelegate;
+        
+        private System.Threading.SendOrPostCallback onSetPriceCompletedDelegate;
         
         private BeginOperationDelegate onBeginDoBigAnalysisFastDelegate;
         
@@ -118,62 +137,15 @@ namespace XCYN.Print.StockServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoWorkCompleted;
-        
         public event System.EventHandler<GetPriceCompletedEventArgs> GetPriceCompleted;
+        
+        public event System.EventHandler<SetPriceCompletedEventArgs> SetPriceCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoBigAnalysisFastCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DoBigAnslysisSlowCompleted;
         
-        public void DoWork() {
-            base.Channel.DoWork();
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginDoWork(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginDoWork(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndDoWork(System.IAsyncResult result) {
-            base.Channel.EndDoWork(result);
-        }
-        
-        private System.IAsyncResult OnBeginDoWork(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginDoWork(callback, asyncState);
-        }
-        
-        private object[] OnEndDoWork(System.IAsyncResult result) {
-            this.EndDoWork(result);
-            return null;
-        }
-        
-        private void OnDoWorkCompleted(object state) {
-            if ((this.DoWorkCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.DoWorkCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void DoWorkAsync() {
-            this.DoWorkAsync(null);
-        }
-        
-        public void DoWorkAsync(object userState) {
-            if ((this.onBeginDoWorkDelegate == null)) {
-                this.onBeginDoWorkDelegate = new BeginOperationDelegate(this.OnBeginDoWork);
-            }
-            if ((this.onEndDoWorkDelegate == null)) {
-                this.onEndDoWorkDelegate = new EndOperationDelegate(this.OnEndDoWork);
-            }
-            if ((this.onDoWorkCompletedDelegate == null)) {
-                this.onDoWorkCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDoWorkCompleted);
-            }
-            base.InvokeAsync(this.onBeginDoWorkDelegate, null, this.onEndDoWorkDelegate, this.onDoWorkCompletedDelegate, userState);
-        }
-        
-        public double GetPrice(string ticker) {
+        public XCYN.Service.WCF.StockPrice GetPrice(string ticker) {
             return base.Channel.GetPrice(ticker);
         }
         
@@ -183,7 +155,7 @@ namespace XCYN.Print.StockServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public double EndGetPrice(System.IAsyncResult result) {
+        public XCYN.Service.WCF.StockPrice EndGetPrice(System.IAsyncResult result) {
             return base.Channel.EndGetPrice(result);
         }
         
@@ -193,7 +165,7 @@ namespace XCYN.Print.StockServiceReference {
         }
         
         private object[] OnEndGetPrice(System.IAsyncResult result) {
-            double retVal = this.EndGetPrice(result);
+            XCYN.Service.WCF.StockPrice retVal = this.EndGetPrice(result);
             return new object[] {
                     retVal};
         }
@@ -221,6 +193,56 @@ namespace XCYN.Print.StockServiceReference {
             }
             base.InvokeAsync(this.onBeginGetPriceDelegate, new object[] {
                         ticker}, this.onEndGetPriceDelegate, this.onGetPriceCompletedDelegate, userState);
+        }
+        
+        public double SetPrice(XCYN.Service.WCF.StockPrice price) {
+            return base.Channel.SetPrice(price);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSetPrice(XCYN.Service.WCF.StockPrice price, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSetPrice(price, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public double EndSetPrice(System.IAsyncResult result) {
+            return base.Channel.EndSetPrice(result);
+        }
+        
+        private System.IAsyncResult OnBeginSetPrice(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            XCYN.Service.WCF.StockPrice price = ((XCYN.Service.WCF.StockPrice)(inValues[0]));
+            return this.BeginSetPrice(price, callback, asyncState);
+        }
+        
+        private object[] OnEndSetPrice(System.IAsyncResult result) {
+            double retVal = this.EndSetPrice(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSetPriceCompleted(object state) {
+            if ((this.SetPriceCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SetPriceCompleted(this, new SetPriceCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SetPriceAsync(XCYN.Service.WCF.StockPrice price) {
+            this.SetPriceAsync(price, null);
+        }
+        
+        public void SetPriceAsync(XCYN.Service.WCF.StockPrice price, object userState) {
+            if ((this.onBeginSetPriceDelegate == null)) {
+                this.onBeginSetPriceDelegate = new BeginOperationDelegate(this.OnBeginSetPrice);
+            }
+            if ((this.onEndSetPriceDelegate == null)) {
+                this.onEndSetPriceDelegate = new EndOperationDelegate(this.OnEndSetPrice);
+            }
+            if ((this.onSetPriceCompletedDelegate == null)) {
+                this.onSetPriceCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSetPriceCompleted);
+            }
+            base.InvokeAsync(this.onBeginSetPriceDelegate, new object[] {
+                        price}, this.onEndSetPriceDelegate, this.onSetPriceCompletedDelegate, userState);
         }
         
         public void DoBigAnalysisFast() {

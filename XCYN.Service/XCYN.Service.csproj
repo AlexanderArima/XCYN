@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="WCF\OrderService.cs" />
     <Compile Include="WCF\ServiceFly.cs" />
+    <Compile Include="WCF\StockPrice.cs" />
     <Compile Include="WCF\StockService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -30,9 +30,20 @@ namespace XCYN.Service.WCF
             return 1990;
         }
 
+        [OperationContract]
         public double GetPrice(string ticker)
         {
             return 1992;
+        }
+
+        public double SetPrice(StockPrice price)
+        {
+            throw new NotImplementedException();
+        }
+
+        StockPrice IStockService.GetPrice(string ticker)
+        {
+            throw new NotImplementedException();
         }
     }
 }

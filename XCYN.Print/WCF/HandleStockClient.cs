@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.StockServiceReference;
-using XCYN.Service.WCF;
+//using XCYN.Service.WCF;
 
 namespace XCYN.Print.WCF
 {
@@ -47,8 +47,8 @@ namespace XCYN.Print.WCF
         {
             StockServiceClient client = new StockServiceClient();
             var result = client.BeginGetPrice("cheng", m => {
-                double price = ((StockServiceClient)m.AsyncState).EndGetPrice(m);
-                Console.WriteLine("price:" + price);
+                var price = ((StockServiceClient)m.AsyncState).EndGetPrice(m);
+                Console.WriteLine("price:" + price.ToString());
             }, client);
             Console.Read();
         }
@@ -74,5 +74,6 @@ namespace XCYN.Print.WCF
             Console.WriteLine("不调用单向操作完成");
             Console.Read();
         }
+        
     }
 }

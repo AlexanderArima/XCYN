@@ -16,7 +16,7 @@ namespace XCYN.Service
 
         static void Main(string[] args)
         {
-            HandleAllService();
+            HandleStockService();
         }
 
         public static void HandleAllService()
