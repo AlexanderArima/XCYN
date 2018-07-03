@@ -889,6 +889,7 @@
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
     <Compile Include="WCF\HandleAllClient.cs" />
+    <Compile Include="WCF\HandleBinding.cs" />
     <Compile Include="WCF\HandleOrderClient.cs" />
     <Compile Include="WCF\HandleStockClient.cs" />
     <Compile Include="XmlAndJson\BookProduct.cs" />

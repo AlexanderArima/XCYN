@@ -39,12 +39,14 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            //HandleBinding binding = new HandleBinding();
+            //binding.Fun1();
             //HandleAllClient client = new HandleAllClient();
             //client.Fun1();
             //HandleOrderClient service = new HandleOrderClient();
             //service.Fun1();
-            HandleStockClient service = new HandleStockClient();
-            service.Fun3();
+            //HandleStockClient service = new HandleStockClient();
+            //service.Fun3();
             //SortOrderTest.HeapSortVsQuick();
             Console.Read();
         }

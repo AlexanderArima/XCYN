@@ -30,10 +30,11 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun2()
         {
+            //创建一个信道工厂
             ChannelFactory<XCYN.Service.WCF.IStockService> channel = new ChannelFactory<XCYN.Service.WCF.IStockService>(
                 new BasicHttpBinding(),
                 new EndpointAddress("http://localhost:8000/StockService"));
-
+            //创建一个信道
             var client = channel.CreateChannel();
             var price = client.GetPrice("Hello World");
             Console.WriteLine("price:" + price);
