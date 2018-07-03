@@ -32,6 +32,7 @@ using System.Text.RegularExpressions;
 using XCYN.Print.delegates;
 using XCYN.Print.Alg;
 using XCYN.Print.WCF;
+using XCYN.Print.MongoDB;
 
 namespace XCYN.Print
 {
@@ -39,6 +40,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
+            BasicOperation basic = new BasicOperation();
+            basic.Fun2();
             //HandleBinding binding = new HandleBinding();
             //binding.Fun1();
             //HandleAllClient client = new HandleAllClient();
