@@ -40,8 +40,43 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            BasicOperation basic = new BasicOperation();
-            basic.Fun2();
+            RefOut();
+            Console.Read();
+        }
+
+        private static void RefOut()
+        {
+            XCYN.Print.MianShiTi.Room room = new XCYN.Print.MianShiTi.Room();
+            //int id = 0;
+            //room.GetPrice(ref id);
+            //Console.WriteLine(id);
+
+            //int age;
+            //room.GetAge(out age);
+            //Console.WriteLine(age);
+        }
+
+        /// <summary>
+        /// 索引器
+        /// </summary>
+        private static void Indexer()
+        {
+            Indexer indexer = new Indexer();
+            indexer[0] = 1;
+            indexer[1] = 2;
+            indexer[2] = 3;
+            indexer[3] = 4;
+            indexer[4] = 5;
+            Console.WriteLine(indexer[0].ToString() + indexer[1].ToString() + indexer[2].ToString() + 
+                indexer[3].ToString() + indexer[4].ToString());
+
+            Console.WriteLine(indexer["a"] + "\n" + indexer["b"]);
+        }
+
+        private static void HandleWCFService()
+        {
+            //BasicOperation basic = new BasicOperation();
+            //basic.Fun2();
             //HandleBinding binding = new HandleBinding();
             //binding.Fun1();
             //HandleAllClient client = new HandleAllClient();
@@ -51,7 +86,6 @@ namespace XCYN.Print
             //HandleStockClient service = new HandleStockClient();
             //service.Fun3();
             //SortOrderTest.HeapSortVsQuick();
-            Console.Read();
         }
 
         private static void Algorithm()
