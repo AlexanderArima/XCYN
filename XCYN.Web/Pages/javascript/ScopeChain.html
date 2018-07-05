@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        if (true)
+        {
+            var color = "blue";
+        }
+        console.log(color);//blue
+
+        //没有块级作用域
+        for (var i = 0; i < 10; i++) {
+
+        }
+        console.log(i);//10
+
+        function Add(num1,num2)
+        {
+            var sum = num1 + num2;
+        }
+        var result = Add(1, 2);
+        console.log(sum);   //这里会报错
+
+        //function Add(num1, num2) {
+        //    sum = num1 + num2;
+        //}
+        //var result = Add(1, 2);
+        //console.log(sum);   //这里不会
+
+    </script>
+</body>
+</html>

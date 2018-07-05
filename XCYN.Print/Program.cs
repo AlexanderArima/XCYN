@@ -40,7 +40,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            RefOut();
+            Algorithm a = new Algorithm();
+            a.ReverseArray();
             Console.Read();
         }
 

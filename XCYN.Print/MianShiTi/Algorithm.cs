@@ -430,5 +430,33 @@ namespace XCYN.Print.MianShiTi
 
         #endregion
 
+        public void ReverseArray()
+        {
+            List<int> list = new List<int>();
+            list.AddRange(new int[6] { 1, 2, 3, 4, 5,6 } );
+            Stack<int> list_new = new Stack<int>();
+            for (int i = 0; i < list.Count; i = i + 2)
+            {
+                int one = list[i];
+                if(i + 1 < list.Count)
+                {
+                    int two = list[i + 1];
+                    list_new.Push(two);
+                }
+                list_new.Push(one);
+            }
+
+            Console.WriteLine("反转前的结果：");
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list.ElementAt(i));
+            }
+
+            Console.WriteLine("反转后的结果：");
+            for (int i = 0; i < list_new.Count; i++)
+            {
+                Console.WriteLine(list_new.ElementAt(i));
+            }
+        }
     }
 }
