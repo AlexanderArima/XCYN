@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="SayHello" onclick="InvokeSayHello()" />
+    <script type="text/javascript">
+
+        //Global对象
+        //URI编码方法（encodeURI,encodeURIComponent)
+        var http = "http://www.baidu.com?w=湖北 武汉";
+
+        console.log("encodeURI:" + encodeURI(http));//http://www.baidu.com?w=%E6%B9%96%E5%8C%97%20%E6%AD%A6%E6%B1%89
+        console.log("encodeURIComponent:" + encodeURIComponent(http));//http%3A%2F%2Fwww.baidu.com%3Fw%3D%E6%B9%96%E5%8C%97%20%E6%AD%A6%E6%B1%89
+
+        //eval会解析参数，并插入到原位置。
+        eval("console.log(sum)");//undefined
+        var sum = 10;
+        eval("console.log(sum)");//10
+
+        //SayHello是一个全局函数，属于window的一个属性
+        function  SayHello()
+        {
+            console.log("Hello !!!");
+        }
+
+        function InvokeSayHello() {
+            window.SayHello();
+        }
+
+    </script>
+</body>
+</html>
