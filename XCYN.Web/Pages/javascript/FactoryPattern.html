@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //工厂模式创建对象
+        function CreatePerson(name,age,job)
+        {
+            var obj = new Object();
+            obj.Name = name;
+            obj.Age = age;
+            obj.Job = job;
+            obj.toString = function()
+            {
+                console.log("Name:" + this.Name + "，Age:" + this.Age + "，Job:" + this.Job);
+            }
+            return obj;
+        }
+
+        //创建对象
+        var Jack = window.CreatePerson("Jack", 18, "Student");
+        var NeKou = CreatePerson("NeKou", 30, "Teacher");
+        Jack.toString();
+        NeKou.toString();
+
+    </script>
+</body>
+</html>

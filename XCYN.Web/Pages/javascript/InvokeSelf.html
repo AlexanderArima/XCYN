@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //递归调用的几种写法
+        function fact(num)
+        {
+            if (num <= 1) {
+                return 1;
+            }
+            else {
+                return num * fact(num - 1);
+            }
+        }
+        //1.这样调用会报错，因为函数内部调用了fact函数，而fact早就是空了。。
+        var temp = fact;
+        fact = null;
+        try {
+            console.log(temp(10));
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+        
+
+        function fact2(num) {
+            if (num <= 1) {
+                return 1;
+            }
+            else {
+                return num * arguments.callee(num - 1);
+            }
+        }
+        //2.改成arguments.callee()就不会报错了，因为它调用的是自身函数
+        var temp2 = fact2;
+        fact2 = null;
+        console.log(temp2(10));
+
+        //console.log(([{ Name: "Cheng" }, { Name: "Wang" }]));
+
+        //3.第二个方法，有个缺陷就是在严格模式下会出错，下面这种方法，可以避免出错
+        var fact3 = (function f(num) {
+            if (num <= 1) {
+                return 1;
+            }
+            else {
+                return num * f(num - 1);
+            }
+        })
+        console.log(fact3(10));
+
+    </script>
+</body>
+</html>

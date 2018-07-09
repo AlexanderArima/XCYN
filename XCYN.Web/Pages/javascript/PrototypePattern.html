@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        //定义Person原型指针
+        function Person()
+        {
+
+        }
+
+        ////定义原型
+        //Person.prototype.Name = "";
+        //Person.prototype.Age = 0;
+        //Person.prototype.Job = "";
+        //Person.prototype.SayHello = function () {
+        //    console.log("Name:" + this.Name + "，Age:" + this.Age + "，Job:" + this.Job);
+        //}
+
+        //更简单的原型语法
+        Person.prototype = {
+            Name: "",
+            Age: 0,
+            Job: "",
+            SayHello: function () {
+                console.log("Name:" + this.Name + "，Age:" + this.Age + "，Job:" + this.Job);
+            }
+        }
+
+        //创建对象
+        var Jack = new Person();
+        Jack.Name = "Jack";
+        Jack.Age = 18;
+        Jack.Job = "Student";
+        Jack.SayHello();
+
+        var NeKou = new Person();
+        NeKou.Name = "NeKou";
+        NeKou.Age = 30;
+        NeKou.Job = "Teacher";
+        NeKou.SayHello();
+
+        console.log(Jack.SayHello == NeKou.SayHello)
+
+    </script>
+
+</body>
+</html>

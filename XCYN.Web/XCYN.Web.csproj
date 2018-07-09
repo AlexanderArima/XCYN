@@ -374,8 +374,13 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
+    <Content Include="Pages\javascript\ConstructorPattern.html" />
+    <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
+    <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GlobalObject.html" />
+    <Content Include="Pages\javascript\InvokeSelf.html" />
+    <Content Include="Pages\javascript\PrototypePattern.html" />
     <Content Include="Pages\javascript\ScopeChain.html" />
     <Content Include="Pages\test\AjaxFormTest.html" />
     <Content Include="Pages\test\ArrayTest.aspx" />

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //构造函数模式
+        function Person(name,age,job)
+        {
+            this.Name = name;
+            this.Age = age;
+            this.Job = job;
+            this.toString = function()
+            {
+                console.log("Name:" + this.Name + "，Age:" + this.Age + "，Job:" + this.Job);
+            }
+        }
+
+        //创建对象
+        var Jack = new Person("Jack", 18, "Student");
+        var NeKou = new Person("NeKou", 30, "Teacher");
+        Jack.toString();
+        NeKou.toString();
+
+        //如果不使用new来创建对象，属性和方法会被添加给window对象。
+        Person("Jack", 18, "Student");
+        console.log(window.Job);//Student
+
+    </script>
+</body>
+</html>

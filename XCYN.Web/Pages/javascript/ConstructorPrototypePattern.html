@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //组合使用构造函数模式和原型模式
+        //每个实例既可以有自己的属性，同时又共享这方法，最大限度节省了内存
+        function Person(name, age, job) {
+            this.Name = name
+            this.Age = age;
+            this.Job = job;
+        }
+
+        Person.prototype = {
+            constructor: Person,
+            SayName: function () {
+                console.log("Name:" + this.Name + ",Age:" + this.Age + ",Job:" + this.Job);
+            }
+        }
+
+        var jack = new Person("Jack", 18, "Student");
+        var Scott = new Person("Scott", 40, "Teacher");
+        jack.SayName();
+        Scott.SayName();
+        console.log(jack.Name + "_" + Scott.Name);
+    </script>
+</body>
+</html>
