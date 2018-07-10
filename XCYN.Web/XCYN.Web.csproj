@@ -380,6 +380,7 @@
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GlobalObject.html" />
     <Content Include="Pages\javascript\InvokeSelf.html" />
+    <Content Include="Pages\javascript\PrivateVariable.html" />
     <Content Include="Pages\javascript\PrototypePattern.html" />
     <Content Include="Pages\javascript\ScopeChain.html" />
     <Content Include="Pages\test\AjaxFormTest.html" />
