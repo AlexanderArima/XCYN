@@ -23,14 +23,57 @@
             var sum = num1 + num2;
         }
         var result = Add(1, 2);
-        console.log(sum);   //这里会报错
+        try {
+            console.log(sum);   //这里会报错
+        }
+        catch (ex) {
+            console.log(ex);
+        }
 
-        //function Add(num1, num2) {
-        //    sum = num1 + num2;
-        //}
-        //var result = Add(1, 2);
-        //console.log(sum);   //这里不会
+        //JavaScript没有块级作用域的概念
+        function OutPutNumber(count) {
+            //使用匿名函数可以模拟块级作用域，变量j在外部无法访问的到。
+            (function () {
+                for (var j = 0; j < count; j++)//这里由于匿名函数是一个闭包，所以它能够访问作用域中的所有变量。
+                {
+                    console.log(j);
+                }
+                
+            })();
 
+            function a() {
+
+            }
+            try {
+                console.log(j);//报错
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+        }
+        OutPutNumber(8);
+
+        //JS重名解决方案
+        var XCFunc = function () {
+
+            function Insert(s) {    //私有函数，外部无法访问
+                console.log(++s);
+            }
+
+            this.Update = function(s) { //public函数，外部也可以访问。
+                console.log(s * 2);
+            };
+        }
+        var x = new XCFunc();
+
+        x.Update(2);
+
+        try {
+            x.Insert(2);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
     </script>
 </body>
 </html>
