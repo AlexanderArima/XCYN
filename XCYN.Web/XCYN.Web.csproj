@@ -374,6 +374,7 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
+    <Content Include="Pages\javascript\ArrayIsObject.html" />
     <Content Include="Pages\javascript\BooleanConvert.html" />
     <Content Include="Pages\javascript\CallApply.html" />
     <Content Include="Pages\javascript\ConstructorPattern.html" />
@@ -385,6 +386,7 @@
     <Content Include="Pages\javascript\PrivateVariable.html" />
     <Content Include="Pages\javascript\PrototypePattern.html" />
     <Content Include="Pages\javascript\ScopeChain.html" />
+    <Content Include="Pages\javascript\ThisUsage.html" />
     <Content Include="Pages\test\AjaxFormTest.html" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
