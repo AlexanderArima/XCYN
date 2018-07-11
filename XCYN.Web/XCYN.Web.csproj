@@ -374,6 +374,8 @@
     <Content Include="Pages\easyui\9.html" />
     <Content Include="Pages\easyui\admin.html" />
     <Content Include="Pages\easyui\login.html" />
+    <Content Include="Pages\javascript\BooleanConvert.html" />
+    <Content Include="Pages\javascript\CallApply.html" />
     <Content Include="Pages\javascript\ConstructorPattern.html" />
     <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+
+        //function的属性call和apply的区别
+
+        function Add(num1, num2) {
+            console.log(this);
+            return num1 + num2;
+        }
+
+        function Person() {
+
+        }
+
+        Person.prototype = {
+            constructor: Person,
+            name: "Wang",
+            Eat: function () {
+                console.log("吃");
+            }
+        }
+
+        var p = new Person();
+
+        //call(thisArg,arg1,arg2,...)
+        //thisArg可以传递任意对象，默认情况下是全局对象window
+        var result = Add.call(p, 1, 2);
+        console.log(result);
+
+        //apply(thisArg,arguements)
+        //thisArg可以传递任意对象，默认情况下是全局对象window
+        //arguements是一个参数数组
+        var result2 = Add.apply(this, [1, 2]);
+        console.log(result2);
+
+        //可以在需要传递对象时用到apply或者call，这样就不用把对象所需要的参数一个一个解析出来了。
+
+    </script>
+</body>
+</html>

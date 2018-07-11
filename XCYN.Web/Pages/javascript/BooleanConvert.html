@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3"> if（condition）的condition求值结果若非布尔值，ECMAScript会自动调用Boolean()转换函数将结果转换为布尔值。转换规则为：</th>
+            </tr>
+            <tr>
+                <th>
+                    数据类型
+                </th>
+                <th>
+                    转换为true的
+                </th>
+                <th>
+                    转换为false的
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    String
+                </td>
+                <td>
+                    任何非空字符串
+                </td>
+                <td>
+                    “”（空字符串）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Number
+                </td>
+                <td>
+                    任何非零数值（包括无穷大）
+                </td>
+                <td>
+                    0和NaN
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Object
+                </td>
+                <td>
+                    任何对象
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    undefined
+                </td>
+                <td>
+                    N/A
+                </td>
+                <td>
+                    undefined
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+
+        var a = "undefined";
+        var b = "false";
+        var c = "0";
+        var d = "";
+        var e = undefined;
+        var f = false;
+        var g = 0;
+        var h = null;
+
+        function Assert(obj)
+        {
+            if (obj)
+                return true;
+            else
+                return false;
+        }
+
+        console.log(Assert(a));
+        console.log(Assert(b));
+        console.log(Assert(c));
+        console.log(Assert(d));
+        console.log(Assert(e));
+        console.log(Assert(f));
+        console.log(Assert(g));
+        console.log(Assert(h));
+        
+    </script>
+</body>
+</html>
