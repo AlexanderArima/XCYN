@@ -114,6 +114,7 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Print\DesignPatternTestCase.cs" />
+    <Compile Include="Print\MongoDB\MongoHelperTest.cs" />
     <Compile Include="Print\MQTestCase.cs" />
     <Compile Include="Commom\RedisCommandTest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
