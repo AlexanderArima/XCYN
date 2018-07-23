@@ -107,6 +107,11 @@ namespace XCYN.Print.MongoDB
             fs.Delete(obj);
         }
 
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="objectID"></param>
+        /// <param name="stream"></param>
         public void FileGet(string objectID,Stream stream)
         {
             GridFSBucket fs = new GridFSBucket(_db);

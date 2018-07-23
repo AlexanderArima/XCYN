@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="超时调用" onclick="Fun1()" />
+    <input type="button" value="间歇调用" onclick="Fun2()" />
+    <input type="button" value="取消间歇调用" onclick="Fun3()" />
+    <script>
+
+        function Fun1()
+        {
+            //JavaScript任务调度方法
+            //超时调用：setTimeOut(code, millsec), 第一个参数是要执行的JavaScript代码，第二个是等待的毫秒数
+
+            //不推荐这种写法，因为它类似与eval()，需要两次解析，性能不好
+            //window.setTimeout("alert('1');", 2000);
+
+            //推荐这种写法
+            window.setTimeout(function () {
+                alert('2');
+            }, 2000);
+
+            var id = window.setTimeout(function () {
+                alert('4');
+            }, 4000);
+            //我们可以调用clearTimeout()取消任务
+            window.clearTimeout(id);
+        }
+
+        function Fun2()
+        {
+            //间歇调用：setInterval(code,millisec[,"lang"])，第一个参数是要执行的JavaScript代码，第二个参数是执行代码的间隔
+
+            //推荐这种写法
+            var i = 0;
+            window.setInterval(function () {
+                console.log(i++);
+            }, 1000);
+
+            window.Time1 = window.setInterval(function () {
+                console.log('Can you see me?');
+            }, 2000);
+           
+        }
+
+        function Fun3() {
+            //我们可以调用clearTimeout()取消任务
+            window.clearTimeout(window.Time1);
+        }
+
+    </script>
+</body>
+</html>
