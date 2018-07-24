@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="显示查询字符串" onclick="Fun1()" />
+    <input type="button" value="改变location属性" onclick="Fun2()" />
+    <input type="button" value="页面跳转无法回退" onclick="Fun3()" />
+    <input type="button" value="重载页面" onclick="Fun4()" />
+    <script type="text/javascript">
+
+        function Fun1() {
+            var arr = GetQueryString();
+            console.log(arr)
+        }
+
+        function Fun2() {
+            location.hash = "#section1";
+            location.search = "?w=C#编程&s=123";
+            //location.hostname = "www.baidu.com";
+            location.pathname = "/Order/";
+            
+        }
+
+        function Fun3() {
+            //使用replace方法之后，用户不能回到前一个页面
+            location.replace("http://www.baidu.com");
+        }
+
+        function Fun4() {
+            location.reload(true);//加上true参数，可从服务器重新加载
+            //而如果不加参数，可能会从缓存中取数据
+        }
+        
+        function GetQueryString() {
+            var qs = location.search.length > 0 ? location.search.substring(1) : "",
+                args = {},//保存数据的对象
+                items = qs.length > 0 ? qs.split("&") : [],
+                item = null,
+                name = null,
+                value = null;     
+            for (var i = 0; i < items.length; i++) {
+                item = items[i].split("=");
+                name = decodeURIComponent(items[i].split("=")[0]),
+                value = decodeURIComponent(items[i].split("=")[1]);
+                args[name] = value;
+            }
+            return args;
+        }
+
+    </script>
+</body>
+</html>

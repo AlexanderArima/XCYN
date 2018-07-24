@@ -381,6 +381,7 @@
     <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
+    <Content Include="Pages\javascript\GetQueryString.html" />
     <Content Include="Pages\javascript\GlobalObject.html" />
     <Content Include="Pages\javascript\InvokeSelf.html" />
     <Content Include="Pages\javascript\PrivateVariable.html" />
