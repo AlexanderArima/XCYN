@@ -11,6 +11,8 @@
     <input type="button" value="重载页面" onclick="Fun4()" />
     <script type="text/javascript">
 
+        //Location对象用法
+
         function Fun1() {
             var arr = GetQueryString();
             console.log(arr)
@@ -33,7 +35,8 @@
             location.reload(true);//加上true参数，可从服务器重新加载
             //而如果不加参数，可能会从缓存中取数据
         }
-        
+
+        //获取查询字符串
         function GetQueryString() {
             var qs = location.search.length > 0 ? location.search.substring(1) : "",
                 args = {},//保存数据的对象
