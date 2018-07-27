@@ -17,7 +17,6 @@ namespace XCYN.Web.Pages.webform
             //var user = CacheHelper.Get("user");
             ////清除缓存
             //CacheHelper.Remove("user");
-
             //获取缓存
             var user = CacheHelperBeta.Get("user");
             //清除缓存
