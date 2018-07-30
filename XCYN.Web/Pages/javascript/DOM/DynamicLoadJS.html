@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>动态加载JS和CSS文件</h2>
+    <script>
+
+        LoadJs("../../../Scripts/dynamic.js");
+
+        function LoadJs(src) {
+            //动态加载js文件
+            var js = document.createElement("script");
+            js.type = "text/javascript";
+            js.src = src;
+            document.body.appendChild(js);
+        }
+
+        LoadCss("../../../Css/dynamic.css");
+
+        function LoadCss(src) {
+            //动态加载js文件
+            var css = document.createElement("link");
+            css.rel = "stylesheet";
+            css.type = "text/css";
+            css.href = src;
+            document.body.appendChild(css);
+        }
+
+    </script>
+</body>
+</html>

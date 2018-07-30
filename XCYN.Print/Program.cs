@@ -40,8 +40,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            Algorithm a = new Algorithm();
-            a.ReverseArray();
+            DataTableSort dts = new DataTableSort();
+            dts.Fun1();
             Console.Read();
         }
 

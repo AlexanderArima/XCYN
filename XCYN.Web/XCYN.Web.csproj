@@ -348,6 +348,7 @@
     <Content Include="Css\bootstrap\js\tooltip.js" />
     <Content Include="Css\bootstrap\js\transition.js" />
     <Content Include="Css\bootstrap\package.js" />
+    <Content Include="Css\dynamic.css" />
     <Content Include="Global.asax" />
     <Content Include="Pages\bootStrap\bs1.html" />
     <Content Include="Pages\bootStrap\bs2.html" />
@@ -380,6 +381,7 @@
     <Content Include="Pages\javascript\CallApply.html" />
     <Content Include="Pages\javascript\ConstructorPattern.html" />
     <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
+    <Content Include="Pages\javascript\DOM\DynamicLoadJS.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />
@@ -965,6 +967,7 @@
     <Content Include="Pages\vue\test3.html" />
     <Content Include="Pages\webform\RoomEdit.aspx" />
     <Content Include="Pages\webform\RoomList.aspx" />
+    <Content Include="Scripts\dynamic.js" />
     <Content Include="Scripts\easyui\11.js" />
     <Content Include="Scripts\easyui\14.js" />
     <Content Include="Scripts\easyui\15.js" />

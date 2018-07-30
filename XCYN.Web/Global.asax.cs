@@ -12,6 +12,8 @@ namespace XCYN.Web
         
         protected void Application_Start(object sender, EventArgs e)
         {
+            Dictionary<int, object> dict = new Dictionary<int, object>();
+
             //不是每次请求都调用
             //在Web应用程序的生命周期里就执行一次
             //在应用程序第一次启动和应用程序域创建事被调用

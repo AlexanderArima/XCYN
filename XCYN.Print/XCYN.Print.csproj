@@ -868,6 +868,7 @@
     <Compile Include="MianShiTi\BasicPrgLng.cs" />
     <Compile Include="MianShiTi\Card.cs" />
     <Compile Include="MianShiTi\ChainTree.cs" />
+    <Compile Include="MianShiTi\DataTableSort.cs" />
     <Compile Include="MianShiTi\Indexer.cs" />
     <Compile Include="MianShiTi\RefOut.cs" />
     <Compile Include="MongoDB\BasicOperation.cs" />
