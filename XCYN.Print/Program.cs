@@ -44,7 +44,7 @@ namespace XCYN.Print
             //dts.Fun1();
             //Console.Read();
             BasicOperation basic = new BasicOperation();
-            basic.Fun2();
+            basic.Fun4();
             Console.Read();
         }
 

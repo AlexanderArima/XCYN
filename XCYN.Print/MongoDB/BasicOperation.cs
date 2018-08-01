@@ -67,10 +67,32 @@ namespace XCYN.Print.MongoDB
             //var objectID5 = new ObjectId(1,1,1,1);
             var newid = ObjectId.GenerateNewId();
         }
+
+        public void Fun4()
+        {
+            MongoHelper _helper = new MongoHelper("mongodb://localhost:27017", "Test");
+            var res = _helper.InsertOneAsync("T_Employee", new Employee()
+            {
+                _id = ObjectId.GenerateNewId(),
+                Name = "Arima",
+                Country = "JAP"
+            });
+            res.ContinueWith((s) => {
+                Console.WriteLine("调用完成");
+            });
+        }
     }
     
     public class Employee
     {
+        public Employee() { }
+        public Employee(ObjectId _id,string Name,string Country)
+        {
+            this._id = _id;
+            this.Name = Name;
+            this.Country = Country;
+        }
+
         public ObjectId _id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }

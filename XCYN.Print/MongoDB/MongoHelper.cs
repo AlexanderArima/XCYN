@@ -57,22 +57,43 @@ namespace XCYN.Print.MongoDB
             return _db.GetCollection<TDocument>(name);
         }
 
+        #region 插入
+
         /// <summary>
         /// 插入一条数据
         /// </summary>
         /// <typeparam name="TDocument"></typeparam>
-        /// <param name="CollectionName"></param>
-        /// <param name="document"></param>
+        /// <param name="CollectionName">表明</param>
+        /// <param name="document">插入的对象</param>
         public void InsertOne<T>(string CollectionName,T entity) where T : class
         {
             var collect = _db.GetCollection<T>(CollectionName);
             collect.InsertOne(entity);
         }
 
-        public async void InsertOneAsync<T>(string ColName,T entity) where T : class
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName">表名</param>
+        /// <param name="entity">插入的对象</param>
+        /// <returns></returns>
+        public async Task InsertOneAsync<T>(string ColName,T entity) where T : class
         {
             var collect = _db.GetCollection<T>(ColName);
-            //return collect.InsertOneAsync(entity);
+            await collect.InsertOneAsync(entity);
+        }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName">表名</param>
+        /// <param name="list">一组插入的对象</param>
+        public void InsertMany<T>(string ColName,IEnumerable<T> list) where T : class
+        {
+            var collect = _db.GetCollection<T>(ColName);
+            collect.InsertMany(list);
         }
 
         /// <summary>
@@ -81,17 +102,78 @@ namespace XCYN.Print.MongoDB
         /// <typeparam name="T"></typeparam>
         /// <param name="ColName"></param>
         /// <param name="list"></param>
-        public void InsertMany<T>(string ColName,IEnumerable<T> list) where T : class
+        /// <returns></returns>
+        public async Task InsertManyAsync<T>(string ColName,IEnumerable<T> list) where T : class
         {
-            var collect = _db.GetCollection<T>(ColName);
-            collect.InsertMany(list);
+            var col = _db.GetCollection<T>(ColName);
+            await col.InsertManyAsync(list);
         }
-        
+
+        #endregion
+
+        #region 删除
+
+        /// <summary>
+        /// 删除单条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public long DeleteOne<T>(string ColName, Expression<Func<T, bool>> filter) where T:class
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return col.DeleteOne<T>(filter).DeletedCount;
+        }
+
+        /// <summary>
+        /// 删除单条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public async Task<DeleteResult> DeleteOneAsync<T>(string ColName, Expression<Func<T, bool>> filter) where T : class
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return await col.DeleteOneAsync(filter);
+        }
+
+        /// <summary>
+        /// 删除多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public long DeleteMany<T>(string ColName, Expression<Func<T, bool>> filter) where T:class
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return col.DeleteMany<T>(filter).DeletedCount;
+        }
+
+        /// <summary>
+        /// 删除多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public async Task<DeleteResult> DeleteManyAsync<T>(string ColName, Expression<Func<T, bool>> filter) where T : class
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return await col.DeleteManyAsync<T>(filter);
+        }
+
+        #endregion
+
         public IList<TDocument> Find<TDocument>(string CollectionName, Expression<Func<TDocument, bool>> filter)
         {
             var collect = _db.GetCollection<TDocument>(CollectionName);
             return collect.Find(filter).ToList();
         }
+
+        #region 文件操作
 
         /// <summary>
         /// 上传文件
@@ -136,6 +218,8 @@ namespace XCYN.Print.MongoDB
             ObjectId obj = new ObjectId(objectID);
             fs.DownloadToStream(obj, stream);
         }
+
+        #endregion
     }
 
     #region 生成一个ObjectID
