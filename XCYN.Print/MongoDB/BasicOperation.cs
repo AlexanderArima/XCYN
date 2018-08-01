@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,10 @@ namespace XCYN.Print.MongoDB
             var db = client.GetDatabase("School");
             
             //获取一个集合
-            var collection =  db.GetCollection<Room>("Room");
+            var collection =  db.GetCollection<Employee>("Room");
 
             //插入数据
-            collection.InsertOne(new Room()
+            collection.InsertOne(new Employee()
             {
                 Name = "Zhong",
             });
@@ -38,28 +39,44 @@ namespace XCYN.Print.MongoDB
         /// </summary>
         public void Fun2()
         {
-            MongoHelper helper = new MongoHelper("mongodb://localhost:27017", "School");
-
-            helper.InsertOne<Room>("Room", new Room()
+            MongoHelper helper = new MongoHelper("mongodb://localhost:27017", "Test");
+            
+            helper.InsertOne("T_Employee", new Employee()
             {
-                _id = Guid.NewGuid().ToString(),
-                Name = "Jim",
+                _id = ObjectId.GenerateNewId(),
+                Name = "JimCheng",
+                Country = "USA"
             });
 
-            var list = helper.Find<Room>("Room", m => true);
+            var list = helper.Find<Employee>("T_Employee", m => true);
 
             foreach (var item in list)
             {
-                Console.WriteLine("_id:{0} \nName:{1}", item._id, item.Name);
+                Console.WriteLine(item);
             }
         }
+
+        public void Fun3()
+        {
+            //var objectID1 = new ObjectId();
+            //byte[] bytes = new byte[] { 0x01, 0x02, 0x03, 0x01, 0x02, 0x03, 0x01, 0x02, 0x03, 0x01, 0x02, 0x03 };
+            //var objectID2 = new ObjectId(bytes);
+            //string str = "123";
+            //var objectID3 = new ObjectId(str);
+            //var objectID4 = new ObjectId(new DateTime(123443111),1,1,1);
+            //var objectID5 = new ObjectId(1,1,1,1);
+            var newid = ObjectId.GenerateNewId();
+        }
     }
-
     
-
-    public class Room
+    public class Employee
     {
-        public string _id { get; set; }
+        public ObjectId _id { get; set; }
         public string Name { get; set; }
+        public string Country { get; set; }
+        public override string ToString()
+        {
+            return string.Format("_id:{0},Name:{1},Country:{2}",_id,Name,Country);
+        }
     }
 }

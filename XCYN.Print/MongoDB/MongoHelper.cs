@@ -63,12 +63,30 @@ namespace XCYN.Print.MongoDB
         /// <typeparam name="TDocument"></typeparam>
         /// <param name="CollectionName"></param>
         /// <param name="document"></param>
-        public void InsertOne<TDocument>(string CollectionName,TDocument document)
+        public void InsertOne<T>(string CollectionName,T entity) where T : class
         {
-            var collect = _db.GetCollection<TDocument>(CollectionName);
-            collect.InsertOne(document);
+            var collect = _db.GetCollection<T>(CollectionName);
+            collect.InsertOne(entity);
         }
 
+        public async void InsertOneAsync<T>(string ColName,T entity) where T : class
+        {
+            var collect = _db.GetCollection<T>(ColName);
+            //return collect.InsertOneAsync(entity);
+        }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="list"></param>
+        public void InsertMany<T>(string ColName,IEnumerable<T> list) where T : class
+        {
+            var collect = _db.GetCollection<T>(ColName);
+            collect.InsertMany(list);
+        }
+        
         public IList<TDocument> Find<TDocument>(string CollectionName, Expression<Func<TDocument, bool>> filter)
         {
             var collect = _db.GetCollection<TDocument>(CollectionName);

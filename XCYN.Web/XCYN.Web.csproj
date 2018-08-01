@@ -382,6 +382,8 @@
     <Content Include="Pages\javascript\ConstructorPattern.html" />
     <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
     <Content Include="Pages\javascript\DOM\DynamicLoadJS.html" />
+    <Content Include="Pages\javascript\DOM\InsertTable.html" />
+    <Content Include="Pages\javascript\DOM\QuerySelector.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />

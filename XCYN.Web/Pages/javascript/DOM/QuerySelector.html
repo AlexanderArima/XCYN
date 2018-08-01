@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form action="POST" name="form1" onsubmit="return false">
+        <table>
+            <tr>
+                <td>
+                    <label>姓名</label>
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>年龄</label>
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="调用querySelector" onclick="Fun1()" />
+                    <input type="button" value="调用querySelectorAll" onclick="Fun2()" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+
+        function Fun1() {
+            //querySelector()方法接收一个Css选择器，返回与该模式匹配的第一个元素，如果没有找到匹配的元素，返回null
+            var name = document.querySelector("input");
+            console.log(name.value);
+        }
+
+        function Fun2() {
+            var input = document.querySelectorAll("input");
+            for (var i = 0; i < input.length; i++) {
+                console.log(input[i].value);
+            }
+            
+        }
+
+        window.setInterval(function () {
+            //查看获得焦点的元素
+            console.log(document.activeElement);
+        }, 1000);
+        
+    </script>
+</body>
+</html>

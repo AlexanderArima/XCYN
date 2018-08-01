@@ -40,8 +40,11 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DataTableSort dts = new DataTableSort();
-            dts.Fun1();
+            //DataTableSort dts = new DataTableSort();
+            //dts.Fun1();
+            //Console.Read();
+            BasicOperation basic = new BasicOperation();
+            basic.Fun2();
             Console.Read();
         }
 

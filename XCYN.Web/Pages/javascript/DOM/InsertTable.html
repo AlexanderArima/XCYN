@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var table = document.createElement("table");
+        table.border = 1;
+        table.width = "100%";
+
+        var tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+
+        tbody.insertRow();//往tbody中添加一行
+        tbody.rows[0].insertCell();//往一个rows中添加一个单元格
+        tbody.rows[0].cells[0].innerText = "col1 cell1";//给单元格赋值
+        tbody.rows[0].insertCell();
+        tbody.rows[0].cells[1].innerHTML = "<input type='button' value='添加' />";
+
+        tbody.insertRow();
+        tbody.rows[1].insertCell();
+        tbody.rows[1].cells[0].innerText = "col2 cell1";
+        tbody.rows[1].insertCell();
+        tbody.rows[1].cells[1].innerText = "col2 cell2";
+
+        document.body.appendChild(table);
+
+    </script>
+</body>
+</html>
