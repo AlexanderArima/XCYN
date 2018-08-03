@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using XCYN.Print.MongoDB;
 
 namespace XCYN.Test.Print.MongoDB
@@ -122,6 +123,23 @@ namespace XCYN.Test.Print.MongoDB
         {
             var count = await _helper.DeleteManyAsync<Employee>("T_Employee", m => m.Name == "Nex");
             Assert.AreEqual(3, count.DeletedCount);
+        }
+
+        [TestMethod]
+        public void TestUpdateOne()
+        {
+           var s = _helper.UpdateOne<Employee>("T_Employee", m => m.Name == "Money", "{$set: { Name: 'Jiao',Country: 'CHI'} }");
+        }
+
+        [TestMethod]
+        public void TestUpdateOne2()
+        {
+            var obj = new
+            {
+                Name = "Zhu"
+            };
+            var s = _helper.UpdateOne<Employee>("T_Employee", m => m.Name == "Money", obj);
+            Assert.AreEqual(1, s.MatchedCount);
         }
     }
 }

@@ -167,6 +167,51 @@ namespace XCYN.Print.MongoDB
 
         #endregion
 
+        #region 修改
+
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateOne"></param>
+        private UpdateResult UpdateOne<T>(string ColName,Expression<Func<T, bool>> Filter, UpdateDefinition<T> UpdateOne)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return col.UpdateOne<T>(Filter, UpdateOne);
+        }
+
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateObject">匿名对象</param>
+        public UpdateResult UpdateOne<T>(string ColName, Expression<Func<T, bool>> Filter, object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return col.UpdateOne<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateJson">MongoDB命令</param>
+        public UpdateResult UpdateOne<T>(string ColName, Expression<Func<T, bool>> Filter, string UpdateJson)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(UpdateJson);
+            return col.UpdateOne<T>(Filter, update);
+        }
+
+        #endregion
+
         public IList<TDocument> Find<TDocument>(string CollectionName, Expression<Func<TDocument, bool>> filter)
         {
             var collect = _db.GetCollection<TDocument>(CollectionName);

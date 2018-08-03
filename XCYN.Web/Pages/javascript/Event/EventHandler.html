@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="发送验证码" id="ButtonValid" />
+    <input type="button" value="删除事件处理" id="ButtonDel" />
+    <input type="button" value="DOM2级事件处理程序" id="ButtonDOM2" />
+    <input type="button" value="删除DOM2级事件处理程序" id="ButtonDel2" />
+    <input type="button" value="跨浏览器事件处理程序" id="ButtonCrossBrowser" />
+    <input type="button" value="删除跨浏览器事件处理程序" id="ButtonDel3" />
+    <script src="../../../Scripts/common.js"></script>
+    <script type="text/javascript">
+
+        //DOM 0级事件处理程序
+        var but = document.getElementById("ButtonValid");
+        but.onclick = function () {
+            console.log(this);
+        }
+
+        document.getElementById("ButtonDel").onclick = function () {
+            but.onclick = null;
+        }
+
+        //DOM 2级事件处理程序
+        var but2 = document.getElementById("ButtonDOM2");
+        //1.添加一个匿名函数
+        but2.addEventListener("click", function () {
+            console.log(this);
+        }, false);
+
+        //2.添加一个非匿名函数
+        var fun1 = function () {
+            console.log("123");
+        }
+        but2.addEventListener("click", fun1, false);
+
+        //移除事件
+        var but3 = document.getElementById("ButtonDel2");
+        but3.addEventListener("click", function () {
+            //只有声明的是非匿名函数，才能移除!
+            but2.removeEventListener("click", function () {
+                console.log(this);
+            }, false);
+            but2.removeEventListener("click", fun1, false);
+        }, false);
+
+        //跨浏览器事件处理程序
+        var showMessage = function () {
+            console.log(1);
+        }
+        var UnshowMessage = function () {
+            eventUtil.removeHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
+        }
+        eventUtil.addHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
+        eventUtil.addHandler(document.getElementById("ButtonDel3"), "click", UnshowMessage);
+    </script>
+</body>
+</html>

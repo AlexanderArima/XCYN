@@ -384,6 +384,8 @@
     <Content Include="Pages\javascript\DOM\DynamicLoadJS.html" />
     <Content Include="Pages\javascript\DOM\InsertTable.html" />
     <Content Include="Pages\javascript\DOM\QuerySelector.html" />
+    <Content Include="Pages\javascript\Event\DomEventFlow.html" />
+    <Content Include="Pages\javascript\Event\EventHandler.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />
@@ -969,6 +971,7 @@
     <Content Include="Pages\vue\test3.html" />
     <Content Include="Pages\webform\RoomEdit.aspx" />
     <Content Include="Pages\webform\RoomList.aspx" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\dynamic.js" />
     <Content Include="Scripts\easyui\11.js" />
     <Content Include="Scripts\easyui\14.js" />
