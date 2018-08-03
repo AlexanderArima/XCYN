@@ -210,6 +210,129 @@ namespace XCYN.Print.MongoDB
             return col.UpdateOne<T>(Filter, update);
         }
 
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateOne"></param>
+        private async Task<UpdateResult> UpdateOneAsync<T>(string ColName, Expression<Func<T, bool>> Filter, UpdateDefinition<T> UpdateOne)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return await col.UpdateOneAsync<T>(Filter, UpdateOne);
+        }
+
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateObject">匿名对象</param>
+        public async Task<UpdateResult> UpdateOneAsync<T>(string ColName, Expression<Func<T, bool>> Filter, object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return await col.UpdateOneAsync<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改一条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateJson">MongoDB命令</param>
+        public async Task<UpdateResult> UpdateOneAsync<T>(string ColName, Expression<Func<T, bool>> Filter, string UpdateJson)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(UpdateJson);
+            return await col.UpdateOneAsync<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateOne"></param>
+        private UpdateResult UpdateMany<T>(string ColName, Expression<Func<T, bool>> Filter, UpdateDefinition<T> UpdateOne)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return col.UpdateMany<T>(Filter, UpdateOne);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateObject">匿名对象</param>
+        public UpdateResult UpdateMany<T>(string ColName, Expression<Func<T, bool>> Filter, object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return col.UpdateMany<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateJson">MongoDB命令</param>
+        public UpdateResult UpdateMany<T>(string ColName, Expression<Func<T, bool>> Filter, string UpdateJson)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(UpdateJson);
+            return col.UpdateMany<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateOne"></param>
+        private async Task<UpdateResult> UpdateManyAsync<T>(string ColName, Expression<Func<T, bool>> Filter, UpdateDefinition<T> UpdateOne)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return await col.UpdateManyAsync<T>(Filter, UpdateOne);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateObject">匿名对象</param>
+        public async Task<UpdateResult> UpdateManyAsync<T>(string ColName, Expression<Func<T, bool>> Filter, object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return await col.UpdateManyAsync<T>(Filter, update);
+        }
+
+        /// <summary>
+        /// 修改多条数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="Filter"></param>
+        /// <param name="UpdateJson">MongoDB命令</param>
+        public async Task<UpdateResult> UpdateManyAsync<T>(string ColName, Expression<Func<T, bool>> Filter, string UpdateJson)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(UpdateJson);
+            return await col.UpdateManyAsync<T>(Filter, update);
+        }
+
         #endregion
 
         public IList<TDocument> Find<TDocument>(string CollectionName, Expression<Func<TDocument, bool>> filter)

@@ -141,5 +141,76 @@ namespace XCYN.Test.Print.MongoDB
             var s = _helper.UpdateOne<Employee>("T_Employee", m => m.Name == "Money", obj);
             Assert.AreEqual(1, s.MatchedCount);
         }
+
+        [TestMethod]
+        public async Task TestUpdateOneAsync()
+        {
+            var s = await _helper.UpdateOneAsync<Employee>("T_Employee", m => m.Name == "Zhu", "{$set: { Country: 'CHI'} }");
+            Assert.AreEqual(1, s.ModifiedCount);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateOneAsync2()
+        {
+            var obj = new
+            {
+                Country = "GER"
+            };
+            var s = await _helper.UpdateOneAsync<Employee>("T_Employee", m => m.Name == "Kong", obj);
+            Assert.AreEqual(1, s.ModifiedCount);
+        }
+
+        [TestMethod]
+        public void TestUpdateMany()
+        {
+            _helper.InsertOne<Employee>("T_Employee", new Employee() {
+                _id = ObjectId.GenerateNewId(),
+                Name = "Kong",
+                Country = "USA"
+            });
+            var s = _helper.UpdateMany<Employee>(
+                "T_Employee",
+                m => m.Name == "Kong", 
+                "{$set: {Country: 'CHI'} }");
+            Assert.AreEqual(2, s.ModifiedCount);
+        }
+
+        [TestMethod]
+        public void TestUpdateMany2()
+        {
+            var obj = new
+            {
+                Country = "USA"
+            };
+            var s = _helper.UpdateMany<Employee>(
+                "T_Employee",
+                m => m.Name == "Kong",
+                obj);
+            Assert.AreEqual(2, s.ModifiedCount);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateAsyncMany()
+        {
+            var s = await _helper.UpdateManyAsync<Employee>(
+                "T_Employee",
+                m => m.Name == "Kong",
+                "{$set: {Country: 'CHI'} }");
+            Assert.AreEqual(2, s.ModifiedCount);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateAsyncMany2()
+        {
+            var obj = new
+            {
+                Country = "USA"
+            };
+            var s = await _helper.UpdateManyAsync<Employee>(
+                "T_Employee",
+                m => m.Name == "Kong",
+                obj);
+            Assert.AreEqual(2, s.ModifiedCount);
+        }
     }
 }
