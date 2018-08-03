@@ -212,5 +212,48 @@ namespace XCYN.Test.Print.MongoDB
                 obj);
             Assert.AreEqual(2, s.ModifiedCount);
         }
+
+        [TestMethod]
+        public void TestFind()
+        {
+            var list = _helper.Find<Employee>("T_Employee", m => m.Country == "USA");
+            Assert.AreEqual(6, list.Count);
+        }
+
+        [TestMethod]
+        public async Task TestFindAsync()
+        {
+            var list = await _helper.FindAsync<Employee>("T_Employee", m => m.Country == "USA");
+            Assert.AreEqual(6, list.ToList().Count);
+
+        }
+
+        [TestMethod]
+        public void TestCount()
+        {
+            var num = _helper.Count<Employee>("T_Employee", m => m.Country == "CHI");
+            Assert.AreEqual(2, num);
+        }
+
+        [TestMethod]
+        public async Task TestCountAsync()
+        {
+            var num = await _helper.CountAsync<Employee>("T_Employee", m => m.Country == "CHI");
+            Assert.AreEqual(2, num);
+        }
+
+        [TestMethod]
+        public void TestFindOneAndDelete()
+        {
+            var obj = _helper.FindOneAndDelete<Employee>("T_Employee", m => m.Country == "CHI");
+            Assert.AreEqual("CHI", obj.Country);
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndDeleteAsync()
+        {
+            var obj = await _helper.FindOneAndDeleteAsync<Employee>("T_Employee", m => m.Country == "CHI");
+            Assert.AreEqual("CHI", obj.Country);
+        }
     }
 }
