@@ -415,6 +415,94 @@ namespace XCYN.Print.MongoDB
             return await col.FindOneAndDeleteAsync<T>(filter);
         }
 
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public T FindOneAndUpdate<T>(string ColName, Expression<Func<T, bool>> filter, UpdateDefinition<T> update)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return col.FindOneAndUpdate(filter, update);
+        }
+
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public T FindOneAndUpdate<T>(string ColName,Expression<Func<T,bool>> filter,object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return FindOneAndUpdate(ColName,filter, update);
+        }
+
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public T FindOneAndUpdate<T>(string ColName, Expression<Func<T, bool>> filter, string json)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(json);
+            return FindOneAndUpdate(ColName, filter, update);
+        }
+
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public async Task<T> FindOneAndUpdateAsync<T>(string ColName, Expression<Func<T, bool>> filter, UpdateDefinition<T> update)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            return await col.FindOneAndUpdateAsync(filter, update);
+        }
+
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public async Task<T> FindOneAndUpdateAsync<T>(string ColName, Expression<Func<T, bool>> filter, object UpdateObject)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>("{$set:" + UpdateObject.ToJson() + "}");
+            return await FindOneAndUpdateAsync(ColName, filter, update);
+        }
+
+        /// <summary>
+        /// 查找一条数据并修改
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ColName"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public async Task<T> FindOneAndUpdateAsync<T>(string ColName, Expression<Func<T, bool>> filter, string json)
+        {
+            var col = _db.GetCollection<T>(ColName);
+            UpdateDefinition<T> update = new JsonUpdateDefinition<T>(json);
+            return await FindOneAndUpdateAsync(ColName, filter, update);
+        }
+        
         #endregion
 
         #region 文件操作

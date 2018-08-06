@@ -205,3 +205,20 @@ var eventUtil = {
         }
     }
 };
+
+//获取查询字符串
+function GetQueryString() {
+    var qs = location.search.length > 0 ? location.search.substring(1) : "",
+        args = {},//保存数据的对象
+        items = qs.length > 0 ? qs.split("&") : [],
+        item = null,
+        name = null,
+        value = null;
+    for (var i = 0; i < items.length; i++) {
+        item = items[i].split("=");
+        name = decodeURIComponent(items[i].split("=")[0]),
+            value = decodeURIComponent(items[i].split("=")[1]);
+        args[name] = value;
+    }
+    return args;
+}

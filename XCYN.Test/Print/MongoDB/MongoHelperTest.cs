@@ -255,5 +255,45 @@ namespace XCYN.Test.Print.MongoDB
             var obj = await _helper.FindOneAndDeleteAsync<Employee>("T_Employee", m => m.Country == "CHI");
             Assert.AreEqual("CHI", obj.Country);
         }
+
+        [TestMethod]
+        public void TestFindOneAndUpdate()
+        {
+            var upd = new
+            {
+                Country = "CHI"
+            };
+            var obj = _helper.FindOneAndUpdate<Employee>("T_Employee", m => m.Name == "Kong", upd);
+            Assert.AreEqual("USA", obj.Country);
+        }
+
+        [TestMethod]
+        public void TestFindOneAndUpdate2()
+        {
+            var upd = "{$set:{Country:'CHI'}}";
+            var obj = _helper.FindOneAndUpdate<Employee>("T_Employee", m =>( m.Name == "Kong" && m.Country == "USA"), upd);
+            Assert.AreEqual("USA", obj.Country);
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndUpdateAsync()
+        {
+            var upd = new
+            {
+                Country = "CHI"
+            };
+            var obj = await _helper.FindOneAndUpdateAsync<Employee>("T_Employee", m => m.Name == "Money", upd);
+            Assert.AreEqual("GER", obj.Country);
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndUpdateAsync2()
+        {
+            var upd = "{$set:{Country:'GER'}}";
+            var obj = await _helper.FindOneAndUpdateAsync<Employee>("T_Employee", m => (m.Name == "Money"), upd);
+            Assert.AreEqual("CHI", obj.Country);
+        }
+        
+
     }
 }

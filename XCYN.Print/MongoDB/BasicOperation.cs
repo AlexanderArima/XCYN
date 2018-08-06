@@ -101,4 +101,10 @@ namespace XCYN.Print.MongoDB
             return string.Format("_id:{0},Name:{1},Country:{2}",_id,Name,Country);
         }
     }
+
+    public class Employee2
+    {
+        public string Name { get; set; }
+        public string Country { get; set; }
+    }
 }
