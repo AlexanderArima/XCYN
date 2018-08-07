@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div style="height:2000px;width:400px;">
+        <input type="button" value="点我" id="but1" />
+        <input type="button" value="哇哦" id="but2" />
+        <br />
+        <input type="button" value="提交" id="but3" />
+    </div>
+    <script src="../../../Scripts/common.js"></script>
+    <script type="text/javascript">
+
+                EventUtil.addHandler(window, "load", function (event) {
+                    console.log(event);
+                });
+                
+                EventUtil.addHandler(window, "resize", function (event) {
+                     //防抖函数
+                     //每次调用函数都会清除之前的计数器，并重新计数，计数完成时，执行操作。
+                    var timer;
+                    return function () {
+                        if (timer) {
+                            clearTimeout(timer);
+                        }
+                        timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
+                            console.log("123");
+                        },500);
+                    }
+                }());//此处的双括号表示，立即调用返回值
+
+                EventUtil.addHandler(window, "scroll", function (event) {
+                    //函数节流
+                    var timer;
+                    return function () {
+                        if (timer) {
+                            clearTimeout(timer);
+                        }
+                        timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
+                            if (document.compatMode == "CSS1Compat") {
+                                //标准模式
+                                console.log("Left:" + document.documentElement.scrollLeft);
+                                console.log("Top:" + document.documentElement.scrollTop);
+                            }
+                            else {
+                                //混杂模式
+                                console.log("Left:" + document.body.scrollLeft);
+                                console.log("Top:" + document.body.scrollTop);
+                            }
+                        }, 500);
+                    }
+                    
+                }());
+
+                EventUtil.addHandler(document.getElementById("but1"), "focus", function (event) {
+                    console.log("获得焦点");
+                });
+
+                EventUtil.addHandler(document.getElementById("but1"), "blur", function (event) {
+                    console.log("失去焦点");
+                });
+
+                EventUtil.addHandler(document.getElementById("but2"), "focusin", function (event) {
+                    console.log("获得焦点");
+                });
+
+                EventUtil.addHandler(document.getElementById("but2"), "focusout", function (event) {
+                    console.log("失去焦点");
+                });
+
+                EventUtil.addHandler(document.getElementById("but3"), "click", function () {
+                    console.log(window.event.target);
+                });
+
+                console.log(document.implementation.hasFeature("MouseEvent", "3.0"));
+
+    </script>
+</body>
+</html>

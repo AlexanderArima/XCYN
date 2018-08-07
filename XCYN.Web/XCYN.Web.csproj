@@ -387,6 +387,7 @@
     <Content Include="Pages\javascript\Event\DomEventFlow.html" />
     <Content Include="Pages\javascript\Event\EventHandler.html" />
     <Content Include="Pages\javascript\Event\EventObject.html" />
+    <Content Include="Pages\javascript\Event\EventType.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />
