@@ -181,8 +181,9 @@ var client = function () {
 /*
  * 跨浏览器的事件处理程序
  * **/
-var eventUtil = {
+var EventUtil = {
     addHandler: function (element, type, handler) {
+        //添加事件函数
         if (element.addEventListener) {
             element.addEventListener(type, handler, false);
         }
@@ -194,6 +195,7 @@ var eventUtil = {
         }
     },
     removeHandler: function (element, type, handler) {
+        //移除事件函数
         if (element.removeEventListener) {
             element.removeEventListener(type, handler, false);
         }
@@ -202,6 +204,32 @@ var eventUtil = {
         }
         else {
             element["on" + type] = null;
+        }
+    },
+    getEvent: function (event) {
+        //获取事件对象
+        return event ? event : window.event;
+    },
+    getTarget: function (event) {
+        //获取事件目标
+        return event.target || event.srcElement;
+    },
+    preventDefault: function (event) {
+        //阻止默认行为
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
+        else {
+            event.returnValue = false;
+        }
+    },
+    stopPropagation: function (event) {
+        //停止事件冒泡
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
+        else {
+            event.cancelBubble = true;
         }
     }
 };

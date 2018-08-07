@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="确定" id="button_ok"/>
+    <a href="http://www.baidu.com" id="my_link">点我</a>
+    <form>
+        <input type="submit" id="but1" value="提交" />
+    </form>
+    <br/>
+    <input type="button" value="阻止事件冒泡" id="but2" />
+    <script type="text/javascript">
+
+        document.body.addEventListener("click", function (event) {
+            //target对于事件的最终对象
+            console.log(event.target == this);
+            console.log(event.target == document.getElementById("button_ok"));
+
+            //currentTarget表示触发事件的对象
+            console.log(event.currentTarget == this);
+            
+        }, false);
+
+        document.getElementById("my_link").addEventListener("click", function () {
+            //阻止默认事件
+            event.preventDefault();
+        });
+
+        document.getElementById("but1").addEventListener("click", function () {
+             //阻止默认事件
+            event.preventDefault();
+        })
+
+        document.getElementById("but2").onclick = function () {
+            //阻止事件向body传递
+            event.stopPropagation();
+        }
+        
+    </script>
+</body>
+</html>

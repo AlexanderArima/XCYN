@@ -13,6 +13,7 @@ namespace XCYN.Print.linq
         {
             using (MeetingSysEntities entity = new MeetingSysEntities())
             {
+                
                 //取出所有的公式，带上类别名称
                 var query = from f in entity.zcp_formula
                             join c in entity.zcp_formula_category

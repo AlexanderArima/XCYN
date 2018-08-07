@@ -52,10 +52,10 @@
             console.log(1);
         }
         var UnshowMessage = function () {
-            eventUtil.removeHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
+            EventUtil.removeHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
         }
-        eventUtil.addHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
-        eventUtil.addHandler(document.getElementById("ButtonDel3"), "click", UnshowMessage);
+        EventUtil.addHandler(document.getElementById("ButtonCrossBrowser"), "click", showMessage);
+        EventUtil.addHandler(document.getElementById("ButtonDel3"), "click", UnshowMessage);
     </script>
 </body>
 </html>
