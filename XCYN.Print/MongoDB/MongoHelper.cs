@@ -45,7 +45,9 @@ namespace XCYN.Print.MongoDB
                 _db = _client.GetDatabase(DataBaseName);
             }
         }
-        
+
+        #region 集合
+
         /// <summary>
         /// 创建一个集合
         /// </summary>
@@ -85,7 +87,7 @@ namespace XCYN.Print.MongoDB
         }
 
         /// <summary>
-        /// 返回所有集合
+        /// 返回所有集合名称
         /// </summary>
         /// <returns></returns>
         public List<string> GetListCollectionNames()
@@ -94,12 +96,30 @@ namespace XCYN.Print.MongoDB
         }
 
         /// <summary>
-        /// 返回所有集合
+        /// 返回所有集合名称
         /// </summary>
         /// <returns></returns>
         public async Task<IAsyncCursor<string>> GetListCollectionNamesAsync()
         {
             return await _db.ListCollectionNamesAsync();
+        }
+
+        /// <summary>
+        /// 返回所有集合
+        /// </summary>
+        /// <returns></returns>
+        public List<BsonDocument> GetListCollections()
+        {
+            return _db.ListCollections().ToList();
+        }
+
+        /// <summary>
+        /// 返回所有集合
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IAsyncCursor<BsonDocument>> GetListCollectionsAsync()
+        {
+            return await _db.ListCollectionsAsync();
         }
 
         /// <summary>
@@ -113,6 +133,29 @@ namespace XCYN.Print.MongoDB
             return _db.GetCollection<TDocument>(name);
         }
 
+        /// <summary>
+        /// 重命名集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        /// <param name="NewName"></param>
+        public void RenameCollection(string ColName,string NewName)
+        {
+            _db.RenameCollection(ColName, NewName);
+        }
+
+        /// <summary>
+        /// 重命名集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        /// <param name="NewName"></param>
+        /// <returns></returns>
+        public async Task RenameCollectionAsync(string ColName,string NewName)
+        {
+            await _db.RenameCollectionAsync(ColName, NewName);
+        }
+
+        #endregion
+        
         #region 插入
 
         /// <summary>
@@ -560,8 +603,7 @@ namespace XCYN.Print.MongoDB
         }
         
         #endregion
-
-
+        
         #region 文件操作
 
         /// <summary>
@@ -609,6 +651,7 @@ namespace XCYN.Print.MongoDB
         }
 
         #endregion
+
     }
     
 }

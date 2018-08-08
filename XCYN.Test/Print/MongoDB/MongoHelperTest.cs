@@ -346,5 +346,79 @@ namespace XCYN.Test.Print.MongoDB
             });
         }
 
+        [TestMethod]
+        public void TestRenameCollection()
+        {
+            var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_Custom"));
+            if(flag == null)
+            {
+                _helper.CreateCollection("T_Custom");
+            }
+            _helper.RenameCollection("T_Custom","Custom");
+            flag = _helper.GetListCollectionNames().Find(m => m.Contains("Custom"));
+            Assert.IsNotNull("Custom");
+        }
+
+        [TestMethod]
+        public async Task TestRenameCollectionAsync()
+        {
+            var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_Custom"));
+            if (flag == null)
+            {
+                _helper.CreateCollection("T_Custom");
+            }
+            var flag2 = _helper.GetListCollectionNames().Find(m => m.Contains("Custom"));
+            if(flag2 != null)
+            {
+                _helper.DropCollection("Custom");
+            }
+            await _helper.RenameCollectionAsync("T_Custom", "Custom").ContinueWith((obj)=> {
+                flag = _helper.GetListCollectionNames().Find(m => m.Contains("Custom"));
+                Assert.IsNotNull("Custom");
+            });
+            
+        }
+
+        [TestMethod]
+        public void TestGetListCollections()
+        {
+            var list = _helper.GetListCollections();
+            for (int i = 0; i < list.Count; i++)
+            {
+                var item = list[i];
+                foreach (var elem in item.Elements)
+                {
+                    if(elem.Value == "T_Employee")
+                    {
+                        Assert.IsTrue(true);
+                        return;
+                    }
+                }
+            }
+            Assert.IsTrue(false);
+        }
+
+        [TestMethod]
+        public void TestGetListCollectionsAsync()
+        {
+            _helper.GetListCollectionsAsync().ContinueWith((obj)=> {
+                var list = obj.Result.ToList();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    foreach (var elem in item.Elements)
+                    {
+                        if (elem.Value == "T_Employee")
+                        {
+                            Assert.IsTrue(true);
+                            return;
+                        }
+                    }
+                }
+                Assert.IsTrue(false);
+            });
+        }
+        
+
     }
 }
