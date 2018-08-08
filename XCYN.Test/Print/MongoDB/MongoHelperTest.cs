@@ -293,7 +293,58 @@ namespace XCYN.Test.Print.MongoDB
             var obj = await _helper.FindOneAndUpdateAsync<Employee>("T_Employee", m => (m.Name == "Money"), upd);
             Assert.AreEqual("CHI", obj.Country);
         }
-        
+
+        [TestMethod]
+        public void TestCreateCollection()
+        {
+            _helper.DropCollection("T_User");
+            _helper.CreateCollection("T_User");
+            var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_User"));
+            Assert.IsNotNull(flag);
+        }
+
+        [TestMethod]
+        public async Task TestCreateColletionAsync()
+        {
+            _helper.DropCollection("T_User");
+            await _helper.CreateCollectionAsync("T_User").ContinueWith((obj)=> {
+                var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_User"));
+                Assert.IsNotNull(flag);
+            });
+        }
+
+        [TestMethod]
+        public async Task TestDropCollectionAsync()
+        {
+            await _helper.DropCollectionAsync("T_User").ContinueWith((obj) => {
+                _helper.CreateCollectionAsync("T_User").ContinueWith((obj2) => {
+                    var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_User"));
+                    Assert.IsNotNull(flag);
+                });
+            });
+        }
+
+        [TestMethod]
+        public void TestGetListCollectionName()
+        {
+            var flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_Custom"));
+            Assert.IsNull(flag);
+            flag = _helper.GetListCollectionNames().Find(m => m.Contains("T_Employee"));
+            Assert.IsNotNull(flag);
+        }
+
+        [TestMethod]
+        public async Task TestGetListCollectionNameAsync()
+        {
+            await _helper.GetListCollectionNamesAsync().ContinueWith((obj)=> {
+                var flag = obj.Result.ToList().Find(m => m.Contains("T_Custom"));
+                Assert.IsNull(flag);
+            });
+            await _helper.GetListCollectionNamesAsync().ContinueWith((obj) => {
+                var flag = obj.Result.ToList().Find(m => m.Contains("T_Employee"));
+                Assert.IsNotNull(flag);
+            });
+        }
 
     }
 }

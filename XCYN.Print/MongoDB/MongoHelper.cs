@@ -45,6 +45,62 @@ namespace XCYN.Print.MongoDB
                 _db = _client.GetDatabase(DataBaseName);
             }
         }
+        
+        /// <summary>
+        /// 创建一个集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        /// <param name="options"></param>
+        public void CreateCollection(string ColName, CreateCollectionOptions options = null)
+        {
+            _db.CreateCollection(ColName, options);
+        }
+
+        /// <summary>
+        /// 创建一个集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        /// <param name="options"></param>
+        public async Task CreateCollectionAsync(string ColName,CreateCollectionOptions options = null)
+        {
+            await _db.CreateCollectionAsync(ColName, options);
+        }
+
+        /// <summary>
+        /// 删除一个集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        public void DropCollection(string ColName)
+        {
+            _db.DropCollection(ColName);
+        }
+
+        /// <summary>
+        /// 删除一个集合
+        /// </summary>
+        /// <param name="ColName"></param>
+        public async Task DropCollectionAsync(string ColName)
+        {
+            await _db.DropCollectionAsync(ColName);
+        }
+
+        /// <summary>
+        /// 返回所有集合
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetListCollectionNames()
+        {
+            return _db.ListCollectionNames().ToList();
+        }
+
+        /// <summary>
+        /// 返回所有集合
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IAsyncCursor<string>> GetListCollectionNamesAsync()
+        {
+            return await _db.ListCollectionNamesAsync();
+        }
 
         /// <summary>
         /// 获取一个集合(表)
@@ -504,6 +560,7 @@ namespace XCYN.Print.MongoDB
         }
         
         #endregion
+
 
         #region 文件操作
 

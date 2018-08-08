@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-    <div style="height:2000px;width:400px;">
+    <div style="height:2000px;width:100%;" id="div1">
         <input type="button" value="点我" id="but1" />
         <input type="button" value="哇哦" id="but2" />
         <br />
@@ -76,6 +76,17 @@
                 });
 
                 console.log(document.implementation.hasFeature("MouseEvent", "3.0"));
+
+                EventUtil.addHandler(document.getElementById("div1"), "click", function (event) {
+                    event = EventUtil.getEvent(event);
+                    //console.log("clientX:" + event.clientX);
+                    //console.log("clientY:" + event.clientY);
+                    //console.log("pageX:" + event.pageX);
+                    //console.log("pageY:" + event.pageY);
+                    console.log("screenX:" + event.screenX);
+                    console.log("screenY:" + event.screenY);
+                });
+
 
     </script>
 </body>
