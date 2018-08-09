@@ -214,6 +214,21 @@ var EventUtil = {
         //获取事件目标
         return event.target || event.srcElement;
     },
+    getRelatedTarget: function (event) {
+        //获取相关目标
+        if (event.relatedTarget) {
+            return event.relatedTarget;
+        }
+        else if (event.fromElement) {
+            return event.fromElement;
+        }
+        else if (event.toElement) {
+            return event.toElement;
+        }
+        else {
+            return null;
+        }
+    },
     preventDefault: function (event) {
         //阻止默认行为
         if (event.preventDefault) {

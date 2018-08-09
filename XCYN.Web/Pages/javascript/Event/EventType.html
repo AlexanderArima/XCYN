@@ -10,6 +10,7 @@
         <input type="button" value="哇哦" id="but2" />
         <br />
         <input type="button" value="提交" id="but3" />
+        <div id="div2" style="height:100px;width:100px;background-color:pink"></div>
     </div>
     <script src="../../../Scripts/common.js"></script>
     <script type="text/javascript">
@@ -77,17 +78,36 @@
 
                 console.log(document.implementation.hasFeature("MouseEvent", "3.0"));
 
-                EventUtil.addHandler(document.getElementById("div1"), "click", function (event) {
-                    event = EventUtil.getEvent(event);
-                    //console.log("clientX:" + event.clientX);
-                    //console.log("clientY:" + event.clientY);
-                    //console.log("pageX:" + event.pageX);
-                    //console.log("pageY:" + event.pageY);
-                    console.log("screenX:" + event.screenX);
-                    console.log("screenY:" + event.screenY);
-                });
+        EventUtil.addHandler(document.getElementById("div1"), "click", function (event) {
+            event = EventUtil.getEvent(event);
+            //console.log("clientX:" + event.clientX);
+            //console.log("clientY:" + event.clientY);
+            console.log("pageX:" + event.pageX);
+            console.log("pageY:" + event.pageY);
+            //console.log("screenX:" + event.screenX);
+            //console.log("screenY:" + event.screenY);
+        });
 
+        EventUtil.addHandler(document.getElementById("div1"), "click", function (event) {
+            //兼容IE8及之前版本
+            event = EventUtil.getEvent(event);
+            var pageX = event.pageX,
+                pageY = event.pageY;
+            if (pageX === undefined) {
+                pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+            }
+            if (pageY === undefined) {
+                pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+            }
+            console.log("pageX:" + pageX);
+            console.log("pageY:" + pageY);
+        });
 
+        EventUtil.addHandler(document.getElementById("div2"), "mouseout", function (event) {
+            event = EventUtil.getEvent(event);
+
+            console.log(EventUtil.getRelatedTarget(event));
+        });
     </script>
 </body>
 </html>
