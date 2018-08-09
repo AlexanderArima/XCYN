@@ -11,72 +11,75 @@
         <br />
         <input type="button" value="提交" id="but3" />
         <div id="div2" style="height:100px;width:100px;background-color:pink"></div>
+        <br />
+        <input type="button" value="鼠标按键" id="but4" />
+        <br />
+        <input type="text" id="text1" />
     </div>
     <script src="../../../Scripts/common.js"></script>
     <script type="text/javascript">
 
-                EventUtil.addHandler(window, "load", function (event) {
-                    console.log(event);
-                });
+        EventUtil.addHandler(window, "load", function (event) {
+            console.log(event);
+        });
                 
-                EventUtil.addHandler(window, "resize", function (event) {
-                     //防抖函数
-                     //每次调用函数都会清除之前的计数器，并重新计数，计数完成时，执行操作。
-                    var timer;
-                    return function () {
-                        if (timer) {
-                            clearTimeout(timer);
-                        }
-                        timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
-                            console.log("123");
-                        },500);
+        EventUtil.addHandler(window, "resize", function (event) {
+                //防抖函数
+                //每次调用函数都会清除之前的计数器，并重新计数，计数完成时，执行操作。
+            var timer;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
+                    console.log("123");
+                },500);
+            }
+        }());//此处的双括号表示，立即调用返回值
+
+        EventUtil.addHandler(window, "scroll", function (event) {
+            //函数节流
+            var timer;
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
+                    if (document.compatMode == "CSS1Compat") {
+                        //标准模式
+                        console.log("Left:" + document.documentElement.scrollLeft);
+                        console.log("Top:" + document.documentElement.scrollTop);
                     }
-                }());//此处的双括号表示，立即调用返回值
-
-                EventUtil.addHandler(window, "scroll", function (event) {
-                    //函数节流
-                    var timer;
-                    return function () {
-                        if (timer) {
-                            clearTimeout(timer);
-                        }
-                        timer = setTimeout(function () { //setTimeout返回唯一标识符，可以使用它来取消计数器
-                            if (document.compatMode == "CSS1Compat") {
-                                //标准模式
-                                console.log("Left:" + document.documentElement.scrollLeft);
-                                console.log("Top:" + document.documentElement.scrollTop);
-                            }
-                            else {
-                                //混杂模式
-                                console.log("Left:" + document.body.scrollLeft);
-                                console.log("Top:" + document.body.scrollTop);
-                            }
-                        }, 500);
+                    else {
+                        //混杂模式
+                        console.log("Left:" + document.body.scrollLeft);
+                        console.log("Top:" + document.body.scrollTop);
                     }
-                    
-                }());
+                }, 500);
+            }     
+        }());
 
-                EventUtil.addHandler(document.getElementById("but1"), "focus", function (event) {
-                    console.log("获得焦点");
-                });
+        EventUtil.addHandler(document.getElementById("but1"), "focus", function (event) {
+            console.log("获得焦点");
+        });
 
-                EventUtil.addHandler(document.getElementById("but1"), "blur", function (event) {
-                    console.log("失去焦点");
-                });
+        EventUtil.addHandler(document.getElementById("but1"), "blur", function (event) {
+            console.log("失去焦点");
+        });
 
-                EventUtil.addHandler(document.getElementById("but2"), "focusin", function (event) {
-                    console.log("获得焦点");
-                });
+        EventUtil.addHandler(document.getElementById("but2"), "focusin", function (event) {
+            console.log("获得焦点");
+        });
 
-                EventUtil.addHandler(document.getElementById("but2"), "focusout", function (event) {
-                    console.log("失去焦点");
-                });
+        EventUtil.addHandler(document.getElementById("but2"), "focusout", function (event) {
+            console.log("失去焦点");
+        });
 
-                EventUtil.addHandler(document.getElementById("but3"), "click", function () {
-                    console.log(window.event.target);
-                });
+        EventUtil.addHandler(document.getElementById("but3"), "click", function () {
+            console.log(window.event.target);
+        });
 
-                console.log(document.implementation.hasFeature("MouseEvent", "3.0"));
+        console.log(document.implementation.hasFeature("MouseEvent", "3.0"));
 
         EventUtil.addHandler(document.getElementById("div1"), "click", function (event) {
             event = EventUtil.getEvent(event);
@@ -99,15 +102,36 @@
             if (pageY === undefined) {
                 pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
             }
-            console.log("pageX:" + pageX);
-            console.log("pageY:" + pageY);
+            //console.log("pageX:" + pageX);
+            //console.log("pageY:" + pageY);
         });
 
-        EventUtil.addHandler(document.getElementById("div2"), "mouseout", function (event) {
+        EventUtil.addHandler(document.getElementById("div2"), "click", function (event) {
             event = EventUtil.getEvent(event);
 
             console.log(EventUtil.getRelatedTarget(event));
         });
+
+        EventUtil.addHandler(document.getElementById("but4"), "mousedown", function (event) {
+            console.log(EventUtil.getButton(event));
+        });
+
+        EventUtil.addHandler(document.body, "mousewheel", function (event) {
+            //滚动鼠标滚轴
+            console.log(EventUtil.getWheelData(event));
+        });
+
+        EventUtil.addHandler(document.getElementById("text1"), "keypress", function (event) {
+            //按下键盘按键时触发
+            console.log(String.fromCharCode(EventUtil.getCharCode(event)));
+        })
+
+        EventUtil.addHandler(window,"beforeunload", function (event) {
+            event = EventUtil.getEvent(event);
+            event.returnValue = "是否确定退出?";
+            return "是否确定退出?";
+        })
+
     </script>
 </body>
 </html>

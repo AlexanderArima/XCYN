@@ -2,6 +2,7 @@
  * 浏览器检测
  * */
 var client = function () {
+
     var engine = {
         //呈现引擎
         ie: 0,
@@ -49,8 +50,8 @@ var client = function () {
 
     if (/OPR\/(\S+)/.test(ua)) {
         //首先识别Opera引擎，因为它可以完全模仿其他浏览器
-        engine.ver = client.browser.ver = RegExp["$1"];
-        engine.opera = client.browser.opera = parseFloat(engine.ver);
+        engine.ver = browser.ver = RegExp["$1"];
+        engine.opera = browser.opera = parseFloat(engine.ver);
     }
     else if (/AppleWebKit\/(\S+)/.test(ua)) {
         //然后识别WebKit引擎，包含特定的AppleWebKit字符串
@@ -182,6 +183,7 @@ var client = function () {
  * 跨浏览器的事件处理程序
  * **/
 var EventUtil = {
+
     addHandler: function (element, type, handler) {
         //添加事件函数
         if (element.addEventListener) {
@@ -215,7 +217,7 @@ var EventUtil = {
         return event.target || event.srcElement;
     },
     getRelatedTarget: function (event) {
-        //获取相关目标
+        //获取相关目标，用于mouseover和mouseout事件
         if (event.relatedTarget) {
             return event.relatedTarget;
         }
@@ -227,6 +229,46 @@ var EventUtil = {
         }
         else {
             return null;
+        }
+    },
+    getButton: function (event) {
+        //获取鼠标按键，用于mouseup和mousedown事件，0=>左键，1=>中间按键，2=>右键
+        if (document.implementation.hasFeature("MouseEvents", 2.0)) {
+            return event.button;
+        }
+        else {
+            //IE8及其之前版本
+            switch (event.button) {
+                case 0:
+                case 1:
+                    return 0;
+                case 2:
+                    return 2;
+                case 3:
+                case 4:
+                    return 1;
+                case 5:
+                case 6:
+                case 7:
+            }
+        }
+    },
+    getWheelData: function (event) {
+        //在mousewheel事件触发时
+        if (event.wheelDelta) {
+            return client.engine.opera && client.browser.opera < 9.5 ? -event.wheelDelta : event.wheelDelta;
+        }
+        else {
+            return -event.detail * 40;
+        }
+    },
+    getCharCode: function (event) {
+        //在keypress事件触发时，获取之后我们可以调用String.fromCharCode()方法将其转为真正的字符
+        if (event.charCode) {
+            return event.charCode;
+        }
+        else {
+            return event.keyCode;
         }
     },
     preventDefault: function (event) {
