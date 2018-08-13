@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table id="table1">
+        <thead>
+            <tr>
+                <th>标识符</th>
+                <th>名称</th>
+                <th>国家</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>CHI</td>
+                <td><a href="javascript:void(0);" id="link1">修改</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>CHI</td>
+                <td><a href="javascript:void(0);" id="link2">修改</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="../../../Scripts/common.js"></script>
+    <script type="text/javascript">
+
+        //注册事件处理程序
+        document.getElementById("link1").onclick = function () {
+            console.log(window.event.target);
+        }
+        
+        document.getElementById("link2").onclick = function () {
+            console.log(window.event.target);
+        }
+
+        window.onunload = function () {
+            //清除事件处理程序
+            document.getElementById("link1").onclick = null;
+            document.getElementById("link2").onclick = null;
+        }
+        
+    </script>
+</body>
+</html>

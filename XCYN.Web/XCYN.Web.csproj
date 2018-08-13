@@ -388,6 +388,8 @@
     <Content Include="Pages\javascript\Event\EventHandler.html" />
     <Content Include="Pages\javascript\Event\EventObject.html" />
     <Content Include="Pages\javascript\Event\EventType.html" />
+    <Content Include="Pages\javascript\Event\po.html" />
+    <Content Include="Pages\javascript\Event\po2.html" />
     <Content Include="Pages\javascript\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />
@@ -417,6 +419,7 @@
     <Content Include="Pages\test\RequestTest.aspx" />
     <Content Include="Pages\test\ResponseTest.html" />
     <Content Include="Pages\test\SessionStorage.aspx" />
+    <Content Include="Pages\test\WebService1.asmx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
     <Content Include="Plugins\easyui\demo\accordion\ajax.html" />
@@ -1523,6 +1526,10 @@
     </Compile>
     <Compile Include="Pages\test\SessionStorage.aspx.designer.cs">
       <DependentUpon>SessionStorage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\test\WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Pages\webform\RoomEdit.aspx.cs">
       <DependentUpon>RoomEdit.aspx</DependentUpon>
