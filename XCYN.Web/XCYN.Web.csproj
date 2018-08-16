@@ -379,8 +379,11 @@
     <Content Include="Pages\javascript\BooleanConvert.html" />
     <Content Include="Pages\javascript\BrowserDetection.html" />
     <Content Include="Pages\javascript\CallApply.html" />
-    <Content Include="Pages\javascript\ConstructorPattern.html" />
-    <Content Include="Pages\javascript\ConstructorPrototypePattern.html" />
+    <Content Include="Pages\javascript\Error\ErrorType.html" />
+    <Content Include="Pages\javascript\Error\UserDefinedError.html" />
+    <Content Include="Pages\javascript\Form\PreventRepeatSubmit.html" />
+    <Content Include="Pages\javascript\Object\ConstructorPattern.html" />
+    <Content Include="Pages\javascript\Object\ConstructorPrototypePattern.html" />
     <Content Include="Pages\javascript\DOM\DynamicLoadJS.html" />
     <Content Include="Pages\javascript\DOM\InsertTable.html" />
     <Content Include="Pages\javascript\DOM\QuerySelector.html" />
@@ -390,13 +393,13 @@
     <Content Include="Pages\javascript\Event\EventType.html" />
     <Content Include="Pages\javascript\Event\po.html" />
     <Content Include="Pages\javascript\Event\po2.html" />
-    <Content Include="Pages\javascript\FactoryPattern.html" />
+    <Content Include="Pages\javascript\Object\FactoryPattern.html" />
     <Content Include="Pages\javascript\FunctionType.html" />
     <Content Include="Pages\javascript\GetQueryString.html" />
     <Content Include="Pages\javascript\GlobalObject.html" />
     <Content Include="Pages\javascript\InvokeSelf.html" />
     <Content Include="Pages\javascript\PrivateVariable.html" />
-    <Content Include="Pages\javascript\PrototypePattern.html" />
+    <Content Include="Pages\javascript\Object\PrototypePattern.html" />
     <Content Include="Pages\javascript\ScopeChain.html" />
     <Content Include="Pages\javascript\TaskSchedule.html" />
     <Content Include="Pages\javascript\ThisUsage.html" />
@@ -420,6 +423,7 @@
     <Content Include="Pages\test\ResponseTest.html" />
     <Content Include="Pages\test\SessionStorage.aspx" />
     <Content Include="Pages\test\WebService1.asmx" />
+    <Content Include="Pages\webform\RoutePage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
     <Content Include="Plugins\easyui\demo\accordion\ajax.html" />
@@ -1544,6 +1548,13 @@
     </Compile>
     <Compile Include="Pages\webform\RoomList.aspx.designer.cs">
       <DependentUpon>RoomList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\webform\RoutePage.aspx.cs">
+      <DependentUpon>RoutePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\webform\RoutePage.aspx.designer.cs">
+      <DependentUpon>RoutePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\OrderService.svc.cs">

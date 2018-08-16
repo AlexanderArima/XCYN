@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form id="form1" name="form1" method="get">
+        <label for="Text1">姓名</label>
+        <input type="text" id="Text1" autofocus/><br />
+        <label for="Text2">年龄</label>
+        <input type="number" id="Text2" /><br />
+        <input type="submit" id="Submit1" value="提交" />
+    </form>
+    <script type="text/javascript">
+
+        //阻止默认表单提交后，然后自定义提交，这就需要编写好提交的数据了
+
+        var form = document.forms["form1"];
+        form.onsubmit = function () {
+            window.event.preventDefault();
+        }
+
+        var sub = document.getElementById("Submit1");
+        sub.onclick = function () {
+            console.log("提交表单");
+            sub.setAttribute("disabled", true);
+        }
+
+    </script>
+</body>
+</html>

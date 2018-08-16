@@ -32,6 +32,8 @@
     <script src="../../../Scripts/common.js"></script>
     <script type="text/javascript">
 
+        //性能优化（移除某个带有事件处理程序的元素时，也要删除挂在它上面的事件）
+
         //注册事件处理程序
         document.getElementById("link1").onclick = function () {
             console.log(window.event.target);

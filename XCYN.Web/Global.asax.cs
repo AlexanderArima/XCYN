@@ -18,6 +18,11 @@ namespace XCYN.Web
             //在Web应用程序的生命周期里就执行一次
             //在应用程序第一次启动和应用程序域创建事被调用
             //适合处理应用程序范围的初始化代码
+
+            var  defaults = new RouteValueDictionary();
+            defaults.Add("name", "*");
+            defaults.Add("id", "*");
+            RouteTable.Routes.MapPageRoute("MyRoute", "employee/{name}/{id}", "~/Pages/webform/RoutePage.aspx", true, defaults);
         }
 
         void Application_End(object sender, EventArgs e)

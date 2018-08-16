@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            try {
+                //var s = v;  //引发：ReferenceError：v is not defined
+                //new eval();   //引发：TypeError: eval is not a constructor
+                //eval("a ++ b")  //引发：SyntaxError: Unexpected identifier
+                //var b = new Array(-20); //引发：RangeError: Invalid array length
+            }
+            catch (error) {
+                console.log(error);
+                
+            }
+            //throw new RangeError(123);    //我们还可以抛出自定义的异常信息
+
+        }
+
+    </script>
+</body>
+</html>
