@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var book = {
+            name: "C# Program",
+            price: 110,
+            auther: ["Jack", "Lili"],
+            year:2016
+        };
+
+        //JSON.stringify可以将一个JavaScript对象转成JSON对象
+        //它的第二个参数是一个数组，或者一个函数
+        var json = JSON.stringify(book);
+
+        console.log(json);
+
+        var json2 = JSON.stringify(book, ["name"]); //第二个参数，表示只返回这个数组里的属性
+
+        console.log(json2);
+
+        var json3 = JSON.stringify(book, function (key, value) {
+            switch (key) {
+                case "auther":
+                    return value.join(","); //join() 方法用于把数组中的所有元素放入一个字符串。
+                                            //元素是通过指定的分隔符进行分隔的。
+                case "year":
+                    return undefined;       //返回undefined表示不返回这个属性
+                default:
+                    return value            //默认返回value表示，其他的属性都不改变
+            }
+        });
+
+        console.log(json3);
+
+        //stringify的第三个参数用于控制结果中的缩进空格数
+        var json4 = JSON.stringify(book,null,4);
+
+        console.log(json4);
+
+        var obj = JSON.parse(json4);
+
+        console.log(obj);
+
+    </script>
+</body>
+</html>

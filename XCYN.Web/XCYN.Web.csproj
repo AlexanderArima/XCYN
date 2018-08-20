@@ -382,6 +382,7 @@
     <Content Include="Pages\javascript\Error\ErrorType.html" />
     <Content Include="Pages\javascript\Error\UserDefinedError.html" />
     <Content Include="Pages\javascript\Form\PreventRepeatSubmit.html" />
+    <Content Include="Pages\javascript\JSONObject.html" />
     <Content Include="Pages\javascript\Object\ConstructorPattern.html" />
     <Content Include="Pages\javascript\Object\ConstructorPrototypePattern.html" />
     <Content Include="Pages\javascript\DOM\DynamicLoadJS.html" />
@@ -1798,9 +1799,10 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4923</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4923</IISUrl>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>
+          </DevelopmentServerVPath>
+          <IISUrl>http://localhost:6356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

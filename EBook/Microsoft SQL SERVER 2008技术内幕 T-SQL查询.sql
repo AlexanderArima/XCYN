@@ -1,0 +1,3 @@
+SELECT DISTINCT Country
+FROM T_Customer
+ORDER BY CustID

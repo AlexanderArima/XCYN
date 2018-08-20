@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+    <script type="text/javascript" src="EventObject.html"></script>
     <script type="text/javascript">
 
         console.log(1 == "1");   //==会有一个类型转换操作，优先转成
@@ -14,14 +15,39 @@
 
         function Fun1(str1, str2, str3) {
             var str = str1 + str2;
-            //if (str3) {           //这样写容易出现bug
-            //    str = str + str3;
-            //}
+            if (str3) {           //这样写容易出现bug
+                str = str + str3;
+            }
             if (typeof str3 == "string") {      //需要加上类型判断
                 str = str + str3;
             }
             return str;
         }
+
+        function GetQueryString(url) {
+            if (typeof url == "string") {   //确保类型安全
+                var pos = url.indexOf("?");
+                if (pos > -1) {
+                    return pos.substring(pos + 1);
+                }
+            }
+            return "";
+        }
+
+        //反转数组
+        function ReverseArray(arr) {
+            if (arr instanceof Array); {
+                arr.sort();
+                arr.reverse();
+            }
+        }
+
+        var a = new Array();
+        a[0] = "a";
+        a[1] = "b";
+        ReverseArray(a);
+        console.log(a);
+        
         console.log(Fun1("10", 20, true));
         console.log(Fun1("10", 20, 1));
         console.log( Fun1("10", 20, "a"));
