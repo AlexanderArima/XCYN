@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        name:<input type="text" id="Text1" />
+        age:<input type="text" id="Text2" />
+    </div>
+    <input type="button" value="设置一个Cookie" id="Button1" />
+    <input type="button" value="移除一个Cookie" id="Button2" />
+    <script src="../../Scripts/common.js"></script>
+    <script type="text/javascript">
+
+        document.getElementById("Button1").onclick = function () {
+            CookieUtil.set("name", "Cheng", new Date(2018, 12, 12));
+            CookieUtil.set("age", "12", new Date(2018, 12, 12));
+        }
+
+        document.getElementById("Button2").onclick = function () {
+            CookieUtil.unset("name");
+            CookieUtil.unset("age");
+        }
+
+        window.onload = function () {
+            document.getElementById("Text1").setAttribute("value", CookieUtil.get("name"));
+            document.getElementById("Text2").setAttribute("value", CookieUtil.get("age"));
+        }
+
+    </script>
+</body>
+</html>
