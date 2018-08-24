@@ -22,7 +22,7 @@ namespace XCYN.Print.linq
                 return r;
 
             });
-            
         }
+        
     }
 }

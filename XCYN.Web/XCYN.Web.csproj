@@ -382,6 +382,7 @@
     <Content Include="Pages\javascript\Error\ErrorType.html" />
     <Content Include="Pages\javascript\Error\UserDefinedError.html" />
     <Content Include="Pages\javascript\Form\PreventRepeatSubmit.html" />
+    <Content Include="Pages\javascript\IndexedDB.html" />
     <Content Include="Pages\javascript\JSONObject.html" />
     <Content Include="Pages\javascript\Object\ConstructorPattern.html" />
     <Content Include="Pages\javascript\Object\ConstructorPrototypePattern.html" />

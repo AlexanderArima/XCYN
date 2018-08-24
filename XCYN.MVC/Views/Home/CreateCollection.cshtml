@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateCollection</title>
+</head>
+<body>
+    <div> 
+        @{ 
+            Dictionary<string, int> dict = Model as Dictionary<string, int>;
+
+        }
+        <table>
+            @for (int i = 0; i < dict.Keys.Count; i++)
+            {
+            <tr>
+                <td>
+                    @dict.Keys.ElementAt(i)
+                </td>
+                <td>
+                    @dict.Values.ElementAt(i)
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

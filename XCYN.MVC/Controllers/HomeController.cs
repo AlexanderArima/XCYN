@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using XCYN.MVC.Models;
+using XCYN.Print.XmlAndJson;
 
 namespace XCYN.MVC.Controllers
 {
@@ -35,6 +37,61 @@ namespace XCYN.MVC.Controllers
         public HttpUnauthorizedResult UnAuth()
         {
             return new HttpUnauthorizedResult();
+        }
+
+        public ViewResult AutoProperty()
+        {
+            return View("ShowModel", (object)string.Format("输出字段：{0}", 17));
+        }
+
+        public ViewResult CreateCollection()
+        {
+            string[] array = { "001", "002", "003" };
+            List<int> list = new List<int> { 98, 99, 100 };
+            Dictionary<string, int> dict = new Dictionary<string, int>
+            {
+                { "Cheng",18 },
+                { "Wang",28 },
+                { "Qin",17 }
+            };
+            return View((object)dict);
+        }
+
+        public ViewResult UseExtensionEnumerable()
+        {
+            /*
+             new Product()
+                {
+                    UnitPrice = 10
+                },
+                new Product()
+                {
+                    UnitPrice = 12.1m
+                },
+                new Product()
+                {
+                    UnitPrice = 17.1m
+                }
+             */
+            var price = new ShoppingCart()
+            {
+                product = new List<Product>()
+                {
+                    new Product()
+                    {
+                        UnitPrice = 10
+                    },
+                    new Product()
+                    {
+                        UnitPrice = 12.1m
+                    },
+                    new Product()
+                    {
+                        UnitPrice = 17.1m
+                    }
+                }
+            }.TotalPrice();
+            return View("ShowModel",(object)price);
         }
     }
 }

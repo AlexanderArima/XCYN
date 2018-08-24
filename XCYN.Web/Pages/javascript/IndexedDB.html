@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var indexedDB = window.indexedDB || window.msIndexedDB || window.mozIndexedDB || window.webkitIndexDB;
+        var request;    //object
+        var database;   //object
+        var store;      //object
+        var user = {
+            username: "007",
+            firstname: "James",
+            age: 18
+        };  //object
+
+        request = indexedDB.open("admin",1);
+        request.onerror = function (event) {
+            alert("打开数据库失败：" + event.target.errorCode);
+        };
+        request.onsuccess = function (event) {
+            database = event.target.result;
+        };
+        request.onupgradeneeded = function (event) {
+            database = event.target.result;
+            store = database.createObjectStore("users", { keypath: "username" });
+        };
+        
+
+    </script>
+</body>
+</html>

@@ -18,5 +18,6 @@ namespace XCYN.Test.MVC.Controllers
             contr.Index();
             Assert.IsNotNull(contr.ViewBag.Greeting);
         }
+
     }
 }
