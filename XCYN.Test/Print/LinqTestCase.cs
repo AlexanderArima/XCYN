@@ -75,7 +75,7 @@ namespace XCYN.Test.Print
             var flag = list.Contains(new Product
             {
                 Name = "we"
-            },new ProductCoomparer());
+            },new ProductEqualityComparer());
             Assert.IsTrue(flag);    //对于复杂类型，需要实现IEqualityComparer才能比较
 
             flag = list.Contains(new Product
@@ -88,8 +88,7 @@ namespace XCYN.Test.Print
             Assert.IsTrue(str.Contains("we"));  //简单类型，可以直接比较
 
         }
-
-
+        
         [TestMethod]
         public void TestCount()
         {
@@ -128,10 +127,135 @@ namespace XCYN.Test.Print
             Assert.AreEqual("fsdfasfwe", list.First(m => m.Name.Equals("fsdfasfwe")).Name);
 
         }
+
+        [TestMethod]
+        public void TestFirstOrDefault()
+        {
+            Product[] list = new Product[] {
+            };
+
+            Assert.AreEqual(default(string), list.FirstOrDefault());
+            
+        }
+        
+        [TestMethod]
+        public void TestLast()
+        {
+            Product[] list = new Product[] {
+            new Product
+            {
+                Name = "Wu"
+            },
+            new Product
+            {
+                Name = "Li"
+            }
+            };
+
+            Assert.AreEqual("Li", list.Last().Name);
+            Assert.AreEqual("Wu", list.Last(m => m.Name.Equals("Wu")).Name);
+            try
+            {
+                var last = list.Last(m => m.Name.Equals("Cheng"));
+            }
+            catch(Exception ex)
+            {
+                Assert.IsNotNull(ex);
+            }
+        }
+
+        [TestMethod]
+        public void TestLastOrDefault()
+        {
+            Product[] list = new Product[] {
+            };
+
+            Assert.AreEqual(default(string), list.LastOrDefault());
+
+        }
+
+        [TestMethod]
+        public void TestMaxAndMin()
+        {
+            Product[] list = new Product[] {
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                },
+            };
+
+            Assert.AreEqual(20, list.Max(m => m.Age));
+            Assert.AreEqual(10, list.Min(m => m.Age));
+        }
+
+        [TestMethod]
+        public void TestOrderBy()
+        {
+            Product[] list = new Product[] {
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                },
+                new Product
+                {
+                    Name = "Anne",
+                    Age = 15,
+                },
+                 new Product
+                {
+                    Name = "Worker",
+                    Age = 15,
+                },
+            };
+
+            Assert.AreEqual("Jack", list.OrderBy(m => m.Age).First().Name);
+            Assert.AreEqual("John", list.OrderByDescending(m => m.Age).First().Name);
+            Assert.AreEqual("Worker", list.OrderBy(m => m.Name,new ProductComparer()).First().Name);
+            Assert.AreEqual("Jim", list.OrderByDescending(m => m.Name, new ProductComparer()).First().Name);
+        }
+
+
     }
 
-    class ProductCoomparer : IEqualityComparer<Product>
+    class ProductComparer : IComparer<string>
     {
+        /// <summary>
+        /// 求出最常的字符串
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public int Compare(string x, string y)
+        {
+            return -(x.Length - y.Length);
+        }
+    }
+
+    class ProductEqualityComparer : IEqualityComparer<Product>
+    {
+        //如果名字和年龄都相等则这两个对象是相等的。
         public bool Equals(Product x, Product y)
         {
             return x.Name.Equals(y.Name) && x.Age == y.Age;
