@@ -385,6 +385,157 @@ namespace XCYN.Test.Print
             var r = obj3.ToList();
         }
 
+        [TestMethod]
+        public void TestSingle()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            try
+            {
+                var obj = list.Single();//返回超过一个元素，即抛出异常
+            }
+            catch(InvalidOperationException ex)
+            {
+                Assert.IsTrue(true);
+            }
+            var obj2 = list.Take(1).Single();
+            Assert.IsNotNull(obj2);
+
+        }
+
+        [TestMethod]
+        public void TestSingleOrDefault()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            var obj = list.Take(1).SingleOrDefault();
+            Assert.IsNotNull(obj);
+            list = new List<Product>();
+            var obj2 = list.SingleOrDefault();  //SingleOrDefault将返回List<string>的默认值，即Null
+            Assert.AreEqual(obj2, default(List<string>));
+        }
+
+        [TestMethod]
+        public void TestSkip()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            //SkipWhile 跳过满足谓词的元素
+            var count = list.SkipWhile(m => m.Age <= 12).Count();
+            Assert.AreEqual(1, count);
+            var count2 = list.SkipWhile(m => m.Name.Equals("Jack")).Count();
+            Assert.AreEqual(2, count2);
+        }
+
+        [TestMethod]
+        public void TestTake()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            var obj = list.TakeWhile(m => m.Age <= 12); //获取满足谓词条件的元素，直到不符合筛选条件
+            Assert.AreEqual(2, obj.Count());
+        }
+
+        [TestMethod]
+        public void TestToDictionaryOrToList()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            
+            var dict = list.ToDictionary(m => Guid.NewGuid());  //返回值为键，入参为值
+            var list2 = dict.Select(m => m.Value);  //利用Select函数可以重新分离出Product列表
+        }
+
     }
 
     class ProductComparer : IComparer<string>
