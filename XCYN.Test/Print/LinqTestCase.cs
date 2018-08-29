@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -236,6 +237,153 @@ namespace XCYN.Test.Print
             Assert.AreEqual("Jim", list.OrderByDescending(m => m.Name, new ProductComparer()).First().Name);
         }
 
+        /// <summary>
+        /// 体现延迟加载
+        /// </summary>
+        [TestMethod]
+        public void TestOrderBy2()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                },
+            };
+            var obj = list.OrderBy(m => m.Age);
+            
+            list.Add(new Product
+            {
+                Name = "Buke",
+                Age = 1
+            });
+            Assert.AreEqual("Buke", obj.First().Name);
+         
+        }
+
+        [TestMethod]
+        public void TestReverse()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                },
+            };
+            list.Reverse(0, 2);//反转前两个元素
+            Assert.AreEqual("Jim", list[0].Name);
+            Assert.AreEqual("John", list[2].Name);
+        }
+
+        [TestMethod]
+        public void TestSelect()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                },
+            };
+            Assert.AreEqual("Jack", list.Select(m => new { Name = m.Name,Age = m.Age }).ElementAt(0).Name);
+            var obj = list.Select(m => new { Name = m.Name, Age = m.Age }); //延迟加载
+            list.Insert(0, new Product
+            {
+                Name = "Ann",
+                Age = 10,
+            });
+            Assert.AreEqual("Ann", obj.ElementAt(0).Name);
+        }
+
+        [TestMethod]
+        public void TestSelectMany()
+        {
+            List<Product> list = new List<Product>(){
+                new Product
+                {
+                    Name = "Jack",
+                    Age = 10,
+                    Ability = new List<string>(){"Eat","Sport"}
+                },
+                new Product
+                {
+                    Name = "Jim",
+                    Age = 12,
+                    Ability = new List<string>(){"Swim","Fly"}
+                },
+                new Product
+                {
+                    Name = "John",
+                    Age = 20,
+                    Ability = new List<string>(){"Talk","Write"}
+                },
+            };
+            var obj = list.SelectMany(m => m.Ability).Where(m => m.Equals("Eat"));
+            Assert.AreEqual("Eat", obj.First());
+            var obj2 = list.SelectMany((m, n) => {
+                if(n > 0)
+                {
+                    //跳过第一个元素
+                    return m.Ability;
+                }
+                return new List<string>();
+            }).Where(m => m.Equals("Fly"));
+            Assert.AreEqual(1, obj2.Count());
+
+            var obj3 = list.SelectMany(m =>
+            {
+                //返回每个Ability的单词数
+                List<int> nums = new List<int>();
+                m.Ability.ForEach((a) =>
+                {
+                    nums.Add(a.Length);
+                });
+                return nums;
+            }, 
+            (m, n) =>
+            {
+                Dictionary<string, int> dict = new Dictionary<string, int>();
+                if (n > 4)
+                {
+                    //跳过单词数小于4的元素
+                    dict[m.Name] = m.Age;
+                    return dict;
+                }
+                return dict;
+            });
+            var r = obj3.ToList();
+        }
 
     }
 
@@ -271,5 +419,6 @@ namespace XCYN.Test.Print
     {
         public string Name { get; set; }
         public int Age { get; set; }
+        public List<string> Ability { get; set; }
     }
 }

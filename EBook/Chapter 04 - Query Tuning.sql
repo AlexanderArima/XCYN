@@ -245,7 +245,7 @@ SELECT
 FROM sys.dm_os_wait_stats
 ORDER BY wait_type;
 
--- Isolate top waits
+-- Isolate top waits（创建重量级等待）
 WITH Waits AS
 (
   SELECT
@@ -279,7 +279,7 @@ HAVING SUM(W2.pct) - W1.pct < 80 -- percentage threshold
 ORDER BY W1.rn;
 GO
 
--- Create the WaitStats table
+-- Create the WaitStats table （创建等待表）
 USE Performance;
 IF OBJECT_ID('dbo.WaitStats', 'U') IS NOT NULL DROP TABLE dbo.WaitStats;
 
@@ -296,7 +296,7 @@ CREATE TABLE dbo.WaitStats
 CREATE UNIQUE CLUSTERED INDEX idx_dt_type ON dbo.WaitStats(dt, wait_type);
 CREATE INDEX idx_type_dt ON dbo.WaitStats(wait_type, dt);
 
--- Load waitstats data on regular intervals
+-- 间隔固定的时间收集数据
 INSERT INTO Performance.dbo.WaitStats
     (wait_type, waiting_tasks_count, wait_time_ms,
      max_wait_time_ms, signal_wait_time_ms)
@@ -355,7 +355,7 @@ FROM dbo.IntervalWaits('2018-08-22', '2018-08-24') AS F;
 GO
 
 ---------------------------------------------------------------------
--- Correlate Waits with Queues
+-- 等待队列
 ---------------------------------------------------------------------
 
 SELECT

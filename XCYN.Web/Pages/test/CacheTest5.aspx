@@ -16,5 +16,10 @@
             C:\>ab -n1000 -c100 -H "If-Modified-Since: 过期时间" xxx地址
         </div>
     </form>
+    <script>
+        var s = new object();
+        s.style.color = "red";
+        s.className = "MainColor";
+    </script>
 </body>
 </html>
