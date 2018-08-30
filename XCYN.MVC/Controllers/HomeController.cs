@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XCYN.MVC.Models;
-using XCYN.Print.XmlAndJson;
 
 namespace XCYN.MVC.Controllers
 {
@@ -55,6 +54,18 @@ namespace XCYN.MVC.Controllers
                 { "Qin",17 }
             };
             return View((object)dict);
+        }
+
+        [HttpGet]
+        public ViewResult GetProduct()
+        {
+            Product pro = new Product()
+            {
+                ProductName = "电脑",
+                ProductID = 1,
+                UnitPrice = 4000
+            };
+            return View(pro);
         }
 
         public ViewResult UseExtensionEnumerable()

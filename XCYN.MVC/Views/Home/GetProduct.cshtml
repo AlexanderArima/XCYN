@@ -1,0 +1,25 @@
+﻿@model XCYN.MVC.Models.Product
+@{
+}
+<table>
+    <thead>
+        <tr>
+            <td>
+                商品ID
+            </td>
+            <td>
+                商品名称
+            </td>
+            <td>
+                商品价格
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.ProductID</td>
+            <td>@Model.ProductName</td>
+            <td>@Model.UnitPrice</td>
+        </tr>
+    </tbody>
+</table>
