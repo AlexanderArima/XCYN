@@ -8,7 +8,7 @@
 		
 		//$("#my_menu").menu("hide");
 		//$("#my_menu").menu("destroy");
-    })
+    }) 
 	
 	//console.log($("#my_menu").menu("options"));
 	//console.log($("#my_menu").menu("getItem","#div_sort"));

@@ -8,7 +8,7 @@ $(function () {
             alert("MyBtn");
         }
     });
-
+     
     $("#div_date").datebox({
         panelWidth: 200,
         panelHeight: 200,

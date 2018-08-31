@@ -3,7 +3,7 @@
 		fit:true,
 	});
 	
-	
+	 
 	//$("#lay").layout().css("display","block");
 	
 	//重置大小

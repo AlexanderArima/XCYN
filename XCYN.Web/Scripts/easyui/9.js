@@ -11,7 +11,7 @@
 		bodyCls:"c",
 		style:{
 			'min-height':'250px'
-		},
+		}, 
 		content:"<h1>我的面板，已刷新</h1>",
 		//fit:true,
 		//border:true,

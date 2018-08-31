@@ -379,6 +379,7 @@
     <Content Include="Pages\javascript\BooleanConvert.html" />
     <Content Include="Pages\javascript\BrowserDetection.html" />
     <Content Include="Pages\javascript\CallApply.html" />
+    <Content Include="Pages\javascript\DOMInter.html" />
     <Content Include="Pages\javascript\Error\ErrorType.html" />
     <Content Include="Pages\javascript\Error\UserDefinedError.html" />
     <Content Include="Pages\javascript\Form\PreventRepeatSubmit.html" />
@@ -985,6 +986,21 @@
     <Content Include="Pages\vue\test3.html" />
     <Content Include="Pages\webform\RoomEdit.aspx" />
     <Content Include="Pages\webform\RoomList.aspx" />
+    <Content Include="Scripts.min\common.min.js" />
+    <Content Include="Scripts.min\dynamic.min.js" />
+    <Content Include="Scripts.min\easyui\11.min.js" />
+    <Content Include="Scripts.min\easyui\14.min.js" />
+    <Content Include="Scripts.min\easyui\15.min.js" />
+    <Content Include="Scripts.min\easyui\17.min.js" />
+    <Content Include="Scripts.min\easyui\18.min.js" />
+    <Content Include="Scripts.min\easyui\22.min.js" />
+    <Content Include="Scripts.min\easyui\23.min.js" />
+    <Content Include="Scripts.min\easyui\26.min.js" />
+    <Content Include="Scripts.min\easyui\27.min.js" />
+    <Content Include="Scripts.min\easyui\32.min.js" />
+    <Content Include="Scripts.min\easyui\33.min.js" />
+    <Content Include="Scripts.min\easyui\34.min.js" />
+    <Content Include="Scripts.min\easyui\login.min.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\dynamic.js" />
     <Content Include="Scripts\easyui\11.js" />
@@ -1001,7 +1017,6 @@
     <Content Include="Scripts\easyui\34.js" />
     <Content Include="Scripts\easyui\35.js" />
     <Content Include="Scripts\easyui\38.js" />
-    <Content Include="Scripts\easyui\46.js" />
     <Content Include="Scripts\easyui\9.js" />
     <Content Include="Scripts\easyui\admin.js" />
     <Content Include="Scripts\easyui\login.js" />

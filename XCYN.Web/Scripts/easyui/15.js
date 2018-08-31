@@ -13,7 +13,7 @@
 		modal:true,
 		fit:true
 	});
-	
+	 
 	//window获取整个window对象
 	//console.log($("#box").window("window"));
 	

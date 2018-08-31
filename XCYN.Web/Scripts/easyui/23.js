@@ -11,7 +11,7 @@ $(function () {
         },
     });
 
-
+     
     $("#email").validatebox({
         required: true,
         validType:'minLength[8]',

@@ -13,7 +13,7 @@ $(function () {
         month: 10,
         formatter: function (date) {
             return '#' + date.getDate();
-        },
+        }, 
         */
         onSelect: function (date) {
             alert(date);

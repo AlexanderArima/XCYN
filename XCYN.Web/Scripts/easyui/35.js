@@ -12,7 +12,7 @@ $(function () {
             });
         }
     }
-
+     
     $("#table_users").datagrid({
         width: 600,
         url: 'ashx/UserHandler.ashx',

@@ -15,7 +15,7 @@ $(function () {
             message: '请输入正确的日期'
         }
     });
-
+     
     //验证日期
     function RQcheck(RQ) {
         var date = RQ;

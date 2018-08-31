@@ -12,7 +12,7 @@ $(function () {
                 sortable: true,
                 halign: "center",
                 hidden: true,
-            },
+            }, 
             {
                 field: 'user_name',
                 title: '用户名',

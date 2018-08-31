@@ -8,7 +8,7 @@ $(function () {
         mode: 'h',
         rule: ["0", "|", "20", "|", "40", "|", "60", "|", "80", "|", "100"],
         showTip:true,
-        step: 1,
+        step: 1, 
         //reversed: true,
         //value: 100,
         //tipFormatter:function(value)

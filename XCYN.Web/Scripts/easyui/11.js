@@ -3,7 +3,7 @@
         width: 400,
         height: 300,
         onBeforeRemove:function(title,index)
-        {
+        { 
             //alert("title:" + title + ",index:" + index);
         },
         onRemove:function(title,index)

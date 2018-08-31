@@ -331,12 +331,12 @@ var CookieUtil = {
         if (expires instanceof Date) {
             cookieText += ";expires=" + expires.toUTCString(); 
         }
-        if (path) {
+        if (path) { 
             cookieText += ";path=" + path;
         }
         if (domain) {
             cookieText += ";domain=" + domain;
-        }
+        } 
         if (secure) {
             cookieText += ";secure";
         }

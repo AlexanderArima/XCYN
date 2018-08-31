@@ -10,7 +10,7 @@ $(function () {
         success:function(data)
         {
             alert(data);
-        }
+        } 
     });
 
     //$("#box").form("load", {

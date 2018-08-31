@@ -10,7 +10,7 @@
         buttons: "#btn",
         modal:true,
     })
-
+     
     $("#username").validatebox({
         required: true,
         missingMessage: "请输入用户名",
