@@ -116,3 +116,69 @@ where shipperid = 'A'
 SELECT * FROM sys.sysperfinfo
 WHERE object_name LIKE '%Buffer Manager%'
 
+SELECT * FROM Orders
+WHERE orderdate >= '20080101' AND orderdate < '20080201';
+
+CREATE CLUSTERED INDEX idx_cl_od ON Orders(orderdate)
+
+DROP INDEX idx_cl_od ON Orders
+
+SELECT * FROM sys.dm_exec_plan_attributes(0x0500FF7FFF7AAEE130FD7CD10400000001000000000000000000000000000000000000000000000000000000);
+
+SELECT * FROM sys.dm_exec_sql_text(0x0500FF7FFF7AAEE130FD7CD10400000001000000000000000000000000000000000000000000000000000000);
+
+SELECT * FROM sys.dm_exec_cached_plan_dependent_objects(0x0500FF7FFF7AAEE130FD7CD10400000001000000000000000000000000000000000000000000000000000000);
+
+SELECT * FROM sys.dm_exec_query_plan(0x0500FF7FFF7AAEE130FD7CD10400000001000000000000000000000000000000000000000000000000000000);
+
+--  STATISTICS IO 返回IO读取的次数
+
+-- First clear cache
+DBCC DROPCLEANBUFFERS;
+
+SET STATISTICS IO ON;
+
+SELECT orderid, custid, empid, shipperid, orderdate, filler
+FROM dbo.Orders
+WHERE orderdate >= '20080101'
+  AND orderdate < '20080201';
+GO
+
+SET STATISTICS IO OFF;
+GO
+
+
+---------------------------------------------------------------------
+-- Measuring Runtime of Queries
+---------------------------------------------------------------------
+
+-- STATISTICS TIME 它返回与运行语句有关的纯CPU时间和实际经过的时钟时间信息.它不仅返回分析和编译的时间,还返回查询时间
+
+-- First clear cache
+DBCC DROPCLEANBUFFERS;
+DBCC FREEPROCCACHE;
+
+-- Then run
+SET STATISTICS TIME ON;
+
+SELECT orderid, custid, empid, shipperid, orderdate, filler
+FROM dbo.Orders
+WHERE orderdate >= '20080101'
+  AND orderdate < '20080201';
+
+SET STATISTICS TIME OFF;
+GO
+
+
+-- First clear cache
+DBCC DROPCLEANBUFFERS;
+DBCC FREEPROCCACHE;
+
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+
+SELECT * FROM ORDERS
+
+SET STATISTICS TIME OFF;
+SET STATISTICS IO OFF;
+GO

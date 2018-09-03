@@ -1,0 +1,7 @@
+﻿table,tr {
+    border: 1px solid #f70cb2
+}
+
+.active{
+    background-color:yellow
+}

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../../Css/common.css" rel="stylesheet" />
+    <link href="../../Css/vue/BindText.css" rel="stylesheet" />
+    <title>绑定文本使用双大括号标记</title>
+</head>
+<body>
+    <div id="app">
+        <transition name="fade">
+            <table v-if="isActive">
+                <thead>
+                    <tr v-bind:class="active">
+                        <th>{{c1r1}}</th>
+                        <th>{{c2r1}}</th>
+                        <th>{{c3r1}}</th>
+                        <th>{{c4r1}}</th>
+                        <th>{{c5r1}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in rows">
+                        <td></td>
+                        <td>{{item.c1}}</td>
+                        <td>{{item.c2}}</td>
+                        <td>{{item.c3}}</td>
+                        <td>{{item.c4}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </transition>
+        <div>
+            <input type="button" v-bind:value="isActive == true ? '收起' : '展示' " v-on:click="isActive = !isActive" />
+        </div>
+    </div>
+    
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/BindText.js"></script>
+</body>
+</html>
