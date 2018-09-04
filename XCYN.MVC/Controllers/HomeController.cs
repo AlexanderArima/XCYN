@@ -4,11 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XCYN.MVC.Models;
+using Ninject;
 
 namespace XCYN.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private IValueCalc calc;
+
+        public HomeController()
+        {
+
+        }
+
+        public HomeController(IValueCalc calc)
+        {
+            this.calc = calc;
+        }
+
         // GET: Home
         public ViewResult Index()
         {
@@ -104,5 +117,74 @@ namespace XCYN.MVC.Controllers
             }.TotalPrice();
             return View("ShowModel",(object)price);
         }
+
+        public ActionResult Index2()
+        {
+            IValueCalc value = new LinqValueCalc();
+            ShoppingCart shop = new ShoppingCart(value) {
+                product = new List<Product>()
+                {
+                    new Product()
+                    {
+                        UnitPrice = 100,
+                    },
+                     new Product()
+                    {
+                        UnitPrice = 200,
+                    },
+                }
+            };
+            var total = shop.CalcProductTotal();
+            return View(total);
+        }
+
+        public ActionResult Index3()
+        {
+            //第一阶段：创建一个Ninject的内核(Kernel)实例，它负责解析依赖项并创建新的对象。
+            //当我们需要创建对象时，将使用这个内核而不是new关键字。
+            IKernel ninject = new StandardKernel();
+            //第二阶段：配置Ninject内核，将想要使用的接口设置为bind方法的类型参数，将希望实例化的实现类设置为To方法的类型参数
+            ninject.Bind<IValueCalc>().To<LinqValueCalc>();
+            //第三阶段：调用Ninject的Get方法来创建一个对象，Get方法的参数可以告诉Ninject创建的是哪个接口，返回值是那个To方法指定的实现类型的实例。
+            IValueCalc value = ninject.Get<IValueCalc>();
+            ShoppingCart shop = new ShoppingCart(value)
+            {
+                product = new List<Product>()
+                {
+                    new Product()
+                    {
+                        UnitPrice = 100,
+                    },
+                     new Product()
+                    {
+                        UnitPrice = 200,
+                    },
+                }
+            };
+            var total = shop.CalcProductTotal();
+            return View(total);
+        }
+
+        public ActionResult Index4()
+        {
+            ShoppingCart shop = new ShoppingCart(calc)
+            {
+                product = new List<Product>()
+                {
+                    new Product()
+                    {
+                        UnitPrice = 100,
+                    },
+                     new Product()
+                    {
+                        UnitPrice = 200,
+                    },
+                }
+            };
+            var total = shop.CalcProductTotal();
+            return View(total);
+        }
+
+
     }
 }

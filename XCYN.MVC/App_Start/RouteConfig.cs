@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using XCYN.MVC.Common;
 
 namespace XCYN.MVC
 {
@@ -18,6 +19,8 @@ namespace XCYN.MVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }
