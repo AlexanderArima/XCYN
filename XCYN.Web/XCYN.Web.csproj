@@ -435,6 +435,7 @@
     <Content Include="Pages\vue\BindHTML.html" />
     <Content Include="Pages\vue\BindText.html" />
     <Content Include="Pages\vue\Component.html" />
+    <Content Include="Pages\vue\ComputeData.html" />
     <Content Include="Pages\webform\RoutePage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1433,6 +1434,7 @@
     <Content Include="Scripts\vue\BindText.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\vue\Component.js" />
+    <Content Include="Scripts\vue\ComputeData.js" />
     <Content Include="Service\OrderService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>

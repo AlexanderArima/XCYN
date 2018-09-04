@@ -11,7 +11,7 @@
         <transition name="fade">
             <table v-if="isActive">
                 <thead>
-                    <tr v-bind:class="active">
+                    <tr :class="active">
                         <th>{{c1r1}}</th>
                         <th>{{c2r1}}</th>
                         <th>{{c3r1}}</th>
@@ -31,7 +31,7 @@
             </table>
         </transition>
         <div>
-            <input type="button" v-bind:value="isActive == true ? '收起' : '展示' " v-on:click="isActive = !isActive" />
+            <input type="button" :value="isActive == true ? '收起' : '展示' " @click="isActive = !isActive" />
         </div>
     </div>
 
