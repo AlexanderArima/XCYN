@@ -25,7 +25,15 @@
             }
         ],
         active: "active",
+        normal:"normal",
         isActive:true,
+    },
+    methods: {
+        GetFocus: function (event) {
+            console.log(event);
+            $("#app tr td").removeClass("td-active");
+            $(event.target).addClass("td-active");
+        }
     }
 })
 

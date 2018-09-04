@@ -351,6 +351,7 @@
     <Content Include="Css\common.css" />
     <Content Include="Css\dynamic.css" />
     <Content Include="Css\vue\BindText.css" />
+    <Content Include="Css\vue\Component.css" />
     <Content Include="Global.asax" />
     <Content Include="Pages\bootStrap\bs1.html" />
     <Content Include="Pages\bootStrap\bs2.html" />
@@ -431,7 +432,9 @@
     <Content Include="Pages\test\ResponseTest.html" />
     <Content Include="Pages\test\SessionStorage.aspx" />
     <Content Include="Pages\test\WebService1.asmx" />
+    <Content Include="Pages\vue\BindHTML.html" />
     <Content Include="Pages\vue\BindText.html" />
+    <Content Include="Pages\vue\Component.html" />
     <Content Include="Pages\webform\RoutePage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1426,8 +1429,10 @@
     <Content Include="Plugins\select2\vendor\jquery-2.1.0.js" />
     <Content Include="Plugins\jquery\jquery-1.10.2.js" />
     <Content Include="Plugins\jquery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\vue\BindHTML.js" />
     <Content Include="Scripts\vue\BindText.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\vue\Component.js" />
     <Content Include="Service\OrderService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
