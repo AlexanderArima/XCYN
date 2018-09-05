@@ -34,6 +34,7 @@ namespace XCYN.MVC.Common
         private void AddBinding()
         {
             kernel.Bind<IValueCalc>().To<LinqValueCalc>();
+            kernel.Bind<IDiscountHelper>().To<DefDiscountHelp>().WithPropertyValue("DiscountSize",10M);   //创建了一个依赖项链，为每一个依赖项进行解析
         }
 
         //private void AddBinding<I,T>()  where T : I 

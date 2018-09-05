@@ -120,7 +120,9 @@ namespace XCYN.MVC.Controllers
 
         public ActionResult Index2()
         {
-            IValueCalc value = new LinqValueCalc();
+            var dis = new DefDiscountHelp();
+            dis.DiscountSize = 10;
+            IValueCalc value = new LinqValueCalc(dis);
             ShoppingCart shop = new ShoppingCart(value) {
                 product = new List<Product>()
                 {
@@ -144,7 +146,8 @@ namespace XCYN.MVC.Controllers
             //当我们需要创建对象时，将使用这个内核而不是new关键字。
             IKernel ninject = new StandardKernel();
             //第二阶段：配置Ninject内核，将想要使用的接口设置为bind方法的类型参数，将希望实例化的实现类设置为To方法的类型参数
-            ninject.Bind<IValueCalc>().To<LinqValueCalc>();
+            ninject.Bind<IDiscountHelper>().To<DefDiscountHelp>().WithPropertyValue("DiscountSize",10M);
+            ninject.Bind<IValueCalc>().To<LinqValueCalc>().WithConstructorArgument("IDiscountHelper", ninject.Get<IDiscountHelper>());
             //第三阶段：调用Ninject的Get方法来创建一个对象，Get方法的参数可以告诉Ninject创建的是哪个接口，返回值是那个To方法指定的实现类型的实例。
             IValueCalc value = ninject.Get<IValueCalc>();
             ShoppingCart shop = new ShoppingCart(value)

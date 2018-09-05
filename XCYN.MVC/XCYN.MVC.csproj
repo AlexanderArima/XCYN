@@ -113,7 +113,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\NinjectControllerFactory.cs" />
     <Compile Include="Common\NinjectDepResolver.cs" />
@@ -121,6 +120,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DefDiscountHelp.cs" />
+    <Compile Include="Models\IDiscountHelper.cs" />
     <Compile Include="Models\IValueCalc.cs" />
     <Compile Include="Models\LinqValueCalc.cs" />
     <Compile Include="Models\MyExtensionMethods.cs" />

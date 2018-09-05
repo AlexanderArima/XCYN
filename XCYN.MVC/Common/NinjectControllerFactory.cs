@@ -8,6 +8,9 @@ using XCYN.MVC.Models;
 
 namespace XCYN.MVC.Common
 {
+    /// <summary>
+    /// 控制器工厂类
+    /// </summary>
     public class NinjectControllerFactory: DefaultControllerFactory
     {
         private IKernel ninjectKernel;
