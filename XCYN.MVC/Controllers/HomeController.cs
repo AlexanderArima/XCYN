@@ -8,6 +8,8 @@ using Ninject;
 
 namespace XCYN.MVC.Controllers
 {
+    [RoutePrefix("{Home?}")]
+    [Route("{action=Index}")]
     public class HomeController : Controller
     {
         private IValueCalc calc;
@@ -22,7 +24,8 @@ namespace XCYN.MVC.Controllers
             this.calc = calc;
         }
 
-        // GET: Home
+        [Route("Home/{Index?}")]
+        //[Route("{Index?}")]
         public ViewResult Index()
         {
             var date = DateTime.Now;
@@ -56,6 +59,7 @@ namespace XCYN.MVC.Controllers
             return View("ShowModel", (object)string.Format("输出字段：{0}", 17));
         }
 
+
         public ViewResult CreateCollection()
         {
             string[] array = { "001", "002", "003" };
@@ -68,7 +72,7 @@ namespace XCYN.MVC.Controllers
             };
             return View((object)dict);
         }
-
+        
         [HttpGet]
         public ViewResult GetProduct()
         {
@@ -80,23 +84,9 @@ namespace XCYN.MVC.Controllers
             };
             return View(pro);
         }
-
+        
         public ViewResult UseExtensionEnumerable()
         {
-            /*
-             new Product()
-                {
-                    UnitPrice = 10
-                },
-                new Product()
-                {
-                    UnitPrice = 12.1m
-                },
-                new Product()
-                {
-                    UnitPrice = 17.1m
-                }
-             */
             var price = new ShoppingCart()
             {
                 product = new List<Product>()
@@ -118,6 +108,7 @@ namespace XCYN.MVC.Controllers
             return View("ShowModel",(object)price);
         }
 
+        //[Route("Index2")]
         public ActionResult Index2()
         {
             var dis = new DefDiscountHelp();
@@ -139,7 +130,7 @@ namespace XCYN.MVC.Controllers
             var total = shop.CalcProductTotal();
             return View(total);
         }
-
+        
         public ActionResult Index3()
         {
             //第一阶段：创建一个Ninject的内核(Kernel)实例，它负责解析依赖项并创建新的对象。
@@ -167,7 +158,7 @@ namespace XCYN.MVC.Controllers
             var total = shop.CalcProductTotal();
             return View(total);
         }
-
+        
         public ActionResult Index4()
         {
             ShoppingCart shop = new ShoppingCart(calc)

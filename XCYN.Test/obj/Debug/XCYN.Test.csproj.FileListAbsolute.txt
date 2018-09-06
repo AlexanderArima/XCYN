@@ -254,3 +254,12 @@ F:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 F:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\Ninject.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\Ninject.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Castle.Core.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Moq.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.ValueTuple.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Castle.Core.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Moq.pdb
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Moq.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.ValueTuple.xml
