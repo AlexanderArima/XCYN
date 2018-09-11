@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,6 +22,8 @@ namespace XCYN.MVC.Controllers
             return Content(string.Format("name:{0},age:{1}", name, age));
         }
 
+        #region 各种返回结果
+
         /// <summary>
         /// 返回一个分部视图
         /// </summary>
@@ -29,6 +32,51 @@ namespace XCYN.MVC.Controllers
         {
             return PartialView("PW");
         }
+
+        /// <summary>
+        /// 重定向到路由
+        /// </summary>
+        /// <returns></returns>
+        public RedirectToRouteResult RedirToAction()
+        {
+            //可以转到指定的控制器中的动作方法
+            return RedirectToAction("Index","Home");
+        }
+
+        public RedirectToRouteResult RedirToActionPermanent()
+        {
+            //可以转到指定的控制器中的动作方法
+            return RedirectToActionPermanent("Index", "Home");
+        }
+
+        public RedirectToRouteResult RedirToRoute()
+        {
+            //定义一个路由对象来重定向
+            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+        }
+
+        /// <summary>
+        /// 重定向到指定页面，通Response.Redirect
+        /// </summary>
+        /// <returns></returns>
+        public RedirectResult RedirURL()
+        {
+            return Redirect("http://www.biying.com");
+        }
+
+        /// <summary>
+        /// 返回指定文本内容，可以指定文本类型和编码格式
+        /// </summary>
+        /// <returns></returns>
+        public ContentResult Content()
+        {
+            return Content("你好，中国", "text/html;text/xc", Encoding.Default);
+        }
+
+        
+
+        #endregion
+
 
     }
 }
