@@ -161,6 +161,7 @@
     <Content Include="Views\Home\Index4.cshtml" />
     <Content Include="Views\Admin\Test.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\PW.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

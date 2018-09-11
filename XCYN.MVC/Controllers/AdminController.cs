@@ -21,5 +21,14 @@ namespace XCYN.MVC.Controllers
             return Content(string.Format("name:{0},age:{1}", name, age));
         }
 
+        /// <summary>
+        /// 返回一个分部视图
+        /// </summary>
+        /// <returns></returns>
+        public PartialViewResult GetAR()
+        {
+            return PartialView("PW");
+        }
+
     }
 }
