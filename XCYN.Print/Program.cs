@@ -33,6 +33,7 @@ using XCYN.Print.delegates;
 using XCYN.Print.Alg;
 using XCYN.Print.WCF;
 using XCYN.Print.MongoDB;
+using XCYN.Print.Basic;
 
 namespace XCYN.Print
 {
@@ -40,11 +41,27 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            //DataTableSort dts = new DataTableSort();
-            //dts.Fun1();
-            //Console.Read();
-            BasicOperation basic = new BasicOperation();
-            basic.Fun4();
+            DefEnum();
+        }
+
+        static void DefEnum()
+        {
+            Fruit f = Fruit.Apple;
+            int obj = Convert.ToInt32(Fruit.Apple);
+            Console.WriteLine("Fruit:{0}",Enum.GetName(typeof(Fruit),f));   //Enum.GetName()获取枚举的名称
+            Console.WriteLine("Fruit:{0}", obj);   
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 定义一个结构体
+        /// </summary>
+        static void DefStruct()
+        {
+            Point point = new Point();
+            point.X = 1.1M;
+            point.Y = 2.2M;
+            Console.WriteLine("X:{0},Y:{1}", point.X, point.Y);
             Console.Read();
         }
 

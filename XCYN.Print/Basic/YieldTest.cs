@@ -9,6 +9,12 @@ namespace XCYN.Print.yield
 {
     public class YieldTest
     {
+
+        public YieldTest()
+        {
+
+        }
+
         public static IEnumerable<int> WithNoYield()
         {
             IList<int> list = new List<int>();
