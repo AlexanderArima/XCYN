@@ -17,3 +17,15 @@
 .font-green{
     color:limegreen
 }
+
+.bg_gray {
+    background-color: gray
+}
+
+.bg_pink {
+    background-color: pink
+}
+
+.border_red{
+    border-color:red;
+}

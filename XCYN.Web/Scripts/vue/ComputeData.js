@@ -8,7 +8,7 @@ var vm = new Vue({
     },
     computed: {
         ValidUserName: function () {
-            if (this.UserName.length <= 0) {
+            if (this.UserName.length <= 0) { 
                 return {
                     state: 0,
                     font:"font-red",

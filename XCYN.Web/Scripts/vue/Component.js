@@ -6,7 +6,7 @@
 var app7 = new Vue({
     el: '#app-7',
     data: {
-        groceryList: [
+        groceryList: [ 
            '蔬菜' ,
            '奶酪' ,
            '随便其它什么人吃的东西',
