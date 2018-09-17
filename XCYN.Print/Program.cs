@@ -41,7 +41,24 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DefEnum();
+            int i = 5;
+            // i = i >> 3;
+            i = i << 2;
+            Console.WriteLine(i);
+            Console.Read();
+        }
+
+        static void Box()
+        {
+            object i = 10;
+            Console.WriteLine(i);
+        }
+
+        static void Unbox()
+        {
+            object i = 10;
+            int s = (int)i;
+            Console.WriteLine(s);
         }
 
         static void DefEnum()

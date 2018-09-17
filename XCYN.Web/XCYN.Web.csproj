@@ -353,6 +353,7 @@
     <Content Include="Css\vue\BindClass.css" />
     <Content Include="Css\vue\BindText.css" />
     <Content Include="Css\vue\Component.css" />
+    <Content Include="Css\vue\ConditionRender.css" />
     <Content Include="Global.asax" />
     <Content Include="Image\Flag\ENG.jpg" />
     <Content Include="Image\Flag\FRA.jpg" />
@@ -445,6 +446,7 @@
     <Content Include="Pages\vue\BindText.html" />
     <Content Include="Pages\vue\Component.html" />
     <Content Include="Pages\vue\ComputeData.html" />
+    <Content Include="Pages\vue\ConditionRender.html" />
     <Content Include="Pages\webform\RoutePage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
     <Content Include="Plugins\easyui\demo\accordion\actions.html" />
@@ -1022,6 +1024,7 @@
     <Content Include="Scripts.min\vue\BindText.min.js" />
     <Content Include="Scripts.min\vue\Component.min.js" />
     <Content Include="Scripts.min\vue\ComputeData.min.js" />
+    <Content Include="Scripts.min\vue\ConditionRender.min.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\dynamic.js" />
     <Content Include="Scripts\easyui\11.js" />
@@ -1452,9 +1455,11 @@
     <Content Include="Scripts.min\vue\Component.min.js.map" />
     <Content Include="Scripts.min\vue\ComputeData.min.js.map" />
     <Content Include="Scripts.min\vue\BindClass.min.js.map" />
+    <Content Include="Scripts.min\vue\ConditionRender.min.js.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\vue\Component.js" />
     <Content Include="Scripts\vue\ComputeData.js" />
+    <Content Include="Scripts\vue\ConditionRender.js" />
     <Content Include="Service\OrderService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>

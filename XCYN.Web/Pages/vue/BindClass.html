@@ -13,12 +13,6 @@
                 <td v-for="(item,index) in country">
                     <input type="button" v-bind:value="item.name" v-bind:class="item.classObj" v-on:click="SelectCountry(index)"/>
                 </td>
-                <!--<td><input type="button" value="法国" /></td>
-                <td><input type="button" value="德国" /></td>
-                <td><input type="button" value="意大利" /></td>
-                <td><input type="button" value="美国" /></td>
-                <td><input type="button" value="苏联" /></td>
-                <td><input type="button" value="日本" /></td>-->
             </tr>
             <tr>
                 <td colspan="7"><label>{{message}}</label></td>
