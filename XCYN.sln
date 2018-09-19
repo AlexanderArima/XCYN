@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.WebApi", "XCYN.WebApi\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.MVC", "XCYN.MVC\XCYN.MVC.csproj", "{264A3216-740E-4E8B-98F2-31190547E986}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{53995F50-D04E-4522-B1E6-6A204E647631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCYN.Filter", "XCYN.Filter\XCYN.Filter.csproj", "{D73D436A-D6F4-4036-967F-1389C149F957}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,9 +121,20 @@ Global
 		{264A3216-740E-4E8B-98F2-31190547E986}.Release|Any CPU.Build.0 = Release|Any CPU
 		{264A3216-740E-4E8B-98F2-31190547E986}.Release|x64.ActiveCfg = Release|Any CPU
 		{264A3216-740E-4E8B-98F2-31190547E986}.Release|x64.Build.0 = Release|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Debug|x64.Build.0 = Debug|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Release|x64.ActiveCfg = Release|Any CPU
+		{D73D436A-D6F4-4036-967F-1389C149F957}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D73D436A-D6F4-4036-967F-1389C149F957} = {53995F50-D04E-4522-B1E6-6A204E647631}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E72ED4E-E39F-4F53-9BAB-36C2FEA783F1}
