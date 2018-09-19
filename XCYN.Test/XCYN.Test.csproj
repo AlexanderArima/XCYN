@@ -172,6 +172,8 @@
     <Compile Include="Print\MQTestCase.cs" />
     <Compile Include="Commom\RedisCommandTest.cs" />
     <Compile Include="Print\LinqTestCase.cs" />
+    <Compile Include="Print\CharTestCase.cs" />
+    <Compile Include="Print\StringTestCase.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

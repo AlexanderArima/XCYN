@@ -2,14 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>条件渲染</title>
 </head>
 <body>
     <div id="app">
-        <span v-if="hour  >= 5 && hour < 12">早晨好</span>
-        <span v-else-if="hour  >= 12 && hour < 19">下午好</span>
-        <span v-else-if="(hour  >= 19 && hour < 24) || (hour < 5 && hour >= 0)">晚上好</span>
-        <span v-else>输出错误</span>
+        <!--<span v-if="hour  >= 5 && hour < 12">早晨好</span>
+    <span v-else-if="hour  >= 12 && hour < 19">下午好</span>
+    <span v-else-if="(hour  >= 19 && hour < 24) || (hour < 5 && hour >= 0)">晚上好</span>
+    <span v-else>输出错误</span>-->
+        <!--我们可以用template来包裹看不见的元素-->
+        <template v-if="hour  >= 5 && hour < 12">
+            早晨好
+        </template>
+        <template v-else-if="hour  >= 12 && hour < 19">
+            下午好
+        </template>
+        <template v-else-if="(hour  >= 19 && hour < 24) || (hour < 5 && hour >= 0)">
+            晚上好
+        </template>
+        <template v-else>
+            输出错误
+        </template>
         ，张三！
     </div>
     <script src="../../Plugins/vue/dist/vue.js"></script>

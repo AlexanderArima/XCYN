@@ -34,6 +34,7 @@ using XCYN.Print.Alg;
 using XCYN.Print.WCF;
 using XCYN.Print.MongoDB;
 using XCYN.Print.Basic;
+using System.Threading;
 
 namespace XCYN.Print
 {
@@ -41,10 +42,11 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            int i = 5;
-            // i = i >> 3;
-            i = i << 2;
-            Console.WriteLine(i);
+            for (int i = 10000; i <  40000; i++)
+            {
+                Console.WriteLine("{0}=>{1}",i,Convert.ToChar(i));
+                Thread.Sleep(1);
+            }
             Console.Read();
         }
 

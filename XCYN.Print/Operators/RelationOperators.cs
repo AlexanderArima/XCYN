@@ -69,6 +69,7 @@ namespace XCYN.Print.Operators
         /// <summary>
         /// as 运算符用于执行引用类型的显示类型转换，如果转换的类型与指定的类型兼容，转换就会成功；
         /// 如果不兼容，as运算符就会返回null
+        /// 相比起使用括号来进行强制转换，这种方式不会抛出异常，抛出异常会消耗大量的CPU资源
         /// </summary>
         public void Fun6()
         {
