@@ -1047,7 +1047,7 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="Operators\info.txt" />
-    <Content Include="ReadMe.txt" />
+    <None Include="ReadMe.md" />
     <Content Include="XmlAndJson\books.xml">
       <SubType>Designer</SubType>
     </Content>
