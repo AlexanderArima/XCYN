@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>组件化</title>
+    <link href="../../Css/vue/Component.css" rel="stylesheet" />
+    <link href="../../Css/common.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app-7">
+        <ol>
+            <!--
+              v-bind:todo传递参数
+            -->
+            <todo-item v-for="item in groceryList"
+                       v-bind:todo="item">
+            </todo-item>
+        </ol>
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/Component.js"></script>
+</body>
+</html>

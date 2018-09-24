@@ -144,6 +144,7 @@
     <Compile Include="Alg\SortOrder.cs" />
     <Compile Include="Alg\SortOrderTest.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
+    <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
     <Compile Include="Calculator\StrategyDiv.cs" />
@@ -927,7 +928,7 @@
     <Compile Include="XmlAndJson\Person.cs" />
     <Compile Include="XmlAndJson\Product.cs" />
     <Compile Include="XmlAndJson\XmlFuns.cs" />
-    <Compile Include="yield\YieldTest.cs" />
+    <Compile Include="Basic\YieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ADONET\config.json" />
@@ -1046,7 +1047,7 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="Operators\info.txt" />
-    <Content Include="ReadMe.txt" />
+    <None Include="ReadMe.md" />
     <Content Include="XmlAndJson\books.xml">
       <SubType>Designer</SubType>
     </Content>

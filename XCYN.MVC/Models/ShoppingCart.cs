@@ -10,6 +10,22 @@ namespace XCYN.MVC.Models
     {
 
         public List<Product> product { get; set; }
+        private IValueCalc calc;
+
+        public ShoppingCart()
+        {
+
+        }
+
+        public ShoppingCart(IValueCalc calc)
+        {
+            this.calc = calc;
+        }
+
+        public decimal CalcProductTotal()
+        {
+            return calc.ValueProduct(product);
+        }
 
         public IEnumerator<Product> GetEnumerator()
         {

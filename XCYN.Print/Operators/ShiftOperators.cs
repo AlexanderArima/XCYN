@@ -9,8 +9,7 @@ namespace XCYN.Print.Operators
     public class ShiftOperators
     {
         /// <summary>
-        /// 左位移运算符(<<)将第一个操作数向左移动第二个操作数指定的位数。
-        /// 第二个操作数的类型必须为 int 或预定义隐式数值转换为 int 的类型。
+        /// 左位移运算符(<<) 相当于乘以2的位移次方
         /// </summary>
         public void Fun1()
         {
@@ -31,7 +30,7 @@ namespace XCYN.Print.Operators
         }
 
         /// <summary>
-        /// 右移运算符 (>>) 将第一个操作数向右移动第二个操作数指定的位数。
+        /// 右移运算符 (>>)  相当于除以2的位移次方，向下取整
         /// </summary>
         public void Fun2()
         {

@@ -1,12 +1,16 @@
 ﻿<h2>简要概述</h2>
 <table>
 	<tr>
-		<td>XCYN.WebAPI</td>
-		<td>API接口</td>
+		<td>EBook</td>
+		<td>读书笔记</td>
 	</tr>
 	<tr>
 		<td>XCYN.Common</td>
-		<td>封装了SQLServer工具类，redis的常用接口，缓存，农历，加密/解密，邮件，JSON，XML，Request，验证，字符串转换等工具类</td>
+		<td>封装了SQLServer工具类，redis/mongoDB的常用接口，缓存，农历，加密/解密，邮件，JSON，XML，Request，验证，字符串转换等工具类</td>
+	</tr>
+	<tr>
+		<td>XCYN.MVC</td>
+		<td>ASP.NET MVC中路由，布局，应用控制反转(Ninject)的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.Print</td>
@@ -21,8 +25,8 @@
 		<td>测试用例</td>
 	</tr>
 	<tr>
-		<td>XCYN.Web</td>
-		<td>JavaScript，KnockOut，Vue，bootStrap，EasyUI例子</td>
+		<td>XCYN.WPF</td>
+		<td>WPF异步加载的例子</td>
 	</tr>
 	<tr>
 		<td>XCYN.WS</td>
@@ -32,4 +36,17 @@
 		<td>XCYN.WS.APP</td>
 		<td>基于SignalR的聊天室服务端</td>
 	</tr>
+	<tr>
+		<td>XCYN.Web</td>
+		<td>JavaScript，KnockOut，Vue，bootStrap，EasyUI例子</td>
+	</tr>
+	<tr>
+		<td>XCYN.WebAPI</td>
+		<td>ASP.NET MVC API接口</td>
+	</tr>
+	<tr>
+		<td>XCYN.WinForm</td>
+		<td>抓取美团美食的爬虫程序</td>
+	</tr>
+
 </table>

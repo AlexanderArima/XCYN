@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>列表渲染</title>
+    <link href="../../Css/vue/ListRender.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app">
+        <div v-for="(item, index) in Student" v-if="index < 1">
+            <!--遍历数组-->
+            <span v-for="(value,key,index) in item">
+                <!--遍历对象-->
+                <span v-if="Object.keys(item).length - 1 == index">
+                    {{key}}
+                </span>
+                <span v-else>
+                    {{key}}-
+                </span>
+            </span>
+        </div>
+        <div v-for="(item, index) in Student" :key="item.ID">  <!--遍历数组-->
+            {{ index }}.
+            <span v-for="(value,key,index) in item">    <!--遍历对象-->
+                {{value}}
+            </span>
+        </div>
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/ListRender.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../../Css/common.css" rel="stylesheet" />
+    <title>计算属性</title>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" v-model="UserName"/></td>
+                <td :class="ValidUserName.font">{{ValidUserName.msg}}</td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" v-model="Password" /></td>
+                <td :class="ValidPassword.font">{{ValidPassword.msg}}</td>
+            </tr>
+            <tr>
+                <td>确认密码：</td>
+                <td><input type="password" v-model="RePassword" /></td>
+                <td :class="ValidRePassword.font">{{ValidRePassword.msg}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="button" value="验证" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/ComputeData.js"></script>
+</body>
+</html>

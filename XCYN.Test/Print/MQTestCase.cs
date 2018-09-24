@@ -37,5 +37,14 @@ namespace XCYN.Test
             Publish.PublishPersistent();
         }
 
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                var s = i;
+            }
+        }
+
     }
 }

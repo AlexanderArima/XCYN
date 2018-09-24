@@ -1,0 +1,38 @@
+﻿input[type="button"] {
+    width:100px;
+    height: 60px;
+    background-size: 100%;
+}
+
+table tr td{
+    width:100px;
+}
+
+.flag_ENG{
+    background:url("../../Image/Flag/ENG.jpg") no-repeat;
+}
+
+.flag_FRA {
+    background: url("../../Image/Flag/FRA.jpg") no-repeat;
+}
+
+.flag_GER {
+    background: url("../../Image/Flag/GER.jpg") no-repeat;
+}
+
+.flag_ITA {
+    background: url("../../Image/Flag/ITA.jpg") no-repeat;
+}
+
+.flag_USA {
+    background: url("../../Image/Flag/USA.jpg") no-repeat;
+}
+
+.flag_SOV {
+    background: url("../../Image/Flag/SOV.jpg") no-repeat;
+}
+
+.flag_JAP {
+    background: url("../../Image/Flag/JAP.jpg") no-repeat;
+}
+

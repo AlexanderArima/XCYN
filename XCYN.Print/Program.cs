@@ -33,6 +33,8 @@ using XCYN.Print.delegates;
 using XCYN.Print.Alg;
 using XCYN.Print.WCF;
 using XCYN.Print.MongoDB;
+using XCYN.Print.Basic;
+using System.Threading;
 
 namespace XCYN.Print
 {
@@ -40,11 +42,45 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            //DataTableSort dts = new DataTableSort();
-            //dts.Fun1();
-            //Console.Read();
-            BasicOperation basic = new BasicOperation();
-            basic.Fun4();
+            for (int i = 10000; i <  40000; i++)
+            {
+                Console.WriteLine("{0}=>{1}",i,Convert.ToChar(i));
+                Thread.Sleep(1);
+            }
+            Console.Read();
+        }
+
+        static void Box()
+        {
+            object i = 10;
+            Console.WriteLine(i);
+        }
+
+        static void Unbox()
+        {
+            object i = 10;
+            int s = (int)i;
+            Console.WriteLine(s);
+        }
+
+        static void DefEnum()
+        {
+            Fruit f = Fruit.Apple;
+            int obj = Convert.ToInt32(Fruit.Apple);
+            Console.WriteLine("Fruit:{0}",Enum.GetName(typeof(Fruit),f));   //Enum.GetName()获取枚举的名称
+            Console.WriteLine("Fruit:{0}", obj);   
+            Console.Read();
+        }
+
+        /// <summary>
+        /// 定义一个结构体
+        /// </summary>
+        static void DefStruct()
+        {
+            Point point = new Point();
+            point.X = 1.1M;
+            point.Y = 2.2M;
+            Console.WriteLine("X:{0},Y:{1}", point.X, point.Y);
             Console.Read();
         }
 
