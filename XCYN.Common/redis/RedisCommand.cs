@@ -265,21 +265,21 @@ namespace XCYN.Common.Sql.redis
             bool flag = RedisManager.WriteDataBase().StringSet(key: key, value: value);
             return flag;
         }
-
+        
         /// <summary>
-        /// 设置一个key的value值
+        /// 设置一个键值对
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
-        public bool StringSetAsync(string key, string value)
+        public Task<bool> StringSetAsync(string key, string value)
         {
-            return RedisManager.WriteDataBase().StringSetAsync(key: key, value: value).Result;
+            return RedisManager.WriteDataBase().StringSetAsync(key,value);
         }
 
         /// <summary>
-        /// 获取指定key对应的value
+        /// 设置一组键值对
         /// </summary>
         /// <param name="keys"></param>
         /// <param name="values"></param>
@@ -292,6 +292,23 @@ namespace XCYN.Common.Sql.redis
                 list.Add(dict);
             }
             return RedisManager.WriteDataBase().StringSet(list.ToArray());
+        }
+
+        /// <summary>
+        /// 设置一组键值对
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public Task<bool> StringSetAsync(string[] keys, string[] values)
+        {
+            List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i], values[i]);
+                list.Add(dict);
+            }
+            return RedisManager.WriteDataBase().StringSetAsync(list.ToArray());
         }
 
         /// <summary>

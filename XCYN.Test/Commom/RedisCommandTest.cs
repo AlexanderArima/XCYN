@@ -6,7 +6,7 @@ using XCYN.Common.Sql.redis;
 using System.Threading;
 using System.Collections;
 
-namespace XCYN.Test
+namespace XCYN.Common
 {
     /// <summary>
     /// RedisCommandTest 的摘要说明
@@ -335,13 +335,28 @@ namespace XCYN.Test
         [TestMethod]
         public void StringSetAsync()
         {
-            var flag = _command.StringSetAsync("myStr", "123");
+            var flag = _command.StringSetAsync("myStr", "123").Result;
 
             Assert.IsTrue(flag);
 
             var str = _command.StringGetAsync("myStr");
 
             Assert.AreEqual("123", str);
+        }
+
+        [TestMethod]
+        public async void TestStringSetAsync()
+        {
+            string[] keys = new string[] {
+                "name", "age"
+            };
+            string[] values = new string[]
+            {
+                "jack",
+                "18"
+            };
+            var flag = await _command.StringSetAsync(keys, values);
+            Assert.IsTrue(flag);
         }
 
         #endregion
