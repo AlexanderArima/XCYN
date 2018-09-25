@@ -73,6 +73,10 @@ namespace XCYN.Common
             RedisCommandTest test = new RedisCommandTest();
             test._command.StringSet("myStr", "hello world");
             test._command.StringSet("myCount", "0");
+            test._command.StringSetBit("myBit", 0, true);
+            test._command.StringSetBit("myBit", 1, true);
+            test._command.StringSetBit("myBit", 2, true);
+            test._command.StringSetBit("myBit", 3, true);
 
             //初始化List
             test._command.KeyDelete("myList");
@@ -326,7 +330,7 @@ namespace XCYN.Common
         [TestMethod]
         public void StringSetEX()
         {
-            _command.StringSetEX("key4", 1, "1");
+            _command.StringSetEX("key4", "1", 1);
 
             Thread.Sleep(1000);
 
@@ -334,7 +338,7 @@ namespace XCYN.Common
 
             Assert.IsNull(str);
 
-            _command.StringSetEX("key4", 2, "1");
+            _command.StringSetEX("key4", "1", 2);
 
             Thread.Sleep(1000);
 
@@ -415,6 +419,45 @@ namespace XCYN.Common
                     continue;
                 }
             }
+        }
+
+        [TestMethod]
+        public void StringSetBit()
+        {
+            var flag =  _command.StringSetBit("myBit", 0, false);
+            Assert.IsTrue(flag);
+            flag = _command.StringSetBit("myBit", 0, false);
+            Assert.IsFalse(flag);
+            flag = _command.StringSetBit("myBit",1, false);
+            Assert.IsTrue(flag);
+
+        }
+
+        [TestMethod]
+        public void StringSetBitAsync()
+        {
+            var flag = _command.StringSetBitAsync("myBit", 3, false).Result;
+            Assert.IsTrue(flag);
+            flag = _command.StringSetBitAsync("myBit", 3, false).Result;
+            Assert.IsFalse(flag);
+        }
+
+        [TestMethod]
+        public void StringGetBit()
+        {
+            var flag = _command.StringGetBit("myBit", 0);
+            Assert.IsTrue(flag);
+            flag = _command.StringGetBit("myBit", 1);
+            Assert.IsFalse(flag);
+        }
+
+        [TestMethod]
+        public void StringGetBitAsync()
+        {
+            var flag = _command.StringGetBitAsync("myBit", 0).Result;
+            Assert.IsTrue(flag);
+            flag = _command.StringGetBitAsync("myBit", 1).Result;
+            Assert.IsTrue(flag);
         }
 
         #endregion

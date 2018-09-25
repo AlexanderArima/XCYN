@@ -413,7 +413,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="seconds">过期秒数</param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool StringSetEX(string key,int seconds,string value)
+        public bool StringSetEX(string key, string value, int seconds)
         {
             return RedisManager.WriteDataBase().StringSet(key, value, TimeSpan.FromSeconds(seconds));
         }
@@ -431,6 +431,52 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 设置位值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="offset">大于等于0</param>
+        /// <param name="bit">0/1</param>
+        /// <returns>返回位的值</returns>
+        public bool StringSetBit(string key,long offset,bool bit)
+        {
+            return RedisManager.WriteDataBase().StringSetBit(key, offset, bit);
+        }
+
+        /// <summary>
+        /// 设置位值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="offset">大于等于0</param>
+        /// <param name="bit">0/1</param>
+        /// <returns>返回位的值</returns>
+        public Task<bool> StringSetBitAsync(string key, long offset, bool bit)
+        {
+            return RedisManager.WriteDataBase().StringSetBitAsync(key, offset, bit);
+        }
+
+        /// <summary>
+        /// 获取位的值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public bool StringGetBit(string key,long offset)
+        {
+            return RedisManager.ReadDataBase().StringGetBit(key, offset);
+        }
+
+        /// <summary>
+        /// 获取位的值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public Task<bool> StringGetBitAsync(string key, long offset)
+        {
+            return RedisManager.ReadDataBase().StringGetBitAsync(key, offset);
+        }
+        
+        /// <summary>
         /// 返回 key 所储存的字符串值的长度。
         /// </summary>
         /// <param name="key">字符串名</param>
@@ -439,11 +485,21 @@ namespace XCYN.Common.Sql.redis
         {
             return RedisManager.ReadDataBase().StringLength(key);
         }
-        
+
+        /// <summary>
+        /// 返回 key 所储存的字符串值的长度。
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <returns></returns>
+        public Task<long> StringLengthAsync(string key)
+        {
+            return RedisManager.ReadDataBase().StringLengthAsync(key);
+        }
+
         #endregion
 
         #region List命令
-        
+
         /// <summary>
         /// 获取指定下标的元素
         /// </summary>
