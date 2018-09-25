@@ -110,6 +110,9 @@ namespace XCYN.Web.Pages.test
             context.Response.ContentType = "text/json";
             context.Response.Write(JsonConvert.SerializeObject(dict));
             context.Response.End();
+
+            context.Response.Redirect("../Home/Index.html");
+            context.Response.End();
         }
 
         private void MoveRecInfoRemovedCallback(string key, object value, CacheItemRemovedReason reason)

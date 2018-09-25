@@ -27,5 +27,18 @@ namespace XCYN.Filter.Controllers
         {
             throw new ArgumentException("参数名不正确");
         }
+
+        [CustomResult]
+        [CustomAction]
+        public string Update()
+        {
+            return "hello world";
+        }
+
+        public string Get()
+        {
+            return "十七岁的雨季";
+        }
+        
     }
 }

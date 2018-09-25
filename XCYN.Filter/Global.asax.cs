@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace XCYN.Filter
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilter(GlobalFilters.Filters);
+            //GlobalFilters.Filters;
         }
     }
 }

@@ -192,7 +192,27 @@ namespace XCYN.Common.Sql.redis
             }
             return list_result;
         }
-        
+
+        /// <summary>
+        /// 获取所有指定key的value，对于不存在的string或者不存在的key，返回null
+        /// </summary>
+        /// <param name="keys"></param>
+        public List<string> StringGetAsync(string[] keys)
+        {
+            RedisKey[] list = new RedisKey[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                list[i] = keys[i];
+            }
+            var sets = RedisManager.ReadDataBase().StringGetAsync(list).Result;
+            List<string> list_result = new List<string>();
+            foreach (var item in sets)
+            {
+                list_result.Add(item.ToString());
+            }
+            return list_result;
+        }
+
 
         /// <summary>
         /// 获取存储在key上的值的一个子字符串
@@ -208,6 +228,18 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 截取字符串
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public string StringGetRangeAsnyc(string key,int start,int end)
+        {
+            return RedisManager.ReadDataBase().StringGetRangeAsync(key, start, end).Result;
+        }
+
+        /// <summary>
         /// 设置一个key的value，并获取设置之前的值
         /// </summary>
         /// <param name="key"></param>
@@ -220,6 +252,18 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 设置一个key的value，并获取设置之前的值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <remarks>如果key存在但是对应的value不是字符串，就返回错误</remarks>
+        /// <returns></returns>
+        public string StringGetSetAsync(string key, string value)
+        {
+            return RedisManager.WriteDataBase().StringGetSetAsync(key, value).Result;
+        }
+
+        /// <summary>
         /// 对key对应的数字做加一操作
         /// </summary>
         /// <param name="key"></param>
@@ -227,6 +271,16 @@ namespace XCYN.Common.Sql.redis
         public long StringIncr(string key)
         {
             return RedisManager.WriteDataBase().StringIncrement(key);
+        }
+
+        /// <summary>
+        /// 对key对应的数字做加一操作
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Task<long> StringIncrAsync(string key)
+        {
+            return RedisManager.WriteDataBase().StringIncrementAsync(key);
         }
 
         /// <summary>
@@ -248,11 +302,35 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">一次增加的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
         /// <returns></returns>
+        public Task<long> StringIncrByAsync(string key, int value)
+        {
+            return RedisManager.WriteDataBase().StringIncrementAsync(key, value);
+        }
+
+        /// <summary>
+        /// 将对应的key增加value
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="value">一次增加的值</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
         public double StringIncrBy(string key, double value)
         {
             return RedisManager.WriteDataBase().StringIncrement(key, value);
         }
-        
+
+        /// <summary>
+        /// 将对应的key增加value
+        /// </summary>
+        /// <param name="key">字符串名</param>
+        /// <param name="value">一次增加的值</param>
+        /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
+        /// <returns></returns>
+        public Task<double> StringIncrByAsync(string key, double value)
+        {
+            return RedisManager.WriteDataBase().StringIncrementAsync(key, value);
+        }
+
         /// <summary>
         /// 设置一个key的value值
         /// </summary>

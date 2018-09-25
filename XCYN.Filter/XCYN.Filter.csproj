@@ -188,8 +188,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CustomActionAttribute.cs" />
     <Compile Include="App_Start\CustomAuthAttribute.cs" />
     <Compile Include="App_Start\CustomExceptionFilter.cs" />
+    <Compile Include="App_Start\CustomResultAttribute.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

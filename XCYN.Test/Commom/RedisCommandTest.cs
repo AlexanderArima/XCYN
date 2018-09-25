@@ -72,9 +72,9 @@ namespace XCYN.Common
             //初始化字符串
             RedisCommandTest test = new RedisCommandTest();
             test._command.StringSet("myStr", "hello world");
-
             test._command.StringSet("myCount", "0");
 
+            //初始化List
             test._command.KeyDelete("myList");
             List<string> list = new List<string>();
             for (int i = 0; i < 7; i++)
@@ -82,7 +82,6 @@ namespace XCYN.Common
                 list.Add(i.ToString());
             }
             test._command.ListLeftPush("myList", list.ToArray());
-
             test._command.KeyDelete("mySet");
             test._command.SetAdd("mySet", list.ToArray());
 
@@ -93,27 +92,25 @@ namespace XCYN.Common
             }
             test._command.KeyDelete("mySet2");
             test._command.SetAdd("mySet2", list2.ToArray());
-
             test._command.KeyDelete("mySet3");
-
             test._command.KeyDelete("mySet4");
             list = new List<string>();
             for (int i = 0; i < 10; i++)
             {
                 list.Add(i.ToString());
             }
+            //初始化Set
             test._command.SetAdd("mySet4", list.ToArray());
-
             test._command.KeyDelete("myHash");
             test._command.HashSet("myHash", "name", "w");
             test._command.HashSet("myHash", "age", "1");
             test._command.HashSet("myHash", "year", "2017");
             test._command.HashSet("myHash", "month", "1");
 
+            //初始化SortedSet
             _command.KeyDelete(new string[] { "mySortedSet", "mySortedSet2","mySortedSet3" });
             _command.SortedSetAdd("mySortedSet", 
                 new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
-
             _command.SortedSetAdd("mySortedSet2", 
                 new string[] { "wuhan", "shanghai" }, new int[] { 1,4 });
         }
@@ -213,6 +210,15 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void StringGetRangeAsync()
+        {
+            var str =  _command.StringGetRangeAsnyc("myStr", 0,4);
+            Assert.AreEqual("hello", str);
+            str = _command.StringGetRangeAsnyc("myStr", 0, -1);
+            Assert.AreEqual("hello world", str);
+        }
+
+        [TestMethod]
         public void StringGetSet()
         {
             var str = _command.StringGetSet("myCount", "10");
@@ -223,18 +229,42 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void StringGetSetAsync()
+        {
+            var str = _command.StringGetSetAsync("myCount", "10");
+            Assert.AreEqual("0", str);
+            str = _command.StringGetSetAsync("myCount", "0");
+            Assert.AreEqual("10", str);
+            str = _command.StringGet("myCount");
+            Assert.AreEqual("0", str);
+        }
+
+        [TestMethod]
         public void StringIncr()
         {
             var count = _command.StringIncr("myCount");
 
             Assert.AreEqual(1, count);
         }
-        
+
+        [TestMethod]
+        public void StringIncrAsync()
+        {
+            var count = _command.StringIncrAsync("myCount").Result;
+            Assert.AreEqual(1, count);
+        }
+
         [TestMethod]
         public void StringIncrBy()
         {
             var count = _command.StringIncrBy("myCount", 10);
+            Assert.AreEqual(10, count);
+        }
 
+        [TestMethod]
+        public void StringIncrByAsync()
+        {
+            var count = _command.StringIncrByAsync("myCount", 10).Result;
             Assert.AreEqual(10, count);
         }
 
@@ -242,6 +272,14 @@ namespace XCYN.Common
         public void StringIncrByFloat()
         {
             var count = _command.StringIncrBy("myCount", 0.1);
+
+            Assert.AreEqual(0.1, count);
+        }
+
+        [TestMethod]
+        public void StringIncrByFloatAsync()
+        {
+            var count = _command.StringIncrByAsync("myCount", 0.1).Result;
 
             Assert.AreEqual(0.1, count);
         }
@@ -357,6 +395,26 @@ namespace XCYN.Common
             };
             var flag = await _command.StringSetAsync(keys, values);
             Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void StringGetAsync2()
+        {
+            string[] arr = { "myStr", "myCount" };
+           var list  = _command.StringGetAsync(arr);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if(i == 0)
+                {
+                    Assert.AreEqual("hello world", list[i]);
+                    continue;
+                }
+                else if(i == 1)
+                {
+                    Assert.AreEqual("0", list[i]);
+                    continue;
+                }
+            }
         }
 
         #endregion
