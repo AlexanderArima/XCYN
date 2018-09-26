@@ -1,0 +1,135 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="3">input控件</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>文本输入框：</td>
+                        <td>
+                            <input type="text" v-model.lazy="UserName" />
+                        </td>
+                        <td>{{UserName}}</td>
+                    </tr>
+                    <tr>
+                        <td>密码输入框：</td>
+                        <td>
+                            <input type="password" v-model="Password" />
+                        </td>
+                        <td>{{Password}}</td>
+                    </tr>
+                    <tr>
+                        <td>按钮：</td>
+                        <td>
+                            <input type="button" v-model="ButtonName" />
+                        </td>
+                        <td> {{ButtonName}}</td>
+                    </tr>
+                    <tr>
+                        <td>生日：</td>
+                        <td>
+                            <input type="date" v-model="Birthday" />
+                        </td>
+                        <td> {{Birthday}}</td>
+                    </tr>
+                    <tr>
+                        <td>生日：</td>
+                        <td>
+                            <input type="datetime-local" v-model="Birthday" />
+                        </td>
+                        <td> {{Birthday}}</td>
+                    </tr>
+                    <tr>
+                        <td>主题颜色：</td>
+                        <td>
+                            <input type="color" v-model="ThemeColor" />
+                        </td>
+                        <td> {{ThemeColor}}</td>
+                    </tr>
+                    <tr>
+                        <td>隐藏控件：</td>
+                        <td>
+                            <input type="hidden" v-model="HiddenValue" />
+                        </td>
+                        <td> {{HiddenValue}}</td>
+                    </tr>
+                    <tr>
+                        <td>日期控件（周）：</td>
+                        <td>
+                            <input type="week" v-model="Birthday" />
+                        </td>
+                        <td> {{Birthday}}</td>
+                    </tr>
+                    <tr>
+                        <td>数字输入框：</td>
+                        <td>
+                            <input type="number" v-model="Price" />
+                        </td>
+                        <td> {{Price}}</td>
+                    </tr>
+                    <tr>
+                        <td>单选按钮：</td>
+                        <td>
+                            <input type="radio" id="radio_man" value="man" v-model="Sex" />
+                            <label for="radio_man">男</label>
+
+                            <input type="radio" id="radio_woman" value="woman" v-model="Sex" />
+                            <label for="radio_woman">女</label>
+                        </td>
+                        <td> {{Sex}}</td>
+                    </tr>
+                    <tr>
+                        <td>下拉菜单：</td>
+                        <td>
+                            <select v-model="Sex">
+                                <option>unknown</option>
+                                <option>man</option>
+                                <option>woman</option>
+                            </select>
+                        </td>
+                        <td> {{Sex}}</td>
+                    </tr>
+                    <tr>
+                        <td>复选按钮：</td>
+                        <td>
+                            <input type="checkbox" id="checkbox_apple" value="apple" v-model="Fruit" />
+                            <label for="checkbox_apple">苹果</label>
+
+                            <input type="checkbox" id="checkbox_banana" value="banana" v-model="Fruit" />
+                            <label for="checkbox_banana">香蕉</label>
+
+                            <input type="checkbox" id="checkbox_peach" value="peach" v-model="Fruit" />
+                            <label for="checkbox_peach">桃子</label>
+
+                            <input type="checkbox" id="checkbox_orange" value="orange" v-model="Fruit" />
+                            <label for="checkbox_orange">橘子</label>
+
+                        </td>
+                        <td> {{Fruit}}</td>
+                    </tr>
+                    <tr>
+                        <td>多行文本</td>
+                        <td>
+                            <textarea v-model="Mark"></textarea>
+                        </td>
+                        <td>{{Mark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/FormInputBind.js"></script>
+</body>
+</html>
