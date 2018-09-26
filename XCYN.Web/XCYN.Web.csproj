@@ -214,6 +214,7 @@
     <Content Include="Pages\vue\ComputeData.html" />
     <Content Include="Pages\vue\ConditionRender2.html" />
     <Content Include="Pages\vue\ConditionRender.html" />
+    <Content Include="Pages\vue\EventHandler.html" />
     <Content Include="Pages\vue\ListRender.html" />
     <Content Include="Pages\webform\RoutePage.aspx" />
     <Content Include="Plugins\easyui\changelog.txt" />
@@ -1276,6 +1277,7 @@
     <Content Include="Scripts\vue\ComputeData.js" />
     <Content Include="Scripts\vue\ConditionRender2.js" />
     <Content Include="Scripts\vue\ConditionRender.js" />
+    <Content Include="Scripts\vue\EventHandler.js" />
     <Content Include="Scripts\vue\ListRender.js" />
     <Content Include="Service\OrderService.svc" />
     <Content Include="Web.config" />

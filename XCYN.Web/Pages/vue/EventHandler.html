@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app" v-on:click="FormClick">
+        <form>
+            <!--
+            在监听与键盘有关的事件时，Vue也添加了一些修饰符，可以在事件后面添加keyCode的数字或者别名
+                例如：enter,tab,esc,space...
+            -->
+            <input type="text" v-on:keypress:enter="Valid" />
+            <!--
+            .stop可以停止事件的冒泡，这样就不会触发Form的FormClick事件了
+            -->
+            <input type="button" value="验证" v-on:click.stop="Valid" />
+            <!--
+            .prevent阻止默认行为，表单不会提交了
+            -->
+            <input type="submit" v-on:click.prevent="Submit" />
+        </form>
+    </div>
+    <script src="../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../Scripts/vue/EventHandler.js"></script>
+</body>
+</html>
