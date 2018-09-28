@@ -253,6 +253,7 @@
     <Compile Include="FileSystem\MyDirectory.cs" />
     <Compile Include="FileSystem\MyStream.cs" />
     <Compile Include="Generics\DocumentManager.cs" />
+    <Compile Include="Generics\GenericsConstraint.cs" />
     <Compile Include="Generics\GenericsFunc.cs" />
     <Compile Include="Generics\KangBianXieBian.cs" />
     <Compile Include="Generics\LinkedListNode.cs" />
