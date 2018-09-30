@@ -895,6 +895,7 @@
     <Compile Include="MultiThread\DemoTaskScheduler.Designer.cs">
       <DependentUpon>DemoTaskScheduler.cs</DependentUpon>
     </Compile>
+    <Compile Include="MultiThread\DemoThread.cs" />
     <Compile Include="MultiThread\DemoThreadPool.cs" />
     <Compile Include="MultiThread\DemoTimer.cs" />
     <Compile Include="MultiThread\DemoTMP.cs" />

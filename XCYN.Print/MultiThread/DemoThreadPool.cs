@@ -28,5 +28,24 @@ namespace XCYN.Print.MultiThread
             
             Console.WriteLine("主线程ID:{0}", Thread.CurrentThread.ManagedThreadId);
         }
+
+        public void Fun2()
+        {
+            ThreadPool.QueueUserWorkItem(m => { Run1(); });
+            ThreadPool.QueueUserWorkItem(m => { Run2(); });
+            Console.WriteLine("调用主线程，ThreadID:{0}", Thread.CurrentThread.ManagedThreadId);
+        }
+
+        public void Run1()
+        {
+            Thread.Sleep(5000);
+            Console.WriteLine("调用工作线程1，ThreadID:{0}", Thread.CurrentThread.ManagedThreadId);
+        }
+
+        public void Run2()
+        {
+            Thread.Sleep(2000);
+            Console.WriteLine("调用工作线程2，ThreadID:{0}", Thread.CurrentThread.ManagedThreadId);
+        }
     }
 }

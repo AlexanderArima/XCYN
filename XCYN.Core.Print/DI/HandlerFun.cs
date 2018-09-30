@@ -46,5 +46,10 @@ namespace XCYN.Core.Print.DI
             human = scope2.GetService<IEnable>();
         }
 
+        public void Fun3()
+        {
+
+        }
+
     }
 }

@@ -42,11 +42,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            for (int i = 10000; i <  40000; i++)
-            {
-                Console.WriteLine("{0}=>{1}",i,Convert.ToChar(i));
-                Thread.Sleep(1);
-            }
+            DemoTask t = new DemoTask();
+            t.Fun10();
             Console.Read();
         }
 
