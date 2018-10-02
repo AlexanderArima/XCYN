@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using AspectCore.DynamicProxy;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Threading.Tasks;
+using AspectCore.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace XCYN.Core.Print.DI
 {
@@ -11,6 +13,9 @@ namespace XCYN.Core.Print.DI
     /// </summary>
     public class HandlerFun
     {
+        /// <summary>
+        /// 使用依赖注入(DI)
+        /// </summary>
         public void Fun1()
         {
             //服务的集合，这里我们将一个一个的类看成是服务了。
@@ -28,6 +33,9 @@ namespace XCYN.Core.Print.DI
             human = provider.GetService<IEnable>();
         }
 
+        /// <summary>
+        /// 使用依赖注入(DI)
+        /// </summary>
         public void Fun2()
         {
             //服务的集合，这里我们将一个一个的类看成是服务了。
@@ -46,9 +54,22 @@ namespace XCYN.Core.Print.DI
             human = scope2.GetService<IEnable>();
         }
 
+        /// <summary>
+        /// 使用控制返回(AOP)，在数据库操作中插入日志
+        /// </summary>
         public void Fun3()
         {
-
+            ServiceCollection services = new ServiceCollection();
+            //注册服务
+            services.AddDynamicProxy();
+            services.AddTransient<ICommand, SQLServerCommand>();
+            
+            //注册动态代理服务数据源
+            var provider = services.BuildAspectInjectorProvider();
+            var command = provider.GetService<ICommand>();
+            command.Add(1, "xc");
+            var data =  command.Get(1);
+            Console.WriteLine($"data:{data}");
         }
 
     }

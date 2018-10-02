@@ -10,7 +10,7 @@ namespace XCYN.Core.Print
         static void Main(string[] args)
         {
             HandlerFun fun = new HandlerFun();
-            fun.Fun1();
+            fun.Fun3();
             Console.Read();
         }
 
