@@ -11,6 +11,7 @@ namespace XCYN.Web.Pages.webform
 {
     public partial class RoomEdit : System.Web.UI.Page
     {
+        public int id = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             ////获取缓存

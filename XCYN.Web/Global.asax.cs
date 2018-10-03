@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using XCYN.Web.Model;
 
 namespace XCYN.Web
 {
@@ -23,6 +24,8 @@ namespace XCYN.Web
             defaults.Add("name", "*");
             defaults.Add("id", "*");
             RouteTable.Routes.MapPageRoute("MyRoute", "employee/{name}/{id}", "~/Pages/webform/RoutePage.aspx", true, defaults);
+
+           
         }
 
         void Application_End(object sender, EventArgs e)
@@ -36,6 +39,9 @@ namespace XCYN.Web
         {
             //不是每次请求都调用
             //会话开始时执行
+            //初始化Session
+            ISession session = XSession.GetInstance();
+            session.session = Session;
         }
 
         void Session_End(object sender, EventArgs e)

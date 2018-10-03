@@ -189,6 +189,8 @@
     <Content Include="Pages\javascript\TestCookieTool.html" />
     <Content Include="Pages\javascript\ThisUsage.html" />
     <Content Include="Pages\javascript\WindowObject.html" />
+    <Content Include="Pages\redis\Index.aspx" />
+    <Content Include="Pages\redis\Login.aspx" />
     <Content Include="Pages\test\AjaxFormTest.html" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
@@ -1248,6 +1250,7 @@
     <Content Include="Scripts.min\vue\EventHandler.min.js.map" />
     <Content Include="Scripts.min\vue\FormInputBind.min.js.map" />
     <Content Include="Scripts.min\vue\ListRender.min.js.map" />
+    <Content Include="Pages\redis\UserHandler.ashx" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\javascript\FindMaxOfArray.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -1297,11 +1300,30 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\ISession.cs" />
+    <Compile Include="Model\XSession.cs" />
+    <Compile Include="Model\XUser.cs" />
     <Compile Include="Module\FileGZipModule.cs" />
     <Compile Include="Pages\knockout\shop.aspx.cs">
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\redis\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\redis\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\redis\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\redis\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\redis\UserHandler.ashx.cs">
+      <DependentUpon>UserHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\test\ArrayTest.aspx.cs">
       <DependentUpon>ArrayTest.aspx</DependentUpon>

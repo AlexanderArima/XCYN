@@ -8,6 +8,7 @@
     <title></title>
 </head>
 <body>
+    <%= this.id %>
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="Label1" runat="server" Text="类型名称"></asp:Label>

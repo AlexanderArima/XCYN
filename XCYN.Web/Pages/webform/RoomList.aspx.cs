@@ -22,7 +22,7 @@ namespace XCYN.Web.Pages.webform
             //CacheHelper.Insert("user", user);
 
             //记录缓存
-            var user = new User(DateTime.Now, 1, "Cheng");
+            var user = new XUser(1,"Cheng", 18);
             CacheHelperBeta.Insert("user", user);
         }
     }
