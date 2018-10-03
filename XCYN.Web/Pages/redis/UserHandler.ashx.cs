@@ -12,10 +12,11 @@ namespace XCYN.Web.Pages.redis
     public class UserHandler : IHttpHandler
     {
 
-        private XSession session = XSession.GetInstance();
+        private XSession session;
 
         public void ProcessRequest(HttpContext context)
         {
+            session = XSession.GetInstance();
             string UserName = context.Request["UserName"];
             if (!string.IsNullOrEmpty(UserName))
             {

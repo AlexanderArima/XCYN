@@ -25,7 +25,7 @@ namespace XCYN.Web
             defaults.Add("id", "*");
             RouteTable.Routes.MapPageRoute("MyRoute", "employee/{name}/{id}", "~/Pages/webform/RoutePage.aspx", true, defaults);
 
-           
+            
         }
 
         void Application_End(object sender, EventArgs e)
@@ -39,9 +39,8 @@ namespace XCYN.Web
         {
             //不是每次请求都调用
             //会话开始时执行
-            //初始化Session
-            ISession session = XSession.GetInstance();
-            session.session = Session;
+            XSession xSession = XSession.GetInstance(Session);
+            XSession.SetSession(Session);
         }
 
         void Session_End(object sender, EventArgs e)

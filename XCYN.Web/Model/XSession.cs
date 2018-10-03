@@ -7,41 +7,73 @@ using XCYN.Common.Sql.redis;
 
 namespace XCYN.Web.Model
 {
-    public class XSession : ISession
+    class XSession
     {
-        private static XSession _instance;
-        private static object _lockMe = new object();
+        //Session外部调用
+        private static HttpSessionState session;
 
-        private XSession()
+        public static HttpSessionState GetSession()
         {
-
+            return session;
         }
 
+        public static void SetSession(HttpSessionState session)
+        {
+            XSession.session = session;
+            //dict[this.session.SessionID] = session;
+        }
+
+        /// <summary>
+        /// 存储所有用户的Session
+        /// </summary>
+        public static Dictionary<string, HttpSessionState> dict = new Dictionary<string, HttpSessionState>();
+
+        private static XSession instance;
+
+        private XSession() { }
+
+        /// <summary>
+        /// 单例
+        /// </summary>
+        /// <returns></returns>
         public static XSession GetInstance()
         {
-            //双检锁
-            if (_instance == null)
+            if(instance == null)
             {
-                lock (_lockMe)
-                {
-                    if (_instance == null)
-                    {
-                         _instance = new XSession();
-                        _instance.UserInfo = new XUser();
-                    }
-                }
+                instance = new XSession();
             }
-            return _instance;
+            return instance;
         }
-        
+
+        /// <summary>
+        /// 单例
+        /// </summary>
+        /// <returns></returns>
+        public static XSession GetInstance(HttpSessionState session)
+        {
+            if (instance == null)
+            {
+                XSession.instance = new XSession();
+                XSession.session = session;
+            }
+            return instance;
+        }
+
         public XUser UserInfo {
             get
             {
                 //登陆未完成，省去验证过程，直接记录到缓存中
                 RedisCommand command = new RedisCommand();
-                if (!command.HashExists(session.SessionID, "UserName"))
+                try
                 {
-                    return null;
+                    if (command.KeyExists(session.SessionID))
+                    {
+                        return null;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw;
                 }
                 var ID = Convert.ToInt32(command.HashGet(session.SessionID, "ID"));
                 var UserName = command.HashGet(session.SessionID, "UserName");
@@ -63,7 +95,6 @@ namespace XCYN.Web.Model
             }
         }
 
-        public HttpSessionState session { get ; set ; }
     }
     
 }
