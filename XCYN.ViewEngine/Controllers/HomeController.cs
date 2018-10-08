@@ -35,5 +35,25 @@ namespace XCYN.ViewEngine.Controllers
         {
             return View();
         }
+
+        public ActionResult GetStrongResult()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 调用子动作
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetChildAction()
+        {
+            return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Time()
+        {
+            return PartialView(DateTime.Now);
+        }
     }
 }

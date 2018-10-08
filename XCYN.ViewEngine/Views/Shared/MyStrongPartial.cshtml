@@ -1,0 +1,11 @@
+﻿@model IEnumerable<string>
+@*
+采用强类型的分部视图，该分部视图接收一个对象    
+*@
+<div>
+    this is the message from the partial view
+</div>
+@foreach (var item in Model)
+{
+    <div>@item</div>
+}

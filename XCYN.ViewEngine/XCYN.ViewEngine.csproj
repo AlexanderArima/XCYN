@@ -103,6 +103,10 @@
     <Content Include="Web.config" />
     <Content Include="Views\Shared\MyPartial.cshtml" />
     <Content Include="Views\Home\GetParital.cshtml" />
+    <Content Include="Views\Shared\MyStrongPartial.cshtml" />
+    <Content Include="Views\Home\GetStrongResult.cshtml" />
+    <Content Include="Views\Home\GetChildAction.cshtml" />
+    <Content Include="Views\Home\Time.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
