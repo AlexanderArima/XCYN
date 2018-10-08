@@ -1,0 +1,30 @@
+﻿@model string[]
+@{
+    ViewBag.Title = "GetSection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <div>
+        @foreach(var item in new string[] { "Home", "List", "Item" })
+        {
+            <a href="javascript:void(0)">@item</a>
+        }
+    </div>    
+}
+
+@section Body{
+    <div>
+        This is a list of fruits names:
+        @foreach (var item in Model)
+        {
+            <span><b>@item</b></span>
+        }
+    </div>    
+}
+
+@section Footer{
+    <div>
+        This is Footer
+    </div>    
+}

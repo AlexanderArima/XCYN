@@ -19,7 +19,7 @@ namespace XCYN.Web.Pages.redis
             session = XSession.GetInstance();
             //判断用户是否登陆
            // Session.SessionID;
-            if(session.UserInfo.UserName != null)
+            if(session.UserInfo != null)
             {
                 //登陆完成，跳转到Index页面
                 Context.Response.Redirect("Index.aspx");

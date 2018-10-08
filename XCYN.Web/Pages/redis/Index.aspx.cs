@@ -18,11 +18,11 @@ namespace XCYN.Web.Pages.redis
         {
             session = XSession.GetInstance();
             var User = session.UserInfo;
-            UserName = User.UserName;
-            if(UserName == null)
+            if(User == null)
             {
                 Response.Redirect("Login.aspx");
             }
+            UserName = User.UserName;
         }
     }
 }

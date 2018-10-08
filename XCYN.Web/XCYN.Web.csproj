@@ -1301,6 +1301,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\ISession.cs" />
+    <Compile Include="Model\MyCustomSessionStateStoreProvider.cs" />
     <Compile Include="Model\XSession.cs" />
     <Compile Include="Model\XUser.cs" />
     <Compile Include="Module\FileGZipModule.cs" />
