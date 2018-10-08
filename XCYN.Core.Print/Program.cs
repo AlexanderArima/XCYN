@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using XCYN.Core.Print.Cache;
 using XCYN.Core.Print.DI;
 
 namespace XCYN.Core.Print
@@ -9,8 +10,8 @@ namespace XCYN.Core.Print
     {
         static void Main(string[] args)
         {
-            HandlerFun fun = new HandlerFun();
-            fun.Fun3();
+            MyCache c = new MyCache();
+            c.Fun4();
             Console.Read();
         }
 
