@@ -7,6 +7,7 @@ using System.Web.SessionState;
 
 namespace XCYN.Web.Model
 {
+    /*
     /// <summary>
     /// 自定义Session实现方式
     /// </summary>
@@ -333,4 +334,5 @@ namespace XCYN.Web.Model
         }
 
     }
+    */
 }

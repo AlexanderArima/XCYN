@@ -39,8 +39,8 @@ namespace XCYN.Web
         {
             //不是每次请求都调用
             //会话开始时执行
-            XSession xSession = XSession.GetInstance(Session);
-            XSession.SetSession(Session);
+            //XSession xSession = XSession.GetInstance(Session);
+            //XSession.SetSession(Session);
         }
 
         void Session_End(object sender, EventArgs e)

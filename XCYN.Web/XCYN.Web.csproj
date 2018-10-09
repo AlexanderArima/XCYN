@@ -214,6 +214,7 @@
     <Content Include="Pages\vue\BindHTML.html" />
     <Content Include="Pages\vue\BindText.html" />
     <Content Include="Pages\vue\Component.html" />
+    <Content Include="Pages\vue\Component\Basic.html" />
     <Content Include="Pages\vue\ComputeData.html" />
     <Content Include="Pages\vue\ConditionRender2.html" />
     <Content Include="Pages\vue\ConditionRender.html" />
@@ -1287,6 +1288,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\vue\Component.js" />
+    <Content Include="Scripts\vue\Component\Basic.js" />
     <Content Include="Scripts\vue\ComputeData.js" />
     <Content Include="Scripts\vue\ConditionRender2.js" />
     <Content Include="Scripts\vue\ConditionRender.js" />

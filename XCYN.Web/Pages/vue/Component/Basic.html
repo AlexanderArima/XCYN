@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:style="{fontSize:fontSize + 'px'}">达达兔论坛</div>
+        <base-changefont v-on:font-change="fontChange"></base-changefont>
+        <base-userregister></base-userregister>
+        <base-bbspost title="中美贸易战" ></base-bbspost>
+    </div>
+    <script src="../../../Plugins/vue/dist/vue.js"></script>
+    <script src="../../../Scripts/vue/Component/Basic.js"></script>
+</body>
+</html>
