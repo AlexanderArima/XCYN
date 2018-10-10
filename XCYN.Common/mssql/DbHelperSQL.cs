@@ -1030,8 +1030,7 @@ namespace XCYN.Common
                 return ds;
             }
         }
-
-
+        
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
         {
             if (conn.State != ConnectionState.Open)

@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,7 +12,7 @@ namespace Common
     public abstract class MySqlHelper
     {
         //数据库连接字符串
-        public static string Conn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString.ToString();
+        private static string _connectString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString.ToString();
 
         #region 执行语句
 
@@ -49,14 +50,24 @@ namespace Common
         /// <returns></returns>
         public static DataSet Query(string SQLString)
         {
-            using (MySqlConnection conn = new MySqlConnection(Conn))
+            return Query(SQLString, null);
+        }
+
+        /// <summary>
+        /// 执行查询返回DataSet
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <returns></returns>
+        public static DataSet Query(string SQLString,MySqlParameter[] param)
+        {
+            using (MySqlConnection conn = new MySqlConnection(_connectString))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     try
                     {
                         //调用 PrepareCommand 方法，对 MySqlCommand 对象设置参数
-                        PrepareCommand(cmd, conn, null, CommandType.Text, SQLString, null);
+                        PrepareCommand(cmd, conn, null, CommandType.Text, SQLString, param);
                         //调用 MySqlCommand 的 ExecuteReader 方法
                         MySqlDataAdapter adapter = new MySqlDataAdapter();
                         adapter.SelectCommand = cmd;
@@ -99,6 +110,59 @@ namespace Common
                 
         }
 
+        /// <summary>
+        /// 执行SQL语句
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <param name="cmdParms"></param>
+        /// <returns></returns>
+        public static int ExecuteSql(string SQLString,MySqlParameter[] cmdParms)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            using (MySqlConnection conn = new MySqlConnection(_connectString))
+            {
+                PrepareCommand(cmd, conn, null,  CommandType.Text, SQLString, cmdParms);
+                int val = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                return val;
+            }
+        }
+
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="SQLStringList"></param>
+        public static void ExecuteSqlTran(Hashtable SQLStringList)
+        {
+            using (MySqlConnection conn = new MySqlConnection(_connectString))
+            {
+                conn.Open();
+                using (MySqlTransaction trans = conn.BeginTransaction())
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        try
+                        {
+                            //循环
+                            foreach (DictionaryEntry myDE in SQLStringList)
+                            {
+                                string cmdText = myDE.Key.ToString();
+                                MySqlParameter[] cmdParms = (MySqlParameter[])myDE.Value;
+                                PrepareCommand(cmd, conn, trans,  CommandType.Text,cmdText, cmdParms);
+                                int val = cmd.ExecuteNonQuery();
+                                cmd.Parameters.Clear();
+                            }
+                            trans.Commit();
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region 执行命令
@@ -122,6 +186,7 @@ namespace Common
                 return val;
             }
         }
+       
         /// <summary>
         /// 用现有的数据库连接执行一个sql命令（不返回数据集）
         /// </summary>
@@ -138,6 +203,7 @@ namespace Common
             cmd.Parameters.Clear();
             return val;
         }
+       
         /// <summary>
         ///使用现有的SQL事务执行一个sql命令（不返回数据集）
         /// </summary>
@@ -173,7 +239,7 @@ namespace Common
         /// <returns>包含结果的读取器</returns>
         public static MySqlDataReader ExecuteReader(string SQLString)
         {
-            return ExecuteReader(Conn, CommandType.Text, SQLString, null);
+            return ExecuteReader(_connectString, CommandType.Text, SQLString, null);
         }
         public static MySqlDataReader ExecuteReader(string connectionString, CommandType cmdType, string cmdText, params MySqlParameter[] commandParameters)
         {
@@ -245,7 +311,7 @@ namespace Common
         /// <returns></returns>
         public static object ExecuteScalar(string SQLString)
         {
-            return ExecuteScalar(Conn, CommandType.Text, SQLString, null);
+            return ExecuteScalar(_connectString, CommandType.Text, SQLString, null);
         }
 
         /// <summary>
