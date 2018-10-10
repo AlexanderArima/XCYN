@@ -35,6 +35,7 @@ using XCYN.Print.WCF;
 using XCYN.Print.MongoDB;
 using XCYN.Print.Basic;
 using System.Threading;
+using XCYN.Print.MySQL;
 
 namespace XCYN.Print
 {
@@ -42,8 +43,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoTask t = new DemoTask();
-            t.Fun10();
+            MySQLTest my = new MySQLTest();
+            my.Fun1();
             Console.Read();
         }
 

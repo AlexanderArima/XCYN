@@ -370,3 +370,7 @@ F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Memory.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Numerics.Vectors.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Threading.Channels.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Google.Protobuf.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\MySql.Data.dll
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\Google.Protobuf.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\MySql.Data.xml

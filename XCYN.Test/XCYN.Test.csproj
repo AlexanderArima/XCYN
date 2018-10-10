@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="IBM.Data.DB2, Version=9.7.4.4, Culture=neutral, PublicKeyToken=7c307b91aa13d208, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\DB2\IBM.Data.DB2.dll</HintPath>
@@ -83,6 +86,9 @@
     <Reference Include="Moq, Version=4.9.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.9.0\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -97,16 +103,21 @@
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.IO.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.4.5.1\lib\netstandard2.0\System.IO.Pipelines.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -133,6 +144,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -178,11 +190,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="APITestCase.cs" />
-    <Compile Include="Commom\CacheTestCase.cs" />
+    <Compile Include="Common\CacheTestCase.cs" />
+    <Compile Include="Common\MySQLTestCase.cs" />
     <Compile Include="MVC\Controllers\HomeTestCase.cs" />
     <Compile Include="Print\CalculatorTestCase.cs" />
-    <Compile Include="Commom\CompressTestCase.cs" />
-    <Compile Include="Commom\DapperTestCase.cs" />
+    <Compile Include="Common\CompressTestCase.cs" />
+    <Compile Include="Common\DapperTestCase.cs" />
     <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -191,7 +204,7 @@
     <Compile Include="Print\DesignPatternTestCase.cs" />
     <Compile Include="Print\MongoDB\MongoHelperTest.cs" />
     <Compile Include="Print\MQTestCase.cs" />
-    <Compile Include="Commom\RedisCommandTest.cs" />
+    <Compile Include="Common\RedisCommandTest.cs" />
     <Compile Include="Print\LinqTestCase.cs" />
     <Compile Include="Print\CharTestCase.cs" />
     <Compile Include="Print\StringBuilderTestCase.cs" />
@@ -203,9 +216,9 @@
     </Compile>
     <Compile Include="Log4NetTestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commom\EncryptTestCase.cs" />
+    <Compile Include="Common\EncryptTestCase.cs" />
     <Compile Include="StringTestCase.cs" />
-    <Compile Include="Commom\UtilTestCase.cs" />
+    <Compile Include="Common\UtilTestCase.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
