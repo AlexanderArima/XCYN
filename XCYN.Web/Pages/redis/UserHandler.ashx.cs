@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 using XCYN.Web.Model;
 
 namespace XCYN.Web.Pages.redis
@@ -9,14 +10,12 @@ namespace XCYN.Web.Pages.redis
     /// <summary>
     /// UserHandler 的摘要说明
     /// </summary>
-    public class UserHandler : IHttpHandler
+    public class UserHandler : IHttpHandler, IRequiresSessionState
     {
-
-        private XSession session;
+        
 
         public void ProcessRequest(HttpContext context)
         {
-            session = XSession.GetInstance();
             string UserName = context.Request["UserName"];
             if (!string.IsNullOrEmpty(UserName))
             {
@@ -27,7 +26,7 @@ namespace XCYN.Web.Pages.redis
                     ID = 1,
                     Age = 12
                 };
-                session.UserInfo = user;
+                context.Session.Add("UserInfo", user);
                 context.Response.Redirect("Index.aspx");
             }
         }

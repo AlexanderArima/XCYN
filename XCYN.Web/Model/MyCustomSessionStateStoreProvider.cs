@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
+using Common;
+using XCYN.Common.Sql.redis;
 
 namespace XCYN.Web.Model
 {
-    /*
+    
     /// <summary>
     /// 自定义Session实现方式
     /// </summary>
@@ -17,6 +19,8 @@ namespace XCYN.Web.Model
         /// 获取配置文件的设置的默认超时时间
         /// </summary>
         private static TimeSpan _expiresTime;
+
+        RedisCommand _command = new RedisCommand();
 
         /// <summary>
         /// 获取Web.config 在sessionState设置的超时时间
@@ -46,22 +50,36 @@ namespace XCYN.Web.Model
         /// <param name="timeout"></param>
         public override void CreateUninitializedItem(HttpContext context, string id, int timeout)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            if(!_command.KeyExists(id))
             {
-                var session = new ASPStateTempSessions
-                {
-                    Created = DateTime.Now,
-                    Expires = DateTime.Now.AddMinutes(timeout),
-                    Flags = (int)SessionStateActions.InitializeItem,
-                    LockDate = DateTime.Now,
-                    Locked = false,
-                    SessionId = id,
-                    LockId = 0,
-                    Timeout = timeout
-                };
-                db.ASPStateTempSessions.Add(session);
-                db.SaveChanges();
+                //如果Session不存在，则新增
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("Create", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Expires", DateTime.Now.AddMinutes(timeout).ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Flags", SessionStateActions.InitializeItem.ToString());
+                dict.Add("LockDate", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Locked", "0");
+                dict.Add("SessionId", id);
+                dict.Add("LockId", "0");
+                dict.Add("Timeout", timeout.ToString());
+                _command.HashSet("Session", dict);
             }
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
+            //    var session = new ASPStateTempSessions
+            //    {
+            //        Created = DateTime.Now,
+            //        Expires = DateTime.Now.AddMinutes(timeout),
+            //        Flags = (int)SessionStateActions.InitializeItem,
+            //        LockDate = DateTime.Now,
+            //        Locked = false,
+            //        SessionId = id,
+            //        LockId = 0,
+            //        Timeout = timeout
+            //    };
+            //    db.ASPStateTempSessions.Add(session);
+            //    db.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -72,20 +90,26 @@ namespace XCYN.Web.Model
         /// <param name="lockId"></param>
         public override void ReleaseItemExclusive(HttpContext context, string id, object lockId)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            if(!_command.KeyExists(id))
             {
-                var session = db.ASPStateTempSessions.Find(id);
-                if (session == null)
-                {
-                    return;
-                }
-
-                // 把locked设置为false
-                session.Locked = false;
-                session.Expires = DateTime.Now + _expiresTime;
-                db.SaveChanges();
+                return;
             }
+            _command.HashSet(id, "Locked", "0");
+            _command.HashSet(id, "Expires", (DateTime.Now + _expiresTime).ToString("yyyy-MM-dd HH:mm:ss"));
+            _command.HashGet(id, "Expires");
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
+            //    var session = db.ASPStateTempSessions.Find(id);
+            //    if (session == null)
+            //    {
+            //        return;
+            //    }
 
+            //    // 把locked设置为false
+            //    session.Locked = false;
+            //    session.Expires = DateTime.Now + _expiresTime;
+            //    db.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -97,17 +121,22 @@ namespace XCYN.Web.Model
         /// <param name="item"></param>
         public override void RemoveItem(HttpContext context, string id, object lockId, SessionStateStoreData item)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            if (!_command.KeyExists(id))
             {
-                var session = db.ASPStateTempSessions.Find(id);
-                if (session == null)
-                {
-                    return;
-                }
-
-                db.ASPStateTempSessions.Remove(session);
-                db.SaveChanges();
+                return;
             }
+            _command.KeyDelete(id);
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
+            //    var session = db.ASPStateTempSessions.Find(id);
+            //    if (session == null)
+            //    {
+            //        return;
+            //    }
+
+            //    db.ASPStateTempSessions.Remove(session);
+            //    db.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -117,16 +146,21 @@ namespace XCYN.Web.Model
         /// <param name="id"></param>
         public override void ResetItemTimeout(HttpContext context, string id)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            if (!_command.KeyExists(id))
             {
-                var session = db.ASPStateTempSessions.Find(id);
-                if (session == null)
-                {
-                    return;
-                }
-                session.Expires = DateTime.Now + _expiresTime;
-                db.SaveChanges();
+                return;
             }
+            _command.HashSet(id, "Expires", (DateTime.Now + _expiresTime).ToString("yyyy-MM-dd HH:mm:ss"));
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
+            //    var session = db.ASPStateTempSessions.Find(id);
+            //    if (session == null)
+            //    {
+            //        return;
+            //    }
+            //    session.Expires = DateTime.Now + _expiresTime;
+            //    db.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -139,41 +173,66 @@ namespace XCYN.Web.Model
         /// <param name="newItem"></param>
         public override void SetAndReleaseItemExclusive(HttpContext context, string id, SessionStateStoreData item, object lockId, bool newItem)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            if (newItem)
             {
-                // 判断是否是新建，如果是新建则和CreateUninitializedItem不同在于Timeout和有初始值。
-                if (newItem)
+                //如果Session不存在，则新增
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("Create", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Expires", DateTime.Now.AddMinutes(item.Timeout).ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Flags", SessionStateActions.None.ToString());
+                dict.Add("LockDate", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                dict.Add("Locked", "0");
+                dict.Add("SessionId", id);
+                dict.Add("LockId", "0");
+                dict.Add("Timeout", item.Timeout.ToString());
+                dict.Add("SessionItem", Serialize((SessionStateItemCollection)item.Items));
+                _command.HashSet("Session", dict);
+            }
+            else
+            {
+                if (!_command.KeyExists(id))
                 {
-                    var session = new ASPStateTempSessions
-                    {
-                        Created = DateTime.Now,
-                        Expires = DateTime.Now.AddMinutes(item.Timeout),
-                        Flags = (int)SessionStateActions.None,
-                        LockDate = DateTime.Now,
-                        Locked = false,
-                        SessionId = id,
-                        LockId = 0,
-                        Timeout = item.Timeout,
-                        SessionItem = Serialize((SessionStateItemCollection)item.Items)
-                    };
-                    db.ASPStateTempSessions.Add(session);
-                    db.SaveChanges();
-                }
-                else// 释放锁定的项并设置Session的值
-                {
-                    var session = db.ASPStateTempSessions.FirstOrDefault(i => i.SessionId == id);
-                    if (session == null)
-                    {
-                        return;
-                    }
-
-                    session.Expires = DateTime.Now.AddMinutes(item.Timeout);
-                    session.Locked = false;
-                    session.LockId = Convert.ToInt32(lockId);
-                    session.SessionItem = Serialize((SessionStateItemCollection)item.Items);
-                    db.SaveChanges();
+                    _command.HashSet(id, "Expires", DateTime.Now.AddMinutes(item.Timeout).ToString("yyyy-MM-dd HH:mm:ss"));
+                    _command.HashSet(id, "Locked", "0");
+                    _command.HashSet(id, "LockId", lockId.ToString());
+                    _command.HashSet(id, "SessionItem", Serialize((SessionStateItemCollection)item.Items));
                 }
             }
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
+            //    // 判断是否是新建，如果是新建则和CreateUninitializedItem不同在于Timeout和有初始值。
+            //    if (newItem)
+            //    {
+            //        var session = new ASPStateTempSessions
+            //        {
+            //            Created = DateTime.Now,
+            //            Expires = DateTime.Now.AddMinutes(item.Timeout),
+            //            Flags = (int)SessionStateActions.None,
+            //            LockDate = DateTime.Now,
+            //            Locked = false,
+            //            SessionId = id,
+            //            LockId = 0,
+            //            Timeout = item.Timeout,
+            //            SessionItem = Serialize((SessionStateItemCollection)item.Items)
+            //        };
+            //        db.ASPStateTempSessions.Add(session);
+            //        db.SaveChanges();
+            //    }
+            //    else// 释放锁定的项并设置Session的值
+            //    {
+            //        var session = db.ASPStateTempSessions.FirstOrDefault(i => i.SessionId == id);
+            //        if (session == null)
+            //        {
+            //            return;
+            //        }
+
+            //        session.Expires = DateTime.Now.AddMinutes(item.Timeout);
+            //        session.Locked = false;
+            //        session.LockId = Convert.ToInt32(lockId);
+            //        session.SessionItem = Serialize((SessionStateItemCollection)item.Items);
+            //        db.SaveChanges();
+            //    }
+            //}
         }
 
         /// <summary>
@@ -219,66 +278,129 @@ namespace XCYN.Web.Model
         /// <returns></returns>
         public SessionStateStoreData DoGet(bool isExclusive, HttpContext context, string id, out bool locked, out TimeSpan lockAge, out object lockId, out SessionStateActions actions)
         {
-            using (SessionStateEF db = new SessionStateEF())
+            // 设置初始值
+            var item = default(SessionStateStoreData);
+            lockAge = TimeSpan.Zero;
+            lockId = null;
+            locked = false;
+            actions = 0;
+            var sessionLockId = "";
+            var sessionLockDate = "";
+            var sessionFlags = "";
+            var sessionTimeout = "";
+            var sessionExpires = "";
+            var sessionSessionItem = "";
+            if (!_command.KeyExists(id))
             {
+                // 如果数据存储区中未找到任何会话项数据，则GetItemExclusive 方法将 locked 输出参数设置为false，并返回 null。
+                // 这将导致 SessionStateModule调用 CreateNewStoreData 方法来为请求创建一个新的SessionStateStoreData 对象。
+                return null;
+            }
+            sessionLockId = _command.HashGet(id, "LockId");
+            sessionLockDate = _command.HashGet(id, "LockDate");
+            sessionFlags = _command.HashGet(id, "Flags");
+            sessionTimeout = _command.HashGet(id, "Timeout");
+            sessionExpires = _command.HashGet(id, "Expires");
+            sessionSessionItem = _command.HashGet(id, "SessionItem");
+            // 判断session是否是ReadOnly 模式，不是readonly模式得判断是否锁住
+            if (isExclusive)
+            {
+                if(_command.HashGet(id, "Locked") != "0")
+                {
+                    locked = true;
+                    lockAge = Convert.ToDateTime(sessionLockDate) - DateTime.Now;
+                    lockId = sessionLockId;
+                    return null;
+                }
+            }
+            // 判断是否过期
+            var Expires = Convert.ToDateTime(sessionExpires);
+            if (Expires < DateTime.Now)
+            {
+                _command.KeyDelete(id);
+                return null;
+            }
+            // 处理值
+            lockId = lockId == null ? 0 : (int)lockId + 1;
+            _command.HashSet(id, "Flags", SessionStateActions.None.ToString());
+            _command.HashSet(id, "LockId", lockId.ToString());
+
+            // 获取timeout
+            var timeout = actions == SessionStateActions.InitializeItem ? _expiresTime.TotalMinutes : Convert.ToDouble(sessionTimeout);
+
+            // 获取SessionStateItemCollection 
+            SessionStateItemCollection sessionStateItemCollection = null;
+
+            // 获取Session的值
+            if (actions == SessionStateActions.None && !string.IsNullOrEmpty(sessionSessionItem))
+            {
+                sessionStateItemCollection = Deserialize(sessionSessionItem);
+            }
+
+            item = new SessionStateStoreData(sessionStateItemCollection ?? new SessionStateItemCollection(), SessionStateUtility.GetSessionStaticObjects(context), (int)timeout);
+
+            return item;
+
+            //using (SessionStateEF db = new SessionStateEF())
+            //{
                 // 设置初始值
-                var item = default(SessionStateStoreData);
-                lockAge = TimeSpan.Zero;
-                lockId = null;
-                locked = false;
-                actions = 0;
+                //var item = default(SessionStateStoreData);
+                //lockAge = TimeSpan.Zero;
+                //lockId = null;
+                //locked = false;
+                //actions = 0;
 
                 // 如果数据存储区中未找到任何会话项数据，则GetItemExclusive 方法将 locked 输出参数设置为false，并返回 null。
                 // 这将导致 SessionStateModule调用 CreateNewStoreData 方法来为请求创建一个新的SessionStateStoreData 对象。
-                var session = db.ASPStateTempSessions.Find(id);
-                if (session == null)
-                {
-                    return null;
-                }
+                //var session = db.ASPStateTempSessions.Find(id);
+                //if (session == null)
+                //{
+                //    return null;
+                //}
 
-                // 判断session是否是ReadOnly 模式，不是readonly模式得判断是否锁住
-                if (isExclusive)
-                {
-                    // 如果在数据存储区中找到会话项数据但该数据已锁定，则GetItemExclusive 方法将 locked 输出参数设置为true，
-                    // 将 lockAge 输出参数设置为当前日期和时间与该项锁定日期和时间的差，将 lockId 输出参数设置为从数据存储区中检索的锁定标识符，并返回 nul
-                    if (session.Locked)
-                    {
-                        locked = true;
-                        lockAge = session.LockDate - DateTime.Now;
-                        lockId = session.LockId;
-                        return null;
-                    }
-                }
+                //// 判断session是否是ReadOnly 模式，不是readonly模式得判断是否锁住
+                //if (isExclusive)
+                //{
+                //    // 如果在数据存储区中找到会话项数据但该数据已锁定，则GetItemExclusive 方法将 locked 输出参数设置为true，
+                //    // 将 lockAge 输出参数设置为当前日期和时间与该项锁定日期和时间的差，将 lockId 输出参数设置为从数据存储区中检索的锁定标识符，并返回 nul
+                //    if (session.Locked)
+                //    {
+                //        locked = true;
+                //        lockAge = session.LockDate - DateTime.Now;
+                //        lockId = session.LockId;
+                //        return null;
+                //    }
+                //}
 
-                // 判断是否过期
-                if (session.Expires < DateTime.Now)
-                {
-                    db.ASPStateTempSessions.Remove(session);
-                    return null;
-                }
+                //// 判断是否过期
+                //if (session.Expires < DateTime.Now)
+                //{
+                //    db.ASPStateTempSessions.Remove(session);
+                //    return null;
+                //}
 
-                // 处理值
-                lockId = lockId == null ? 0 : (int)lockId + 1;
-                session.Flags = (int)SessionStateActions.None;
-                session.LockId = Convert.ToInt32(lockId);
+                //// 处理值
+                //lockId = lockId == null ? 0 : (int)lockId + 1;
+                //session.Flags = (int)SessionStateActions.None;
+                //session.LockId = Convert.ToInt32(lockId);
 
-                // 获取timeout
-                var timeout = actions == SessionStateActions.InitializeItem ? _expiresTime.TotalMinutes : session.Timeout;
+                //// 获取timeout
+                //var timeout = actions == SessionStateActions.InitializeItem ? _expiresTime.TotalMinutes : session.Timeout;
 
-                // 获取SessionStateItemCollection 
-                SessionStateItemCollection sessionStateItemCollection = null;
+                //// 获取SessionStateItemCollection 
+                //SessionStateItemCollection sessionStateItemCollection = null;
 
-                // 获取Session的值
-                if (actions == SessionStateActions.None && !string.IsNullOrEmpty(session.SessionItem))
-                {
-                    sessionStateItemCollection = Deserialize((session.SessionItem));
-                }
+                //// 获取Session的值
+                //if (actions == SessionStateActions.None && !string.IsNullOrEmpty(session.SessionItem))
+                //{
+                //    sessionStateItemCollection = Deserialize((session.SessionItem));
+                //}
 
-                item = new SessionStateStoreData(sessionStateItemCollection ?? new SessionStateItemCollection(), SessionStateUtility.GetSessionStaticObjects(context), (int)timeout);
+                //item = new SessionStateStoreData(sessionStateItemCollection ?? new SessionStateItemCollection(), SessionStateUtility.GetSessionStaticObjects(context), (int)timeout);
 
-                return item;
+                //return item;
 
-            }
+            //}
 
         }
 
@@ -334,5 +456,11 @@ namespace XCYN.Web.Model
         }
 
     }
-    */
+
+    internal class SessionStateEF
+    {
+        public SessionStateEF()
+        {
+        }
+    }
 }

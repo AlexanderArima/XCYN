@@ -12,14 +12,10 @@ namespace XCYN.Web.Pages.redis
     public partial class Login : System.Web.UI.Page
     {
         public string UserName = "";
-        private XSession session;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            session = XSession.GetInstance();
-            //判断用户是否登陆
-           // Session.SessionID;
-            if(session.UserInfo != null)
+            if(Session["UserInfo"] != null)
             {
                 //登陆完成，跳转到Index页面
                 Context.Response.Redirect("Index.aspx");

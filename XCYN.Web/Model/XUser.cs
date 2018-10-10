@@ -5,6 +5,7 @@ using System.Web;
 
 namespace XCYN.Web.Model
 {
+    [Serializable]
     public class XUser
     {
         public XUser()

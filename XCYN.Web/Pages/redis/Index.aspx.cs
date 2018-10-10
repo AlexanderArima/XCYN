@@ -12,12 +12,10 @@ namespace XCYN.Web.Pages.redis
     {
 
         public string UserName = "";
-        private XSession session;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            session = XSession.GetInstance();
-            var User = session.UserInfo;
+            var User = Session["UserInfo"] as XUser;
             if(User == null)
             {
                 Response.Redirect("Login.aspx");
