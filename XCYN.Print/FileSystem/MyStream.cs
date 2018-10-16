@@ -86,5 +86,39 @@ namespace XCYN.Print.FileSystem
                 }
             } 
         }
+
+        /// <summary>
+        /// 写入文件流
+        /// </summary>
+        public void Fun3()
+        {
+            string path = @"C:\1.txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                sw.WriteLine("hello world");
+            }
+        }
+
+        /// <summary>
+        /// 读取文件流
+        /// </summary>
+        public void Fun4()
+        {
+            string path = @"C:\1.txt";
+            using (StreamReader sw = new StreamReader(path))
+            {
+               var r =  sw.ReadLine();
+                Console.WriteLine(r);
+            }
+        }
+
+        /// <summary>
+        /// 读取文件的最简单方法，也不需要释放资源
+        /// </summary>
+        public void Fun5()
+        {
+            var s = File.ReadAllText(@"C:\1.txt");
+            Console.WriteLine(s);
+        }
     }
 }

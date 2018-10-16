@@ -180,6 +180,7 @@
     <Compile Include="Alg\SortOrder.cs" />
     <Compile Include="Alg\SortOrderTest.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
+    <Compile Include="Basic\ListDictSetTest.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />

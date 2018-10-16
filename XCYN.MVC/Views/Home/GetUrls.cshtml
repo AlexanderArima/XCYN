@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetUrls</title>
+</head>
+<body>
+    <div> 
+        <table>
+            <tr>
+                <td>相对于应用程序的URL</td>
+                <td>@Url.Content("/Admin/Index")</td>
+            </tr>
+            <tr>
+                <td>联接到指定的控制器/动作</td>
+                <td>@Html.ActionLink("click me","Test", "Admin")</td>
+            </tr>
+            <tr>
+                <td>动作URL</td>
+                <td>@Url.Action("Index2","Home")</td>
+            </tr>
+            <tr>
+                <td>使用路由定位URL</td>
+                <td>@Url.RouteUrl(new  { controller = "Home" , action = "CreateCollection"})</td>
+            </tr>
+            <tr>
+                <td>使用路由数据联接</td>
+                <td>@Html.RouteLink("确定",new { controller = "Home", action = "Index4" })</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

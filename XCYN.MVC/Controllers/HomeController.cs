@@ -178,7 +178,15 @@ namespace XCYN.MVC.Controllers
             var total = shop.CalcProductTotal();
             return View(total);
         }
-
+        
+        /// <summary>
+        ///  渲染URL的HTML辅助器
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetUrls()
+        {
+            return View();
+        }
 
     }
 }

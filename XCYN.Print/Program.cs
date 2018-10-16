@@ -43,8 +43,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MySQLTest my = new MySQLTest();
-            my.Fun1();
+            ListDictSetTest ld = new ListDictSetTest();
+            ld.Fun1();
             Console.Read();
         }
 
