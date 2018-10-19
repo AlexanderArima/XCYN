@@ -552,7 +552,7 @@ namespace XCYN.Common.Sql.redis
         {
             return RedisManager.WriteDataBase().ListLeftPop(key);
         }
-
+        
         /// <summary>
         /// 从队列左边入队一个元素
         /// </summary>

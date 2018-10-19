@@ -19,13 +19,13 @@ namespace XCYN.Print.MultiThread
         }
 
         /// <summary>
-        /// Timer定时器
+        /// 轮询
         /// </summary>
         public void Fun2()
         {
             Timer t = new Timer(new TimerCallback((obj) => {
                 Console.WriteLine("obj:{0},ThreadID:{1},DateTime:{2}", obj, Thread.CurrentThread.ManagedThreadId, DateTime.Now);
-            }), "hello world", 1000, 1000);
+            }), "hello world", 0, 1000);
 
         }
     }

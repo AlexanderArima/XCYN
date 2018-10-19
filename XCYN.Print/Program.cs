@@ -43,8 +43,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            ListDictSetTest ld = new ListDictSetTest();
-            ld.Fun1();
+            DemoTimer timer = new DemoTimer();
+            timer.Fun2();
             Console.Read();
         }
 
