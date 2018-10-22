@@ -10,7 +10,7 @@ namespace XCYN.Core.Print
     {
         static void Main(string[] args)
         {
-            MyRedisCache c = new MyRedisCache();
+            MyMongodbCache c = new MyMongodbCache();
             c.Fun1();
             Console.Read();
         }
