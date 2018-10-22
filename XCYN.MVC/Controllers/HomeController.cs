@@ -188,5 +188,10 @@ namespace XCYN.MVC.Controllers
             return View();
         }
 
+        public ActionResult GetValue()
+        {
+            return View();
+        }
+
     }
 }

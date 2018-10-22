@@ -120,6 +120,7 @@
     <Content Include="Image\123.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -167,6 +168,7 @@
     <Content Include="Views\Admin\PW.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Home\GetUrls.cshtml" />
+    <Content Include="Views\Home\GetValue.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

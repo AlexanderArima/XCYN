@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetValue</title>
+</head>
+<body>
+    <div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $.get("http://192.168.43.136:8080/api/Values", function (data) {
+            document.writeln(data);
+        });
+    </script>
+</body>
+</html>

@@ -24,7 +24,7 @@
         {
             return num + 20; 
         }
-
+    
         /**
          * fun1与fun2是相等的
          * @param num
