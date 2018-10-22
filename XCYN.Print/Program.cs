@@ -44,7 +44,7 @@ namespace XCYN.Print
         static void Main(string[] args)
         {
             DemoTimer timer = new DemoTimer();
-            timer.Fun2();
+            timer.Fun1();
             Console.Read();
         }
 

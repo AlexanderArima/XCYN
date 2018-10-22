@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using XCYN.Core.Print.Cache;
 using XCYN.Core.Print.DI;
+using XCYN.Core.Print.ORM;
 
 namespace XCYN.Core.Print
 {
@@ -10,8 +11,8 @@ namespace XCYN.Core.Print
     {
         static void Main(string[] args)
         {
-            MyMongodbCache c = new MyMongodbCache();
-            c.Fun1();
+            MyDapper c = new MyDapper();
+            c.Fun3();
             Console.Read();
         }
 
