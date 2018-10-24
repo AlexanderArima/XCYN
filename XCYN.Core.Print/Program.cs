@@ -11,8 +11,8 @@ namespace XCYN.Core.Print
     {
         static void Main(string[] args)
         {
-            MyDapper c = new MyDapper();
-            c.Fun3();
+            XCYN.Core.Print.Service.Timer c = new XCYN.Core.Print.Service.Timer();
+            c.Fun1();
             Console.Read();
         }
 

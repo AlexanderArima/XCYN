@@ -17,6 +17,11 @@ namespace XCYN.Core.MVC
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// 读取配置文件，注册服务
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
