@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace XCYN.Print.DesignPattern.Factory
 {
+    /// <summary>
+    /// 被工厂创建的实现类
+    /// </summary>
     public class SqlServerDataBase:IDataBase
     {
         public void Create()

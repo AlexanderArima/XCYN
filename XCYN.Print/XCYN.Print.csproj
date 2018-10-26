@@ -257,12 +257,11 @@
     <Compile Include="DesignPattern\Composite\Component.cs" />
     <Compile Include="DesignPattern\Composite\Composite.cs" />
     <Compile Include="DesignPattern\Composite\Leaf.cs" />
+    <Compile Include="DesignPattern\Factory\FactoryClient.cs" />
     <Compile Include="DesignPattern\Factory\IDataBase.cs" />
-    <Compile Include="DesignPattern\Factory\IFactory.cs" />
+    <Compile Include="DesignPattern\Factory\DataBaseFactory.cs" />
     <Compile Include="DesignPattern\Factory\SqliteDataBase.cs" />
     <Compile Include="DesignPattern\Factory\SqlServerDataBase.cs" />
-    <Compile Include="DesignPattern\Factory\SqliteFactory.cs" />
-    <Compile Include="DesignPattern\Factory\SqlserverFactory.cs" />
     <Compile Include="DesignPattern\Flyweight\ConcreteFlyWeight.cs" />
     <Compile Include="DesignPattern\Flyweight\Factory.cs" />
     <Compile Include="DesignPattern\Flyweight\FlyWeight.cs" />
@@ -278,6 +277,7 @@
     <Compile Include="DesignPattern\Observer\ConcreteSubject.cs" />
     <Compile Include="DesignPattern\Observer\IObserver.cs" />
     <Compile Include="DesignPattern\Observer\ISubject.cs" />
+    <Compile Include="DesignPattern\Singleton\lazy\DB.cs" />
     <Compile Include="DesignPattern\State\AbstractState.cs" />
     <Compile Include="DesignPattern\State\AfternoonState.cs" />
     <Compile Include="DesignPattern\State\Context.cs" />
@@ -300,7 +300,7 @@
     <Compile Include="DesignPattern\Proxy\DataService.cs" />
     <Compile Include="DesignPattern\Proxy\IDataService.cs" />
     <Compile Include="DesignPattern\Singleton\hungry\DB.cs" />
-    <Compile Include="DesignPattern\Singleton\lazy\DB.cs" />
+    <Compile Include="DesignPattern\Singleton\DCL\DB.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\DbFactory.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\IDataBase.cs" />
     <Compile Include="DesignPattern\StaticFactoryMethod\MySql.cs" />
@@ -1029,6 +1029,7 @@
     <None Include="Connected Services\StockServiceReference\StockService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="DesignPattern\Factory\ClassDiagram1.cd" />
     <None Include="linq\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>

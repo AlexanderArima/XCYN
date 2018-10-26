@@ -22,8 +22,14 @@ namespace XCYN.Core.MVC
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var builder = WebHost.CreateDefaultBuilder(args).UseIISIntegration()
                 .UseStartup<Startup>();
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            builder.UseUrls(config["Urls"]);
+            return builder;
+        }
+            
     }
 }

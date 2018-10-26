@@ -43,8 +43,17 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DemoTimer timer = new DemoTimer();
-            timer.Fun1();
+            //var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+
+            for (int i = 0; i < 100; i++)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
+                    Console.WriteLine(db.Show());
+                });
+            }
+
             Console.Read();
         }
 
@@ -584,13 +593,13 @@ namespace XCYN.Print
         /// </summary>
         private static void HandleFactory()
         {
-            IFactory sqlserver = new SqlserverFactory();
-            sqlserver.CreateInstance().Create();
+            //IFactory sqlserver = new SqlserverFactory();
+            //sqlserver.CreateInstance().Create();
 
-            IFactory sqlite = new SqliteFactory();
-            sqlite.CreateInstance().Remove();
+            //IFactory sqlite = new SqliteFactory();
+            //sqlite.CreateInstance().Remove();
 
-            Console.Read();
+            //Console.Read();
         }
 
         /// <summary>
@@ -709,19 +718,19 @@ namespace XCYN.Print
             //多线程调用单例模式的例子
             Task.Factory.StartNew(() =>
             {
-                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+                var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
             });
             Task.Factory.StartNew(() =>
             {
-                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+                var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
             });
             Task.Factory.StartNew(() =>
             {
-                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+                var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
             });
             Task.Factory.StartNew(() =>
             {
-                var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
+                var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
             });
             Console.Read();
         }
