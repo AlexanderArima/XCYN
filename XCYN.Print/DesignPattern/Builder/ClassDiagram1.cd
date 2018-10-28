@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="XCYN.Print.DesignPattern.Builder.AbstractPerson" Collapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACgAAAAACAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>DesignPattern\Builder\AbstractPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.BuilderDirector">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\BuilderDirector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="person" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.FatPerson" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACgAAAAACAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>DesignPattern\Builder\FatPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.ThinPerson" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACgAAAAACAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>DesignPattern\Builder\ThinPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

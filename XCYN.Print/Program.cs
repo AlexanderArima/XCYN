@@ -36,6 +36,7 @@ using XCYN.Print.MongoDB;
 using XCYN.Print.Basic;
 using System.Threading;
 using XCYN.Print.MySQL;
+using XCYN.Print.DesignPattern.Builder.Rest;
 
 namespace XCYN.Print
 {
@@ -43,17 +44,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            //var db = XCYN.Print.DesignPattern.Singleton.lazy.DB.GetInstance();
-
-            for (int i = 0; i < 100; i++)
-            {
-                Task.Factory.StartNew(() =>
-                {
-                    var db = XCYN.Print.DesignPattern.Singleton.DCL.DB.GetInstance();
-                    Console.WriteLine(db.Show());
-                });
-            }
-
+            BuilderClient builder = new BuilderClient();
+            builder.Fun1();
             Console.Read();
         }
 

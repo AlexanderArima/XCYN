@@ -242,9 +242,16 @@
     <Compile Include="DesignPattern\Bridge\PhoneXiaoMi.cs" />
     <Compile Include="DesignPattern\Bridge\Soft.cs" />
     <Compile Include="DesignPattern\Builder\AbstractPerson.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\BanLiShaoJi.cs" />
     <Compile Include="DesignPattern\Builder\BuilderDirector.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\BuilderClient.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\Cooking.cs" />
     <Compile Include="DesignPattern\Builder\FatPerson.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\HongShaoPaiGu.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\Item.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\Meal.cs" />
     <Compile Include="DesignPattern\Builder\ThinPerson.cs" />
+    <Compile Include="DesignPattern\Builder\Rest\YuXiangRouSi.cs" />
     <Compile Include="DesignPattern\ChainOfResponsibility\AbstractHandler.cs" />
     <Compile Include="DesignPattern\ChainOfResponsibility\ConcreteHander3.cs" />
     <Compile Include="DesignPattern\ChainOfResponsibility\ConcreteHander2.cs" />
@@ -1029,6 +1036,8 @@
     <None Include="Connected Services\StockServiceReference\StockService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="DesignPattern\Builder\ClassDiagram1.cd" />
+    <None Include="DesignPattern\Builder\Rest\ClassDiagram1.cd" />
     <None Include="DesignPattern\Factory\ClassDiagram1.cd" />
     <None Include="linq\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

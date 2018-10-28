@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="XCYN.Print.DesignPattern.Builder.BanLiShaoJi" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\BanLiShaoJi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.Rest.BuilderClient">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\BuilderClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.Cooking" Collapsed="true">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\Cooking.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.HongShaoPaiGu" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\HongShaoPaiGu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.Meal">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\Meal.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="list" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Builder.YuXiangRouSi" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\YuXiangRouSi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="XCYN.Print.DesignPattern.Builder.Item" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>DesignPattern\Builder\Rest\Item.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
