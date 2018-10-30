@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="XCYN.Print.DesignPattern.Adapter.Object.PowerAdapter">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Adapter\Object\PowerAdapter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="twohole" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Adapter.Object.ThreeHole">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Adapter\Object\ThreeHole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XCYN.Print.DesignPattern.Adapter.Object.TwoHole">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPattern\Adapter\Object\TwoHole.cs</FileName>
+      <NewMemberFileName>DesignPattern\Adapter\Class\TwoHole.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

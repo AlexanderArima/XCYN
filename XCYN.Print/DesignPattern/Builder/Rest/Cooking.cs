@@ -29,7 +29,7 @@ namespace XCYN.Print.DesignPattern.Builder
             }
             set
             {
-                discount = value;
+                type = value;
             }
         }
 

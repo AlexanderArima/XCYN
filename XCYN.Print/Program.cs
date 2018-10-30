@@ -37,6 +37,7 @@ using XCYN.Print.Basic;
 using System.Threading;
 using XCYN.Print.MySQL;
 using XCYN.Print.DesignPattern.Builder.Rest;
+using XCYN.Print.DesignPattern.Adapter.Object;
 
 namespace XCYN.Print
 {
@@ -44,8 +45,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            BuilderClient builder = new BuilderClient();
-            builder.Fun1();
+            PowerAdapter adapter = new PowerAdapter();
+            adapter.GetLargePower();
             Console.Read();
         }
 

@@ -235,6 +235,13 @@
     <Compile Include="delegates\EventTest.cs" />
     <Compile Include="delegates\LambdaTest.cs" />
     <Compile Include="delegates\MulticastDelegateTest.cs" />
+    <Compile Include="DesignPattern\Adapter\Class\PowerAdapter.cs" />
+    <Compile Include="DesignPattern\Adapter\Class\IThreeHole.cs" />
+    <Compile Include="DesignPattern\Adapter\Class\ITwoHole.cs" />
+    <Compile Include="DesignPattern\Adapter\Object\PowerAdapter.cs" />
+    <Compile Include="DesignPattern\Adapter\Object\ThreeHole.cs" />
+    <Compile Include="DesignPattern\Adapter\Class\TwoHole.cs" />
+    <Compile Include="DesignPattern\Adapter\Object\TwoHole.cs" />
     <Compile Include="DesignPattern\Bridge\Game.cs" />
     <Compile Include="DesignPattern\Bridge\Map.cs" />
     <Compile Include="DesignPattern\Bridge\PhoneBrand.cs" />
@@ -1036,6 +1043,8 @@
     <None Include="Connected Services\StockServiceReference\StockService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="DesignPattern\Adapter\Class\ClassDiagram1.cd" />
+    <None Include="DesignPattern\Adapter\Object\ClassDiagram1.cd" />
     <None Include="DesignPattern\Builder\ClassDiagram1.cd" />
     <None Include="DesignPattern\Builder\Rest\ClassDiagram1.cd" />
     <None Include="DesignPattern\Factory\ClassDiagram1.cd" />
@@ -1098,6 +1107,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="DesignPattern\Adapter\info.txt" />
     <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
     <Content Include="DesignPattern\ChainOfResponsibility\info.txt" />
@@ -1157,6 +1167,7 @@
     <WCFMetadataStorage Include="Connected Services\OrderServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
