@@ -4,6 +4,7 @@ using System.IO;
 using log4net.Config;
 using log4net;
 using XCYN.Print.rabbitmq;
+using System.Web;
 
 namespace XCYN.Test
 {
@@ -21,7 +22,6 @@ namespace XCYN.Test
             logger.Warn("警告");
             logger.Error("异常");
             logger.Fatal("错误");
-
             Console.ReadLine();
         }
 

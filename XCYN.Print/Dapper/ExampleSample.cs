@@ -14,7 +14,7 @@ namespace XCYN.Print.Dapper
     
     public class ExampleSample
     {
-        public static string connectionString = ConfigurationManager.ConnectionStrings["MeetingSys"].ConnectionString;
+        public static string connectionString = @"Data Source=.\MSSQL2008;Initial Catalog=XPMS;Persist Security Info=True;User ID=sa;Password=900424";
 
         /// <summary>
         /// 查询数据

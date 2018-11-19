@@ -1081,10 +1081,6 @@
       <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
       <Name>XCYN.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XCYN.Service\XCYN.Service.csproj">
-      <Project>{275ef310-c8b8-40f5-8bad-3a077eb311cc}</Project>
-      <Name>XCYN.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\OrderServiceReference\item.disco" />
@@ -1167,7 +1163,9 @@
     <WCFMetadataStorage Include="Connected Services\OrderServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DesignPattern\Filter\My\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
