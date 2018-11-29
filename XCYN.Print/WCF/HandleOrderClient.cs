@@ -13,10 +13,10 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun1()
         {
-            OrderServiceReference.OrderServiceClient proxy = new OrderServiceReference.OrderServiceClient();
-            var price = proxy.GetPrice("x1");
-            Console.WriteLine("price:" + price);
-            Console.Read();
+            //OrderServiceReference.OrderServiceClient proxy = new OrderServiceReference.OrderServiceClient();
+            //var price = proxy.GetPrice("x1");
+            //Console.WriteLine("price:" + price);
+            //Console.Read();
         }
     }
 }

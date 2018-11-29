@@ -4,7 +4,6 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using XCYN.Print.StockServiceReference;
 //using XCYN.Service.WCF;
 
 namespace XCYN.Print.WCF
@@ -19,10 +18,10 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun1()
         {
-            StockServiceReference.StockServiceClient proxy = new Print.StockServiceReference.StockServiceClient();
-            var price = proxy.GetPrice("x1");
-            Console.WriteLine("price:"+price);
-            Console.Read();
+            //StockServiceReference.StockServiceClient proxy = new Print.StockServiceReference.StockServiceClient();
+            //var price = proxy.GetPrice("x1");
+            //Console.WriteLine("price:"+price);
+            //Console.Read();
         }
         
         /// <summary>
@@ -30,15 +29,15 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun2()
         {
-            //创建一个信道工厂
-            ChannelFactory<XCYN.Service.WCF.IStockService> channel = new ChannelFactory<XCYN.Service.WCF.IStockService>(
-                new BasicHttpBinding(),
-                new EndpointAddress("http://localhost:8000/StockService"));
-            //创建一个信道
-            var client = channel.CreateChannel();
-            var price = client.GetPrice("Hello World");
-            Console.WriteLine("price:" + price);
-            Console.Read();
+            ////创建一个信道工厂
+            //ChannelFactory<XCYN.Service.WCF.IStockService> channel = new ChannelFactory<XCYN.Service.WCF.IStockService>(
+            //    new BasicHttpBinding(),
+            //    new EndpointAddress("http://localhost:8000/StockService"));
+            ////创建一个信道
+            //var client = channel.CreateChannel();
+            //var price = client.GetPrice("Hello World");
+            //Console.WriteLine("price:" + price);
+            //Console.Read();
         }
 
         /// <summary>
@@ -46,12 +45,12 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun3()
         {
-            StockServiceClient client = new StockServiceClient();
-            var result = client.BeginGetPrice("cheng", m => {
-                var price = ((StockServiceClient)m.AsyncState).EndGetPrice(m);
-                Console.WriteLine("price:" + price.ToString());
-            }, client);
-            Console.Read();
+            //StockServiceClient client = new StockServiceClient();
+            //var result = client.BeginGetPrice("cheng", m => {
+            //    var price = ((StockServiceClient)m.AsyncState).EndGetPrice(m);
+            //    Console.WriteLine("price:" + price.ToString());
+            //}, client);
+            //Console.Read();
         }
 
         /// <summary>
@@ -59,10 +58,10 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun4()
         {
-            StockServiceClient client = new StockServiceClient();
-            client.DoBigAnalysisFast();
-            Console.WriteLine("调用单向操作完成");
-            Console.Read();
+            //StockServiceClient client = new StockServiceClient();
+            //client.DoBigAnalysisFast();
+            //Console.WriteLine("调用单向操作完成");
+            //Console.Read();
         }
 
         /// <summary>
@@ -70,10 +69,10 @@ namespace XCYN.Print.WCF
         /// </summary>
         public void Fun5()
         {
-            StockServiceClient client = new StockServiceClient();
-            client.DoBigAnslysisSlow();
-            Console.WriteLine("不调用单向操作完成");
-            Console.Read();
+            //StockServiceClient client = new StockServiceClient();
+            //client.DoBigAnslysisSlow();
+            //Console.WriteLine("不调用单向操作完成");
+            //Console.Read();
         }
         
     }

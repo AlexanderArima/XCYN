@@ -215,21 +215,6 @@
     <Compile Include="Calculator\StrategyMul.cs" />
     <Compile Include="Calculator\StrategySub.cs" />
     <Compile Include="Calculator\StrategyAdd.cs" />
-    <Compile Include="Connected Services\AllServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\OrderServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\StockServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Crawler\Crawler.cs" />
     <Compile Include="Dapper\ExampleSample.cs" />
     <Compile Include="delegates\EventTest.cs" />
@@ -1019,30 +1004,6 @@
     <None Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Connected Services\AllServiceReference\service.wsdl" />
-    <None Include="Connected Services\AllServiceReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AllServiceReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderServiceReference\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderServiceReference\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderServiceReference\OrderService.wsdl" />
-    <None Include="Connected Services\StockServiceReference\StockService.wsdl" />
-    <None Include="Connected Services\StockServiceReference\StockService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StockServiceReference\StockService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StockServiceReference\StockService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="DesignPattern\Adapter\Class\ClassDiagram1.cd" />
     <None Include="DesignPattern\Adapter\Object\ClassDiagram1.cd" />
     <None Include="DesignPattern\Builder\ClassDiagram1.cd" />
@@ -1083,26 +1044,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\OrderServiceReference\item.disco" />
-    <None Include="Connected Services\OrderServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\OrderServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\OrderServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\StockServiceReference\StockService.disco" />
-    <None Include="Connected Services\StockServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\StockServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\StockServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\AllServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\AllServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\AllServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="DesignPattern\Adapter\info.txt" />
     <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
@@ -1157,11 +1098,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\AllServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\OrderServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\StockServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DesignPattern\Filter\My\" />
