@@ -189,6 +189,7 @@
     <Content Include="Pages\javascript\InvokeSelf.html" />
     <Content Include="Pages\javascript\InvokeVar.html" />
     <Content Include="Pages\javascript\PO\Defer.html" />
+    <Content Include="Pages\javascript\PO\DynamicScript.html" />
     <Content Include="Pages\javascript\PrivateVariable.html" />
     <Content Include="Pages\javascript\Object\PrototypePattern.html" />
     <Content Include="Pages\javascript\ScopeChain.html" />
@@ -1265,6 +1266,7 @@
     <Content Include="Scripts\javascript\FindMaxOfArray.js" />
     <Content Include="Scripts\javascript\PO\defer.js" />
     <Content Include="Scripts\javascript\PO\defer2.js" />
+    <Content Include="Scripts\javascript\PO\dynamicScript.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.js" />
