@@ -207,7 +207,6 @@ F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.MVC.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Print.exe
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Winform.exe
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.dll
-F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Service.exe
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\MongoDB.Driver.GridFS.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.dll
@@ -239,14 +238,11 @@ F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.WebPages.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.WebPages.Deployment.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.WebPages.Razor.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.xml
-F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Service.pdb
-F:\MyProject\XCYN\XCYN.Test\bin\Debug\XCYN.Service.exe.config
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\MongoDB.Driver.GridFS.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.pdb
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\HtmlAgilityPack.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
-F:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\System.Net.Http.Formatting.resources.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\System.Web.Http.resources.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\zh-Hans\System.Web.Mvc.resources.dll
 F:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CopyComplete
@@ -374,3 +370,4 @@ F:\MyProject\XCYN\XCYN.Test\bin\Debug\Google.Protobuf.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\MySql.Data.dll
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\Google.Protobuf.xml
 F:\MyProject\XCYN\XCYN.Test\bin\Debug\MySql.Data.xml
+F:\MyProject\XCYN\XCYN.Test\bin\Debug\ApplicationInsights.config

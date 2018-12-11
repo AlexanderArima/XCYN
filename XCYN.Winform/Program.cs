@@ -17,7 +17,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MeiShi());
+            Application.Run(new SocketServer());
 
             //方式1
             //Application app = new Application();

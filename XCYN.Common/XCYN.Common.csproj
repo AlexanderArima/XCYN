@@ -86,6 +86,7 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChinaDate.cs" />
+    <Compile Include="CrossThreadCalls.cs" />
     <Compile Include="Dapper\DapperHelper.cs" />
     <Compile Include="Dapper\DapperManager.cs" />
     <Compile Include="DESEncrypt.cs" />

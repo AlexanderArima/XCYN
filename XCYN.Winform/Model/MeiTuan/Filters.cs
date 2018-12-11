@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XCYN.Winform.Model.MeiTuan.EF;
 using Dapper;
-using XCYN.Common.Dapper;
 using System.Data.SqlClient;
 
 namespace XCYN.Winform.Model.MeiTuan
