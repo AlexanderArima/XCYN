@@ -10,6 +10,12 @@ namespace XCYN.Core.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        public IFormula _formula = null;
+
+        public HomeController(IFormula formula)
+        {
+            _formula = formula;
+        }
         public IActionResult Index()
         {
             return View();
