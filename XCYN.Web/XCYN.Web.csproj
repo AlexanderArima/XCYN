@@ -135,6 +135,7 @@
     <Content Include="Image\Flag\SOV.jpg" />
     <Content Include="Image\Flag\USA.jpg" />
     <Content Include="Image\image1.jpeg" />
+    <Content Include="Pages\activeX\Home.html" />
     <Content Include="Pages\bootStrap\bs1.html" />
     <Content Include="Pages\bootStrap\bs2.html" />
     <Content Include="Pages\bootStrap\bs3.html" />

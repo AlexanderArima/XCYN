@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <object id="school_obj" name="school_obj" classid="clsid:6C6A0DE4-193A-48f5-BA91-3C180558785B"></object>
+    <label>密码：</label>
+    <input type="password" id="text_pwd" />
+    <br />
+    <input id="btnId" type="button" onclick="javascript: init();" value="初始化插件" />
+    <br />
+    <button onclick="ChangePwd()">修改密码</button>
+    <br />
+    <button onclick="ActiveXInvokeJS()">ActiveX调用JS</button>
+    <!--<button onclick="OpenActiveX()">获取名字</button>-->
+    <!--<script  language="javascript" type="text/javascript">
+                //Passing parameters to ActiveX object
+                function OpenActiveX()
+                {
+                    var name = school_obj.Add(1,1);
+                    alert(name);
+                }
+        </script>-->
+
+    <script language="javascript" type="text/javascript">
+
+        /**
+         * 初始化组件中的window和document对象，这个要首先调用一下，否则后面的一些方法将无法正常执行
+         * */
+        function init() {
+            school_obj.Init(window, document);
+        }
+
+        function ChangePwd() {
+            var pwd = document.getElementById("text_pwd");
+            var name = school_obj.SetPwd(pwd.value);
+            // var name = school_obj.GetPwd();
+            alert(name);
+        }
+
+          /**
+         * JS调用ActiveX，ActiveX调用JS的被调用的JS方法
+         * */
+        function GetSeq(num) {
+            return (num * num);
+        }
+
+        /**
+         * JS调用ActiveX，ActiveX调用JS的入口方法
+         * */
+        function ActiveXInvokeJS() {
+            var result = school_obj.RunJs("GetSeq", "2");
+            alert(result);
+        }
+
+    </script>
+
+    <!--<script language="Javascript" event="OnNotify(pwd)" for="school_obj">
+        function school_obj:: OnNotify(pwd) {
+            alert("密码修改成功:" + pwd);
+        }
+    </script>-->
+</body>
+</html>
