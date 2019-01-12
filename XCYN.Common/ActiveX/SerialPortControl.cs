@@ -10,7 +10,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.ComponentModel;
 using mshtml;
-using XCYN.Common.ActiveX;
 
 namespace XCYN.Common.ActiveX
 {
@@ -113,9 +112,9 @@ namespace XCYN.Common.ActiveX
         {
             return txtPwd.Text;
         }
-        
+
         [ComVisible(true)]
-        public  int Add(int x, int y)
+        public int Add(int x, int y)
         {
             return x + y;
         }

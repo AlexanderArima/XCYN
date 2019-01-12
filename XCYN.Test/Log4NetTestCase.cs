@@ -18,7 +18,7 @@ namespace XCYN.Test
 
             var logger = LogManager.GetLogger(typeof(Log4NetTestCase));
             Console.WriteLine(logger.IsDebugEnabled);
-            logger.Info("消息");
+            logger.Info("消息",new NullReferenceException("名字不能为空"));
             logger.Warn("警告");
             logger.Error("异常");
             logger.Fatal("错误");
@@ -27,8 +27,7 @@ namespace XCYN.Test
 
         private static void InitLog4Net()
         {
-            var logCfg = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "\\log4net.config");
-            XmlConfigurator.ConfigureAndWatch(logCfg);
+            XmlConfigurator.Configure();
         }
 
         [TestMethod]

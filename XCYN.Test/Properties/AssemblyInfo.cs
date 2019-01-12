@@ -34,3 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+//监视默认的配置文件，App.exe.config 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
