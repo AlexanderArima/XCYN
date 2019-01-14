@@ -81,33 +81,55 @@ namespace XCYN.Winform.Model.LogViewer
                 json = "[" + json.Remove(json.Length - 1, 1) + "]";
                 var jsonModel = JsonConvert.DeserializeObject<List<LogModel>>(json);
                 jsonModel = jsonModel.FindAll(m => {
-                    TimeSpan span = new TimeSpan();
-                    if(message == null || m.message != message)
-                    {
-                        return false;
-                    }
-                    if(level == null || m.level != level)
-                    {
-                        return false;
-                    }
-                    if(createTime == null && endTime == null)
+                    if(!string.IsNullOrEmpty(message) && m.message.Contains(message))
                     {
                         return true;
                     }
-                    if(createTime == null && endTime != null && createTime > endTime)
+                    else if(string.IsNullOrEmpty(message))
+                    {
+                        return true;
+                    }
+                    else
                     {
                         return false;
                     }
-                    if(createTime != null && createTime < startTime && endTime == null)
-                    {
-                        return false;
-                    }
-                    if(createTime != null && endTime != null && (createTime > endTime || createTime < startTime))
-                    {
-                        return false;
-                    }
-                    return true;
                });
+
+                jsonModel = jsonModel.FindAll(m => {
+                    if (!string.IsNullOrEmpty(level) && m.level.ToUpper().Equals(level.ToUpper()))
+                    {
+                        return true;
+                    }
+                    else if (string.IsNullOrEmpty(level))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+
+                jsonModel = jsonModel.FindAll(m =>
+                {
+                    if (startTime == null && endTime == null)
+                    {
+                        return true;
+                    }
+                    if (startTime == null && endTime != null && m.createTime < endTime)
+                    {
+                        return true;
+                    }
+                    if (startTime != null && m.createTime > startTime && endTime == null)
+                    {
+                        return true;
+                    }
+                    if (startTime != null && endTime != null && m.createTime < endTime && m.createTime > startTime)
+                    {
+                        return true;
+                    }
+                    return false;
+                });
                 return jsonModel;
             }
             catch (Exception ex)
