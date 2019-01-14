@@ -567,3 +567,4 @@ E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CoreCompileInputs.cach
 E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CopyComplete
 E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Newtonsoft.Json.pdb

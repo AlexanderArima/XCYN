@@ -15,14 +15,11 @@ namespace XCYN.Test
         public void TestMethod1()
         {
             InitLog4Net();
-
             var logger = LogManager.GetLogger(typeof(Log4NetTestCase));
-            Console.WriteLine(logger.IsDebugEnabled);
             logger.Info("消息",new NullReferenceException("名字不能为空"));
             logger.Warn("警告");
             logger.Error("异常");
             logger.Fatal("错误");
-            Console.ReadLine();
         }
 
         private static void InitLog4Net()

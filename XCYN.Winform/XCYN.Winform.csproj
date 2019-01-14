@@ -67,8 +67,8 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -102,6 +102,12 @@
     <Compile Include="CalculatorForm.Designer.cs">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogViewer.Designer.cs">
+      <DependentUpon>LogViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="MeiTuan\ChangeCity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,8 @@
     <Compile Include="MeiTuan\MeiShi.Designer.cs">
       <DependentUpon>MeiShi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\LogViewer\LogLevel.cs" />
+    <Compile Include="Model\LogViewer\LogModel.cs" />
     <Compile Include="Model\MeiTuan\Dict.cs" />
     <Compile Include="Model\MeiTuan\EF\Log.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -192,6 +200,9 @@
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogViewer.resx">
+      <DependentUpon>LogViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MeiTuan\ChangeCity.resx">
       <DependentUpon>ChangeCity.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +247,8 @@
     <None Include="Model\Spider\DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
+    <None Include="Properties\DataSources\XCYN.Winform.Model.LogViewer.LogLevel.datasource" />
+    <None Include="Properties\DataSources\XCYN.Winform.Model.LogViewer.LogModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -247,7 +260,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
