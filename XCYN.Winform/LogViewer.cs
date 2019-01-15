@@ -25,9 +25,13 @@ namespace XCYN.Winform
         {
             InitializeComponent();
 
-            #region 读取日志等级
+            #region 异常等级
 
             var LogLevel = ConfigurationManager.AppSettings["LogLevel"];
+            _list_level.Add(new LogLevel() {
+                Name = "--全部--",
+                Value = ""
+            });
             var list_level = LogLevel.Split(',');
             for (int i = 0; i < list_level.Count(); i++)
             {
@@ -39,6 +43,8 @@ namespace XCYN.Winform
             comboBox1.DataSource = _list_level;
 
             #endregion
+
+            dateTimePicker1.Value = DateTime.Now.AddDays(-3);
         }
 
         /// <summary>
@@ -61,7 +67,7 @@ namespace XCYN.Winform
                 }
                 if(comboBox1.Text.Length > 0)
                 {
-                    level = comboBox1.Text;
+                    level = comboBox1.SelectedValue.ToString();
                 }
                 if(dateTimePicker1.Text.Length > 0)
                 {
@@ -83,6 +89,20 @@ namespace XCYN.Winform
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
             e.Row.HeaderCell.Value = string.Format("{0}", e.Row.Index + 1);
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex < 0)
+            {
+                return;
+            }
+            var level = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var message = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            var className = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            var methodName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            var exception = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            MessageBox.Show(exception);
         }
     }
 }
