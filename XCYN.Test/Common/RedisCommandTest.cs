@@ -77,6 +77,8 @@ namespace XCYN.Common
             test._command.StringSetBit("myBit", 1, true);
             test._command.StringSetBit("myBit", 2, true);
             test._command.StringSetBit("myBit", 3, true);
+            test._command.KeyDelete("StudentName", 1); 
+            test._command.KeyDelete("myCount1", 1);
 
             //初始化List
             test._command.KeyDelete("myList");
@@ -131,6 +133,17 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void KeyExists2()
+        {
+            var actual = _command.KeyExists("StudentName",1);
+            Assert.IsFalse(actual);
+
+            _command.StringSet("StudentName", "YY",1);
+            actual = _command.KeyExists("StudentName", 1);
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
         public void KeyExpire()
         {
             var flag = _command.KeyExpire("myStr", 10);
@@ -145,10 +158,21 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void KeyDelete()
+        {
+            _command.StringSet("City", "WuHan",1);
+            _command.StringSet("Country", "China",1);
+
+            string[] array = { "City","Country" };
+            var actual =  _command.KeyDelete(array, 1);
+            Assert.AreEqual(2, actual);
+        }
+        
+        [TestMethod]
         public void Keys()
         {
             var keys = _command.Keys("*");
-            Assert.AreEqual(9, keys.Count);
+            Assert.AreEqual(13, keys.Count);
         }
 
         [TestMethod]
@@ -173,6 +197,13 @@ namespace XCYN.Common
             var len = _command.StringAppend("myStr", "wuhan");
 
             Assert.AreEqual(16, len);
+        }
+
+        [TestMethod]
+        public void StringAppend2()
+        {
+            var len = _command.StringAppend("StudentName", "XC",1);
+            Assert.AreEqual(2, len);
         }
 
         [TestMethod]
@@ -203,6 +234,8 @@ namespace XCYN.Common
 
             Assert.AreEqual(3, str2.Count);
         }
+
+
 
         [TestMethod]
         public void StringGetRange()
@@ -307,6 +340,14 @@ namespace XCYN.Common
 
             Assert.AreEqual("2", myCount2);
             Assert.AreEqual("3", myCount3);
+        }
+
+        [TestMethod]
+        public void StringSet2()
+        {
+            _command.StringSet("myCount1", "1", 1);
+            var actual =  _command.StringGet("myCount1", 1);
+            Assert.AreEqual("1", actual);
         }
 
         [TestMethod]

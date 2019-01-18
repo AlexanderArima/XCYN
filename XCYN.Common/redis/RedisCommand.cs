@@ -25,7 +25,18 @@ namespace XCYN.Common.Sql.redis
         {
             return RedisManager.WriteDataBase().KeyDelete(key);
         }
-        
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="db">库ID</param>
+        /// <returns></returns>
+        public bool KeyDelete(string key,int db)
+        {
+            return RedisManager.WriteDataBase(db).KeyDelete(key);
+        }
+
         /// <summary>
         /// 批量删除
         /// </summary>
@@ -43,6 +54,23 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="db">库ID</param>
+        /// <returns></returns>
+        public long KeyDelete(string[] keys,int db)
+        {
+            var rkeys = new RedisKey[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                rkeys[i] = keys[i];
+            }
+            return RedisManager.WriteDataBase(db).KeyDelete(rkeys);
+
+        }
+
+        /// <summary>
         /// 判断Key是否存在
         /// </summary>
         /// <param name="key"></param>
@@ -50,6 +78,17 @@ namespace XCYN.Common.Sql.redis
         public bool KeyExists(string key)
         {
             return RedisManager.ReadDataBase().KeyExists(key);
+        }
+
+        /// <summary>
+        /// 判断Key是否存在
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="db">库ID</param>
+        /// <returns></returns>
+        public bool KeyExists(string key,int db)
+        {
+            return RedisManager.ReadDataBase(db).KeyExists(key);
         }
 
         /// <summary>
@@ -61,7 +100,7 @@ namespace XCYN.Common.Sql.redis
         {
             return RedisManager.Keys(key);
         }
-
+        
         /// <summary>
         /// 为给定 key 设置生存时间，当 key 过期时(生存时间为 0 )，它会被自动删除。
         /// </summary>
@@ -129,6 +168,18 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 追加一个值到key上
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <remarks>如果 key 已经存在，并且值为字符串，那么这个命令会把 value 追加到原来值（value）的结尾。 如果 key 不存在，那么它将首先创建一个空字符串的key，再执行追加操作，这种情况 APPEND 将类似于 SET 操作。</remarks>
+        /// <returns>返回append后字符串值（value）的长度。</returns>
+        public long StringAppend(string key, string value,int db)
+        {
+            return RedisManager.WriteDataBase(db).StringAppend(key, value);
+        }
+
+        /// <summary>
         /// 对key对应的数字做减一操作
         /// </summary>
         /// <param name="key">字符串名</param>
@@ -160,6 +211,17 @@ namespace XCYN.Common.Sql.redis
         public string StringGet(string key)
         {
             return RedisManager.ReadDataBase().StringGet(key);
+        }
+
+        /// <summary>
+        /// 返回key的value
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
+        /// <returns>key对应的value，或者nil（key不存在时）</returns>
+        public string StringGet(string key,int db)
+        {
+            return RedisManager.ReadDataBase(db).StringGet(key);
         }
 
         /// <summary>
@@ -343,7 +405,21 @@ namespace XCYN.Common.Sql.redis
             bool flag = RedisManager.WriteDataBase().StringSet(key: key, value: value);
             return flag;
         }
-        
+
+        /// <summary>
+        /// 设置一个key的value值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="db">库ID</param>
+        /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
+        /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
+        public bool StringSet(string key, string value,int db)
+        {
+            bool flag = RedisManager.WriteDataBase(db).StringSet(key: key, value: value);
+            return flag;
+        }
+
         /// <summary>
         /// 设置一个键值对
         /// </summary>

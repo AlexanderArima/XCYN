@@ -568,3 +568,9 @@ E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CopyComplete
 E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 E:\MyGitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
 E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Newtonsoft.Json.pdb
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OOXML.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OpenXml4Net.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\ICSharpCode.SharpZipLib.xml
