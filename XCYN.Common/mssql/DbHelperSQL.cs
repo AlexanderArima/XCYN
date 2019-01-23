@@ -137,11 +137,14 @@ namespace XCYN.Common
         public static bool ExecuteNonQuery(DataTable dt)
         {
             SqlConnection connection = null;
+            SqlTransaction tran = null;
+            SqlBulkCopy sqlbulkcopy = null;
             try
             {
                 connection = new SqlConnection(connectionString);
                 connection.Open();
-                SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(connection);
+                tran = connection.BeginTransaction();//开启事务
+                sqlbulkcopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.CheckConstraints, tran);
                 sqlbulkcopy.BulkCopyTimeout = 100;  //超时之前操作完成所允许的秒数
                 sqlbulkcopy.BatchSize = dt.Rows.Count;  //每一批次中的行数
                 sqlbulkcopy.DestinationTableName = dt.TableName;  //服务器上目标表的名称
@@ -150,24 +153,29 @@ namespace XCYN.Common
                     sqlbulkcopy.ColumnMappings.Add(i, i);  //映射定义数据源中的列和目标表中的列之间的关系
                 }
                 sqlbulkcopy.WriteToServer(dt);  // 将DataTable数据上传到数据表中
+                tran.Commit();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (connection != null)
                 {
                     connection.Close();
                 }
-                throw e;
+                tran.Rollback();
+                return false;
             }
             finally
             {
-                if(connection != null)
+                if (connection != null)
                 {
                     connection.Close();
                 }
+                if (sqlbulkcopy != null)
+                {
+                    sqlbulkcopy.Close();
+                }
             }
-            
         }
 
         #endregion
@@ -666,8 +674,7 @@ namespace XCYN.Common
             }
             return ds;
         }
-
-
+        
         #endregion
 
         #region 执行带参数的SQL语句

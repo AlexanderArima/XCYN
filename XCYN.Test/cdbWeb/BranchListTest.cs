@@ -90,28 +90,90 @@ namespace XCYN.Test.cdbWeb
         [TestMethod]
         public void Count()
         {
-            var flag = _model.Count("武汉1");
+            var flag = _model.Count("武汉1","");
             Assert.IsTrue(flag == 1);
 
-            flag = _model.Count("武汉7");
+            flag = _model.Count("武汉7","");
             Assert.IsTrue(flag ==2);
 
-            flag = _model.Count("武汉s");
+            flag = _model.Count("武汉s","");
             Assert.IsTrue(flag ==0);
         } 
 
         [TestMethod]
         public void Count2()
         {
-            var flag = _model.Count("武汉1",2);
+            var flag = _model.Count( 2,"武汉1","");
             Assert.IsTrue(flag == 0);
 
             //如果大于0，就不能修改，因为已存在同名
-            flag = _model.Count("武汉2", 2);
+            flag = _model.Count( 2,"武汉2","");
             Assert.IsTrue(flag == 1);
 
-            flag = _model.Count("武汉w", 2);
+            flag = _model.Count(2,"武汉w","");
             Assert.IsTrue(flag == 0);
+        }
+
+        [TestMethod]
+        public void Add2()
+        {
+            //上级机构不存在时，无法录入
+            Node node = new Node()
+            {
+                NUMBER = "105",
+                NSRMC = "武汉1",
+                NSRSBH = "003",
+                JYDZ = "武汉市洪山区",
+                SFNSZT = 0,
+                KYSJ = "2010-2-14",
+                ZGSWJG = "",
+                SJJGMC = "湖北1",
+                ZXSJ = "2018-06-14",
+                JGCJ = 2,
+            };
+            //上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构
+            try
+            {
+                _model.Add(node);
+            }
+            catch(Exception ex)
+            {
+                Assert.AreEqual("上级机构名称: 湖北1, 不存在，请先录入该机构", ex.Message);
+            }
+
+            //上级机构不存在时，无法录入
+            node = new Node()
+            {
+                NUMBER = "105",
+                NSRMC = "湖北1",
+                NSRSBH = "002",
+                JYDZ = "武汉市洪山区",
+                SFNSZT = 0,
+                KYSJ = "2010-2-14",
+                ZGSWJG = "",
+                SJJGMC = "",
+                ZXSJ = "2018-06-14",
+                JGCJ = 2,
+            };
+            _model.Add(node);
+
+            //上级机构不存在时，无法录入
+            node = new Node()
+            {
+                NUMBER = "105",
+                NSRMC = "武汉1",
+                NSRSBH = "003",
+                JYDZ = "武汉市洪山区",
+                SFNSZT = 0,
+                KYSJ = "2010-2-14",
+                ZGSWJG = "",
+                SJJGMC = "湖北1",
+                ZXSJ = "2018-06-14",
+                JGCJ = 2,
+            };
+            //上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构
+            int actual =  _model.Add(node);
+            Assert.AreEqual(1, actual);
         }
 
         [TestMethod]
@@ -120,22 +182,76 @@ namespace XCYN.Test.cdbWeb
             Node node = new Node()
             {
                 NUMBER = "105",
-                NSRMC = "武汉6",
-                NSRSBH = "027",
+                NSRMC = "湖北1",
+                NSRSBH = "002",
                 JYDZ = "武汉市洪山区",
                 SFNSZT = 0,
                 KYSJ = "2010-2-14",
                 ZGSWJG = "",
-                SJJGMC = "武汉2",
+                SJJGMC = "",
                 ZXSJ = "2018-06-14",
                 JGCJ = 3, 
             };
-            int actual = _model.Add(node);
-            Assert.AreEqual(-1, actual);
+            
+            try
+            {
+                _model.Add(node);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("纳税人名称: 湖北1, 已存在"));
+            }
+
+            node = new Node()
+            {
+                NUMBER = "105",
+                NSRMC = "湖北2",
+                NSRSBH = "001",
+                JYDZ = "武汉市洪山区",
+                SFNSZT = 0,
+                KYSJ = "2010-2-14",
+                ZGSWJG = "",
+                SJJGMC = "",
+                ZXSJ = "2018-06-14",
+                JGCJ = 3,
+            };
+            try
+            {
+                _model.Add(node);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("纳税人识别号: 001, 已存在"));
+            }
+
+            node = new Node()
+            {
+                NUMBER = "105",
+                NSRMC = "湖北2",
+                NSRSBH = "002",
+                JYDZ = "武汉市洪山区",
+                SFNSZT = 0,
+                KYSJ = "2010-2-14",
+                ZGSWJG = "",
+                SJJGMC = "",
+                ZXSJ = "2018-06-14",
+                JGCJ = 3,
+            };
+            int actual = 0;
+            try
+            {
+               actual =  _model.Add(node);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("纳税人识别号: 001, 已存在"));
+                return;
+            }
+            Assert.AreEqual(1, actual);
         }
 
         [TestMethod]
-        public void BatchAdd()
+        public void BatchAdd2()
         {
             List<Node> list = new List<Node>();
             for (int i = 1; i <= 10; i++)
@@ -155,22 +271,53 @@ namespace XCYN.Test.cdbWeb
                 };
                 list.Add(node2);
             }
+            try
+            {
+                _model.BatchAdd(list);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("纳税人识别号: 027, 已存在"));
+            }
+        }
+
+        [TestMethod]
+        public void BatchAdd()
+        {
+            List<Node> list = new List<Node>();
+            for (int i = 1; i <= 3; i++)
+            {
+                Node node2 = new Node()
+                {
+                    NUMBER = "Test" + i,
+                    NSRMC = "湖北" + i,
+                    NSRSBH = "A" + i.ToString().PadLeft(3,'0'),
+                    JYDZ = "武汉市洪山区",
+                    SFNSZT = 0,
+                    KYSJ = "2010-2-14",
+                    ZGSWJG = "1",
+                    SJJGMC = "",
+                    ZXSJ = "",
+                    JGCJ = 2,
+                };
+                list.Add(node2);
+            }
             _model.BatchAdd(list);
             list.Clear();
             Random random = new Random();
             //二级菜单
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 Node node2 = new Node()
                 {
                     NUMBER = "Test" + i,
                     NSRMC = "武汉" + i ,
-                    NSRSBH = "027",
+                    NSRSBH = "B" + i.ToString().PadLeft(3,'0'),
                     JYDZ = "武汉市洪山区",
                     SFNSZT = 0,
                     KYSJ = "2010-2-14",
-                    ZGSWJG = "",
-                    SJJGMC = "湖北" + random.Next(1,9),
+                    ZGSWJG = "1",
+                    SJJGMC = "湖北" + random.Next(1,4),
                     ZXSJ = "2018-01-11",
                     JGCJ = 2,
                 };
@@ -180,18 +327,18 @@ namespace XCYN.Test.cdbWeb
             list.Clear();
 
             //三级菜单
-            for (int i = 1; i <= 1000; i++)
+            for (int i = 1; i <= 100; i++)
             {
                 Node node2 = new Node()
                 {
                     NUMBER = "Test" + i,
                     NSRMC = "洪山" + i,
-                    NSRSBH = "027",
+                    NSRSBH = "C" + i.ToString().PadLeft(3, '0'),
                     JYDZ = "武汉市洪山区",
                     SFNSZT = 0,
                     KYSJ = "2010-2-14",
-                    ZGSWJG = "",
-                    SJJGMC = "武汉" + random.Next(1, 99),
+                    ZGSWJG = "1",
+                    SJJGMC = "武汉" + random.Next(1, 11),
                     ZXSJ = "2018-01-11",
                     JGCJ = 2,
                 };
@@ -199,7 +346,7 @@ namespace XCYN.Test.cdbWeb
             }
             _model.BatchAdd(list);
             int count = _model.Count();
-            Assert.AreEqual(1110, count);
+            //Assert.AreEqual(120, count);
             
         }
 
@@ -225,14 +372,51 @@ namespace XCYN.Test.cdbWeb
         [TestMethod]
         public void Edit()
         {
-            var node = _model.GetModel(2);
-            node.NSRSBH = "0271";
-            var flag = _model.Edit(node);
+            var node = _model.GetModel(4);
+            node.NSRSBH = "001";
+            var flag = 0;
+            try
+            {
+                flag = _model.Edit(node);
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.AreEqual("纳税人识别号:001,已存在", ex.Message);
+            }
+
+            node = _model.GetModel(4);
+            node.NSRMC = "湖北1";
+            try
+            {
+                flag = _model.Edit(node);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("纳税人名称:湖北1,已存在", ex.Message);
+            }
+
+            node = _model.GetModel(4);
+            node.NSRMC = "湖北3";
+            try
+            {
+                flag = _model.Edit(node);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("纳税人名称:湖北1,已存在", ex.Message);
+            }
             Assert.IsTrue(flag == 1);
 
-            node = _model.GetModel(2);
-            var bh = node.NSRSBH;
-            Assert.AreEqual("0271", bh);
+        }
+
+        [TestMethod]
+        public void DeleteAll()
+        {
+            var actual = _model.Delete(467);
+            actual = _model.Delete(468);
+            actual = _model.Delete(469);
+            Assert.AreEqual(true, actual);
+            
         }
 
         [TestMethod]

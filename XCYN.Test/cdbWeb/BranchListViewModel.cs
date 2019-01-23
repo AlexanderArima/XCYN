@@ -1,6 +1,10 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -16,12 +20,109 @@ namespace bscy.App_Code.Models.Table.BranchList
     [Serializable]
     public class BranchListViewModel
     {
-
         public BranchListViewModel()
         {
             //
             // TODO: 在此处添加构造函数逻辑
             //
+        }
+
+        /// <summary>
+        /// 遍历所有数据
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetExcelExportDataTable()
+        {
+            BranchRecord model = new BranchRecord();
+            return model.GetExcelExportDataTable("");
+        }
+
+        /// <summary>
+        /// Datable导出成Excel
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="file">导出路径(包括文件名与扩展名)</param>
+        public byte[] TableToExcel(DataTable dt, string file)
+        {
+            IWorkbook workbook;
+            string fileExt = Path.GetExtension(file).ToLower();
+            if (fileExt == ".xlsx")
+            {
+                workbook = new XSSFWorkbook();
+            }
+            else if (fileExt == ".xls")
+            {
+                workbook = new HSSFWorkbook();
+            }
+            else
+            {
+                workbook = null;
+            }
+            if (workbook == null)
+            {
+                throw new NullReferenceException("workbook的值为空");
+            }
+            ISheet sheet = string.IsNullOrEmpty(dt.TableName) ? workbook.CreateSheet("Sheet1") : workbook.CreateSheet(dt.TableName);
+            sheet.SetColumnWidth(0, 20 * 256);
+            sheet.SetColumnWidth(1, 40 * 256);
+            sheet.SetColumnWidth(2, 30 * 256);
+            sheet.SetColumnWidth(3, 80 * 256);
+            sheet.SetColumnWidth(4, 45 * 256);
+            sheet.SetColumnWidth(5, 15 * 256);
+            sheet.SetColumnWidth(6, 10 * 256);
+            sheet.SetColumnWidth(7, 10 * 256);
+
+            //表头样式
+            ICellStyle style = workbook.CreateCellStyle();
+            //IDataFormat format = workbook.CreateDataFormat();
+            IFont f = workbook.CreateFont();
+            f.Boldweight = (short)FontBoldWeight.Bold;  //加粗
+            style.SetFont(f);
+            style.WrapText = false; //不自动换行
+            style.VerticalAlignment = VerticalAlignment.Center; //垂直水平居中
+            style.Alignment = HorizontalAlignment.Center;
+
+            //表头  
+            IRow row = sheet.CreateRow(0);
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                ICell cell = row.CreateCell(i);
+                cell.SetCellValue(dt.Columns[i].ColumnName);
+                cell.CellStyle = style;
+            }
+
+            //数据样式
+            style = workbook.CreateCellStyle();
+            style.WrapText = false; //不自动换行
+            style.VerticalAlignment = VerticalAlignment.Center; //垂直水平居中
+            style.Alignment = HorizontalAlignment.Center;
+
+            //数据  
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                IRow row1 = sheet.CreateRow(i + 1);
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    ICell cell = row1.CreateCell(j);
+                    cell.SetCellValue(dt.Rows[i][j].ToString());
+                    cell.CellStyle = style;
+                }
+            }
+
+            //转为字节数组  
+            using (MemoryStream stream = new MemoryStream())
+            {
+                workbook.Write(stream);
+                byte[] buf = stream.ToArray();
+                //保存为Excel文件  
+                using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(buf, 0, buf.Length);
+                    fs.Flush();
+                    return buf;
+                }
+            }
+
         }
 
         /// <summary>
@@ -52,49 +153,17 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     builder.Append(string.Format(" AND NSRSBH like '%{0}%' ", parm.NSRSBH));
                 }
-                if (!string.IsNullOrEmpty(parm.JYDZ) && parm.JYDZ.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND JYDZ like '%{0}%' ", parm.JYDZ));
-                }
-                if (!string.IsNullOrEmpty(parm.ZGSWJG) && parm.ZGSWJG.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND ZGSWJG like '%{0}%' ", parm.ZGSWJG));
-                }
+                //if (!string.IsNullOrEmpty(parm.JYDZ) && parm.JYDZ.Trim().Length > 0)
+                //{
+                //    builder.Append(string.Format(" AND JYDZ like '%{0}%' ", parm.JYDZ));
+                //}
+                //if (!string.IsNullOrEmpty(parm.ZGSWJG) && parm.ZGSWJG.Trim().Length > 0)
+                //{
+                //    builder.Append(string.Format(" AND ZGSWJG like '%{0}%' ", parm.ZGSWJG));
+                //}
                 if (parm.SFNSZT == 0 || parm.SFNSZT == 1)
                 {
                     builder.Append(string.Format(" AND SFNSZT = {0} ", parm.SFNSZT));
-                }
-                //开业时间
-                if (!string.IsNullOrEmpty(parm.KYSJ_StartTime) && parm.KYSJ_StartTime.Trim().Length > 0 &&
-                    !string.IsNullOrEmpty(parm.KYSJ_EndTime) && parm.KYSJ_EndTime.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND KYSJ > '{0}' AND KYSJ < '{1}' ", parm.KYSJ_StartTime, parm.KYSJ_EndTime));
-                }
-                if (string.IsNullOrEmpty(parm.KYSJ_StartTime) && !string.IsNullOrEmpty(parm.KYSJ_EndTime) &&
-                    parm.KYSJ_EndTime.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND KYSJ < '{0}' ", parm.KYSJ_EndTime));
-                }
-                if (!string.IsNullOrEmpty(parm.KYSJ_StartTime) && parm.KYSJ_StartTime.Trim().Length > 0 &&
-                    string.IsNullOrEmpty(parm.KYSJ_EndTime))
-                {
-                    builder.Append(string.Format(" AND KYSJ > '{0}' ", parm.KYSJ_StartTime));
-                }
-                //注销时间
-                if (!string.IsNullOrEmpty(parm.ZXSJ_StartTime) && parm.ZXSJ_StartTime.Trim().Length > 0 &&
-                    !string.IsNullOrEmpty(parm.ZXSJ_EndTime) && parm.ZXSJ_EndTime.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND ZXSJ > '{0}' AND ZXSJ < '{1}' ", parm.ZXSJ_StartTime, parm.ZXSJ_EndTime));
-                }
-                if (string.IsNullOrEmpty(parm.ZXSJ_StartTime) && !string.IsNullOrEmpty(parm.ZXSJ_EndTime) &&
-                     parm.ZXSJ_EndTime.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND ZXSJ < '{0}' ", parm.ZXSJ_EndTime));
-                }
-                if (!string.IsNullOrEmpty(parm.ZXSJ_StartTime) && string.IsNullOrEmpty(parm.ZXSJ_EndTime) &&
-                    parm.ZXSJ_StartTime.Trim().Length > 0)
-                {
-                    builder.Append(string.Format(" AND ZXSJ > '{0}' ", parm.ZXSJ_StartTime));
                 }
                 #endregion
             }
@@ -124,6 +193,8 @@ namespace bscy.App_Code.Models.Table.BranchList
                 grid.Rows.Add(node);
             }
             grid = GetTreeMap(grid);
+            //按显示的数据导出Excel
+
             return grid;
         }
 
@@ -141,11 +212,9 @@ namespace bscy.App_Code.Models.Table.BranchList
             //层级关系，SJJGMC 为空表示根，有值则查找上级菜单，只有三层
             for (int i = 0; i < grid.Rows.Count; i++)
             {
+                //SJJGMC 为空表示根节点
                 if (grid.Rows[i].SJJGMC.Trim().Length == 0)
                 {
-                    //SJJGMC 为空表示根
-                    //grid_result.Rows.Add(grid.Rows[i]);
-                    //grid.Rows.Remove(grid.Rows[i]);
                     temp_node.Add(grid.Rows[i]);
                 }
             }
@@ -190,6 +259,7 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     for (int j = 0; j < children.Count; j++)
                     {
+                        temp_node.Clear();
                         //循环子节点
                         for (int k = 0; k < grid.Rows.Count; k++)
                         {
@@ -211,7 +281,6 @@ namespace bscy.App_Code.Models.Table.BranchList
                             {
                                 grid.Rows.Remove(item);
                             }
-                            temp_node.Clear();
                         }
                     }
                 }
@@ -287,10 +356,20 @@ namespace bscy.App_Code.Models.Table.BranchList
             dt.Columns.Add("ZXSJ", typeof(DateTime));
             dt.Columns.Add("JGCJ");
             dt.Columns.Add("SJJGMC");
-            dt.Columns.Add("ISDELETE",typeof(bool));
+            dt.Columns.Add("ISDELETE", typeof(bool));
             dt.Columns.Add("DELETETIME", typeof(DateTime));
             for (int i = 0; i < list.Count; i++)
             {
+                string NSRMC = list[i].NSRMC;
+                string NSRSBH = list[i].NSRSBH;
+                if (this.Count(NSRMC, string.Empty) != 0)
+                {
+                    throw new ArgumentException(string.Format("纳税人名称:{0}，已存在", NSRMC));
+                }
+                if (this.Count("", NSRSBH) != 0)
+                {
+                    throw new ArgumentException(string.Format("纳税人识别号:{0}，已存在", NSRSBH));
+                }
                 DataRow row = dt.NewRow();
                 row[1] = list[i].NUMBER;
                 row[2] = list[i].NSRMC;
@@ -300,7 +379,7 @@ namespace bscy.App_Code.Models.Table.BranchList
                 row[6] = list[i].SFNSZT == 1 ? true : false;
                 row[7] = list[i].KYSJ;
                 DateTime Temp_ZXSJ = new DateTime();
-                if(DateTime.TryParse(list[i].ZXSJ, out Temp_ZXSJ))
+                if (DateTime.TryParse(list[i].ZXSJ, out Temp_ZXSJ))
                 {
                     row[8] = list[i].ZXSJ;
                 }
@@ -312,6 +391,7 @@ namespace bscy.App_Code.Models.Table.BranchList
             BranchRecord branch = new BranchRecord();
             return branch.BatchAdd(dt);
         }
+
 
         /// <summary>
         /// 添加
@@ -338,10 +418,19 @@ namespace bscy.App_Code.Models.Table.BranchList
             }
             branch.JGCJ = node.JGCJ;
             branch.SJJGMC = node.SJJGMC;
-            //检查纳税人名称是否不存在
-            if (this.Count(node.NSRMC) != 0)
+            //验证上级机构是否存在
+            if (node.SJJGMC.Length > 0 && Count(node.SJJGMC, string.Empty) == 0)
             {
-                return -1;
+                throw new ArgumentException("上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构");
+            }
+            //检查纳税人名称是否不存在
+            if (this.Count(node.NSRMC, string.Empty) != 0)
+            {
+                throw new ArgumentException("纳税人名称: " + branch.NSRMC + ", 已存在");
+            }
+            if (this.Count("", node.NSRSBH) != 0)
+            {
+                throw new ArgumentException("纳税人识别号: " + branch.NSRSBH + ", 已存在");
             }
             int num = branch.Add();
             return num;
@@ -373,9 +462,19 @@ namespace bscy.App_Code.Models.Table.BranchList
             }
             branch.JGCJ = node.JGCJ;
             branch.SJJGMC = node.SJJGMC;
-            if (this.Count(branch.NSRMC, branch.id) != 0)
+            //验证上级机构是否存在
+            if (node.SJJGMC.Length > 0 && Count(node.SJJGMC, string.Empty) == 0)
             {
-                return -1;
+                throw new ArgumentException("上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构");
+            }
+            //检查纳税人名称是否不存在
+            if (this.Count(branch.id, branch.NSRMC, string.Empty) != 0)
+            {
+                throw new ArgumentException("纳税人名称:" + branch.NSRMC + ",已存在");
+            }
+            if (this.Count(branch.id, string.Empty, branch.NSRSBH) != 0)
+            {
+                throw new ArgumentException("纳税人识别号:" + branch.NSRSBH + ",已存在");
             }
             bool flag = branch.Update();
             if (flag == true)
@@ -386,7 +485,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 return 0;
             }
-            //return flag;
         }
 
         /// <summary>
@@ -397,9 +495,21 @@ namespace bscy.App_Code.Models.Table.BranchList
         public bool Delete(int id)
         {
             BranchRecord branch = new BranchRecord();
-            branch.Delete(id);
+            branch.DeleteAll(id);
             branch.GetModel(id);
             return branch.ISDELETE;
+
+            //删除所有下级，这样做没有考虑到事务。。
+            //if (CountSJJGMC(branch.NSRMC) > 0)
+            //{
+            //    DataTable dt = branch.GetList(string.Format(" SJJGMC = '{0}' ",branch.NSRMC));
+            //    for (int i = 0; i < dt.Rows.Count; i++)
+            //    {
+            //        //删除子集
+            //        branch.Delete(Convert.ToInt32(dt.Rows[i]["id"]));
+            //    }
+            //}
+
         }
 
         /// <summary>
@@ -407,21 +517,54 @@ namespace bscy.App_Code.Models.Table.BranchList
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int Count(string name)
+        public int Count(string NSRMC, string NSRSBH)
         {
             BranchRecord branch = new BranchRecord();
-            return branch.Count(name);
+            if (NSRMC.Length == 0 && NSRSBH.Length > 0)
+            {
+                return branch.CountNSRSBH(NSRSBH);
+            }
+            else if (NSRMC.Length > 0 && NSRSBH.Length == 0)
+            {
+                return branch.CountNSRMC(NSRMC);
+            }
+            else
+            {
+                throw new Exception("纳税人名称与识别号不能为空，也不能同时有值");
+            }
         }
 
         /// <summary>
-        /// 纳税人名称是否唯一，除了某个ID之外，编辑时会用到
+        /// 判断上级机构名称是否存在
+        /// </summary>
+        /// <param name="SJJGMC"></param>
+        /// <returns></returns>
+        public int CountSJJGMC(string SJJGMC)
+        {
+            BranchRecord branch = new BranchRecord();
+            return branch.CountNSRMC(SJJGMC);
+        }
+
+        /// <summary>
+        /// 纳税人名称与纳税人识别号是否唯一，除了某个ID之外，编辑时会用到
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int Count(string name, int id)
+        public int Count(int id, string NSRMC, string NSRSBH)
         {
             BranchRecord branch = new BranchRecord();
-            return branch.Count(name, id);
+            if (NSRMC.Length == 0 && NSRSBH.Length > 0)
+            {
+                return branch.CountNSRSBH(NSRSBH, id);
+            }
+            else if (NSRMC.Length > 0 && NSRSBH.Length == 0)
+            {
+                return branch.CountNSRMC(NSRMC, id);
+            }
+            else
+            {
+                throw new Exception("纳税人名称与识别号不能为空，也不能同时有值");
+            }
         }
 
         /// <summary>
@@ -451,6 +594,8 @@ namespace bscy.App_Code.Models.Table.BranchList
             set { _Rows = value; }
         }
     }
+
+
 
     [Serializable]
     public class Node

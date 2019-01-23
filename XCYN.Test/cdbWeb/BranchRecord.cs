@@ -343,6 +343,68 @@ namespace bscy.App_Code.Models.Table.BranchList
             }
         }
 
+        public bool DeleteAll(int id)
+        {
+            List<string> listSql = new List<string>();
+            listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", id));
+            //查看是否有子节点
+            this.GetModel(id);
+            string NSRMC = this.NSRMC;
+            if (this.CountSJJGMC(this.NSRMC) == 0)
+            {
+                //没有子节点执行SQL语句
+                goto executeSql;
+            }
+            else
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("select id,NSRMC ");
+                strSql.Append(" FROM [BranchRecord] ");
+                strSql.Append(string.Format(" where SJJGMC = '{0}' AND  ISDELETE = 0 ", NSRMC));
+                DataTable dt = SqlHelper.GetTable(strSql.ToString());
+                StringBuilder strId = new StringBuilder();
+                StringBuilder strNSRMC = new StringBuilder();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", dt.Rows[i]["id"]));
+                    strId.Append(dt.Rows[i]["id"].ToString() + ",");
+                    strNSRMC.Append("'" + dt.Rows[i]["NSRMC"].ToString() + "',");
+                }
+                
+                strId.Remove(strId.Length - 1, 1);
+                strNSRMC.Remove(strNSRMC.Length - 1, 1);    //去掉最后一位逗号
+                //查看是否还有子节点
+                if (Count(string.Format("and SJJGMC in({0})", strNSRMC)) == 0)
+                {
+                    //没有子节点执行SQL语句
+                    goto executeSql;
+                }
+                else
+                {
+                    strSql.Remove(0, strSql.Length);    //清空
+                    strSql.Append("select id,NSRMC ");
+                    strSql.Append(" FROM [BranchRecord] ");
+                    strSql.Append(string.Format(" where SJJGMC in({0}) AND  ISDELETE = 0 ", strNSRMC));
+                    dt = SqlHelper.GetTable(strSql.ToString());
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", dt.Rows[i]["id"]));
+                    }
+                }
+            }
+
+
+        executeSql:
+            if (SqlHelper.ExecuteSqlTran(listSql) == listSql.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -375,15 +437,50 @@ namespace bscy.App_Code.Models.Table.BranchList
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(*) ");
             strSql.Append(" FROM [BranchRecord] ");
-            strSql.Append(" where ISDELETE = 0");
+            strSql.Append(" where ISDELETE = 0 ");
             DataTable dt = SqlHelper.GetTable(strSql.ToString());
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        /// <summary>
+        /// 获取数据总数
+        /// </summary>
+        public int Count(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(*) ");
+            strSql.Append(" FROM [BranchRecord] ");
+            strSql.Append(" where ISDELETE = 0 ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(strWhere);
+            }
+            DataTable dt = SqlHelper.GetTable(strSql.ToString());
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        /// <summary>
+        /// 纳税人识别号是否存在
+        /// </summary>
+        public int CountNSRSBH(string name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(*) ");
+            strSql.Append(" FROM [BranchRecord] ");
+            strSql.Append(" where NSRSBH=@NSRSBH and ISDELETE = 0");
+            SqlParameter[] parameters = {
+                        new SqlParameter("@NSRSBH", SqlDbType.NVarChar,200)
+            };
+            parameters[0].Value = name;
+
+            DataTable dt = SqlHelper.GetTable(strSql.ToString(), parameters);
             return Convert.ToInt32(dt.Rows[0][0]);
         }
 
         /// <summary>
         /// 纳税人名称是否存在
         /// </summary>
-        public int Count(string name)
+        public int CountNSRMC(string name)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(*) ");
@@ -399,9 +496,46 @@ namespace bscy.App_Code.Models.Table.BranchList
         }
 
         /// <summary>
+        /// 上级机构名称是否存在
+        /// </summary>
+        public int CountSJJGMC(string name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(*) ");
+            strSql.Append(" FROM [BranchRecord] ");
+            strSql.Append(" where SJJGMC=@SJJGMC and ISDELETE = 0");
+            SqlParameter[] parameters = {
+                        new SqlParameter("@SJJGMC", SqlDbType.NVarChar,200)
+            };
+            parameters[0].Value = name;
+
+            DataTable dt = SqlHelper.GetTable(strSql.ToString(), parameters);
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        /// <summary>
         /// 纳税人名称是否存在，除了某个id之外
         /// </summary>
-        public int Count(string name, int id)
+        public int CountNSRSBH(string name, int id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(*) ");
+            strSql.Append(" FROM [BranchRecord] ");
+            strSql.Append(" where NSRSBH=@NSRSBH and id <> @id and ISDELETE = 0");
+            SqlParameter[] parameters = {
+                        new SqlParameter("@NSRSBH", SqlDbType.NVarChar,200),
+                        new SqlParameter("@id", SqlDbType.Int,4)
+            };
+            parameters[0].Value = name;
+            parameters[1].Value = id;
+            DataTable dt = SqlHelper.GetTable(strSql.ToString(), parameters);
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        /// <summary>
+        /// 纳税人名称是否存在，除了某个id之外
+        /// </summary>
+        public int CountNSRMC(string name, int id)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(*) ");
@@ -503,6 +637,30 @@ namespace bscy.App_Code.Models.Table.BranchList
         }
 
         /// <summary>
+        /// 获得数据列表，Excel中需要导出中文表头和一部分字段
+        /// </summary>
+        public DataTable GetExcelExportDataTable(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"SELECT ROW_NUMBER() over(order by id) AS '序号' ,
+                                                     [NSRMC] AS '纳税人名称'
+                                                    ,[NSRSBH] AS '纳税人识别号'
+                                                    ,[JYDZ] AS '经营地址'
+                                                    ,[ZGSWJG] AS '主管税务机关'
+                                                    , CASE[SFNSZT] WHEN 1 THEN '是' ELSE '否' END AS '是否纳税主体'
+                                                    ,CONVERT(varchar(100), [KYSJ], 23) AS '开业时间'
+                                                    ,CONVERT(varchar(100), [ZXSJ], 23) AS '注销时间' ");
+            strSql.Append(" FROM [BranchRecord] ");
+            strSql.Append(" WHERE ISDELETE = 0 ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(strWhere);
+            }
+            strSql.Append(" ORDER BY JGCJ ASC ");
+            return SqlHelper.GetTable(strSql.ToString());
+        }
+
+        /// <summary>
         /// 获得数据列表
         /// </summary>
         public DataTable GetList(string strWhere)
@@ -515,7 +673,7 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 strSql.Append(strWhere);
             }
-            strSql.Append(" ORDER BY JGCJ ASC ");
+            strSql.Append(" ORDER BY id ASC ");
             return SqlHelper.GetTable(strSql.ToString());
         }
 
