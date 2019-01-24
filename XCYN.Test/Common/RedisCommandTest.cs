@@ -72,13 +72,19 @@ namespace XCYN.Common
             //初始化字符串
             RedisCommandTest test = new RedisCommandTest();
             test._command.StringSet("myStr", "hello world");
+            test._command.StringSet("myStr", "hello world2",1);
             test._command.StringSet("myCount", "0");
+            test._command.StringSet("myCount2", "2");
+            test._command.StringSet("myCount3", "3");
+            test._command.StringSet("myCount2", "02",1);
+            test._command.StringSet("myCount3", "03",1);
             test._command.StringSetBit("myBit", 0, true);
-            test._command.StringSetBit("myBit", 1, true);
-            test._command.StringSetBit("myBit", 2, true);
-            test._command.StringSetBit("myBit", 3, true);
+            //test._command.StringSetBit("myBit", 1, true);
+            //test._command.StringSetBit("myBit", 2, true);
+            //test._command.StringSetBit("myBit", 3, true);
             test._command.KeyDelete("StudentName", 1); 
             test._command.KeyDelete("myCount1", 1);
+            test._command.KeyDelete("myCount", 1);
 
             //初始化List
             test._command.KeyDelete("myList");
@@ -212,13 +218,21 @@ namespace XCYN.Common
             var num = _command.StringDecr("myCount");
 
             Assert.AreEqual(-1, num);
-            
+
+            //往DB1库中添加myCount 字符串
+            num = _command.StringDecr("myCount",1);
+
+            Assert.AreEqual(-1, num);
         }
 
         [TestMethod]
         public void StringDescBy()
         {
             var num = _command.StringDecrBy("myCount",10);
+
+            Assert.AreEqual(-10, num);
+
+            num = _command.StringDecrBy("myCount", 10,1);
 
             Assert.AreEqual(-10, num);
         }
@@ -331,15 +345,32 @@ namespace XCYN.Common
             };
             string[] values = new string[2]
             {
-                "2",
-                "3"
+                "A",
+                "B"
             };
             _command.StringSet(keys, values);
             var myCount2 = _command.StringGet("myCount2");
             var myCount3 = _command.StringGet("myCount3");
 
-            Assert.AreEqual("2", myCount2);
-            Assert.AreEqual("3", myCount3);
+            Assert.AreEqual("A", myCount2);
+            Assert.AreEqual("B", myCount3);
+
+            keys = new string[2]
+            {
+                "myCount2" ,
+                "myCount3"
+            };
+            values = new string[2]
+            {
+                "C",
+                "D"
+            };
+            _command.StringSet(keys, values,1);
+            myCount2 = _command.StringGet("myCount2",1);
+            myCount3 = _command.StringGet("myCount3",1);
+
+            Assert.AreEqual("C", myCount2);
+            Assert.AreEqual("D", myCount3);
         }
 
         [TestMethod]
@@ -413,18 +444,25 @@ namespace XCYN.Common
         {
             var str = _command.StringGetAsync("myStr");
             Assert.AreEqual("hello world", str);
+
+            str = _command.StringGetAsync("myStr",1);
+            Assert.AreEqual("hello world2", str);
         }
 
         [TestMethod]
         public void StringSetAsync()
         {
             var flag = _command.StringSetAsync("myStr", "123").Result;
-
             Assert.IsTrue(flag);
 
             var str = _command.StringGetAsync("myStr");
-
             Assert.AreEqual("123", str);
+
+            flag = _command.StringSetAsync("myStr", "1234",1).Result;
+            Assert.IsTrue(flag);
+
+            str = _command.StringGetAsync("myStr",1);
+            Assert.AreEqual("1234", str);
         }
 
         [TestMethod]

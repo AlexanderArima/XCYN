@@ -184,10 +184,10 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">字符串名</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
-        /// <returns></returns>
-        public long StringDecr(string key)
+        /// <returns>返回减少之后的值 </returns>
+        public long StringDecr(string key, int db = -1)
         {
-            return RedisManager.WriteDataBase().StringDecrement(key);
+            return RedisManager.WriteDataBase(db).StringDecrement(key);
         }
 
         /// <summary>
@@ -196,10 +196,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">字符串名</param>
         /// <param name="value">一次减去的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
-        /// <returns></returns>
-        public long StringDecrBy(string key,int value)
+        /// <returns>返回减少之后的值</returns>
+        public long StringDecrBy(string key,int value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringDecrement(key, value);
+            return RedisManager.WriteDataBase(db).StringDecrement(key, value);
         }
 
         /// <summary>
@@ -208,18 +208,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>key对应的value，或者nil（key不存在时）</returns>
-        public string StringGet(string key)
-        {
-            return RedisManager.ReadDataBase().StringGet(key);
-        }
-
-        /// <summary>
-        /// 返回key的value
-        /// </summary>
-        /// <param name="keys"></param>
-        /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
-        /// <returns>key对应的value，或者nil（key不存在时）</returns>
-        public string StringGet(string key,int db)
+        public string StringGet(string key,int db = -1)
         {
             return RedisManager.ReadDataBase(db).StringGet(key);
         }
@@ -230,9 +219,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>key对应的value，或者nil（key不存在时）</returns>
-        public string StringGetAsync(string key)
+        public string StringGetAsync(string key,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringGetAsync(key).Result;
+            return RedisManager.ReadDataBase(db).StringGetAsync(key).Result;
         }
 
         /// <summary>
@@ -392,20 +381,7 @@ namespace XCYN.Common.Sql.redis
         {
             return RedisManager.WriteDataBase().StringIncrementAsync(key, value);
         }
-
-        /// <summary>
-        /// 设置一个key的value值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
-        /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
-        public bool StringSet(string key,string value)
-        {
-            bool flag = RedisManager.WriteDataBase().StringSet(key: key, value: value);
-            return flag;
-        }
-
+        
         /// <summary>
         /// 设置一个key的value值
         /// </summary>
@@ -414,7 +390,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="db">库ID</param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
-        public bool StringSet(string key, string value,int db)
+        public bool StringSet(string key, string value,int db = -1)
         {
             bool flag = RedisManager.WriteDataBase(db).StringSet(key: key, value: value);
             return flag;
@@ -427,9 +403,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value"></param>
         /// <remarks>返回key的value。如果key不存在，返回特殊值nil。如果key的value不是string，就返回错误，因为GET只处理string类型的values。</remarks>
         /// <returns>如果SET命令正常执行那么回返回OK，否则如果加了NX 或者 XX选项，但是没有设置条件。那么会返回nil。</returns>
-        public Task<bool> StringSetAsync(string key, string value)
+        public Task<bool> StringSetAsync(string key, string value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringSetAsync(key,value);
+            return RedisManager.WriteDataBase(db).StringSetAsync(key,value);
         }
 
         /// <summary>
@@ -437,7 +413,7 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="keys"></param>
         /// <param name="values"></param>
-        public bool StringSet(string[] keys,string[] values)
+        public bool StringSet(string[] keys,string[] values,int db = -1)
         {
             List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
             for (int i = 0; i < keys.Length; i++)
@@ -445,7 +421,7 @@ namespace XCYN.Common.Sql.redis
                 KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i],values[i]);
                 list.Add(dict);
             }
-            return RedisManager.WriteDataBase().StringSet(list.ToArray());
+            return RedisManager.WriteDataBase(db).StringSet(list.ToArray());
         }
 
         /// <summary>
@@ -454,7 +430,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public Task<bool> StringSetAsync(string[] keys, string[] values)
+        public Task<bool> StringSetAsync(string[] keys, string[] values,int db = -1)
         {
             List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
             for (int i = 0; i < keys.Length; i++)
@@ -462,7 +438,7 @@ namespace XCYN.Common.Sql.redis
                 KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i], values[i]);
                 list.Add(dict);
             }
-            return RedisManager.WriteDataBase().StringSetAsync(list.ToArray());
+            return RedisManager.WriteDataBase(db).StringSetAsync(list.ToArray());
         }
 
         /// <summary>
@@ -471,7 +447,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public bool StringSetNX(string[] keys,string[] values)
+        public bool StringSetNX(string[] keys,string[] values,int db = -1)
         {
             List<KeyValuePair<RedisKey, RedisValue>> list = new List<KeyValuePair<RedisKey, RedisValue>>();
             for (int i = 0; i < keys.Length; i++)
@@ -479,7 +455,7 @@ namespace XCYN.Common.Sql.redis
                 KeyValuePair<RedisKey, RedisValue> dict = new KeyValuePair<RedisKey, RedisValue>(keys[i], values[i]);
                 list.Add(dict);
             }
-            return RedisManager.WriteDataBase().StringSet(list.ToArray(),When.NotExists);
+            return RedisManager.WriteDataBase(db).StringSet(list.ToArray(),When.NotExists);
         }
 
         /// <summary>
@@ -489,9 +465,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="seconds">过期秒数</param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool StringSetEX(string key, string value, int seconds)
+        public bool StringSetEX(string key, string value, int seconds,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringSet(key, value, TimeSpan.FromSeconds(seconds));
+            return RedisManager.WriteDataBase(db).StringSet(key, value, TimeSpan.FromSeconds(seconds));
         }
 
         /// <summary>
@@ -501,9 +477,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="offset">覆盖的起始位置</param>
         /// <param name="value">覆盖值</param>
         /// <returns></returns>
-        public long StringSetRange(string key,int offset,string value)
+        public long StringSetRange(string key,int offset,string value,int db = -1)
         {
-            return (long)RedisManager.WriteDataBase().StringSetRange(key, offset, value);
+            return (long)RedisManager.WriteDataBase(db).StringSetRange(key, offset, value);
         }
 
         /// <summary>
@@ -513,9 +489,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="offset">大于等于0</param>
         /// <param name="bit">0/1</param>
         /// <returns>返回位的值</returns>
-        public bool StringSetBit(string key,long offset,bool bit)
+        public bool StringSetBit(string key,long offset,bool bit,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringSetBit(key, offset, bit);
+            return RedisManager.WriteDataBase(db).StringSetBit(key, offset, bit);
         }
 
         /// <summary>
@@ -525,9 +501,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="offset">大于等于0</param>
         /// <param name="bit">0/1</param>
         /// <returns>返回位的值</returns>
-        public Task<bool> StringSetBitAsync(string key, long offset, bool bit)
+        public Task<bool> StringSetBitAsync(string key, long offset, bool bit,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringSetBitAsync(key, offset, bit);
+            return RedisManager.WriteDataBase(db).StringSetBitAsync(key, offset, bit);
         }
 
         /// <summary>
@@ -536,9 +512,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public bool StringGetBit(string key,long offset)
+        public bool StringGetBit(string key,long offset,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringGetBit(key, offset);
+            return RedisManager.ReadDataBase(db).StringGetBit(key, offset);
         }
 
         /// <summary>
@@ -547,9 +523,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public Task<bool> StringGetBitAsync(string key, long offset)
+        public Task<bool> StringGetBitAsync(string key, long offset,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringGetBitAsync(key, offset);
+            return RedisManager.ReadDataBase(db).StringGetBitAsync(key, offset);
         }
         
         /// <summary>
@@ -557,9 +533,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">字符串名</param>
         /// <returns></returns>
-        public long StringLength(string key)
+        public long StringLength(string key,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringLength(key);
+            return RedisManager.ReadDataBase(db).StringLength(key);
         }
 
         /// <summary>
@@ -567,9 +543,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">字符串名</param>
         /// <returns></returns>
-        public Task<long> StringLengthAsync(string key)
+        public Task<long> StringLengthAsync(string key,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringLengthAsync(key);
+            return RedisManager.ReadDataBase(db).StringLengthAsync(key);
         }
 
         #endregion

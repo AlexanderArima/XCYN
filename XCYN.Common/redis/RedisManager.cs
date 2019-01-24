@@ -61,6 +61,7 @@ namespace XCYN.Common.Sql.redis
         /// 获取只读库
         /// </summary>
         /// <param name="db">库ID</param>
+        /// 数据库的数量是可以配置的，默认情况下是16个。修改redis.conf下的databases指令：databases 64
         /// <returns></returns>
         public static IDatabase ReadDataBase(int db)
         {
@@ -106,7 +107,8 @@ namespace XCYN.Common.Sql.redis
         /// <summary>
         /// 获取只写库
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">库ID</param>
+        /// 数据库的数量是可以配置的，默认情况下是16个。修改redis.conf下的databases指令：databases 64
         /// <returns></returns>
         public static IDatabase WriteDataBase(int db)
         {
