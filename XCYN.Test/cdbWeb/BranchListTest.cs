@@ -66,7 +66,7 @@ namespace XCYN.Test.cdbWeb
         public void GetList()
         {
             var actual = _model.GetList().Rows.Count;
-            Assert.AreEqual(6, actual);
+            Assert.AreEqual(3, actual);
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace XCYN.Test.cdbWeb
             parm.ZXSJ_EndTime = " ";
             BranchListViewModel model = new BranchListViewModel();
             var grid =  model.GetList(parm);
-            Assert.AreEqual(7, grid.Rows.Count);
+            Assert.AreEqual(113, grid.Rows.Count);
         }
 
         [TestMethod]
@@ -120,7 +120,6 @@ namespace XCYN.Test.cdbWeb
             //上级机构不存在时，无法录入
             Node node = new Node()
             {
-                NUMBER = "105",
                 NSRMC = "武汉1",
                 NSRSBH = "003",
                 JYDZ = "武汉市洪山区",
@@ -129,7 +128,8 @@ namespace XCYN.Test.cdbWeb
                 ZGSWJG = "",
                 SJJGMC = "湖北1",
                 ZXSJ = "2018-06-14",
-                JGCJ = 2,
+                CREATEID = 1,
+                CREATETIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
             //上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构
             try
@@ -144,7 +144,6 @@ namespace XCYN.Test.cdbWeb
             //上级机构不存在时，无法录入
             node = new Node()
             {
-                NUMBER = "105",
                 NSRMC = "湖北1",
                 NSRSBH = "002",
                 JYDZ = "武汉市洪山区",
@@ -153,14 +152,12 @@ namespace XCYN.Test.cdbWeb
                 ZGSWJG = "",
                 SJJGMC = "",
                 ZXSJ = "2018-06-14",
-                JGCJ = 2,
             };
             _model.Add(node);
 
             //上级机构不存在时，无法录入
             node = new Node()
             {
-                NUMBER = "105",
                 NSRMC = "武汉1",
                 NSRSBH = "003",
                 JYDZ = "武汉市洪山区",
@@ -169,7 +166,6 @@ namespace XCYN.Test.cdbWeb
                 ZGSWJG = "",
                 SJJGMC = "湖北1",
                 ZXSJ = "2018-06-14",
-                JGCJ = 2,
             };
             //上级机构名称: " + branch.SJJGMC + ", 不存在，请先录入该机构
             int actual =  _model.Add(node);
@@ -181,7 +177,6 @@ namespace XCYN.Test.cdbWeb
         {
             Node node = new Node()
             {
-                NUMBER = "105",
                 NSRMC = "湖北1",
                 NSRSBH = "002",
                 JYDZ = "武汉市洪山区",
@@ -190,64 +185,20 @@ namespace XCYN.Test.cdbWeb
                 ZGSWJG = "",
                 SJJGMC = "",
                 ZXSJ = "2018-06-14",
-                JGCJ = 3, 
+                SJJGSFNSZT = 0,
+                CREATEID = 1,
+                CREATETIME = DateTime.Now.ToString("yyyy-MM-dd")
             };
-            
             try
             {
-                _model.Add(node);
+                 int count = _model.Add(node);
+                Assert.AreEqual(1, count);
             }
             catch(ArgumentException ex)
             {
                 Assert.IsTrue(ex.Message.Contains("纳税人名称: 湖北1, 已存在"));
             }
-
-            node = new Node()
-            {
-                NUMBER = "105",
-                NSRMC = "湖北2",
-                NSRSBH = "001",
-                JYDZ = "武汉市洪山区",
-                SFNSZT = 0,
-                KYSJ = "2010-2-14",
-                ZGSWJG = "",
-                SJJGMC = "",
-                ZXSJ = "2018-06-14",
-                JGCJ = 3,
-            };
-            try
-            {
-                _model.Add(node);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.IsTrue(ex.Message.Contains("纳税人识别号: 001, 已存在"));
-            }
-
-            node = new Node()
-            {
-                NUMBER = "105",
-                NSRMC = "湖北2",
-                NSRSBH = "002",
-                JYDZ = "武汉市洪山区",
-                SFNSZT = 0,
-                KYSJ = "2010-2-14",
-                ZGSWJG = "",
-                SJJGMC = "",
-                ZXSJ = "2018-06-14",
-                JGCJ = 3,
-            };
-            int actual = 0;
-            try
-            {
-               actual =  _model.Add(node);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.IsTrue(ex.Message.Contains("纳税人识别号: 001, 已存在"));
-                return;
-            }
-            Assert.AreEqual(1, actual);
+            
         }
 
         [TestMethod]
@@ -258,7 +209,6 @@ namespace XCYN.Test.cdbWeb
             {
                 Node node2 = new Node()
                 {
-                    NUMBER = "Test" + i,
                     NSRMC = "湖北" + i,
                     NSRSBH = "027",
                     JYDZ = "武汉市洪山区",
@@ -267,7 +217,6 @@ namespace XCYN.Test.cdbWeb
                     ZGSWJG = "",
                     SJJGMC = "",
                     ZXSJ = "",
-                    JGCJ = 2,
                 };
                 list.Add(node2);
             }
@@ -289,7 +238,6 @@ namespace XCYN.Test.cdbWeb
             {
                 Node node2 = new Node()
                 {
-                    NUMBER = "Test" + i,
                     NSRMC = "湖北" + i,
                     NSRSBH = "A" + i.ToString().PadLeft(3,'0'),
                     JYDZ = "武汉市洪山区",
@@ -298,7 +246,9 @@ namespace XCYN.Test.cdbWeb
                     ZGSWJG = "1",
                     SJJGMC = "",
                     ZXSJ = "",
-                    JGCJ = 2,
+                    SJJGSFNSZT = 0,
+                     CREATEID = 1,
+                     CREATETIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 };
                 list.Add(node2);
             }
@@ -310,7 +260,6 @@ namespace XCYN.Test.cdbWeb
             {
                 Node node2 = new Node()
                 {
-                    NUMBER = "Test" + i,
                     NSRMC = "武汉" + i ,
                     NSRSBH = "B" + i.ToString().PadLeft(3,'0'),
                     JYDZ = "武汉市洪山区",
@@ -319,7 +268,9 @@ namespace XCYN.Test.cdbWeb
                     ZGSWJG = "1",
                     SJJGMC = "湖北" + random.Next(1,4),
                     ZXSJ = "2018-01-11",
-                    JGCJ = 2,
+                    SJJGSFNSZT = 0,
+                    CREATEID = 1,
+                    CREATETIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 };
                 list.Add(node2);
             }
@@ -331,7 +282,6 @@ namespace XCYN.Test.cdbWeb
             {
                 Node node2 = new Node()
                 {
-                    NUMBER = "Test" + i,
                     NSRMC = "洪山" + i,
                     NSRSBH = "C" + i.ToString().PadLeft(3, '0'),
                     JYDZ = "武汉市洪山区",
@@ -340,40 +290,44 @@ namespace XCYN.Test.cdbWeb
                     ZGSWJG = "1",
                     SJJGMC = "武汉" + random.Next(1, 11),
                     ZXSJ = "2018-01-11",
-                    JGCJ = 2,
+                    SJJGSFNSZT = 0,
+                    CREATEID = 1,
+                    CREATETIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 };
                 list.Add(node2);
             }
             _model.BatchAdd(list);
             int count = _model.Count();
-            //Assert.AreEqual(120, count);
+            Assert.AreEqual(113, count);
             
         }
 
         [TestMethod]
         public void GetModel()
         {
-            var node = _model.GetModel(2);
+            var node = _model.GetModel(1);
             Assert.IsNotNull(node);
-            Assert.AreEqual("100", node.NUMBER);
-            Assert.AreEqual("武汉1", node.NSRMC);
-            Assert.AreEqual("027", node.NSRSBH);
-            Assert.AreEqual("湖北省武汉市", node.JYDZ);
-            Assert.AreEqual("1号机关", node.ZGSWJG);
+            Assert.AreEqual("湖北1", node.NSRMC);
+            Assert.AreEqual("002", node.NSRSBH);
+            Assert.AreEqual("武汉市洪山区", node.JYDZ);
+            Assert.AreEqual("", node.ZGSWJG);
             Assert.AreEqual(0, node.SFNSZT);
-            Assert.AreEqual("2019-01-01", node.KYSJ);
-            Assert.AreEqual("", node.ZXSJ);
-            Assert.AreEqual(1, node.JGCJ);
+            Assert.AreEqual("2010-02-14", node.KYSJ);
+            Assert.AreEqual("2018-06-14", node.ZXSJ);
             Assert.AreEqual("", node.SJJGMC);
             Assert.AreEqual(0, node.ISDELETE);
+            Assert.AreEqual(0, node.SJJGSFNSZT);
+            Assert.AreEqual(1, node.CREATEID);
+            Assert.AreEqual("2019-01-24 00:00:00", node.CREATETIME);
             Assert.IsTrue(node.DELETETIME == null);
         }
 
         [TestMethod]
         public void Edit()
         {
-            var node = _model.GetModel(4);
-            node.NSRSBH = "001";
+            var node = _model.GetModel(3);
+            node.EDITID = 2;
+            node.NSRSBH = "A003";
             var flag = 0;
             try
             {
@@ -383,38 +337,18 @@ namespace XCYN.Test.cdbWeb
             {
                 Assert.AreEqual("纳税人识别号:001,已存在", ex.Message);
             }
-
-            node = _model.GetModel(4);
-            node.NSRMC = "湖北1";
-            try
-            {
-                flag = _model.Edit(node);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("纳税人名称:湖北1,已存在", ex.Message);
-            }
-
-            node = _model.GetModel(4);
-            node.NSRMC = "湖北3";
-            try
-            {
-                flag = _model.Edit(node);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("纳税人名称:湖北1,已存在", ex.Message);
-            }
-            Assert.IsTrue(flag == 1);
+            
+            node = _model.GetModel(3);
+            Assert.AreEqual("A003", node.NSRSBH);
 
         }
 
         [TestMethod]
         public void DeleteAll()
         {
-            var actual = _model.Delete(467);
-            actual = _model.Delete(468);
-            actual = _model.Delete(469);
+            var actual = _model.Delete(2,3);
+            //actual = _model.Delete(468);
+            //actual = _model.Delete(469);
             Assert.AreEqual(true, actual);
             
         }
@@ -422,7 +356,7 @@ namespace XCYN.Test.cdbWeb
         [TestMethod]
         public void Delete()
         {
-            var actual= _model.Delete(7);
+            var actual= _model.Delete(7,3);
             Assert.AreEqual(true, actual);
         }
     }

@@ -154,7 +154,7 @@ namespace XCYN.Common.Sql.redis
         #endregion
 
         #region String命令
-
+        
         /// <summary>
         /// 追加一个值到key上
         /// </summary>
@@ -162,19 +162,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value"></param>
         /// <remarks>如果 key 已经存在，并且值为字符串，那么这个命令会把 value 追加到原来值（value）的结尾。 如果 key 不存在，那么它将首先创建一个空字符串的key，再执行追加操作，这种情况 APPEND 将类似于 SET 操作。</remarks>
         /// <returns>返回append后字符串值（value）的长度。</returns>
-        public long StringAppend(string key,string value)
-        {
-            return RedisManager.WriteDataBase().StringAppend(key, value);
-        }
-
-        /// <summary>
-        /// 追加一个值到key上
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <remarks>如果 key 已经存在，并且值为字符串，那么这个命令会把 value 追加到原来值（value）的结尾。 如果 key 不存在，那么它将首先创建一个空字符串的key，再执行追加操作，这种情况 APPEND 将类似于 SET 操作。</remarks>
-        /// <returns>返回append后字符串值（value）的长度。</returns>
-        public long StringAppend(string key, string value,int db)
+        public long StringAppend(string key, string value,int db = -1)
         {
             return RedisManager.WriteDataBase(db).StringAppend(key, value);
         }
@@ -228,14 +216,14 @@ namespace XCYN.Common.Sql.redis
         /// 获取所有指定key的value，对于不存在的string或者不存在的key，返回null
         /// </summary>
         /// <param name="keys"></param>
-        public ArrayList StringGet(string[] keys)
+        public ArrayList StringGet(string[] keys,int db = -1)
         {
             RedisKey[] list = new RedisKey[keys.Length];
             for (int i = 0; i < keys.Length; i++)
             {
                 list[i] = keys[i];
             }
-            var sets = RedisManager.ReadDataBase().StringGet(list);
+            var sets = RedisManager.ReadDataBase(db).StringGet(list);
             ArrayList list_result = new ArrayList();
             foreach (var item in sets)
             {
@@ -248,14 +236,14 @@ namespace XCYN.Common.Sql.redis
         /// 获取所有指定key的value，对于不存在的string或者不存在的key，返回null
         /// </summary>
         /// <param name="keys"></param>
-        public List<string> StringGetAsync(string[] keys)
+        public List<string> StringGetAsync(string[] keys,int db = -1)
         {
             RedisKey[] list = new RedisKey[keys.Length];
             for (int i = 0; i < keys.Length; i++)
             {
                 list[i] = keys[i];
             }
-            var sets = RedisManager.ReadDataBase().StringGetAsync(list).Result;
+            var sets = RedisManager.ReadDataBase(db).StringGetAsync(list).Result;
             List<string> list_result = new List<string>();
             foreach (var item in sets)
             {
@@ -273,9 +261,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="end">结束位置</param>
         /// <remarks>返回key对应的字符串value的子串，这个子串是由start和end位移决定的（两者都在string内）。可以用负的位移来表示从string尾部开始数的下标。所以-1就是最后一个字符，-2就是倒数第二个，以此类推。</remarks>
         /// <returns></returns>
-        public string StringGetRange(string key,int start,int end)
+        public string StringGetRange(string key,int start,int end,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringGetRange(key, start, end);
+            return RedisManager.ReadDataBase(db).StringGetRange(key, start, end);
         }
 
         /// <summary>
@@ -285,9 +273,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string StringGetRangeAsnyc(string key,int start,int end)
+        public string StringGetRangeAsnyc(string key,int start,int end,int db = -1)
         {
-            return RedisManager.ReadDataBase().StringGetRangeAsync(key, start, end).Result;
+            return RedisManager.ReadDataBase(db).StringGetRangeAsync(key, start, end).Result;
         }
 
         /// <summary>
@@ -297,9 +285,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value"></param>
         /// <remarks>如果key存在但是对应的value不是字符串，就返回错误</remarks>
         /// <returns></returns>
-        public string StringGetSet(string key,string value)
+        public string StringGetSet(string key,string value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringGetSet(key, value);
+            return RedisManager.WriteDataBase(db).StringGetSet(key, value);
         }
 
         /// <summary>
@@ -309,9 +297,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value"></param>
         /// <remarks>如果key存在但是对应的value不是字符串，就返回错误</remarks>
         /// <returns></returns>
-        public string StringGetSetAsync(string key, string value)
+        public string StringGetSetAsync(string key, string value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringGetSetAsync(key, value).Result;
+            return RedisManager.WriteDataBase(db).StringGetSetAsync(key, value).Result;
         }
 
         /// <summary>
@@ -319,9 +307,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public long StringIncr(string key)
+        public long StringIncr(string key,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrement(key);
+            return RedisManager.WriteDataBase(db).StringIncrement(key);
         }
 
         /// <summary>
@@ -329,9 +317,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public Task<long> StringIncrAsync(string key)
+        public Task<long> StringIncrAsync(string key,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrementAsync(key);
+            return RedisManager.WriteDataBase(db).StringIncrementAsync(key);
         }
 
         /// <summary>
@@ -341,9 +329,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">一次增加的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
         /// <returns></returns>
-        public long StringIncrBy(string key, int value)
+        public long StringIncrBy(string key, int value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrement(key, value);
+            return RedisManager.WriteDataBase(db).StringIncrement(key, value);
         }
 
         /// <summary>
@@ -353,9 +341,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">一次增加的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
         /// <returns></returns>
-        public Task<long> StringIncrByAsync(string key, int value)
+        public Task<long> StringIncrByAsync(string key, int value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrementAsync(key, value);
+            return RedisManager.WriteDataBase(db).StringIncrementAsync(key, value);
         }
 
         /// <summary>
@@ -365,9 +353,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">一次增加的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
         /// <returns></returns>
-        public double StringIncrBy(string key, double value)
+        public double StringIncrBy(string key, double value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrement(key, value);
+            return RedisManager.WriteDataBase(db).StringIncrement(key, value);
         }
 
         /// <summary>
@@ -377,9 +365,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">一次增加的值</param>
         /// <remarks>如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。</remarks>
         /// <returns></returns>
-        public Task<double> StringIncrByAsync(string key, double value)
+        public Task<double> StringIncrByAsync(string key, double value,int db = -1)
         {
-            return RedisManager.WriteDataBase().StringIncrementAsync(key, value);
+            return RedisManager.WriteDataBase(db).StringIncrementAsync(key, value);
         }
         
         /// <summary>
@@ -558,9 +546,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public string ListIndex(string key, int index)
+        public string ListIndex(string key, int index,int db = -1)
         {
-            return RedisManager.ReadDataBase().ListGetByIndex(key, index);
+            return RedisManager.ReadDataBase(db).ListGetByIndex(key, index);
         }
 
         public enum RedisCommandDirection
@@ -569,15 +557,15 @@ namespace XCYN.Common.Sql.redis
             AFTER = 1
         }
 
-        public long ListInsert(string key, RedisCommandDirection direct, string pivot, string value)
+        public long ListInsert(string key, RedisCommandDirection direct, string pivot, string value,int db = -1)
         {
             if (direct == RedisCommandDirection.BEFORE)
             {
-                return RedisManager.WriteDataBase().ListInsertBefore(key, pivot, value);
+                return RedisManager.WriteDataBase(db).ListInsertBefore(key, pivot, value);
             }
             else if (direct == RedisCommandDirection.AFTER)
             {
-                return RedisManager.WriteDataBase().ListInsertAfter(key, pivot, value);
+                return RedisManager.WriteDataBase(db).ListInsertAfter(key, pivot, value);
             }
             else
             {
@@ -590,7 +578,7 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public long ListLength(string key)
+        public long ListLength(string key,int db = -1)
         {
             return RedisManager.ReadDataBase().ListLength(key);
         }
@@ -600,9 +588,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string ListLeftPop(string key)
+        public string ListLeftPop(string key,int db = -1)
         {
-            return RedisManager.WriteDataBase().ListLeftPop(key);
+            return RedisManager.WriteDataBase(db).ListLeftPop(key);
         }
         
         /// <summary>
@@ -611,9 +599,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public long ListLeftPush(string key, string value)
+        public long ListLeftPush(string key, string value,int db = -1)
         {
-            return RedisManager.WriteDataBase().ListLeftPush(key, value);
+            return RedisManager.WriteDataBase(db).ListLeftPush(key, value);
         }
 
         /// <summary>
@@ -622,14 +610,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="values">插入的值数组</param>
         /// <returns></returns>
-        public long ListLeftPush(string key, string[] values)
+        public long ListLeftPush(string key, string[] values, int db = -1)
         {
             var rvalues = new RedisValue[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
                 rvalues[i] = values[i];
             }
-            return RedisManager.WriteDataBase().ListLeftPush(key, rvalues);
+            return RedisManager.WriteDataBase(db).ListLeftPush(key, rvalues);
         }
 
         /// <summary>
@@ -638,9 +626,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public long ListLeftPushX(string key,string value)
+        public long ListLeftPushX(string key,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListLeftPush(key, value, When.Exists);
+            return RedisManager.WriteDataBase(db).ListLeftPush(key, value, When.Exists);
         }
 
         /// <summary>
@@ -650,9 +638,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start">起始下标</param>
         /// <param name="stop">结束下标</param>
         /// <returns></returns>
-        public ArrayList ListRange(string key,int start,int stop)
+        public ArrayList ListRange(string key,int start,int stop, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().ListRange(key, start, stop);
+            var list = RedisManager.ReadDataBase(db).ListRange(key, start, stop);
             var result_list = new ArrayList();
             foreach (var item in list)
             {
@@ -668,9 +656,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="count">删除元素的个数和方向</param>
         /// <param name="value">删除的元素</param>
         /// <returns></returns>
-        public long ListRemove(string key, string value, int count)
+        public long ListRemove(string key, string value, int count, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListRemove(key, value, count);
+            return RedisManager.WriteDataBase(db).ListRemove(key, value, count);
         }
 
         /// <summary>
@@ -679,9 +667,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="index">下标位置</param>
         /// <param name="value">修改的元素值</param>
-        public void ListSetByIndex(string key,int index,string value)
+        public void ListSetByIndex(string key,int index,string value, int db = -1)
         {
-            RedisManager.WriteDataBase().ListSetByIndex(key, index, value);
+            RedisManager.WriteDataBase(db).ListSetByIndex(key, index, value);
         }
 
         /// <summary>
@@ -690,9 +678,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="start">起始下标</param>
         /// <param name="stop">结束下标</param>
-        public void ListTrim(string key,int start,int stop)
+        public void ListTrim(string key,int start,int stop, int db = -1)
         {
-            RedisManager.WriteDataBase().ListTrim(key, start, stop);
+            RedisManager.WriteDataBase(db).ListTrim(key, start, stop);
         }
 
         /// <summary>
@@ -702,9 +690,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="destination">目标队列</param>
         /// <remarks>可用来做安全的队列，循环列表</remarks>
         /// <returns></returns>
-        public string ListRightPopLeftPush(string source,string destination)
+        public string ListRightPopLeftPush(string source,string destination, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListRightPopLeftPush(source, destination);
+            return RedisManager.WriteDataBase(db).ListRightPopLeftPush(source, destination);
         }
         
         /// <summary>
@@ -712,9 +700,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string ListRightPop(string key)
+        public string ListRightPop(string key, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListRightPop(key);
+            return RedisManager.WriteDataBase(db).ListRightPop(key);
         }
 
         /// <summary>
@@ -723,9 +711,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public long ListRightPush(string key, string value)
+        public long ListRightPush(string key, string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListRightPush(key, value);
+            return RedisManager.WriteDataBase(db).ListRightPush(key, value);
         }
 
         /// <summary>
@@ -734,14 +722,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="values">插入的值数组</param>
         /// <returns></returns>
-        public long ListRightPush(string key, string[] values)
+        public long ListRightPush(string key, string[] values, int db = -1)
         {
             var rvalues = new RedisValue[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
                 rvalues[i] = values[i];
             }
-            return RedisManager.WriteDataBase().ListRightPush(key, rvalues);
+            return RedisManager.WriteDataBase(db).ListRightPush(key, rvalues);
         }
 
         /// <summary>
@@ -750,9 +738,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">列表名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public long ListRightPushX(string key, string value)
+        public long ListRightPushX(string key, string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().ListRightPush(key, value, When.Exists);
+            return RedisManager.WriteDataBase(db).ListRightPush(key, value, When.Exists);
         }
 
         #endregion
@@ -765,9 +753,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public bool SetAdd(string key,string value)
+        public bool SetAdd(string key,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetAdd(key, value);
+            return RedisManager.WriteDataBase(db).SetAdd(key, value);
         }
 
         /// <summary>
@@ -776,14 +764,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="value">插入的值</param>
         /// <returns></returns>
-        public long SetAdd(string key,string[] values)
+        public long SetAdd(string key,string[] values, int db = -1)
         {
             var rvalues = new RedisValue[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
                 rvalues[i] = values[i];
             }
-            return RedisManager.WriteDataBase().SetAdd(key, rvalues);
+            return RedisManager.WriteDataBase(db).SetAdd(key, rvalues);
         }
 
         /// <summary>
@@ -792,9 +780,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public ArrayList SetDiff(string first,string second)
+        public ArrayList SetDiff(string first,string second, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Difference, first, second);
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Difference, first, second);
             ArrayList list_result = new ArrayList();
             for (int i = 0; i < list.Count(); i++)
             {
@@ -809,14 +797,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public ArrayList SetDiff(string[] keys)
+        public ArrayList SetDiff(string[] keys, int db = -1)
         {
             List<RedisKey> list_key = new List<RedisKey>();
             for (int i = 0; i < keys.Length; i++)
             {
                 list_key.Add(keys[i]);
             }
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Difference, keys: list_key.ToArray());
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Difference, keys: list_key.ToArray());
             ArrayList list_result = new ArrayList();
             for (int i = 0; i < list.Count(); i++)
             {
@@ -832,9 +820,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="second"></param>
         /// <param name="dest">生成的集合</param>
         /// <returns></returns>
-        public long SetDiffStore(string first, string second, string dest)
+        public long SetDiffStore(string first, string second, string dest, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Difference, dest, first, second);
+            return RedisManager.WriteDataBase(db).SetCombineAndStore(SetOperation.Difference, dest, first, second);
         }
 
         /// <summary>
@@ -843,14 +831,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys">集合数组</param>
         /// <param name="dest">生成的集合</param>
         /// <returns></returns>
-        public long SetDiffStore(string[] keys, string dest)
+        public long SetDiffStore(string[] keys, string dest,int db = -1)
         {
             List<RedisKey> list_key = new List<RedisKey>();
             for (int i = 0; i < keys.Length; i++)
             {
                 list_key.Add(keys[i]);
             }
-            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Difference, dest, keys: list_key.ToArray());
+            return RedisManager.WriteDataBase(db).SetCombineAndStore(SetOperation.Difference, dest, keys: list_key.ToArray());
         }
 
         /// <summary>
@@ -859,9 +847,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public ArrayList SetInter(string first,string second)
+        public ArrayList SetInter(string first,string second, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Intersect, first, second);
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Intersect, first, second);
             ArrayList list_result = new ArrayList();
             for (int i = 0; i < list.Length; i++)
             {
@@ -875,14 +863,14 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public ArrayList SetInter(string[] keys)
+        public ArrayList SetInter(string[] keys, int db = -1)
         {
             List<RedisKey> list_key = new List<RedisKey>();
             for (int i = 0; i < keys.Length; i++)
             {
                 list_key.Add(keys[i]);
             }
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Intersect, list_key.ToArray());
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Intersect, list_key.ToArray());
             ArrayList list_result = new ArrayList();
             for (int i = 0; i < list.Length; i++)
             {
@@ -898,9 +886,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="second"></param>
         /// <param name="dest">生成的集合</param>
         /// <returns></returns>
-        public long SetInterStore(string first, string second, string dest)
+        public long SetInterStore(string first, string second, string dest, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Intersect, dest, first, second);
+            return RedisManager.WriteDataBase(db).SetCombineAndStore(SetOperation.Intersect, dest, first, second);
         }
 
         /// <summary>
@@ -909,14 +897,14 @@ namespace XCYN.Common.Sql.redis
         /// <param name="keys">集合数组</param>
         /// <param name="dest">生成的集合</param>
         /// <returns></returns>
-        public long SetInterStore(string[] keys, string dest)
+        public long SetInterStore(string[] keys, string dest, int db = -1)
         {
             List<RedisKey> list_key = new List<RedisKey>();
             for (int i = 0; i < keys.Length; i++)
             {
                 list_key.Add(keys[i]);
             }
-            return RedisManager.WriteDataBase().SetCombineAndStore(SetOperation.Intersect, dest, keys: list_key.ToArray());
+            return RedisManager.WriteDataBase(db).SetCombineAndStore(SetOperation.Intersect, dest, keys: list_key.ToArray());
         }
 
         /// <summary>
@@ -925,9 +913,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="member">成员的值</param>
         /// <returns></returns>
-        public bool SetIsMember(string key,string member)
+        public bool SetIsMember(string key,string member, int db = -1)
         {
-            return RedisManager.ReadDataBase().SetContains(key, member);
+            return RedisManager.ReadDataBase(db).SetContains(key, member);
         }
 
         /// <summary>
@@ -935,9 +923,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">集合名称</param>
         /// <returns></returns>
-        public ArrayList SetMembers(string key)
+        public ArrayList SetMembers(string key, int db = -1)
         {
-            var sets = RedisManager.ReadDataBase().SetMembers(key);
+            var sets = RedisManager.ReadDataBase(db).SetMembers(key);
             ArrayList list = new ArrayList();
             foreach (var item in sets)
             {
@@ -953,9 +941,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="destination">目标集合</param>
         /// <param name="value">移动的值</param>
         /// <returns></returns>
-        public bool SetMove(string source,string destination,string value)
+        public bool SetMove(string source,string destination,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetMove(source, destination, value);
+            return RedisManager.WriteDataBase(db).SetMove(source, destination, value);
         }
 
         /// <summary>
@@ -963,9 +951,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">集合名称</param>
         /// <returns></returns>
-        public long SetLength(string key)
+        public long SetLength(string key, int db = -1)
         {
-            return RedisManager.ReadDataBase().SetLength(key);
+            return RedisManager.ReadDataBase(db).SetLength(key);
         }
 
         /// <summary>
@@ -974,9 +962,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="member">成员的值</param>
         /// <returns></returns>
-        public bool SetContains(string key,string member)
+        public bool SetContains(string key,string member, int db = -1)
         {
-            return RedisManager.ReadDataBase().SetContains(key, member);
+            return RedisManager.ReadDataBase(db).SetContains(key, member);
         }
 
         /// <summary>
@@ -984,9 +972,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">集合名称</param>
         /// <returns></returns>
-        public string SetPop(string key)
+        public string SetPop(string key, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetPop(key);
+            return RedisManager.WriteDataBase(db).SetPop(key);
         }
 
         /// <summary>
@@ -994,9 +982,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">集合名称</param>
         /// <returns></returns>
-        public string SetRandMember(string key)
+        public string SetRandMember(string key, int db = -1)
         {
-            return RedisManager.ReadDataBase().SetRandomMember(key);
+            return RedisManager.ReadDataBase(db).SetRandomMember(key);
         }
 
         /// <summary>
@@ -1005,9 +993,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="count">取出元素的个数</param>
         /// <returns></returns>
-        public ArrayList SetRandMembers(string key,int count)
+        public ArrayList SetRandMembers(string key,int count, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetRandomMembers(key,count);
+            var list = RedisManager.ReadDataBase(db).SetRandomMembers(key,count);
             ArrayList list_result = new ArrayList();
             for (int i = 0; i < list.Count(); i++)
             {
@@ -1022,9 +1010,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="value">删除的值</param>
         /// <returns></returns>
-        public bool SetRemove(string key,string value)
+        public bool SetRemove(string key,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().SetRemove(key, value);
+            return RedisManager.WriteDataBase(db).SetRemove(key, value);
         }
 
         /// <summary>
@@ -1033,10 +1021,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">集合名称</param>
         /// <param name="value">删除的值</param>
         /// <returns></returns>
-        public long SetRemove(string key,string[] value)
+        public long SetRemove(string key,string[] value, int db = -1)
         {
             var list = Array.ConvertAll<string, RedisValue>(value, s => (RedisValue)s);
-            return RedisManager.WriteDataBase().SetRemove(key, values: list.ToArray());
+            return RedisManager.WriteDataBase(db).SetRemove(key, values: list.ToArray());
         }
 
         /// <summary>
@@ -1045,9 +1033,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="first">第一个集合</param>
         /// <param name="second">第二个集合</param>
         /// <returns></returns>
-        public string[] SetUnion(string first,string second)
+        public string[] SetUnion(string first,string second, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Union, first, second);
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Union, first, second);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1056,10 +1044,10 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="keys">所有合并的集合名称</param>
         /// <returns></returns>
-        public string[] SetUnion(string[] keys)
+        public string[] SetUnion(string[] keys, int db = -1)
         {
             var redisKeys = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
-            var list = RedisManager.ReadDataBase().SetCombine(SetOperation.Union, redisKeys);
+            var list = RedisManager.ReadDataBase(db).SetCombine(SetOperation.Union, redisKeys);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1070,9 +1058,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="first">第一个集合</param>
         /// <param name="second">第二个集合</param>
         /// <returns></returns>
-        public long SetUnionStore(string destination, string first, string second)
+        public long SetUnionStore(string destination, string first, string second, int db = -1)
         {
-            return RedisManager.ReadDataBase().SetCombineAndStore(SetOperation.Union, destination, first, second);
+            return RedisManager.ReadDataBase(db).SetCombineAndStore(SetOperation.Union, destination, first, second);
         }
 
         /// <summary>
@@ -1081,10 +1069,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="destination">合并生成的集合</param>
         /// <param name="keys">所有合并的集合名称</param>
         /// <returns></returns>
-        public long SetUnionStore(string destination, string[] keys)
+        public long SetUnionStore(string destination, string[] keys, int db = -1)
         {
             var redisKeys = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
-            return RedisManager.ReadDataBase().SetCombineAndStore(SetOperation.Union, destination, redisKeys);
+            return RedisManager.ReadDataBase(db).SetCombineAndStore(SetOperation.Union, destination, redisKeys);
         }
 
         /// <summary>
@@ -1094,9 +1082,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="pattern">获取的值</param>
         /// <param name="pagesize">最大结果数</param>
         /// <returns></returns>
-        public string[] SetScan(string key,string pattern,int pagesize)
+        public string[] SetScan(string key,string pattern,int pagesize, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetScan(key, pattern, pagesize).ToArray();
+            var list = RedisManager.ReadDataBase(db).SetScan(key, pattern, pagesize).ToArray();
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1107,9 +1095,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="pattern">获取的值</param>
         /// <param name="pagesize">最大结果数</param>
         /// <returns></returns>
-        public string[] SetScan(string key, string pattern, int pagesize,int cursor)
+        public string[] SetScan(string key, string pattern, int pagesize,int cursor, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SetScan(key, pattern, pagesize,cursor).ToArray();
+            var list = RedisManager.ReadDataBase(db).SetScan(key, pattern, pagesize,cursor).ToArray();
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1123,9 +1111,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">哈希表的名称</param>
         /// <param name="field">域的名称</param>
         /// <returns></returns>
-        public bool HashDelete(string key,string field)
+        public bool HashDelete(string key,string field, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashDelete(key, field);
+            return RedisManager.WriteDataBase(db).HashDelete(key, field);
         }
 
         /// <summary>
@@ -1134,9 +1122,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">哈希表的名称</param>
         /// <param name="field">域的名称</param>
         /// <returns></returns>
-        public long HashDelete(string key, string[] fields)
+        public long HashDelete(string key, string[] fields, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashDelete(key,Array.ConvertAll<string, RedisValue>(fields,m => (RedisValue)m));
+            return RedisManager.WriteDataBase(db).HashDelete(key,Array.ConvertAll<string, RedisValue>(fields,m => (RedisValue)m));
         }
 
         /// <summary>
@@ -1145,9 +1133,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">哈希表的名称</param>
         /// <param name="field">域的名称</param>
         /// <returns></returns>
-        public bool HashExists(string key,string field)
+        public bool HashExists(string key,string field, int db = -1)
         {
-            return RedisManager.ReadDataBase().HashExists(key, field);
+            return RedisManager.ReadDataBase(db).HashExists(key, field);
         }
 
         /// <summary>
@@ -1156,9 +1144,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">哈希表的名称</param>
         /// <param name="field">域的名称</param>
         /// <returns></returns>
-        public string HashGet(string key,string field)
+        public string HashGet(string key,string field, int db = -1)
         {
-            return RedisManager.ReadDataBase().HashGet(key, field);
+            return RedisManager.ReadDataBase(db).HashGet(key, field);
         }
 
         /// <summary>
@@ -1166,9 +1154,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">哈希表的名称</param>
         /// <returns></returns>
-        public Dictionary<string, string> HashGetAll(string key)
+        public Dictionary<string, string> HashGetAll(string key, int db = -1)
         {
-            var entry = RedisManager.ReadDataBase().HashGetAll(key);
+            var entry = RedisManager.ReadDataBase(db).HashGetAll(key);
             return entry.ToDictionary(m => m.Name.ToString(), n => n.Value.ToString());
         }
 
@@ -1179,9 +1167,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="field">域的名称</param>
         /// <param name="value">增量</param>
         /// <returns></returns>
-        public long HashIncrement(string key,string field,int value)
+        public long HashIncrement(string key,string field,int value, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashIncrement(key, field, value);
+            return RedisManager.WriteDataBase(db).HashIncrement(key, field, value);
         }
 
         /// <summary>
@@ -1191,9 +1179,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="field">域的名称</param>
         /// <param name="value">增量</param>
         /// <returns></returns>
-        public double HashIncrement(string key, string field, double value)
+        public double HashIncrement(string key, string field, double value, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashIncrement(key, field, value);
+            return RedisManager.WriteDataBase(db).HashIncrement(key, field, value);
         }
 
         /// <summary>
@@ -1201,9 +1189,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">哈希表的名称</param>
         /// <returns></returns>
-        public string[] HashKeys(string key)
+        public string[] HashKeys(string key, int db = -1)
         {
-            var list_key = RedisManager.ReadDataBase().HashKeys(key);
+            var list_key = RedisManager.ReadDataBase(db).HashKeys(key);
             return Array.ConvertAll<RedisValue, string>(list_key, m => m.ToString());
         }
 
@@ -1212,9 +1200,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public long HashLength(string key)
+        public long HashLength(string key, int db = -1)
         {
-            return RedisManager.ReadDataBase().HashLength(key);
+            return RedisManager.ReadDataBase(db).HashLength(key);
         }
 
         /// <summary>
@@ -1224,9 +1212,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="field">域的名称</param>
         /// <param name="value">域的值</param>
         /// <returns></returns>
-        public bool HashSet(string key,string field,string value)
+        public bool HashSet(string key,string field,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashSet(key, field, value);
+            return RedisManager.WriteDataBase(db).HashSet(key, field, value);
         }
 
         /// <summary>
@@ -1235,7 +1223,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key">哈希表的名称</param>
         /// <param name="fields">域的名称</param>
         /// <param name="values">域的值</param>
-        public void HashSet(string key,string[] fields,string[] values)
+        public void HashSet(string key,string[] fields,string[] values, int db = -1)
         {
             //判断两个数组的长度是否相等
             if (fields.Length != values.Length)
@@ -1248,7 +1236,7 @@ namespace XCYN.Common.Sql.redis
                 HashEntry entry = new HashEntry(fields[i], values[i]);
                 hashlist[i] = entry;
             }
-            RedisManager.WriteDataBase().HashSet(key, hashlist);
+            RedisManager.WriteDataBase(db).HashSet(key, hashlist);
         }
 
         /// <summary>
@@ -1256,11 +1244,11 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key">哈希表的名称</param>
         /// <param name="field_value">域的名称和值</param>
-        public void HashSet(string key,Dictionary<string,string> field_value)
+        public void HashSet(string key,Dictionary<string,string> field_value, int db = -1)
         {
             var fields = field_value.Keys.ToArray();
             var values = field_value.Values.ToArray();
-            this.HashSet(key, fields, values);
+            this.HashSet(key, fields, values,db);
         }
         
 
@@ -1271,9 +1259,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool HashSetNX(string key,string field,string value)
+        public bool HashSetNX(string key,string field,string value, int db = -1)
         {
-            return RedisManager.WriteDataBase().HashSet(key, false, value, When.NotExists);
+            return RedisManager.WriteDataBase(db).HashSet(key, false, value, When.NotExists);
         }
 
         /// <summary>
@@ -1281,9 +1269,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string[] HashValues(string key)
+        public string[] HashValues(string key, int db = -1)
         {
-            var values = RedisManager.ReadDataBase().HashValues(key);
+            var values = RedisManager.ReadDataBase(db).HashValues(key);
             return Array.ConvertAll<RedisValue, string>(values, m => m.ToString());
 
         }
@@ -1295,9 +1283,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="pattern"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public Dictionary<string, string> HashScan(string key,string pattern ,int pageSize)
+        public Dictionary<string, string> HashScan(string key,string pattern ,int pageSize, int db = -1)
         {
-            var entrys = RedisManager.ReadDataBase().HashScan(key, pattern, pageSize).ToList();
+            var entrys = RedisManager.ReadDataBase(db).HashScan(key, pattern, pageSize).ToList();
             return entrys.ToDictionary(m => m.Name.ToString(), n => n.Value.ToString());
         }
         #endregion
@@ -1311,9 +1299,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">值</param>
         /// <param name="score">分值</param>
         /// <returns></returns>
-        public bool SortedSetAdd(string key,string value,long score)
+        public bool SortedSetAdd(string key,string value,long score, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetAdd(key, value, score);
+            return RedisManager.WriteDataBase(db).SortedSetAdd(key, value, score);
         }
 
         /// <summary>
@@ -1323,7 +1311,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="value">值</param>
         /// <param name="score">分值</param>
         /// <returns></returns>
-        public long SortedSetAdd(string key,string[] values,int[] score)
+        public long SortedSetAdd(string key,string[] values,int[] score, int db = -1)
         {
             List<SortedSetEntry> list = new List<SortedSetEntry>();
             for(int i = 0;i < values.Length;i++)
@@ -1331,7 +1319,7 @@ namespace XCYN.Common.Sql.redis
                 SortedSetEntry entry = new SortedSetEntry(values[i],score[i]);
                 list.Add(entry);
             }
-            return RedisManager.WriteDataBase().SortedSetAdd(key, list.ToArray());
+            return RedisManager.WriteDataBase(db).SortedSetAdd(key, list.ToArray());
         }
 
         /// <summary>
@@ -1339,9 +1327,9 @@ namespace XCYN.Common.Sql.redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public long SortedSetLength(string key)
+        public long SortedSetLength(string key, int db = -1)
         {
-            return RedisManager.ReadDataBase().SortedSetLength(key);
+            return RedisManager.ReadDataBase(db).SortedSetLength(key);
         }
 
         /// <summary>
@@ -1350,9 +1338,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="min"></param>
         /// <param name="max"></param>
-        public long SortedSetCount(string key,int min,int max)
+        public long SortedSetCount(string key,int min,int max, int db = -1)
         {
-            return RedisManager.ReadDataBase().SortedSetLength(key, min, max);
+            return RedisManager.ReadDataBase(db).SortedSetLength(key, min, max);
         }
 
         /// <summary>
@@ -1362,9 +1350,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="member"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public double SortedSetIncrBy(string key, string member, int value)
+        public double SortedSetIncrBy(string key, string member, int value, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetIncrement(key, member, value);
+            return RedisManager.WriteDataBase(db).SortedSetIncrement(key, member, value);
         }
 
         /// <summary>
@@ -1374,9 +1362,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string[] SortedSetRange(string key,int start,int end)
+        public string[] SortedSetRange(string key,int start,int end, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SortedSetRangeByRank(key, start, end);
+            var list = RedisManager.ReadDataBase(db).SortedSetRangeByRank(key, start, end);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1387,9 +1375,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public List<Dictionary<string, string>> SortedSetRangeWithScore(string key, int start, int end)
+        public List<Dictionary<string, string>> SortedSetRangeWithScore(string key, int start, int end, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SortedSetRangeByRankWithScores(key, start, end);
+            var list = RedisManager.ReadDataBase(db).SortedSetRangeByRankWithScores(key, start, end);
             List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
             for (int i = 0; i < list.Count(); i++)
             {
@@ -1408,9 +1396,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string[] SortedSetRangeByScore(string key, long start, long end)
+        public string[] SortedSetRangeByScore(string key, long start, long end, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SortedSetRangeByScore(key, start, end);
+            var list = RedisManager.ReadDataBase(db).SortedSetRangeByScore(key, start, end);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1420,9 +1408,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public long? SortedSetRank(string key,string member)
+        public long? SortedSetRank(string key,string member, int db = -1)
         {
-            return RedisManager.ReadDataBase().SortedSetRank(key, member);
+            return RedisManager.ReadDataBase(db).SortedSetRank(key, member);
         }
 
         /// <summary>
@@ -1431,9 +1419,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public bool SortedSetRemove(string key,string member)
+        public bool SortedSetRemove(string key,string member, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetRemove(key, member);
+            return RedisManager.WriteDataBase(db).SortedSetRemove(key, member);
         }
 
         /// <summary>
@@ -1442,9 +1430,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public long SortedSetRemove(string key, string[] member)
+        public long SortedSetRemove(string key, string[] member, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetRemove(key,Array.ConvertAll<string,RedisValue>(member,m => (RedisValue)m));
+            return RedisManager.WriteDataBase(db).SortedSetRemove(key,Array.ConvertAll<string,RedisValue>(member,m => (RedisValue)m));
         }
 
         /// <summary>
@@ -1454,9 +1442,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public long SortedSetRemoveRangeByRank(string key,int start,int end)
+        public long SortedSetRemoveRangeByRank(string key,int start,int end, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetRemoveRangeByRank(key, start, end);
+            return RedisManager.WriteDataBase(db).SortedSetRemoveRangeByRank(key, start, end);
         }
 
         /// <summary>
@@ -1466,9 +1454,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public long SortedSetRemoveRangeByScore(string key,int start,int end)
+        public long SortedSetRemoveRangeByScore(string key,int start,int end, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetRemoveRangeByScore(key, start, end);
+            return RedisManager.WriteDataBase(db).SortedSetRemoveRangeByScore(key, start, end);
         }
 
         /// <summary>
@@ -1478,9 +1466,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string[] SortedSetRevRange(string key, int start, int end)
+        public string[] SortedSetRevRange(string key, int start, int end, int db = -1)
         {
-            var list = RedisManager.ReadDataBase().SortedSetRangeByRank(key, start, end,Order.Descending);
+            var list = RedisManager.ReadDataBase(db).SortedSetRangeByRank(key, start, end,Order.Descending);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1491,9 +1479,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string[] SortedSetRevRangeByScore(string key, int start, int end)
+        public string[] SortedSetRevRangeByScore(string key, int start, int end, int db = -1)
         {
-            var list = RedisManager.WriteDataBase().SortedSetRangeByScore(key, start, end,order:Order.Descending);
+            var list = RedisManager.WriteDataBase(db).SortedSetRangeByScore(key, start, end,order:Order.Descending);
             return Array.ConvertAll<RedisValue, string>(list, m => m.ToString());
         }
 
@@ -1503,9 +1491,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public long? SortedSetRevRank(string key, string member)
+        public long? SortedSetRevRank(string key, string member, int db = -1)
         {
-            return RedisManager.ReadDataBase().SortedSetRank(key, member,Order.Descending);
+            return RedisManager.ReadDataBase(db).SortedSetRank(key, member,Order.Descending);
         }
         
         /// <summary>
@@ -1514,9 +1502,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public double? SortedSetScore(string key,string member)
+        public double? SortedSetScore(string key,string member, int db = -1)
         {
-            return RedisManager.ReadDataBase().SortedSetScore(key, member);
+            return RedisManager.ReadDataBase(db).SortedSetScore(key, member);
         }
 
         /// <summary>
@@ -1527,9 +1515,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="dest"></param>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public double? SortedSetUnionStore(string first,string second,string dest)
+        public double? SortedSetUnionStore(string first,string second,string dest, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Union, dest, first, second);
+            return RedisManager.WriteDataBase(db).SortedSetCombineAndStore(SetOperation.Union, dest, first, second);
         }
 
         /// <summary>
@@ -1540,10 +1528,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="dest"></param>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public double? SortedSetUnionStore(string[] keys, string dest)
+        public double? SortedSetUnionStore(string[] keys, string dest, int db = -1)
         {
             var list = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
-            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Union, dest, list);
+            return RedisManager.WriteDataBase(db).SortedSetCombineAndStore(SetOperation.Union, dest, list);
         }
 
         /// <summary>
@@ -1554,9 +1542,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="dest"></param>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public double? SortedSetInterStore(string first, string second, string dest)
+        public double? SortedSetInterStore(string first, string second, string dest, int db = -1)
         {
-            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Intersect, dest, first, second);
+            return RedisManager.WriteDataBase(db).SortedSetCombineAndStore(SetOperation.Intersect, dest, first, second);
         }
 
         /// <summary>
@@ -1567,10 +1555,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="dest"></param>
         /// <param name="keys"></param>
         /// <returns></returns>
-        public double? SortedSetInterStore(string[] keys, string dest)
+        public double? SortedSetInterStore(string[] keys, string dest, int db = -1)
         {
             var list = Array.ConvertAll<string, RedisKey>(keys, m => (RedisKey)m);
-            return RedisManager.WriteDataBase().SortedSetCombineAndStore(SetOperation.Intersect, dest, list);
+            return RedisManager.WriteDataBase(db).SortedSetCombineAndStore(SetOperation.Intersect, dest, list);
         }
 
         /// <summary>
@@ -1580,10 +1568,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="pattern">获取的值</param>
         /// <param name="pagesize">最大结果数</param>
         /// <returns></returns>
-        public List<Dictionary<string,string>> SortedSetScan(string key, string pattern, int pagesize)
+        public List<Dictionary<string,string>> SortedSetScan(string key, string pattern, int pagesize, int db = -1)
         {
             List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
-            var list = RedisManager.ReadDataBase().SortedSetScan(key, pattern, pagesize).ToArray();
+            var list = RedisManager.ReadDataBase(db).SortedSetScan(key, pattern, pagesize).ToArray();
             for (int i = 0; i < list.Length; i++)
             {
                 Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -1602,10 +1590,10 @@ namespace XCYN.Common.Sql.redis
         /// <param name="pattern">获取的值</param>
         /// <param name="pagesize">最大结果数</param>
         /// <returns></returns>
-        public List<Dictionary<string, string>> SortedSetScan(string key, string pattern, int pagesize, int cursor)
+        public List<Dictionary<string, string>> SortedSetScan(string key, string pattern, int pagesize, int cursor, int db = -1)
         {
             List<Dictionary<string, string>> list_result = new List<Dictionary<string, string>>();
-            var list = RedisManager.ReadDataBase().SortedSetScan(key, pattern, pagesize, cursor).ToArray();
+            var list = RedisManager.ReadDataBase(db).SortedSetScan(key, pattern, pagesize, cursor).ToArray();
             for (int i = 0; i < list.Length; i++)
             {
                 Dictionary<string, string> dict = new Dictionary<string, string>();

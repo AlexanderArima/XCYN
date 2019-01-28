@@ -70,7 +70,7 @@ namespace bscy.App_Code.Models.Table.BranchList
             sheet.SetColumnWidth(4, 45 * 256);
             sheet.SetColumnWidth(5, 15 * 256);
             sheet.SetColumnWidth(6, 10 * 256);
-            sheet.SetColumnWidth(7, 10 * 256);
+            sheet.SetColumnWidth(7, 20 * 256);
 
             //表头样式
             ICellStyle style = workbook.CreateCellStyle();
@@ -153,14 +153,6 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     builder.Append(string.Format(" AND NSRSBH like '%{0}%' ", parm.NSRSBH));
                 }
-                //if (!string.IsNullOrEmpty(parm.JYDZ) && parm.JYDZ.Trim().Length > 0)
-                //{
-                //    builder.Append(string.Format(" AND JYDZ like '%{0}%' ", parm.JYDZ));
-                //}
-                //if (!string.IsNullOrEmpty(parm.ZGSWJG) && parm.ZGSWJG.Trim().Length > 0)
-                //{
-                //    builder.Append(string.Format(" AND ZGSWJG like '%{0}%' ", parm.ZGSWJG));
-                //}
                 if (parm.SFNSZT == 0 || parm.SFNSZT == 1)
                 {
                     builder.Append(string.Format(" AND SFNSZT = {0} ", parm.SFNSZT));
@@ -173,7 +165,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 Node node = new Node();
                 node.id = row["id"].ToString();
-                node.NUMBER = row["NUMBER"].ToString();
                 node.NSRMC = row["NSRMC"].ToString();
                 node.NSRSBH = row["NSRSBH"].ToString();
                 node.JYDZ = row["JYDZ"].ToString();
@@ -188,8 +179,8 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     node.ZXSJ = "";
                 }
-                node.JGCJ = ConvertHelper.ToInt(row["JGCJ"]);
                 node.SJJGMC = row["SJJGMC"].ToString();
+                node.SJJGSFNSZT = ConvertHelper.ToBoolean(row["SJJGSFNSZT"]) ? 1 : 0;
                 grid.Rows.Add(node);
             }
             grid = GetTreeMap(grid);
@@ -316,7 +307,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             model.GetModel(id);
             Node node = new Node();
             node.id = model.id.ToString();
-            node.NUMBER = model.NUMBER;
             node.NSRMC = model.NSRMC;
             node.NSRSBH = model.NSRSBH;
             node.JYDZ = model.JYDZ;
@@ -331,8 +321,10 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 node.ZXSJ = "";
             }
-            node.JGCJ = model.JGCJ;
             node.SJJGMC = model.SJJGMC;
+            node.SJJGSFNSZT = model.SJJGSFNSZT ? 1 : 0;
+            node.CREATEID = model.CREATEID;
+            node.CREATETIME = model.CREATETIME.ToString("yyyy-MM-dd HH:mm:ss");
             return node;
         }
 
@@ -346,7 +338,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             //将IList<Node>转成DataTable
             DataTable dt = new DataTable("BranchRecord");
             dt.Columns.Add("id");
-            dt.Columns.Add("NUMBER");
             dt.Columns.Add("NSRMC");
             dt.Columns.Add("NSRSBH");
             dt.Columns.Add("JYDZ");
@@ -354,9 +345,14 @@ namespace bscy.App_Code.Models.Table.BranchList
             dt.Columns.Add("SFNSZT", typeof(bool));
             dt.Columns.Add("KYSJ", typeof(DateTime));
             dt.Columns.Add("ZXSJ", typeof(DateTime));
-            dt.Columns.Add("JGCJ");
             dt.Columns.Add("SJJGMC");
+            dt.Columns.Add("SJJGSFNSZT", typeof(bool));
             dt.Columns.Add("ISDELETE", typeof(bool));
+            dt.Columns.Add("CREATEID", typeof(int));
+            dt.Columns.Add("CREATETIME", typeof(DateTime));
+            dt.Columns.Add("EDITID", typeof(int));
+            dt.Columns.Add("EDITTIME", typeof(DateTime));
+            dt.Columns.Add("DELETEID", typeof(int));
             dt.Columns.Add("DELETETIME", typeof(DateTime));
             for (int i = 0; i < list.Count; i++)
             {
@@ -371,21 +367,22 @@ namespace bscy.App_Code.Models.Table.BranchList
                     throw new ArgumentException(string.Format("纳税人识别号:{0}，已存在", NSRSBH));
                 }
                 DataRow row = dt.NewRow();
-                row[1] = list[i].NUMBER;
-                row[2] = list[i].NSRMC;
-                row[3] = list[i].NSRSBH;
-                row[4] = list[i].JYDZ;
-                row[5] = list[i].ZGSWJG;
-                row[6] = list[i].SFNSZT == 1 ? true : false;
-                row[7] = list[i].KYSJ;
+                row[1] = list[i].NSRMC;
+                row[2] = list[i].NSRSBH;
+                row[3] = list[i].JYDZ;
+                row[4] = list[i].ZGSWJG;
+                row[5] = list[i].SFNSZT == 1 ? true : false;
+                row[6] = list[i].KYSJ;
                 DateTime Temp_ZXSJ = new DateTime();
                 if (DateTime.TryParse(list[i].ZXSJ, out Temp_ZXSJ))
                 {
-                    row[8] = list[i].ZXSJ;
+                    row[7] = list[i].ZXSJ;
                 }
-                row[9] = list[i].JGCJ;
-                row[10] = list[i].SJJGMC;
-                row[11] = false;
+                row[8] = list[i].SJJGMC;
+                row[9] = list[i].SJJGSFNSZT;
+                row[10] = false;
+                row[11] = list[i].CREATEID;
+                row[12] = list[i].CREATETIME;
                 dt.Rows.Add(row);
             }
             BranchRecord branch = new BranchRecord();
@@ -401,7 +398,6 @@ namespace bscy.App_Code.Models.Table.BranchList
         public int Add(Node node)
         {
             BranchRecord branch = new BranchRecord();
-            branch.NUMBER = node.NUMBER;
             branch.NSRMC = node.NSRMC;
             branch.NSRSBH = node.NSRSBH;
             branch.JYDZ = node.JYDZ;
@@ -416,8 +412,10 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 branch.ZXSJ = Convert.ToDateTime(node.ZXSJ);
             }
-            branch.JGCJ = node.JGCJ;
             branch.SJJGMC = node.SJJGMC;
+            branch.SJJGSFNSZT = node.SJJGSFNSZT == 1 ? true : false;
+            branch.CREATEID = node.CREATEID;
+            branch.CREATETIME = Convert.ToDateTime(node.CREATETIME);
             //验证上级机构是否存在
             if (node.SJJGMC.Length > 0 && Count(node.SJJGMC, string.Empty) == 0)
             {
@@ -445,7 +443,6 @@ namespace bscy.App_Code.Models.Table.BranchList
         {
             BranchRecord branch = new BranchRecord();
             branch.id = ConvertHelper.ToInt(node.id);
-            branch.NUMBER = node.NUMBER;
             branch.NSRMC = node.NSRMC;
             branch.NSRSBH = node.NSRSBH;
             branch.JYDZ = node.JYDZ;
@@ -460,8 +457,12 @@ namespace bscy.App_Code.Models.Table.BranchList
             {
                 branch.ZXSJ = Convert.ToDateTime(node.ZXSJ);
             }
-            branch.JGCJ = node.JGCJ;
             branch.SJJGMC = node.SJJGMC;
+            branch.SJJGSFNSZT = node.SJJGSFNSZT == 1 ? true : false;
+            branch.CREATEID = node.CREATEID;
+            branch.CREATETIME = Convert.ToDateTime(node.CREATETIME);
+            branch.EDITID = node.EDITID;
+            branch.EDITTIME = DateTime.Now;
             //验证上级机构是否存在
             if (node.SJJGMC.Length > 0 && Count(node.SJJGMC, string.Empty) == 0)
             {
@@ -492,24 +493,10 @@ namespace bscy.App_Code.Models.Table.BranchList
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public bool Delete(int id,int userId)
         {
             BranchRecord branch = new BranchRecord();
-            branch.DeleteAll(id);
-            branch.GetModel(id);
-            return branch.ISDELETE;
-
-            //删除所有下级，这样做没有考虑到事务。。
-            //if (CountSJJGMC(branch.NSRMC) > 0)
-            //{
-            //    DataTable dt = branch.GetList(string.Format(" SJJGMC = '{0}' ",branch.NSRMC));
-            //    for (int i = 0; i < dt.Rows.Count; i++)
-            //    {
-            //        //删除子集
-            //        branch.Delete(Convert.ToInt32(dt.Rows[i]["id"]));
-            //    }
-            //}
-
+            return branch.DeleteAll(id, userId);
         }
 
         /// <summary>
@@ -601,7 +588,6 @@ namespace bscy.App_Code.Models.Table.BranchList
     public class Node
     {
         private string _id;
-        private string _number;
         private string _nsrmc;
         private string _nsrsbh;
         private string _jydz;
@@ -609,25 +595,22 @@ namespace bscy.App_Code.Models.Table.BranchList
         private int _sfnszt;
         private string _kysj;
         private string _zxsj;
-        private int _jgcj;
         private string _sjjgmc;
+        private int _sjjgsfnszt;
         private int _isdelete = 0;
-        private DateTime? _deletetime;
+        private int _createid;
+        private string _createtime;
+        private int? _editid;
+        private string _edittime;
+        private int? _deleteid;
+        private string _deletetime;
         /// <summary>
-        /// 
-        /// </summary>
-        public string id
+		/// 
+		/// </summary>
+		public string id
         {
             set { _id = value; }
             get { return _id; }
-        }
-        /// <summary>
-        /// 序号
-        /// </summary>
-        public string NUMBER
-        {
-            set { _number = value; }
-            get { return _number; }
         }
         /// <summary>
         /// 纳税人名称
@@ -686,14 +669,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             get { return _zxsj; }
         }
         /// <summary>
-        /// 机构层级
-        /// </summary>
-        public int JGCJ
-        {
-            set { _jgcj = value; }
-            get { return _jgcj; }
-        }
-        /// <summary>
         /// 上级机构名称
         /// </summary>
         public string SJJGMC
@@ -701,7 +676,14 @@ namespace bscy.App_Code.Models.Table.BranchList
             set { _sjjgmc = value; }
             get { return _sjjgmc; }
         }
-
+        /// <summary>
+        /// 上级机构是否纳税主体
+        /// </summary>
+        public int SJJGSFNSZT
+        {
+            set { _sjjgsfnszt = value; }
+            get { return _sjjgsfnszt; }
+        }
         /// <summary>
         /// 删除标记
         /// </summary>
@@ -710,11 +692,50 @@ namespace bscy.App_Code.Models.Table.BranchList
             set { _isdelete = value; }
             get { return _isdelete; }
         }
-
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        public int CREATEID
+        {
+            set { _createid = value; }
+            get { return _createid; }
+        }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public string CREATETIME
+        {
+            set { _createtime = value; }
+            get { return _createtime; }
+        }
+        /// <summary>
+        /// 编辑人
+        /// </summary>
+        public int? EDITID
+        {
+            set { _editid = value; }
+            get { return _editid; }
+        }
+        /// <summary>
+        /// 编辑时间
+        /// </summary>
+        public string EDITTIME
+        {
+            set { _edittime = value; }
+            get { return _edittime; }
+        }
+        /// <summary>
+        /// 删除人
+        /// </summary>
+        public int? DELETEID
+        {
+            set { _deleteid = value; }
+            get { return _deleteid; }
+        }
         /// <summary>
         /// 删除时间
         /// </summary>
-        public DateTime? DELETETIME
+        public string DELETETIME
         {
             set { _deletetime = value; }
             get { return _deletetime; }

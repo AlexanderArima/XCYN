@@ -18,7 +18,6 @@ namespace bscy.App_Code.Models.Table.BranchList
 
         #region Model
         private int _id;
-        private string _number;
         private string _nsrmc;
         private string _nsrsbh;
         private string _jydz;
@@ -26,25 +25,22 @@ namespace bscy.App_Code.Models.Table.BranchList
         private bool _sfnszt;
         private DateTime _kysj;
         private DateTime? _zxsj;
-        private int _jgcj;
         private string _sjjgmc;
+        private bool _sjjgsfnszt;
         private bool _isdelete = false;
+        private int _createid;
+        private DateTime _createtime;
+        private int? _editid;
+        private DateTime? _edittime;
+        private int? _deleteid;
         private DateTime? _deletetime;
         /// <summary>
-        /// 
-        /// </summary>
-        public int id
+		/// 
+		/// </summary>
+		public int id
         {
             set { _id = value; }
             get { return _id; }
-        }
-        /// <summary>
-        /// 序号
-        /// </summary>
-        public string NUMBER
-        {
-            set { _number = value; }
-            get { return _number; }
         }
         /// <summary>
         /// 纳税人名称
@@ -103,14 +99,6 @@ namespace bscy.App_Code.Models.Table.BranchList
             get { return _zxsj; }
         }
         /// <summary>
-        /// 机构层级
-        /// </summary>
-        public int JGCJ
-        {
-            set { _jgcj = value; }
-            get { return _jgcj; }
-        }
-        /// <summary>
         /// 上级机构名称
         /// </summary>
         public string SJJGMC
@@ -118,7 +106,14 @@ namespace bscy.App_Code.Models.Table.BranchList
             set { _sjjgmc = value; }
             get { return _sjjgmc; }
         }
-
+        /// <summary>
+        /// 上级机构是否纳税主体
+        /// </summary>
+        public bool SJJGSFNSZT
+        {
+            set { _sjjgsfnszt = value; }
+            get { return _sjjgsfnszt; }
+        }
         /// <summary>
         /// 删除标记
         /// </summary>
@@ -127,7 +122,46 @@ namespace bscy.App_Code.Models.Table.BranchList
             set { _isdelete = value; }
             get { return _isdelete; }
         }
-
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        public int CREATEID
+        {
+            set { _createid = value; }
+            get { return _createid; }
+        }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CREATETIME
+        {
+            set { _createtime = value; }
+            get { return _createtime; }
+        }
+        /// <summary>
+        /// 编辑人
+        /// </summary>
+        public int? EDITID
+        {
+            set { _editid = value; }
+            get { return _editid; }
+        }
+        /// <summary>
+        /// 编辑时间
+        /// </summary>
+        public DateTime? EDITTIME
+        {
+            set { _edittime = value; }
+            get { return _edittime; }
+        }
+        /// <summary>
+        /// 删除人
+        /// </summary>
+        public int? DELETEID
+        {
+            set { _deleteid = value; }
+            get { return _deleteid; }
+        }
         /// <summary>
         /// 删除时间
         /// </summary>
@@ -141,16 +175,16 @@ namespace bscy.App_Code.Models.Table.BranchList
         #region  Method
 
         /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public BranchRecord(int id)
+		/// 得到一个对象实体
+		/// </summary>
+		public BranchRecord(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,NUMBER,NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,JGCJ,SJJGMC,ISDELETE,DELETETIME ");
+            strSql.Append("select id,NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,SJJGMC,SJJGSFNSZT,ISDELETE,CREATEID,CREATETIME,EDITID,EDITTIME,DELETEID,DELETETIME ");
             strSql.Append(" FROM [BranchRecord] ");
             strSql.Append(" where id=@id ");
             SqlParameter[] parameters = {
-                        new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             DataTable dt = SqlHelper.GetTable(strSql.ToString(), parameters);
@@ -159,10 +193,6 @@ namespace bscy.App_Code.Models.Table.BranchList
                 if (dt.Rows[0]["id"] != null && dt.Rows[0]["id"].ToString() != "")
                 {
                     this.id = int.Parse(dt.Rows[0]["id"].ToString());
-                }
-                if (dt.Rows[0]["NUMBER"] != null)
-                {
-                    this.NUMBER = dt.Rows[0]["NUMBER"].ToString();
                 }
                 if (dt.Rows[0]["NSRMC"] != null)
                 {
@@ -200,14 +230,22 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     this.ZXSJ = DateTime.Parse(dt.Rows[0]["ZXSJ"].ToString());
                 }
-                if (dt.Rows[0]["JGCJ"] != null && dt.Rows[0]["JGCJ"].ToString() != "")
-                {
-                    this.JGCJ = int.Parse(dt.Rows[0]["JGCJ"].ToString());
-                }
                 if (dt.Rows[0]["SJJGMC"] != null)
                 {
                     this.SJJGMC = dt.Rows[0]["SJJGMC"].ToString();
                 }
+                if (dt.Rows[0]["SJJGSFNSZT"] != null && dt.Rows[0]["SJJGSFNSZT"].ToString() != "")
+                {
+                    if ((dt.Rows[0]["SJJGSFNSZT"].ToString() == "1") || (dt.Rows[0]["SJJGSFNSZT"].ToString().ToLower() == "true"))
+                    {
+                        this.SJJGSFNSZT = true;
+                    }
+                    else
+                    {
+                        this.SJJGSFNSZT = false;
+                    }
+                }
+
                 if (dt.Rows[0]["ISDELETE"] != null && dt.Rows[0]["ISDELETE"].ToString() != "")
                 {
                     if ((dt.Rows[0]["ISDELETE"].ToString() == "1") || (dt.Rows[0]["ISDELETE"].ToString().ToLower() == "true"))
@@ -220,6 +258,26 @@ namespace bscy.App_Code.Models.Table.BranchList
                     }
                 }
 
+                if (dt.Rows[0]["CREATEID"] != null && dt.Rows[0]["CREATEID"].ToString() != "")
+                {
+                    this.CREATEID = int.Parse(dt.Rows[0]["CREATEID"].ToString());
+                }
+                if (dt.Rows[0]["CREATETIME"] != null && dt.Rows[0]["CREATETIME"].ToString() != "")
+                {
+                    this.CREATETIME = DateTime.Parse(dt.Rows[0]["CREATETIME"].ToString());
+                }
+                if (dt.Rows[0]["EDITID"] != null && dt.Rows[0]["EDITID"].ToString() != "")
+                {
+                    this.EDITID = int.Parse(dt.Rows[0]["EDITID"].ToString());
+                }
+                if (dt.Rows[0]["EDITTIME"] != null && dt.Rows[0]["EDITTIME"].ToString() != "")
+                {
+                    this.EDITTIME = DateTime.Parse(dt.Rows[0]["EDITTIME"].ToString());
+                }
+                if (dt.Rows[0]["DELETEID"] != null && dt.Rows[0]["DELETEID"].ToString() != "")
+                {
+                    this.DELETEID = int.Parse(dt.Rows[0]["DELETEID"].ToString());
+                }
                 if (dt.Rows[0]["DELETETIME"] != null && dt.Rows[0]["DELETETIME"].ToString() != "")
                 {
                     this.DELETETIME = DateTime.Parse(dt.Rows[0]["DELETETIME"].ToString());
@@ -238,18 +296,17 @@ namespace bscy.App_Code.Models.Table.BranchList
         }
 
         /// <summary>
-        /// 增加一条数据
-        /// </summary>
-        public int Add()
+		/// 增加一条数据
+		/// </summary>
+		public int Add()
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into [BranchRecord] (");
-            strSql.Append("NUMBER,NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,JGCJ,SJJGMC,ISDELETE,DELETETIME)");
+            strSql.Append("NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,SJJGMC,SJJGSFNSZT,ISDELETE,CREATEID,CREATETIME,EDITID,EDITTIME,DELETEID,DELETETIME)");
             strSql.Append(" values (");
-            strSql.Append("@NUMBER,@NSRMC,@NSRSBH,@JYDZ,@ZGSWJG,@SFNSZT,@KYSJ,@ZXSJ,@JGCJ,@SJJGMC,@ISDELETE,@DELETETIME)");
+            strSql.Append("@NSRMC,@NSRSBH,@JYDZ,@ZGSWJG,@SFNSZT,@KYSJ,@ZXSJ,@SJJGMC,@SJJGSFNSZT,@ISDELETE,@CREATEID,@CREATETIME,@EDITID,@EDITTIME,@DELETEID,@DELETETIME)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-                    new SqlParameter("@NUMBER", SqlDbType.NVarChar,200),
                     new SqlParameter("@NSRMC", SqlDbType.NVarChar,200),
                     new SqlParameter("@NSRSBH", SqlDbType.NVarChar,200),
                     new SqlParameter("@JYDZ", SqlDbType.NVarChar,200),
@@ -257,23 +314,31 @@ namespace bscy.App_Code.Models.Table.BranchList
                     new SqlParameter("@SFNSZT", SqlDbType.Bit,1),
                     new SqlParameter("@KYSJ", SqlDbType.DateTime),
                     new SqlParameter("@ZXSJ", SqlDbType.DateTime),
-                    new SqlParameter("@JGCJ", SqlDbType.Int,4),
                     new SqlParameter("@SJJGMC", SqlDbType.NVarChar,200),
+                    new SqlParameter("@SJJGSFNSZT", SqlDbType.Bit,1),
                     new SqlParameter("@ISDELETE", SqlDbType.Bit,1),
+                    new SqlParameter("@CREATEID", SqlDbType.Int,4),
+                    new SqlParameter("@CREATETIME", SqlDbType.DateTime),
+                    new SqlParameter("@EDITID", SqlDbType.Int,4),
+                    new SqlParameter("@EDITTIME", SqlDbType.DateTime),
+                    new SqlParameter("@DELETEID", SqlDbType.Int,4),
                     new SqlParameter("@DELETETIME", SqlDbType.DateTime)};
-            parameters[0].Value = NUMBER;
-            parameters[1].Value = NSRMC;
-            parameters[2].Value = NSRSBH;
-            parameters[3].Value = JYDZ;
-            parameters[4].Value = ZGSWJG;
-            parameters[5].Value = SFNSZT;
-            parameters[6].Value = KYSJ;
-            parameters[7].Value = ZXSJ;
-            parameters[8].Value = JGCJ;
-            parameters[9].Value = SJJGMC;
-            parameters[10].Value = ISDELETE;
-            parameters[11].Value = DELETETIME;
-
+            parameters[0].Value = NSRMC;
+            parameters[1].Value = NSRSBH;
+            parameters[2].Value = JYDZ;
+            parameters[3].Value = ZGSWJG;
+            parameters[4].Value = SFNSZT;
+            parameters[5].Value = KYSJ;
+            parameters[6].Value = ZXSJ;
+            parameters[7].Value = SJJGMC;
+            parameters[8].Value = SJJGSFNSZT;
+            parameters[9].Value = ISDELETE;
+            parameters[10].Value = CREATEID;
+            parameters[11].Value = CREATETIME;
+            parameters[12].Value = EDITID;
+            parameters[13].Value = EDITTIME;
+            parameters[14].Value = DELETEID;
+            parameters[15].Value = DELETETIME;
             object obj = SqlHelper.ExecuteNonQuery(strSql.ToString(), parameters);
             if (obj == null)
             {
@@ -284,14 +349,14 @@ namespace bscy.App_Code.Models.Table.BranchList
                 return Convert.ToInt32(obj);
             }
         }
+
         /// <summary>
-        /// 更新一条数据
-        /// </summary>
-        public bool Update()
+		/// 更新一条数据
+		/// </summary>
+		public bool Update()
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update [BranchRecord] set ");
-            strSql.Append("NUMBER=@NUMBER,");
             strSql.Append("NSRMC=@NSRMC,");
             strSql.Append("NSRSBH=@NSRSBH,");
             strSql.Append("JYDZ=@JYDZ,");
@@ -299,38 +364,51 @@ namespace bscy.App_Code.Models.Table.BranchList
             strSql.Append("SFNSZT=@SFNSZT,");
             strSql.Append("KYSJ=@KYSJ,");
             strSql.Append("ZXSJ=@ZXSJ,");
-            strSql.Append("JGCJ=@JGCJ,");
             strSql.Append("SJJGMC=@SJJGMC,");
+            strSql.Append("SJJGSFNSZT=@SJJGSFNSZT,");
             strSql.Append("ISDELETE=@ISDELETE,");
+            strSql.Append("CREATEID=@CREATEID,");
+            strSql.Append("CREATETIME=@CREATETIME,");
+            strSql.Append("EDITID=@EDITID,");
+            strSql.Append("EDITTIME=@EDITTIME,");
+            strSql.Append("DELETEID=@DELETEID,");
             strSql.Append("DELETETIME=@DELETETIME");
             strSql.Append(" where id=@id ");
             SqlParameter[] parameters = {
-                        new SqlParameter("@NUMBER", SqlDbType.NVarChar,200),
-                        new SqlParameter("@NSRMC", SqlDbType.NVarChar,200),
-                        new SqlParameter("@NSRSBH", SqlDbType.NVarChar,200),
-                        new SqlParameter("@JYDZ", SqlDbType.NVarChar,200),
-                        new SqlParameter("@ZGSWJG", SqlDbType.NVarChar,200),
-                        new SqlParameter("@SFNSZT", SqlDbType.Bit,1),
-                        new SqlParameter("@KYSJ", SqlDbType.DateTime),
-                        new SqlParameter("@ZXSJ", SqlDbType.DateTime),
-                        new SqlParameter("@JGCJ", SqlDbType.Int,4),
-                        new SqlParameter("@SJJGMC", SqlDbType.NVarChar,200),
-                        new SqlParameter("@ISDELETE", SqlDbType.Bit,1),
-                        new SqlParameter("@DELETETIME", SqlDbType.DateTime),
-                        new SqlParameter("@id", SqlDbType.Int,4)};
-            parameters[0].Value = NUMBER;
-            parameters[1].Value = NSRMC;
-            parameters[2].Value = NSRSBH;
-            parameters[3].Value = JYDZ;
-            parameters[4].Value = ZGSWJG;
-            parameters[5].Value = SFNSZT;
-            parameters[6].Value = KYSJ;
-            parameters[7].Value = ZXSJ;
-            parameters[8].Value = JGCJ;
-            parameters[9].Value = SJJGMC;
-            parameters[10].Value = ISDELETE;
-            parameters[11].Value = DELETETIME;
-            parameters[12].Value = id;
+                    new SqlParameter("@NSRMC", SqlDbType.NVarChar,200),
+                    new SqlParameter("@NSRSBH", SqlDbType.NVarChar,200),
+                    new SqlParameter("@JYDZ", SqlDbType.NVarChar,200),
+                    new SqlParameter("@ZGSWJG", SqlDbType.NVarChar,200),
+                    new SqlParameter("@SFNSZT", SqlDbType.Bit,1),
+                    new SqlParameter("@KYSJ", SqlDbType.DateTime),
+                    new SqlParameter("@ZXSJ", SqlDbType.DateTime),
+                    new SqlParameter("@SJJGMC", SqlDbType.NVarChar,200),
+                    new SqlParameter("@SJJGSFNSZT", SqlDbType.Bit,1),
+                    new SqlParameter("@ISDELETE", SqlDbType.Bit,1),
+                    new SqlParameter("@CREATEID", SqlDbType.Int,4),
+                    new SqlParameter("@CREATETIME", SqlDbType.DateTime),
+                    new SqlParameter("@EDITID", SqlDbType.Int,4),
+                    new SqlParameter("@EDITTIME", SqlDbType.DateTime),
+                    new SqlParameter("@DELETEID", SqlDbType.Int,4),
+                    new SqlParameter("@DELETETIME", SqlDbType.DateTime),
+                    new SqlParameter("@id", SqlDbType.Int,4)};
+            parameters[0].Value = NSRMC;
+            parameters[1].Value = NSRSBH;
+            parameters[2].Value = JYDZ;
+            parameters[3].Value = ZGSWJG;
+            parameters[4].Value = SFNSZT;
+            parameters[5].Value = KYSJ;
+            parameters[6].Value = ZXSJ;
+            parameters[7].Value = SJJGMC;
+            parameters[8].Value = SJJGSFNSZT;
+            parameters[9].Value = ISDELETE;
+            parameters[10].Value = CREATEID;
+            parameters[11].Value = CREATETIME;
+            parameters[12].Value = EDITID;
+            parameters[13].Value = EDITTIME;
+            parameters[14].Value = DELETEID;
+            parameters[15].Value = DELETETIME;
+            parameters[16].Value = id;
 
             int rows = SqlHelper.ExecuteNonQuery(strSql.ToString(), parameters);
             if (rows > 0)
@@ -343,16 +421,21 @@ namespace bscy.App_Code.Models.Table.BranchList
             }
         }
 
-        public bool DeleteAll(int id)
+        /// <summary>
+        /// 删除节点，及其所属的所有子节点
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DeleteAll(int id,int userId)
         {
             List<string> listSql = new List<string>();
-            listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", id));
+            listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1,DELETEID = {1},DELETETIME = '{2}' where id={0}", id,userId,DateTime.Now));
             //查看是否有子节点
             this.GetModel(id);
             string NSRMC = this.NSRMC;
             if (this.CountSJJGMC(this.NSRMC) == 0)
             {
-                //没有子节点执行SQL语句
+                //没有子节点跳到方法末尾
                 goto executeSql;
             }
             else
@@ -366,17 +449,16 @@ namespace bscy.App_Code.Models.Table.BranchList
                 StringBuilder strNSRMC = new StringBuilder();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", dt.Rows[i]["id"]));
+                    listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1,DELETEID = {1},DELETETIME = '{2}' where id={0}", dt.Rows[i]["id"], userId, DateTime.Now));
                     strId.Append(dt.Rows[i]["id"].ToString() + ",");
                     strNSRMC.Append("'" + dt.Rows[i]["NSRMC"].ToString() + "',");
                 }
-                
                 strId.Remove(strId.Length - 1, 1);
                 strNSRMC.Remove(strNSRMC.Length - 1, 1);    //去掉最后一位逗号
                 //查看是否还有子节点
                 if (Count(string.Format("and SJJGMC in({0})", strNSRMC)) == 0)
                 {
-                    //没有子节点执行SQL语句
+                    //没有子节点跳到方法末尾
                     goto executeSql;
                 }
                 else
@@ -388,15 +470,15 @@ namespace bscy.App_Code.Models.Table.BranchList
                     dt = SqlHelper.GetTable(strSql.ToString());
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1 where id={0}", dt.Rows[i]["id"]));
+                        listSql.Add(string.Format("update [BranchRecord] set ISDELETE = 1,DELETEID = {1},DELETETIME = '{2}' where id={0}", dt.Rows[i]["id"], userId, DateTime.Now));
                     }
                 }
             }
 
-
         executeSql:
             if (SqlHelper.ExecuteSqlTran(listSql) == listSql.Count)
             {
+                //删除的数量与预计的一致，则返回true
                 return true;
             }
             else
@@ -552,16 +634,16 @@ namespace bscy.App_Code.Models.Table.BranchList
         }
 
         /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public void GetModel(int id)
+		/// 得到一个对象实体
+		/// </summary>
+		public void GetModel(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,NUMBER,NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,JGCJ,SJJGMC,ISDELETE,DELETETIME ");
+            strSql.Append("select id,NSRMC,NSRSBH,JYDZ,ZGSWJG,SFNSZT,KYSJ,ZXSJ,SJJGMC,SJJGSFNSZT,ISDELETE,CREATEID,CREATETIME,EDITID,EDITTIME,DELETEID,DELETETIME ");
             strSql.Append(" FROM [BranchRecord] ");
             strSql.Append(" where id=@id ");
             SqlParameter[] parameters = {
-                        new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             DataTable dt = SqlHelper.GetTable(strSql.ToString(), parameters);
@@ -570,10 +652,6 @@ namespace bscy.App_Code.Models.Table.BranchList
                 if (dt.Rows[0]["id"] != null && dt.Rows[0]["id"].ToString() != "")
                 {
                     this.id = int.Parse(dt.Rows[0]["id"].ToString());
-                }
-                if (dt.Rows[0]["NUMBER"] != null)
-                {
-                    this.NUMBER = dt.Rows[0]["NUMBER"].ToString();
                 }
                 if (dt.Rows[0]["NSRMC"] != null)
                 {
@@ -610,13 +688,20 @@ namespace bscy.App_Code.Models.Table.BranchList
                 {
                     this.ZXSJ = DateTime.Parse(dt.Rows[0]["ZXSJ"].ToString());
                 }
-                if (dt.Rows[0]["JGCJ"] != null && dt.Rows[0]["JGCJ"].ToString() != "")
-                {
-                    this.JGCJ = int.Parse(dt.Rows[0]["JGCJ"].ToString());
-                }
                 if (dt.Rows[0]["SJJGMC"] != null)
                 {
                     this.SJJGMC = dt.Rows[0]["SJJGMC"].ToString();
+                }
+                if (dt.Rows[0]["SJJGSFNSZT"] != null && dt.Rows[0]["SJJGSFNSZT"].ToString() != "")
+                {
+                    if ((dt.Rows[0]["SJJGSFNSZT"].ToString() == "1") || (dt.Rows[0]["SJJGSFNSZT"].ToString().ToLower() == "true"))
+                    {
+                        this.SJJGSFNSZT = true;
+                    }
+                    else
+                    {
+                        this.SJJGSFNSZT = false;
+                    }
                 }
                 if (dt.Rows[0]["ISDELETE"] != null && dt.Rows[0]["ISDELETE"].ToString() != "")
                 {
@@ -628,6 +713,26 @@ namespace bscy.App_Code.Models.Table.BranchList
                     {
                         this.ISDELETE = false;
                     }
+                }
+                if (dt.Rows[0]["CREATEID"] != null && dt.Rows[0]["CREATEID"].ToString() != "")
+                {
+                    this.CREATEID = int.Parse(dt.Rows[0]["CREATEID"].ToString());
+                }
+                if (dt.Rows[0]["CREATETIME"] != null && dt.Rows[0]["CREATETIME"].ToString() != "")
+                {
+                    this.CREATETIME = DateTime.Parse(dt.Rows[0]["CREATETIME"].ToString());
+                }
+                if (dt.Rows[0]["EDITID"] != null && dt.Rows[0]["EDITID"].ToString() != "")
+                {
+                    this.EDITID = int.Parse(dt.Rows[0]["EDITID"].ToString());
+                }
+                if (dt.Rows[0]["EDITTIME"] != null && dt.Rows[0]["EDITTIME"].ToString() != "")
+                {
+                    this.EDITTIME = DateTime.Parse(dt.Rows[0]["EDITTIME"].ToString());
+                }
+                if (dt.Rows[0]["DELETEID"] != null && dt.Rows[0]["DELETEID"].ToString() != "")
+                {
+                    this.DELETEID = int.Parse(dt.Rows[0]["DELETEID"].ToString());
                 }
                 if (dt.Rows[0]["DELETETIME"] != null && dt.Rows[0]["DELETETIME"].ToString() != "")
                 {
