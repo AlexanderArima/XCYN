@@ -125,6 +125,12 @@ namespace XCYN.Common
                 new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
             _command.SortedSetAdd("mySortedSet2", 
                 new string[] { "wuhan", "shanghai" }, new int[] { 1,4 });
+
+            //初始化Geo
+            _command.KeyDelete("MyMap");
+            _command.GeoAdd("MyMap", 114.31, 30.52, "WuHan",2);
+            _command.GeoAdd("MyMap", 121.48, 31.22, "ShangHai",2);
+            _command.GeoAdd("MyMap", 116.46, 39.92, "BeiJing",2);
         }
 
         #endregion
@@ -1142,6 +1148,33 @@ namespace XCYN.Common
             Assert.AreEqual(1, num);
         }
         #endregion
-        
+
+        #region 地理信息
+
+        [TestMethod]
+        public void GeoAdd()
+        {
+             var flag = _command.GeoAdd("MyMap", 114.31, 30.52,"WuHan");
+            _command.GeoAdd("MyMap", 121.48, 31.22, "ShangHai");
+            _command.GeoAdd("MyMap", 116.46, 39.92, "BeiJing");
+            Assert.AreEqual(true, flag);
+        }
+
+        [TestMethod]
+        public void GeoDistance()
+        {
+            var dist = _command.GeoDistance("MyMap", "WuHan", "ShangHai",StackExchange.Redis.GeoUnit.Kilometers,2);
+            Assert.IsTrue(dist > 500);  //武汉到上海的距离超过500km
+        }
+
+        [TestMethod]
+        public void GeoHash()
+        {
+            var dist = _command.GeoHash("MyMap", "WuHan", 2);
+            //Assert.IsTrue(dist > 500);  //武汉到上海的距离超过500km
+        }
+
+        #endregion
+
     }
 }

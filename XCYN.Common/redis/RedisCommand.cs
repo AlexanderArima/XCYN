@@ -1604,6 +1604,143 @@ namespace XCYN.Common.Sql.redis
             return list_result;
         }
         #endregion
-        
+
+        #region 地理空间（geospatial）
+
+        /// <summary>
+        /// 将指定的地理空间位置（纬度、经度、名称）添加到指定的key中
+        /// </summary>
+        /// <param name="key">键名</param>
+        /// <param name="longitude">经度</param>
+        /// <param name="latitude">纬度</param>
+        /// <param name="member">地点名称</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public bool GeoAdd(string key,double longitude, double latitude,string member,int db = -1)
+        {
+            return RedisManager.WriteDataBase(db).GeoAdd(key, longitude, latitude, member);
+        }
+
+        /// <summary>
+        /// 返回两个地点之间的距离(Km)，如果两个地点中有一个不存在就返回空
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member1">地点1</param>
+        /// <param name="member2">地点2</param>
+        /// <param name="unit">长度单位</param>
+        /// <returns></returns>
+        public double? GeoDistance(string key,string member1,string member2, GeoUnit unit = GeoUnit.Kilometers, int db = -1)
+        {
+            return RedisManager.ReadDataBase(db).GeoDistance(key, member1, member2, unit);
+        }
+
+        /// <summary>
+        /// 返回一个或多个位置元素的 Geohash 表示
+        /// Geohash是GustavoNiemeyer发明的一种公共域地理编码系统，它将地理位置编码成一串简短的字母和数字。它是一种分层的空间数据结构，它将空间细分为网格形状的桶，这是Z阶曲线和一般空间填充曲线的众多应用之一。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public string GeoHash(string key, string member, int db = -1)
+        {
+            return RedisManager.ReadDataBase(db).GeoHash(key, member);
+        }
+
+        /// <summary>
+        /// 返回指定地点的经纬度，如果地点不存在就返回空
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public GeoPosition? GeoPos(string key,string member, int db = -1)
+        {
+            return RedisManager.ReadDataBase(db).GeoPosition(key, member);
+        }
+
+        /// <summary>
+        /// 返回指定地点的经纬度，如果地点不存在就返回空
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public GeoPosition?[] GetPos(string key,string[] member, int db = -1)
+        {
+            RedisValue[] value = new RedisValue[member.Length];
+            for (int i = 0; i < member.Length; i++)
+            {
+                value[i] = member[i];
+            }
+            return RedisManager.ReadDataBase(db).GeoPosition(key, value);
+        }
+
+        /// <summary>
+        /// 以给定的经纬度为中心， 返回键包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="longitude">经度</param>
+        /// <param name="latitude">纬度</param>
+        /// <returns></returns>
+        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude)
+        {
+            return GeoRadius(key, longitude, latitude, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance);
+        }
+
+        /// <summary>
+        /// 以给定的经纬度为中心， 返回键包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="longitude">经度</param>
+        /// <param name="latitude">纬度</param>
+        /// <param name="unit">长度单位</param>
+        /// <param name="count">返回值数量</param>
+        /// <param name="order">排序方式</param>
+        /// <param name="options">返回额外的值，比如之间的距离，地点的经纬度</param>
+        /// <returns></returns>
+        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude,GeoUnit unit = GeoUnit.Kilometers,int count = -1,Order? order = Order.Ascending, GeoRadiusOptions options = GeoRadiusOptions.Default, int db = -1)
+        {
+            return RedisManager.ReadDataBase(db).GeoRadius(key, longitude, latitude, unit,count, order, options);
+        }
+
+        /// <summary>
+        /// 以给定的地点为中心， 返回键包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member">地点</param>
+        /// <param name="radius">距离</param>
+        /// <returns></returns>
+        public GeoRadiusResult[] GeoRadiusByMember(string key, string member, double radius)
+        {
+            return GeoRadiusByMember(key, member, radius, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance);
+        }
+
+        /// <summary>
+        /// 以给定的地点为中心， 返回键包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member">地点</param>
+        /// <param name="radius">距离</param>
+        /// <param name="unit">长度单位</param>
+        /// <param name="count">返回值数量</param>
+        /// <param name="order">排序方式</param>
+        /// <param name="options">返回额外的值，比如之间的距离，地点的经纬度</param>
+        /// <returns></returns>
+        public GeoRadiusResult[] GeoRadiusByMember(string key,string member,double radius, GeoUnit unit = GeoUnit.Kilometers, int count = -1, Order? order = Order.Ascending, GeoRadiusOptions options = GeoRadiusOptions.Default, int db = -1)
+        {
+            return RedisManager.ReadDataBase(db).GeoRadius(key, member, radius, unit, count, order, options);
+        }
+
+        /// <summary>
+        /// 移除指定键的地点
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public bool GeoRemove(string key,string member, int db = -1)
+        {
+            return RedisManager.WriteDataBase(db).GeoRemove(key, member);
+        }
+
+        #endregion
+
     }
 }
