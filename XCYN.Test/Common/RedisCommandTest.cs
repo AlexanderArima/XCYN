@@ -131,6 +131,7 @@ namespace XCYN.Common
             _command.GeoAdd("MyMap", 114.31, 30.52, "WuHan",2);
             _command.GeoAdd("MyMap", 121.48, 31.22, "ShangHai",2);
             _command.GeoAdd("MyMap", 116.46, 39.92, "BeiJing",2);
+            _command.GeoAdd("MyMap", 113.31, 29.52, "YueYang",2);
         }
 
         #endregion
@@ -1172,6 +1173,66 @@ namespace XCYN.Common
         {
             var dist = _command.GeoHash("MyMap", "WuHan", 2);
             //Assert.IsTrue(dist > 500);  //武汉到上海的距离超过500km
+        }
+
+        [TestMethod]
+        public void GeoPosition()
+        {
+            var pos = _command.GeoPosition("MyMap", "WuHan",2);
+            Assert.AreEqual("114.31", pos.Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("30.52", pos.Value.Latitude.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void GeoPosition2()
+        {
+            string[] member = new string[] {
+                "WuHan",
+                "ShangHai"
+            };
+            var pos = _command.GeoPosition("MyMap", member, 2);
+            Assert.AreEqual("114.31", pos[0].Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("30.52", pos[0].Value.Latitude.ToString("0.00"));
+
+            Assert.AreEqual("121.48", pos[1].Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("31.22", pos[1].Value.Latitude.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void GeoRadius()
+        {
+            //岳阳距离武汉150km
+            var actual = _command.GeoRadius("MyMap", 113.31, 29.52,200,2);
+            Assert.AreEqual(2, actual.Length);
+
+            actual = _command.GeoRadius("MyMap", 113.31, 29.52, 900, 2);
+            Assert.AreEqual(3, actual.Length);
+
+            actual = _command.GeoRadius("MyMap", 113.31, 29.52, 1300, 2);
+            Assert.AreEqual(4, actual.Length);
+        }
+
+        [TestMethod]
+        public void GeoRadiusByMember()
+        {
+            var actual = _command.GeoRadiusByMember("MyMap", "YueYang", 200, 2);
+            Assert.AreEqual(2, actual.Length);
+
+            actual = _command.GeoRadiusByMember("MyMap", "YueYang", 900, 2);
+            Assert.AreEqual(3, actual.Length);
+
+            actual = _command.GeoRadiusByMember("MyMap", "YueYang", 1200, 2);
+            Assert.AreEqual(4, actual.Length);
+        }
+
+        [TestMethod]
+        public void GeoRemove()
+        {
+            var flag = _command.GeoRemove("MyMap", "YueYang", 2);
+            Assert.IsTrue(flag);
+
+            var pos = _command.GeoPosition("MyMap", "YueYang", 2);
+            Assert.IsNull(pos);
         }
 
         #endregion

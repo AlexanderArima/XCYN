@@ -1652,7 +1652,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public GeoPosition? GeoPos(string key,string member, int db = -1)
+        public GeoPosition? GeoPosition(string key,string member, int db = -1)
         {
             return RedisManager.ReadDataBase(db).GeoPosition(key, member);
         }
@@ -1663,7 +1663,7 @@ namespace XCYN.Common.Sql.redis
         /// <param name="key"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public GeoPosition?[] GetPos(string key,string[] member, int db = -1)
+        public GeoPosition?[] GeoPosition(string key,string[] member, int db = -1)
         {
             RedisValue[] value = new RedisValue[member.Length];
             for (int i = 0; i < member.Length; i++)
@@ -1680,9 +1680,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="longitude">经度</param>
         /// <param name="latitude">纬度</param>
         /// <returns></returns>
-        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude)
+        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude, double radius, int db = -1)
         {
-            return GeoRadius(key, longitude, latitude, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance);
+            return GeoRadius(key, longitude, latitude,radius, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance,db);
         }
 
         /// <summary>
@@ -1696,9 +1696,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="order">排序方式</param>
         /// <param name="options">返回额外的值，比如之间的距离，地点的经纬度</param>
         /// <returns></returns>
-        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude,GeoUnit unit = GeoUnit.Kilometers,int count = -1,Order? order = Order.Ascending, GeoRadiusOptions options = GeoRadiusOptions.Default, int db = -1)
+        public GeoRadiusResult[] GeoRadius(string key, double longitude, double latitude,double radius,GeoUnit unit = GeoUnit.Kilometers,int count = -1,Order? order = Order.Ascending, GeoRadiusOptions options = GeoRadiusOptions.Default, int db = -1)
         {
-            return RedisManager.ReadDataBase(db).GeoRadius(key, longitude, latitude, unit,count, order, options);
+            return RedisManager.ReadDataBase(db).GeoRadius(key, longitude, latitude, radius, unit,count, order, options);
         }
 
         /// <summary>
@@ -1708,9 +1708,9 @@ namespace XCYN.Common.Sql.redis
         /// <param name="member">地点</param>
         /// <param name="radius">距离</param>
         /// <returns></returns>
-        public GeoRadiusResult[] GeoRadiusByMember(string key, string member, double radius)
+        public GeoRadiusResult[] GeoRadiusByMember(string key, string member, double radius, int db = -1)
         {
-            return GeoRadiusByMember(key, member, radius, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance);
+            return GeoRadiusByMember(key, member, radius, GeoUnit.Kilometers, -1, Order.Ascending, GeoRadiusOptions.WithDistance, db);
         }
 
         /// <summary>
