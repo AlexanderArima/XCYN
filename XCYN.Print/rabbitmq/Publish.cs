@@ -1,6 +1,7 @@
 ﻿using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +10,20 @@ namespace XCYN.Print.rabbitmq
 {
     public class Publish
     {
+
+        public static string RabbitMQ_UserName = ConfigurationManager.AppSettings["RabbitMQ_UserName"];
+        public static string RabbitMQ_Password = ConfigurationManager.AppSettings["RabbitMQ_Password"];
+        public static string RabbitMQ_HostName = ConfigurationManager.AppSettings["RabbitMQ_HostName"];
+
         /// <summary>
         /// 基础发布消息
         /// </summary>
         public static void PublishBasic()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -32,6 +38,7 @@ namespace XCYN.Print.rabbitmq
                     for (int i = 0; i < 10; i++)
                     {
                         var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好",i));
+                        Console.WriteLine("生产出：" + string.Format("{0},你好", i));
                         //发送消息
                         channel.BasicPublish("", "test", basicProperties: null, body: msg);
                     }
@@ -40,14 +47,46 @@ namespace XCYN.Print.rabbitmq
         }
 
         /// <summary>
+        /// 基础发布消息
+        /// </summary>
+        public static void PublishBasic(string QueueName)
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
+            //创建connection
+            using (var connection = factory.CreateConnection())
+            {
+                //创建channel
+                using (var channel = connection.CreateModel())
+                {
+                    //创建交换机
+
+                    //创建Queue
+                    var queue = channel.QueueDeclare(QueueName, true, false, false, null);
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        var msg = Encoding.UTF8.GetBytes(string.Format("{0},你好", i));
+                        //Console.WriteLine("生产出：" + string.Format("{0},你好", i));
+                        //发送消息
+                        channel.BasicPublish("", QueueName, basicProperties: null, body: msg);
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
         /// 带上交换机发布消息
         /// </summary>
         public static void PublishWithExchange()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -75,9 +114,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishLog()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -105,9 +144,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishFanout()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -136,9 +175,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishHeader()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -151,7 +190,7 @@ namespace XCYN.Print.rabbitmq
                     //var queue = channel.QueueDeclare("test", true, false, false, null);
                     var prop = channel.CreateBasicProperties();
                     prop.Headers = new Dictionary<string, object>();
-                    prop.Headers.Add("userName", "root");
+                    prop.Headers.Add("userName", RabbitMQ_UserName);
                     prop.Headers.Add("password", "123456");
                     //此处不创建队列
                     for (int i = 0; i < 100; i++)
@@ -171,9 +210,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishTopic()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -186,7 +225,7 @@ namespace XCYN.Print.rabbitmq
                     //var queue = channel.QueueDeclare("test", true, false, false, null);
                     var prop = channel.CreateBasicProperties();
                     prop.Headers = new Dictionary<string, object>();
-                    prop.Headers.Add("userName", "root");
+                    prop.Headers.Add("userName", RabbitMQ_UserName);
                     prop.Headers.Add("password", "123456");
                     //此处不创建队列
                     for (int i = 0; i < 100; i++)
@@ -206,9 +245,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishNonDurable()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -228,9 +267,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishExclusive()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -250,9 +289,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishAutoDelete()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -272,9 +311,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishPassive()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -299,9 +338,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishMessageTTL()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -329,9 +368,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishAutoExpire()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -355,9 +394,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishMaxLength()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -385,9 +424,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishMaxLengthByte()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -415,9 +454,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishDeadLetterExchangeAndRoutingKey()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -447,9 +486,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishPriority()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -480,9 +519,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishTX()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -522,9 +561,9 @@ namespace XCYN.Print.rabbitmq
         public static void PublishPersistent()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
-            factory.HostName = "192.168.1.111";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
+            factory.HostName = RabbitMQ_HostName;
             //创建connection
             using (var connection = factory.CreateConnection())
             {
@@ -555,8 +594,8 @@ namespace XCYN.Print.rabbitmq
         public static void PublishLazy()
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "root";
-            factory.Password = "900424";
+            factory.UserName = RabbitMQ_UserName;
+            factory.Password = RabbitMQ_Password;
             factory.HostName = "192.168.1.107";
             //创建connection
             using (var connection = factory.CreateConnection())
