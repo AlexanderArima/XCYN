@@ -111,7 +111,7 @@ namespace XCYN.Common.Access
         }
 
         // 7
-        private static int ExecuteNonQuery(string cmdText, params OleDbParameter[] cmdParms)
+        public static int ExecuteNonQuery(string cmdText, params OleDbParameter[] cmdParms)
         {
             return ExecuteNonQuery(connStr, cmdText, cmdParms);
         }

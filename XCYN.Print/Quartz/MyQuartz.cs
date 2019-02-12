@@ -39,12 +39,15 @@ namespace XCYN.Print.Quartz
 
             scheduler.Start();
 
+            //Job执行的任务
             var job = JobBuilder.Create<PublishJob>().Build();
 
-            var trigger = TriggerBuilder.Create().WithSimpleSchedule(m => m.WithIntervalInSeconds(1)
-                                                                            .RepeatForever())
-                                                 .StartNow()
-                                                 .Build();
+            //Schedule计划表，可以设置调用次数，调用间隔
+            //Trigger触发器，可以设置调用开始，结束时间，优先级
+            var trigger = TriggerBuilder.Create().WithSimpleSchedule(
+                                                                             m => m.WithIntervalInSeconds(1).WithRepeatCount(1))
+                                                                            .StartNow()//.EndAt(DateTimeOffset.Now.AddSeconds(10))
+                                                                            .Build();
 
             scheduler.ScheduleJob(job, trigger);
         }

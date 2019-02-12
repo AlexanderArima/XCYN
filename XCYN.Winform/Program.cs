@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using XCYN.Winform.MeiTuan;
+using XCYN.Winform.Quartz;
 
 namespace XCYN.Winform
 {
@@ -17,7 +18,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogViewer());
+            Application.Run(new TimerForm());
 
             //方式1
             //Application app = new Application();
