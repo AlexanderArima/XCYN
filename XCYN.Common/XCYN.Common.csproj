@@ -120,11 +120,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\OleDbHelper.cs" />
     <Compile Include="ActiveX\IObjectSafety.cs" />
     <Compile Include="ActiveX\SerialPortControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ChinaDate.cs" />
+    <Compile Include="ConvertHelper.cs" />
     <Compile Include="CrossThreadCalls.cs" />
     <Compile Include="Dapper\DapperHelper.cs" />
     <Compile Include="Dapper\DapperManager.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="DTKeys.cs" />
     <Compile Include="mysql\MySqlHelper.cs" />
     <Compile Include="PrintHelper.cs" />
+    <Compile Include="ReflectionHelper.cs" />
     <Compile Include="RequestHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MailHelper.cs" />

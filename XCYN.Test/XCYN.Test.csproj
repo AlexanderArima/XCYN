@@ -216,6 +216,7 @@
     <Compile Include="cdbWeb\SqlHelper.cs" />
     <Compile Include="Common\CacheTestCase.cs" />
     <Compile Include="Common\MySQLTestCase.cs" />
+    <Compile Include="Common\OleDbHelperTest.cs" />
     <Compile Include="MVC\Controllers\HomeTestCase.cs" />
     <Compile Include="Print\CalculatorTestCase.cs" />
     <Compile Include="Common\CompressTestCase.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Common\UtilTestCase.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Winform\LogModelTest.cs" />
+    <Compile Include="Winform\TimerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

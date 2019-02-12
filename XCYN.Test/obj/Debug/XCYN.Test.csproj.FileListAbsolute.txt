@@ -574,3 +574,13 @@ E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OOXML.dll
 E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OpenXml4Net.dll
 E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\NPOI.OpenXmlFormats.dll
 E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\ICSharpCode.SharpZipLib.xml
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Quartz.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.Core.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.dll
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Quartz.pdb
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Quartz.xml
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.Core.pdb
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.Core.xml
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.pdb
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Common.Logging.xml
+E:\MyGitProject\XCYN\XCYN.Test\bin\Debug\Quartz\Timer.accdb
