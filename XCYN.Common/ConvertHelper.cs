@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -165,6 +166,30 @@ namespace XCYN.Common
             {
                 return err;
             }
+        }
+
+        /// <summary>
+        /// 将DataTable转成DataRow
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static DataRow[] ToDataRow(DataTable table)
+        {
+            DataRow[] row = new DataRow[table.Rows.Count];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                row[i] = table.Rows[i];
+            }
+            return row;
+        }
+
+        public static DataTable ToDataTable(DataRow[] rows)
+        {
+            if (rows == null || rows.Length == 0) return null;
+            DataTable tmp = rows[0].Table.Clone();  // 复制DataRow的表结构
+            foreach (DataRow row in rows)
+                tmp.Rows.Add(row.ItemArray);  // 将DataRow添加到DataTable中
+            return tmp;
         }
 
         /// <summary>

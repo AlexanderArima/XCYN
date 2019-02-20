@@ -8,21 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using XCYN.Common;
+using XCYN.Winform.Quartz.Model;
 
-namespace XCYN.Winform.Quartz
+namespace XCYN.Winform.Quartz.Views
 {
     public partial class AddTriggerForm : Form
     {
 
         static Color WARN_COLOR = Color.Pink;
         static Color NORMAL_COLOR = Color.White;
+        //DataTable _ServiceList_DataTable = new DataTable();
 
         public AddTriggerForm()
         {
             InitializeComponent();
             dateTimePicker1.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             dateTimePicker2.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            
+            T_ServiceList service = new T_ServiceList();
+            var ds = service.GetList("");
+            comboBox1.DataSource = ds.Tables[0];
+            comboBox1.DisplayMember = "ServiceName";
+            comboBox1.ValueMember = "ID";
+            //_ServiceList_DataTable = ds.Tables[0];
+            AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var row = ds.Tables[0].Rows[i];
+                auto.Add(row["ServiceName"].ToString());
+            }
+            comboBox1.AutoCompleteCustomSource = auto;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -80,7 +94,7 @@ namespace XCYN.Winform.Quartz
                 RepeatTime = ConvertHelper.ToInt(repeatTime),
                 RepeatInterval = ConvertHelper.ToInt(repeatInterval)
             };
-            if(simpleTrigger.Add() > 0)
+            if(simpleTrigger.Add(comboBox1.Text) > 0)
             {
                 //添加成功，提示并关闭画面
                 if(MessageBox.Show("添加成功","提示") == DialogResult.OK)
@@ -103,6 +117,16 @@ namespace XCYN.Winform.Quartz
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             textBox2.BackColor = NORMAL_COLOR;
+        }
+
+        /// <summary>
+        /// 输入值后可以进行搜索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+
         }
     }
 }

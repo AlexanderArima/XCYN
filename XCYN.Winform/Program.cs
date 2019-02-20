@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using XCYN.Winform.MeiTuan;
 using XCYN.Winform.Quartz;
+using XCYN.Winform.Quartz.Views;
 
 namespace XCYN.Winform
 {

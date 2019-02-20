@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XCYN.Winform.Quartz
+namespace XCYN.Winform.Quartz.Model
 {
     public class Olympic
     {

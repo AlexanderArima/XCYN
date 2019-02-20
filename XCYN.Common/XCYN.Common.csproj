@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\DbHelperOleDb.cs" />
     <Compile Include="Access\OleDbHelper.cs" />
     <Compile Include="ActiveX\IObjectSafety.cs" />
     <Compile Include="ActiveX\SerialPortControl.cs">
