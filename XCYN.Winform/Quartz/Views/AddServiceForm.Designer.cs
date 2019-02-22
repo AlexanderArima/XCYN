@@ -55,7 +55,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(103, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(121, 21);
             this.textBox1.TabIndex = 1;
             // 
             // label2
@@ -96,7 +96,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(103, 157);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(121, 21);
             this.textBox2.TabIndex = 7;
             // 
             // label4
@@ -112,7 +112,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(103, 200);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.Size = new System.Drawing.Size(121, 21);
             this.textBox3.TabIndex = 9;
             // 
             // label5
@@ -126,7 +126,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(40, 269);
+            this.button1.Location = new System.Drawing.Point(34, 269);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -136,7 +136,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(185, 269);
+            this.button2.Location = new System.Drawing.Point(179, 269);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 346);
+            this.ClientSize = new System.Drawing.Size(284, 361);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox3);

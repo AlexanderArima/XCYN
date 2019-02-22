@@ -24,7 +24,15 @@ namespace XCYN.Winform.Quartz.Views
             ServiceFormViewModel service = new ServiceFormViewModel();
             var ds = service.GetList();
             gridControl1.DataSource = ds.Tables[0];
-            //gridView1.DataSource = ds.Tables[0];
+        }
+
+        private void 添加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddServiceForm form = new AddServiceForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                form.Dispose();
+            }
         }
     }
 }

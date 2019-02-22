@@ -29,24 +29,25 @@ namespace XCYN.Winform.Quartz.Model
         /// <summary>
         /// 添加
         /// </summary>
-        public int Add(string serviceName)
+        public int Add(T_SimpleTrigger model)
         {
-            //判断，ServiceName查找对应的SID
-            var ds = DbHelperOleDb.Query(string.Format(@"
-                SELECT ID FROM T_ServiceList WHERE ServiceName = '{0}'", serviceName));
-            if(ds.Tables[0].Rows.Count == 0)
-            {
-                throw new ArgumentException("ServiceName:" + serviceName + "，在T_ServiceList表中不存在");
-            }
-            var sid = ds.Tables[0].Rows[0]["ID"].ToString();
+            ////判断，ServiceName查找对应的SID
+            //var ds = DbHelperOleDb.Query(string.Format(@"
+            //    SELECT ID FROM T_ServiceList WHERE ServiceName = '{0}'", serviceName));
+            //if(ds.Tables[0].Rows.Count == 0)
+            //{
+            //    throw new ArgumentException("ServiceName:" + serviceName + "，在T_ServiceList表中不存在");
+            //}
+            //var sid = ds.Tables[0].Rows[0]["ID"].ToString();
             
             return OleDbHelper.ExecuteNonQuery(@"
-                INSERT INTO T_SimpleTrigger(StartTime,EndTime,RepeatTime,RepeatInterval) 
-                Values(@StartTime,@EndTime,@RepeatTime,@RepeatInterval)",
-                new OleDbParameter("@StartTime", this.StartTime),
-                new OleDbParameter("@EndTime", this.EndTime),
-                new OleDbParameter("@RepeatTime", this.RepeatTime),
-                new OleDbParameter("@RepeatInterval", this.RepeatInterval));
+                INSERT INTO T_SimpleTrigger(StartTime,EndTime,RepeatTime,RepeatInterval,SID) 
+                Values(@StartTime,@EndTime,@RepeatTime,@RepeatInterval,@SID)",
+                new OleDbParameter("@StartTime", model.StartTime),
+                new OleDbParameter("@EndTime", model.EndTime),
+                new OleDbParameter("@RepeatTime", model.RepeatTime),
+                new OleDbParameter("@RepeatInterval", model.RepeatInterval),
+                new OleDbParameter("@SID", model.SID));
         }
 
 

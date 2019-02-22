@@ -44,6 +44,7 @@
             this.colClassName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMethodName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsDelete = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -56,11 +57,12 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加ToolStripMenuItem,
             this.修改ToolStripMenuItem,
             this.删除ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(719, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(717, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,7 +86,7 @@
             this.groupControl1.Controls.Add(this.gridControl1);
             this.groupControl1.Location = new System.Drawing.Point(0, 28);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(719, 383);
+            this.groupControl1.Size = new System.Drawing.Size(717, 320);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "列表展示";
             // 
@@ -95,7 +97,7 @@
             this.gridControl1.Location = new System.Drawing.Point(2, 21);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(715, 360);
+            this.gridControl1.Size = new System.Drawing.Size(713, 297);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -174,11 +176,18 @@
             this.colIsDelete.FieldName = "IsDelete";
             this.colIsDelete.Name = "colIsDelete";
             // 
+            // 添加ToolStripMenuItem
+            // 
+            this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.添加ToolStripMenuItem.Text = "添加";
+            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
+            // 
             // ServiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 408);
+            this.ClientSize = new System.Drawing.Size(717, 345);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -217,5 +226,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colClassName;
         private DevExpress.XtraGrid.Columns.GridColumn colMethodName;
         private DevExpress.XtraGrid.Columns.GridColumn colIsDelete;
+        private System.Windows.Forms.ToolStripMenuItem 添加ToolStripMenuItem;
     }
 }

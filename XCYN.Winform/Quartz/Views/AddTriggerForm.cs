@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using XCYN.Common;
 using XCYN.Winform.Quartz.Model;
+using XCYN.Winform.Quartz.ViewModel;
 
 namespace XCYN.Winform.Quartz.Views
 {
@@ -22,10 +23,14 @@ namespace XCYN.Winform.Quartz.Views
         public AddTriggerForm()
         {
             InitializeComponent();
-            dateTimePicker1.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            dateTimePicker2.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            T_ServiceList service = new T_ServiceList();
-            var ds = service.GetList("");
+        }
+
+        private void AddTriggerForm_Load(object sender, EventArgs e)
+        {
+            //dateTimePicker1.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //dateTimePicker2.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            AddTriggerFormViewModel_GetList service = new AddTriggerFormViewModel_GetList();
+            var ds = service.GetList();
             comboBox1.DataSource = ds.Tables[0];
             comboBox1.DisplayMember = "ServiceName";
             comboBox1.ValueMember = "ID";
@@ -37,6 +42,42 @@ namespace XCYN.Winform.Quartz.Views
                 auto.Add(row["ServiceName"].ToString());
             }
             comboBox1.AutoCompleteCustomSource = auto;
+
+            this.dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.dateEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.dateEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm";
+
+            this.dateEdit1.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit1.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit1.Properties.VistaTimeProperties.DisplayFormat.FormatString = "HH:mm";
+            this.dateEdit1.Properties.VistaTimeProperties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.VistaTimeProperties.EditFormat.FormatString = "HH:mm";
+            this.dateEdit1.Properties.VistaTimeProperties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.VistaTimeProperties.Mask.EditMask = "HH:mm";
+
+            this.dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.dateEdit2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.dateEdit2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm";
+
+            this.dateEdit2.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit2.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit2.Properties.VistaTimeProperties.DisplayFormat.FormatString = "HH:mm";
+            this.dateEdit2.Properties.VistaTimeProperties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.VistaTimeProperties.EditFormat.FormatString = "HH:mm";
+            this.dateEdit2.Properties.VistaTimeProperties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.VistaTimeProperties.Mask.EditMask = "HH:mm";
+
+            //为空的时候显示的内容
+            lookUpEdit1.Properties.NullText = "";
+            lookUpEdit1.Properties.DataSource = new string[]
+            {
+                "秒","分","小时","天","周","月","年"
+            };
+            //dropDownButton1.
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -57,44 +98,73 @@ namespace XCYN.Winform.Quartz.Views
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            var startTime = dateTimePicker1.Text;
-            var endTime = dateTimePicker2.Text;
-            var repeatTime_temp = textBox1.Text;
-            var repeatInterval_temp = textBox2.Text;
+            //var startTime = dateTimePicker1.Text;
+            //var endTime = dateTimePicker2.Text;
+            var startTime = dateEdit1.Text;
+            var endTime = dateEdit2.Text;
+            var repeatTime_temp = textEdit1.Text;
+            var repeatInterval_temp = textEdit2.Text;
             int repeatTime = 0;
             int repeatInterval = 0;
+            var serviceName = comboBox1.Text;
             if (!int.TryParse(repeatTime_temp, out repeatTime))
             {
                 MessageBox.Show("重复次数只能输入数字");
-                textBox1.BackColor = WARN_COLOR;
+                textEdit1.BackColor = WARN_COLOR;
                 return;
             }
             if(repeatTime < 0)
             {
                 MessageBox.Show("重复次数只能输入正整数");
-                textBox1.BackColor = WARN_COLOR;
+                textEdit1.BackColor = WARN_COLOR;
                 return;
             }
             if (!int.TryParse(repeatInterval_temp, out repeatInterval))
             {
                 MessageBox.Show("重复次数只能输入数字");
-                textBox2.BackColor = WARN_COLOR;
+                textEdit2.BackColor = WARN_COLOR;
                 return;
             }
             if (repeatInterval < 0)
             {
                 MessageBox.Show("重复次数只能输入正整数");
-                textBox2.BackColor = WARN_COLOR;
+                textEdit2.BackColor = WARN_COLOR;
                 return;
             }
-            T_SimpleTrigger simpleTrigger = new T_SimpleTrigger()
+            if (lookUpEdit1.Text.Equals("分"))
+            {
+                repeatInterval = 60 * repeatInterval;
+            }
+            else if (lookUpEdit1.Text.Equals("小时"))
+            {
+                repeatInterval = 60 * 60 * repeatInterval;
+            }
+            else if (lookUpEdit1.Text.Equals("天"))
+            {
+                repeatInterval = 24 * 60 * 60 * repeatInterval;
+            }
+            else if (lookUpEdit1.Text.Equals("周"))
+            {
+                repeatInterval = 7 * 24 * 60 * 60 * repeatInterval;
+            }
+            else if (lookUpEdit1.Text.Equals("月"))
+            {
+                repeatInterval = 31 * 7 * 24 * 60 * 60 * repeatInterval;
+            }
+            else if (lookUpEdit1.Text.Equals("年"))
+            {
+                repeatInterval = 12 * 31 * 7 * 24 * 60 * 60 * repeatInterval;
+            }
+            //插入数据
+            AddTriggerFormViewModel_Add simpleTrigger = new AddTriggerFormViewModel_Add()
             {
                 StartTime = ConvertHelper.ToDateTime(startTime),
                 EndTime = ConvertHelper.ToDateTime(endTime),
                 RepeatTime = ConvertHelper.ToInt(repeatTime),
-                RepeatInterval = ConvertHelper.ToInt(repeatInterval)
+                RepeatInterval = ConvertHelper.ToInt(repeatInterval),
+                ServiceName = serviceName
             };
-            if(simpleTrigger.Add(comboBox1.Text) > 0)
+            if(simpleTrigger.Add(simpleTrigger) > 0)
             {
                 //添加成功，提示并关闭画面
                 if(MessageBox.Show("添加成功","提示") == DialogResult.OK)
@@ -109,14 +179,14 @@ namespace XCYN.Winform.Quartz.Views
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textEdit1_TextChanged(object sender, EventArgs e)
         {
-            textBox1.BackColor = NORMAL_COLOR;
+            textEdit1.BackColor = NORMAL_COLOR;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void textEdit2_TextChanged(object sender, EventArgs e)
         {
-            textBox2.BackColor = NORMAL_COLOR;
+            textEdit2.BackColor = NORMAL_COLOR;
         }
 
         /// <summary>
@@ -128,5 +198,6 @@ namespace XCYN.Winform.Quartz.Views
         {
 
         }
+
     }
 }

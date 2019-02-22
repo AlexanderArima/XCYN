@@ -719,6 +719,8 @@ namespace XCYN.Winform.Quartz {
             
             private global::System.Data.DataColumn columnServiceName;
             
+            private global::System.Data.DataColumn columnNextExecuteTime;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public TimerForm_DataSet1DataTable() {
@@ -810,6 +812,14 @@ namespace XCYN.Winform.Quartz {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn NextExecuteTimeColumn {
+                get {
+                    return this.columnNextExecuteTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -845,7 +855,7 @@ namespace XCYN.Winform.Quartz {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public TimerForm_DataSet1Row AddTimerForm_DataSet1Row(System.DateTime StartTime, System.DateTime EndTime, int RepeatTime, int RepeatInterval, int SID, string ServiceName) {
+            public TimerForm_DataSet1Row AddTimerForm_DataSet1Row(System.DateTime StartTime, System.DateTime EndTime, int RepeatTime, int RepeatInterval, int SID, string ServiceName, string NextExecuteTime) {
                 TimerForm_DataSet1Row rowTimerForm_DataSet1Row = ((TimerForm_DataSet1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -854,7 +864,8 @@ namespace XCYN.Winform.Quartz {
                         RepeatTime,
                         RepeatInterval,
                         SID,
-                        ServiceName};
+                        ServiceName,
+                        NextExecuteTime};
                 rowTimerForm_DataSet1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTimerForm_DataSet1Row);
                 return rowTimerForm_DataSet1Row;
@@ -891,6 +902,7 @@ namespace XCYN.Winform.Quartz {
                 this.columnRepeatInterval = base.Columns["RepeatInterval"];
                 this.columnSID = base.Columns["SID"];
                 this.columnServiceName = base.Columns["ServiceName"];
+                this.columnNextExecuteTime = base.Columns["NextExecuteTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -910,6 +922,8 @@ namespace XCYN.Winform.Quartz {
                 base.Columns.Add(this.columnSID);
                 this.columnServiceName = new global::System.Data.DataColumn("ServiceName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnServiceName);
+                this.columnNextExecuteTime = new global::System.Data.DataColumn("NextExecuteTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNextExecuteTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -922,6 +936,7 @@ namespace XCYN.Winform.Quartz {
                 this.columnRepeatTime.Caption = "重复次数";
                 this.columnRepeatInterval.Caption = "重复间隔";
                 this.columnServiceName.Caption = "服务名";
+                this.columnNextExecuteTime.Caption = "下次执行时间";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1993,6 +2008,22 @@ namespace XCYN.Winform.Quartz {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string NextExecuteTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableTimerForm_DataSet1.NextExecuteTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“TimerForm_DataSet1”中列“NextExecuteTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableTimerForm_DataSet1.NextExecuteTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsStartTimeNull() {
                 return this.IsNull(this.tableTimerForm_DataSet1.StartTimeColumn);
             }
@@ -2061,6 +2092,18 @@ namespace XCYN.Winform.Quartz {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetServiceNameNull() {
                 this[this.tableTimerForm_DataSet1.ServiceNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNextExecuteTimeNull() {
+                return this.IsNull(this.tableTimerForm_DataSet1.NextExecuteTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNextExecuteTimeNull() {
+                this[this.tableTimerForm_DataSet1.NextExecuteTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
