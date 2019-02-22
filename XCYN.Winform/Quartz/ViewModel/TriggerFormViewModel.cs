@@ -8,7 +8,7 @@ using XCYN.Winform.Quartz.Model;
 
 namespace XCYN.Winform.Quartz.ViewModel
 {
-    public class TimerFormViewModel
+    public class TriggerFormViewModel
     {
 
         public int ID { get; set; }

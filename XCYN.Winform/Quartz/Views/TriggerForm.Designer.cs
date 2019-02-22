@@ -1,6 +1,6 @@
 ﻿namespace XCYN.Winform.Quartz.Views
 {
-    partial class TimerForm
+    partial class TriggerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -131,14 +131,14 @@
             // 列表显示ToolStripMenuItem
             // 
             this.列表显示ToolStripMenuItem.Name = "列表显示ToolStripMenuItem";
-            this.列表显示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.列表显示ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.列表显示ToolStripMenuItem.Text = "列表";
             this.列表显示ToolStripMenuItem.Click += new System.EventHandler(this.列表显示ToolStripMenuItem_Click);
             // 
             // 添加ToolStripMenuItem1
             // 
             this.添加ToolStripMenuItem1.Name = "添加ToolStripMenuItem1";
-            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.添加ToolStripMenuItem1.Text = "添加";
             this.添加ToolStripMenuItem1.Click += new System.EventHandler(this.添加ToolStripMenuItem1_Click);
             // 
@@ -256,7 +256,7 @@
             this.colNextExecuteTime.Visible = true;
             this.colNextExecuteTime.VisibleIndex = 6;
             // 
-            // TimerForm
+            // TriggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,8 +264,8 @@
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "TimerForm";
-            this.Text = "TimerForm";
+            this.Name = "TriggerForm";
+            this.Text = "主面板";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.TimerForm_Load);
             this.menuStrip1.ResumeLayout(false);

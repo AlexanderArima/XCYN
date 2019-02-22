@@ -12,23 +12,23 @@ using XCYN.Winform.Quartz.ViewModel;
 
 namespace XCYN.Winform.Quartz.Views
 {
-    public partial class TimerForm :  DevExpress.XtraEditors.XtraForm
+    public partial class TriggerForm :  DevExpress.XtraEditors.XtraForm
     {
-        public TimerForm()
+        public TriggerForm()
         {
             InitializeComponent();
         }
 
         private void TimerForm_Load(object sender, EventArgs e)
         {
-            TimerFormViewModel trigger = new TimerFormViewModel();
+            TriggerFormViewModel trigger = new TriggerFormViewModel();
             var ds = trigger.GetList();
             gridControl1.DataSource = ds.Tables[0];
         }
         
         private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TimerFormViewModel trigger = new TimerFormViewModel();
+            TriggerFormViewModel trigger = new TriggerFormViewModel();
             var ds = trigger.GetList();
             gridControl1.DataSource = ds.Tables[0];
         }

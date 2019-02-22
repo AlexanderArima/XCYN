@@ -207,7 +207,7 @@
     <Compile Include="Quartz\ViewModel\AddTriggerFormViewModel.cs" />
     <Compile Include="Quartz\ViewModel\EditServiceFormViewModel.cs" />
     <Compile Include="Quartz\ViewModel\ServiceFormViewModel.cs" />
-    <Compile Include="Quartz\ViewModel\TimerFormViewModel.cs" />
+    <Compile Include="Quartz\ViewModel\TriggerFormViewModel.cs" />
     <Compile Include="Quartz\Views\AddServiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,11 +238,11 @@
     <Compile Include="Quartz\Views\ServiceForm.Designer.cs">
       <DependentUpon>ServiceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Quartz\Views\TimerForm.cs">
+    <Compile Include="Quartz\Views\TriggerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Quartz\Views\TimerForm.Designer.cs">
-      <DependentUpon>TimerForm.cs</DependentUpon>
+    <Compile Include="Quartz\Views\TriggerForm.Designer.cs">
+      <DependentUpon>TriggerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Quartz\Model\T_ServiceList.cs" />
     <Compile Include="Quartz\Model\T_SimpleTrigger.cs" />
@@ -302,8 +302,8 @@
     <EmbeddedResource Include="Quartz\Views\ServiceForm.resx">
       <DependentUpon>ServiceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Quartz\Views\TimerForm.resx">
-      <DependentUpon>TimerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Quartz\Views\TriggerForm.resx">
+      <DependentUpon>TriggerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SocketServer.resx">
       <DependentUpon>SocketServer.cs</DependentUpon>

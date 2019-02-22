@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
             this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,17 +43,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -76,10 +76,19 @@
             this.groupBox1.Controls.Add(this.textEdit1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 298);
+            this.groupBox1.Size = new System.Drawing.Size(310, 337);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "请录入数据";
+            // 
+            // lookUpEdit1
+            // 
+            this.lookUpEdit1.Location = new System.Drawing.Point(157, 143);
+            this.lookUpEdit1.Name = "lookUpEdit1";
+            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEdit1.Size = new System.Drawing.Size(100, 20);
+            this.lookUpEdit1.TabIndex = 17;
             // 
             // textEdit2
             // 
@@ -87,10 +96,6 @@
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Size = new System.Drawing.Size(68, 20);
             this.textEdit2.TabIndex = 16;
-            // 
-            // popupMenu1
-            // 
-            this.popupMenu1.Name = "popupMenu1";
             // 
             // dateEdit2
             // 
@@ -144,7 +149,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(208, 239);
+            this.button2.Location = new System.Drawing.Point(190, 239);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 9;
@@ -154,7 +159,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(64, 239);
+            this.button1.Location = new System.Drawing.Point(46, 239);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
@@ -205,35 +210,31 @@
             this.textEdit1.Size = new System.Drawing.Size(142, 20);
             this.textEdit1.TabIndex = 15;
             // 
-            // lookUpEdit1
+            // popupMenu1
             // 
-            this.lookUpEdit1.Location = new System.Drawing.Point(157, 143);
-            this.lookUpEdit1.Name = "lookUpEdit1";
-            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit1.Size = new System.Drawing.Size(100, 20);
-            this.lookUpEdit1.TabIndex = 17;
+            this.popupMenu1.Name = "popupMenu1";
             // 
             // AddTriggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 322);
+            this.ClientSize = new System.Drawing.Size(334, 361);
             this.Controls.Add(this.groupBox1);
             this.Name = "AddTriggerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加触发器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddTriggerForm_FormClosed);
             this.Load += new System.EventHandler(this.AddTriggerForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             this.ResumeLayout(false);
 
         }

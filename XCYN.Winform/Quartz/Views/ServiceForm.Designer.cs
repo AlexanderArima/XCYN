@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -44,7 +45,7 @@
             this.colClassName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMethodName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsDelete = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.刷新FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -57,6 +58,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.刷新FToolStripMenuItem,
             this.添加ToolStripMenuItem,
             this.修改ToolStripMenuItem,
             this.删除ToolStripMenuItem});
@@ -66,17 +68,26 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // 添加ToolStripMenuItem
+            // 
+            this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.添加ToolStripMenuItem.Text = "添加";
+            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
+            // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
             this.删除ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // groupControl1
             // 
@@ -124,7 +135,10 @@
             this.colIsDelete});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
             // 
             // colID
             // 
@@ -176,12 +190,12 @@
             this.colIsDelete.FieldName = "IsDelete";
             this.colIsDelete.Name = "colIsDelete";
             // 
-            // 添加ToolStripMenuItem
+            // 刷新FToolStripMenuItem
             // 
-            this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.添加ToolStripMenuItem.Text = "添加";
-            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
+            this.刷新FToolStripMenuItem.Name = "刷新FToolStripMenuItem";
+            this.刷新FToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.刷新FToolStripMenuItem.Text = "刷新";
+            this.刷新FToolStripMenuItem.Click += new System.EventHandler(this.刷新FToolStripMenuItem_Click);
             // 
             // ServiceForm
             // 
@@ -227,5 +241,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colMethodName;
         private DevExpress.XtraGrid.Columns.GridColumn colIsDelete;
         private System.Windows.Forms.ToolStripMenuItem 添加ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 刷新FToolStripMenuItem;
     }
 }

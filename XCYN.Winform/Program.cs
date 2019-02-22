@@ -19,7 +19,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TimerForm());
+            Application.Run(new TriggerForm());
 
             //方式1
             //Application app = new Application();
