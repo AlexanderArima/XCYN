@@ -217,6 +217,7 @@
     <Compile Include="Common\CacheTestCase.cs" />
     <Compile Include="Common\MySQLTestCase.cs" />
     <Compile Include="Common\OleDbHelperTest.cs" />
+    <Compile Include="Common\Log4NetHelpTest.cs" />
     <Compile Include="MVC\Controllers\HomeTestCase.cs" />
     <Compile Include="Print\CalculatorTestCase.cs" />
     <Compile Include="Common\CompressTestCase.cs" />
@@ -249,6 +250,9 @@
     <Compile Include="Winform\TimerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="格式化输出日志.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>

@@ -79,6 +79,7 @@ namespace XCYN.Winform.Model.LogViewer
             {
                 var json = File.ReadAllText(LogModel.LOGLOCATION, Encoding.UTF8);
                 json = "[" + json.Remove(json.Length - 1, 1) + "]";
+                json = json.Replace(@"\",@"/");
                 var jsonModel = JsonConvert.DeserializeObject<List<LogModel>>(json);
                 jsonModel = jsonModel.FindAll(m => {
                     if(!string.IsNullOrEmpty(message) && m.message.Contains(message))

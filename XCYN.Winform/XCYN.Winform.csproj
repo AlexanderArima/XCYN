@@ -52,6 +52,9 @@
     <StartupObject>XCYN.Winform.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSkin, Version=16.1.14.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\cskin.16.1.14.3\lib\net40\CSkin.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
     </Reference>
@@ -122,6 +125,12 @@
     </Compile>
     <Compile Include="CalculatorForm.Designer.cs">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSkinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSkinForm.Designer.cs">
+      <DependentUpon>CSkinForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogViewer.cs">
       <SubType>Form</SubType>
@@ -263,6 +272,9 @@
     </Compile>
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSkinForm.resx">
+      <DependentUpon>CSkinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>
