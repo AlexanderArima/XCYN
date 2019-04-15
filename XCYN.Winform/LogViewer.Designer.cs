@@ -30,35 +30,40 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.logLevelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.levelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.logModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.createTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.messageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.methodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exceptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.logModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.logLevelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.levelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logModelBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
@@ -70,10 +75,29 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(782, 91);
+            this.groupBox1.Size = new System.Drawing.Size(866, 91);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "筛选条件";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(262, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "label5";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(193, 53);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(63, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "日志路径";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -123,6 +147,10 @@
             this.comboBox1.TabIndex = 4;
             this.comboBox1.ValueMember = "Value";
             // 
+            // logLevelBindingSource
+            // 
+            this.logLevelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogLevel);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -166,7 +194,7 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(12, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(782, 339);
+            this.groupBox2.Size = new System.Drawing.Size(866, 450);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据列表";
@@ -178,28 +206,33 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.levelDataGridViewTextBoxColumn,
+            this.createTime,
             this.messageDataGridViewTextBoxColumn,
             this.classNameDataGridViewTextBoxColumn,
             this.methodNameDataGridViewTextBoxColumn,
-            this.exceptionDataGridViewTextBoxColumn});
+            this.exceptionDataGridViewTextBoxColumn,
+            this.levelDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.logModelBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 319);
+            this.dataGridView1.Size = new System.Drawing.Size(860, 430);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
-            // levelDataGridViewTextBoxColumn
+            // logModelBindingSource
             // 
-            this.levelDataGridViewTextBoxColumn.DataPropertyName = "level";
-            this.levelDataGridViewTextBoxColumn.HeaderText = "异常等级";
-            this.levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
-            this.levelDataGridViewTextBoxColumn.ReadOnly = true;
+            this.logModelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogModel);
+            // 
+            // createTime
+            // 
+            this.createTime.DataPropertyName = "createTime";
+            this.createTime.HeaderText = "发生时间";
+            this.createTime.Name = "createTime";
+            this.createTime.ReadOnly = true;
             // 
             // messageDataGridViewTextBoxColumn
             // 
@@ -230,29 +263,29 @@
             this.exceptionDataGridViewTextBoxColumn.ReadOnly = true;
             this.exceptionDataGridViewTextBoxColumn.Width = 300;
             // 
-            // logModelBindingSource
+            // levelDataGridViewTextBoxColumn
             // 
-            this.logModelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogModel);
-            // 
-            // logLevelBindingSource
-            // 
-            this.logLevelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogLevel);
+            this.levelDataGridViewTextBoxColumn.DataPropertyName = "level";
+            this.levelDataGridViewTextBoxColumn.HeaderText = "异常等级";
+            this.levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
+            this.levelDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // LogViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(884, 561);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "LogViewer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "日志查看器";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,10 +307,13 @@
         private System.Windows.Forms.BindingSource logModelBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource logLevelBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn messageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn classNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn methodNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn exceptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
     }
 }

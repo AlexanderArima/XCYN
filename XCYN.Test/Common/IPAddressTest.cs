@@ -2,26 +2,24 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XCYN.Winform.Model.LogViewer;
+using XCYN.Common;
 
-namespace XCYN.Test.Winform
+namespace XCYN.Test.Common
 {
     /// <summary>
-    /// LogViewerTest 的摘要说明
+    /// IPAddressTest 的摘要说明
     /// </summary>
     [TestClass]
-    public class LogModelTest
+    public class IPAddressTest
     {
-        public LogModelTest()
+        public IPAddressTest()
         {
             //
             //TODO:  在此处添加构造函数逻辑
             //
-            _logModel = new LogModel();
         }
 
         private TestContext testContextInstance;
-        private LogModel _logModel;
 
         /// <summary>
         ///获取或设置测试上下文，该上下文提供
@@ -62,26 +60,25 @@ namespace XCYN.Test.Winform
         #endregion
 
         [TestMethod]
-        public void GetList()
+        public void CheckIPAddrTest()
         {
-           var list =  _logModel.GetList("","",null,null);
-            Assert.AreEqual(4, list.Count);
-
-            list = _logModel.GetList("", "Info", null, null);
-            Assert.AreEqual(1, list.Count);
-
-            list = _logModel.GetList("", "FATAL", null, null);
-            Assert.AreEqual(1, list.Count);
-
-            list = _logModel.GetList("", "", new DateTime(2019,1,14,12,0,0).ToString("yyyy-MM-dd HH:mm:ss"), null);
-            Assert.AreEqual(4, list.Count);
-
-            list = _logModel.GetList("", "",null, new DateTime(2019, 1, 14, 18, 0, 0));
-            Assert.AreEqual(4, list.Count);
-
-            list = _logModel.GetList("", "", new DateTime(2019, 1, 14, 14, 0, 0).ToString("yyyy-MM-dd HH:mm:ss"), new DateTime(2019, 1, 14, 18, 0, 0));
-            Assert.AreEqual(3, list.Count);
+            var flag = IPAddressHelper.CheckIPAddr("180.97.33.108");
+            Assert.IsTrue(flag);
         }
-        
+
+        [TestMethod]
+        public void TestNetConnectityTest()
+        {
+            var flag = IPAddressHelper.TestNetConnectity("180.97.33.108", 10000);
+            Assert.IsTrue(flag);
+        }
+
+        [TestMethod]
+        public void TestNetConnectedTest()
+        {
+            var flag = IPAddressHelper.TestNetConnected("180.97.33.108");
+            Assert.IsTrue(flag);
+        }
+
     }
 }

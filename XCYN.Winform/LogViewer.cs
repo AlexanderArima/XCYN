@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using XCYN.Winform.Model.LogViewer;
-using System.Linq;
 
 namespace XCYN.Winform
 {
@@ -20,6 +19,8 @@ namespace XCYN.Winform
     {
 
         private List<LogLevel> _list_level = new List<LogLevel>();
+
+        private string _file_path = "";
 
         public LogViewer()
         {
@@ -77,7 +78,12 @@ namespace XCYN.Winform
                 {
                     endTime = Convert.ToDateTime(dateTimePicker2.Text);
                 }
-                var list = model.GetList(message, level, startTime, endTime);
+                if (string.IsNullOrWhiteSpace(_file_path))
+                {
+                    MessageBox.Show("请选择要读取的日志文件路径");
+                    return;
+                }
+                var list = model.GetList(_file_path,message, level, startTime, endTime);
                 dataGridView1.DataSource = list;
             }
             catch(Exception ex)
@@ -103,6 +109,21 @@ namespace XCYN.Winform
             var methodName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
             var exception = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             MessageBox.Show(exception);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();     //显示选择文件对话框
+            openFileDialog1.InitialDirectory = "C:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _file_path = openFileDialog1.FileName;
+                label5.Text = openFileDialog1.FileName;          //显示文件路径
+            }
         }
     }
 }

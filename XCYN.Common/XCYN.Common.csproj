@@ -136,6 +136,7 @@
     <Compile Include="Dapper\DapperManager.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="DTKeys.cs" />
+    <Compile Include="IPAddressHelper.cs" />
     <Compile Include="Log4NetHelper.cs" />
     <Compile Include="mysql\MySqlHelper.cs" />
     <Compile Include="PrintHelper.cs" />

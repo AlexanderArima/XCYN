@@ -68,16 +68,16 @@ namespace XCYN.Winform.Model.LogViewer
         /// <param name="startTime">异常其时时间</param>
         /// <param name="endTime">异常结束时间</param>
         /// <returns></returns>
-        public List<LogModel> GetList(string message = "", string level = "",DateTime? startTime = null,DateTime? endTime = null)
+        public List<LogModel> GetList(string filePath,string message = "", string level = "",DateTime? startTime = null,DateTime? endTime = null)
         {
             //确认文件是否存在
-            if (!File.Exists(LogModel.LOGLOCATION))
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException(string.Format("文件:{0}，不存在或没有访问权限", LogModel.LOGLOCATION));
             }
             try
             {
-                var json = File.ReadAllText(LogModel.LOGLOCATION, Encoding.UTF8);
+                var json = File.ReadAllText(filePath, Encoding.UTF8);
                 json = "[" + json.Remove(json.Length - 1, 1) + "]";
                 json = json.Replace(@"\",@"/");
                 var jsonModel = JsonConvert.DeserializeObject<List<LogModel>>(json);

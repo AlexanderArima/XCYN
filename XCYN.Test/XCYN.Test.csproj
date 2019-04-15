@@ -215,6 +215,7 @@
     <Compile Include="cdbWeb\JsonResult.cs" />
     <Compile Include="cdbWeb\SqlHelper.cs" />
     <Compile Include="Common\CacheTestCase.cs" />
+    <Compile Include="Common\IPAddressTest.cs" />
     <Compile Include="Common\MySQLTestCase.cs" />
     <Compile Include="Common\OleDbHelperTest.cs" />
     <Compile Include="Common\Log4NetHelpTest.cs" />
