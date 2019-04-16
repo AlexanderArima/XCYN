@@ -47,9 +47,10 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            //Publish.PublishBasic();
-            MyQuartz.Fun2();
-            MyQuartz.Fun1();
+            DefineUndef.FunDebug();
+            DefineUndef.FunError();
+            DefineUndef.FunErrorOrDebug();
+            DefineUndef.FunErrorAndDebug();
             Console.Read();
         }
 

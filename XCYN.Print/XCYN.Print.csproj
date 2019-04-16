@@ -36,7 +36,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;Debug</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -216,6 +216,7 @@
     <Compile Include="Alg\SortOrder.cs" />
     <Compile Include="Alg\SortOrderTest.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
+    <Compile Include="Basic\DefineUndef.cs" />
     <Compile Include="Basic\ListDictSetTest.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
