@@ -132,11 +132,17 @@
     <Compile Include="CSkinForm.Designer.cs">
       <DependentUpon>CSkinForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogViewer.cs">
+    <Compile Include="LogViewer\LogDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogViewer.Designer.cs">
-      <DependentUpon>LogViewer.cs</DependentUpon>
+    <Compile Include="LogViewer\LogDetail.Designer.cs">
+      <DependentUpon>LogDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogViewer\LogMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogViewer\LogMain.Designer.cs">
+      <DependentUpon>LogMain.cs</DependentUpon>
     </Compile>
     <Compile Include="MeiTuan\ChangeCity.cs">
       <SubType>Form</SubType>
@@ -276,8 +282,11 @@
     <EmbeddedResource Include="CSkinForm.resx">
       <DependentUpon>CSkinForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogViewer.resx">
-      <DependentUpon>LogViewer.cs</DependentUpon>
+    <EmbeddedResource Include="LogViewer\LogDetail.resx">
+      <DependentUpon>LogDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogViewer\LogMain.resx">
+      <DependentUpon>LogMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MeiTuan\ChangeCity.resx">
       <DependentUpon>ChangeCity.cs</DependentUpon>
@@ -383,6 +392,12 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\LogFilePath.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\LogDetail.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Image\icons\back.png" />
     <Content Include="Image\icons\blank.gif" />
     <Content Include="Image\icons\cancel.png" />

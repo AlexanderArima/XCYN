@@ -13,16 +13,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using XCYN.Winform.Model.LogViewer;
 
-namespace XCYN.Winform
+namespace XCYN.Winform.LogViewer
 {
-    public partial class LogViewer : Form
+    public partial class LogMain : Form
     {
 
         private List<LogLevel> _list_level = new List<LogLevel>();
 
         private string _file_path = "";
 
-        public LogViewer()
+        public LogMain()
         {
             InitializeComponent();
 
@@ -108,13 +108,25 @@ namespace XCYN.Winform
             var className = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             var methodName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
             var exception = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            MessageBox.Show(exception);
+            LogDetail form = new LogDetail(exception);
+            if(form.ShowDialog() == DialogResult.OK)
+            {
+                form.Dispose();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //读取上次打开文件夹的路径，如果读取不到则默认从C盘读取，然后再用户重新选择了一个路径之后刷新里面的内容
+            string path = string.Format("{0}\\Config\\LogFilePath.txt",System.IO.Directory.GetCurrentDirectory());
+            var str = File.ReadAllText(path);
+            var dict = "C:\\";
+            if(str.Length > 0)
+            {
+                dict = str;
+            }
             OpenFileDialog openFileDialog1 = new OpenFileDialog();     //显示选择文件对话框
-            openFileDialog1.InitialDirectory = "C:\\";
+            openFileDialog1.InitialDirectory = dict;
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
@@ -122,6 +134,8 @@ namespace XCYN.Winform
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 _file_path = openFileDialog1.FileName;
+                FileInfo info = new FileInfo(_file_path);
+                File.WriteAllText(path,info.DirectoryName);
                 label5.Text = openFileDialog1.FileName;          //显示文件路径
             }
         }

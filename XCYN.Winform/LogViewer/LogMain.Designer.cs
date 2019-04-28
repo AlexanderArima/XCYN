@@ -1,6 +1,6 @@
-﻿namespace XCYN.Winform
+﻿namespace XCYN.Winform.LogViewer
 {
-    partial class LogViewer
+    partial class LogMain
     {
         /// <summary>
         /// Required designer variable.
@@ -44,13 +44,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.logModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.messageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.methodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exceptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.levelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.logModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -85,9 +85,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(262, 58);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(101, 12);
             this.label5.TabIndex = 10;
-            this.label5.Text = "label5";
+            this.label5.Text = "请先选择日志路径";
             // 
             // button2
             // 
@@ -223,10 +223,6 @@
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
-            // logModelBindingSource
-            // 
-            this.logModelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogModel);
-            // 
             // createTime
             // 
             this.createTime.DataPropertyName = "createTime";
@@ -270,14 +266,18 @@
             this.levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
             this.levelDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // LogViewer
+            // logModelBindingSource
+            // 
+            this.logModelBindingSource.DataSource = typeof(XCYN.Winform.Model.LogViewer.LogModel);
+            // 
+            // LogMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 561);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "LogViewer";
+            this.Name = "LogMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "日志查看器";
             this.groupBox1.ResumeLayout(false);
