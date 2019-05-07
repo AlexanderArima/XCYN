@@ -47,10 +47,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            DefineUndef.FunDebug();
-            DefineUndef.FunError();
-            DefineUndef.FunErrorOrDebug();
-            DefineUndef.FunErrorAndDebug();
+            MyCommand command = new MyCommand();
+            command.Fun1();
             Console.Read();
         }
 

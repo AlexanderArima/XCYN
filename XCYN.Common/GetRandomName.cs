@@ -72,7 +72,7 @@ namespace XCYN.Common
             string strNumber = rnd.Next(startnumber, endnumber).ToString();
             return strNumber;
         }
-        public static string GetRandomNation()
+        public static string GetRandomNation()  
         {
             nationName = nationName.Replace("\n", "");
             nationName = nationName.Replace("\r", "");

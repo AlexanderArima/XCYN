@@ -218,6 +218,8 @@
     <Compile Include="AsyncProgram\Class1.cs" />
     <Compile Include="Basic\DefineUndef.cs" />
     <Compile Include="Basic\ListDictSetTest.cs" />
+    <Compile Include="Basic\MyCommand.cs" />
+    <Compile Include="Basic\MyConnection.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
