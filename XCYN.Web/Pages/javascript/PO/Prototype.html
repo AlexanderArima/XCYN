@@ -1,0 +1,34 @@
+﻿
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        //创建一个原型链
+        function Book(title) {
+            this.title = title;
+        }
+
+        Book.prototype.ShowTitle = function (event) {
+            alert(this.title);
+        }
+        
+        var b = new Book("The World War 2");
+        b.ShowTitle();
+
+        var City = {
+            Name:"WuHan"
+        };
+        City.prototype.ShowName = function (event) {
+            alert(this.Name);
+        }
+        var c = new City();
+        c.ShowName();
+
+        
+
+    </script>
+</body>
+</html>
