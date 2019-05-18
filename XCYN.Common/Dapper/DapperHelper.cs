@@ -37,12 +37,7 @@ namespace XCYN.Common.Dapper
             catch(Exception ex)
             {
                 //封装异常处理
-#if Debug
-#warning "Debug is define!"
                 throw ex;
-#else
-                return 0;
-#endif
             }
             finally
             {
@@ -72,12 +67,7 @@ namespace XCYN.Common.Dapper
             }
             catch(Exception ex)
             {
-#if Debug
-#warning "Debug is define!"
                 throw ex;
-#else
-                return null;
-#endif
             }
             finally
             {
@@ -103,12 +93,7 @@ namespace XCYN.Common.Dapper
             }
             catch (Exception ex)
             {
-#if Debug
-#warning "Debug is define!"
                 throw ex;
-#else
-                return null;
-#endif
             }
             finally
             {
@@ -134,12 +119,7 @@ namespace XCYN.Common.Dapper
             }
             catch (Exception ex)
             {
-#if Debug
-#warning "Debug is define!"
                 throw ex;
-#else
-                return 0;
-#endif
             }
             finally
             {

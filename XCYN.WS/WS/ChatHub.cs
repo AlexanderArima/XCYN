@@ -24,7 +24,7 @@ namespace XCYN.WS
         {
             User user = new User() {
                 ConnectionID = this.Context.ConnectionId,
-                RandomName = XCYN.Common.GetRandomName.getRandomName(),
+                RandomName = Common.GetRandomName.getRandomName(),
             };
             _set.Add(user);
             return base.OnConnected();

@@ -128,6 +128,56 @@ namespace XCYN.Common
                 return true;
             }
         }
+
+        /// <summary>
+        /// 批量导入
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static bool ExecuteNonQuery(DataTable dt)
+        {
+            SqlConnection connection = null;
+            SqlTransaction tran = null;
+            SqlBulkCopy sqlbulkcopy = null;
+            try
+            {
+                connection = new SqlConnection(connectionString);
+                connection.Open();
+                tran = connection.BeginTransaction();//开启事务
+                sqlbulkcopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.CheckConstraints, tran);
+                sqlbulkcopy.BulkCopyTimeout = 100;  //超时之前操作完成所允许的秒数
+                sqlbulkcopy.BatchSize = dt.Rows.Count;  //每一批次中的行数
+                sqlbulkcopy.DestinationTableName = dt.TableName;  //服务器上目标表的名称
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    sqlbulkcopy.ColumnMappings.Add(i, i);  //映射定义数据源中的列和目标表中的列之间的关系
+                }
+                sqlbulkcopy.WriteToServer(dt);  // 将DataTable数据上传到数据表中
+                tran.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+                tran.Rollback();
+                return false;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+                if (sqlbulkcopy != null)
+                {
+                    sqlbulkcopy.Close();
+                }
+            }
+        }
+
         #endregion
 
         #region  执行简单SQL语句
@@ -624,8 +674,7 @@ namespace XCYN.Common
             }
             return ds;
         }
-
-
+        
         #endregion
 
         #region 执行带参数的SQL语句

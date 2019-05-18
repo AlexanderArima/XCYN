@@ -58,6 +58,17 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 获取只读库
+        /// </summary>
+        /// <param name="db">库ID</param>
+        /// 数据库的数量是可以配置的，默认情况下是16个。修改redis.conf下的databases指令：databases 64
+        /// <returns></returns>
+        public static IDatabase ReadDataBase(int db)
+        {
+            return GetReadInstance().GetDatabase(db);
+        }
+
+        /// <summary>
         /// 写入连接实例
         /// </summary>
         /// <returns></returns>
@@ -94,6 +105,17 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 获取只写库
+        /// </summary>
+        /// <param name="db">库ID</param>
+        /// 数据库的数量是可以配置的，默认情况下是16个。修改redis.conf下的databases指令：databases 64
+        /// <returns></returns>
+        public static IDatabase WriteDataBase(int db)
+        {
+            return GetWriteInstance().GetDatabase(db);
+        }
+
+        /// <summary>
         /// 查找所有符合给定模式 pattern 的 key 。
         /// </summary>
         /// <returns></returns>
@@ -108,6 +130,30 @@ namespace XCYN.Common.Sql.redis
                 options.EndPoints.Add(list_endpoint.ElementAt(i));
                 var conn = ConnectionMultiplexer.Connect(options);
                 var list_keys = conn.GetServer(list_endpoint.ElementAt(i)).Keys(pattern:key);
+                //迭代所有的keys
+                for (int j = 0; j < list_keys.Count(); j++)
+                {
+                    list_result.Add(list_keys.ElementAt(j));
+                }
+            }
+            return list_result;
+        }
+
+        /// <summary>
+        /// 查找所有符合给定模式 pattern 的 key 。
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList Keys(string key,int db)
+        {
+            //迭代所有的节点
+            var list_endpoint = GetReadInstance().GetEndPoints();
+            ArrayList list_result = new ArrayList();
+            for (int i = 0; i < list_endpoint.Length; i++)
+            {
+                ConfigurationOptions options = new ConfigurationOptions();
+                options.EndPoints.Add(list_endpoint.ElementAt(i));
+                var conn = ConnectionMultiplexer.Connect(options);
+                var list_keys = conn.GetServer(list_endpoint.ElementAt(i)).Keys(pattern: key);
                 //迭代所有的keys
                 for (int j = 0; j < list_keys.Count(); j++)
                 {

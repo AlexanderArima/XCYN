@@ -38,6 +38,8 @@ using System.Threading;
 using XCYN.Print.MySQL;
 using XCYN.Print.DesignPattern.Builder.Rest;
 using XCYN.Print.DesignPattern.Adapter.Object;
+using XCYN.Print.rabbitmq;
+using XCYN.Print.Quartz;
 
 namespace XCYN.Print
 {
@@ -45,8 +47,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            PowerAdapter adapter = new PowerAdapter();
-            adapter.GetLargePower();
+            MyCommand command = new MyCommand();
+            command.Fun1();
             Console.Read();
         }
 

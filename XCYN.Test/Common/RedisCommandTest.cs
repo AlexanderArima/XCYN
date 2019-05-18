@@ -72,11 +72,19 @@ namespace XCYN.Common
             //初始化字符串
             RedisCommandTest test = new RedisCommandTest();
             test._command.StringSet("myStr", "hello world");
+            test._command.StringSet("myStr", "hello world2",1);
             test._command.StringSet("myCount", "0");
+            test._command.StringSet("myCount2", "2");
+            test._command.StringSet("myCount3", "3");
+            test._command.StringSet("myCount2", "02",1);
+            test._command.StringSet("myCount3", "03",1);
             test._command.StringSetBit("myBit", 0, true);
-            test._command.StringSetBit("myBit", 1, true);
-            test._command.StringSetBit("myBit", 2, true);
-            test._command.StringSetBit("myBit", 3, true);
+            //test._command.StringSetBit("myBit", 1, true);
+            //test._command.StringSetBit("myBit", 2, true);
+            //test._command.StringSetBit("myBit", 3, true);
+            test._command.KeyDelete("StudentName", 1); 
+            test._command.KeyDelete("myCount1", 1);
+            test._command.KeyDelete("myCount", 1);
 
             //初始化List
             test._command.KeyDelete("myList");
@@ -117,6 +125,13 @@ namespace XCYN.Common
                 new string[] { "wuhan", "hangzhou" ,"beijing"}, new int[] { 1, 2, 3 });
             _command.SortedSetAdd("mySortedSet2", 
                 new string[] { "wuhan", "shanghai" }, new int[] { 1,4 });
+
+            //初始化Geo
+            _command.KeyDelete("MyMap");
+            _command.GeoAdd("MyMap", 114.31, 30.52, "WuHan",2);
+            _command.GeoAdd("MyMap", 121.48, 31.22, "ShangHai",2);
+            _command.GeoAdd("MyMap", 116.46, 39.92, "BeiJing",2);
+            _command.GeoAdd("MyMap", 113.31, 29.52, "YueYang",2);
         }
 
         #endregion
@@ -128,6 +143,17 @@ namespace XCYN.Common
         {
             var str = _command.KeyExists("myStr");
             Assert.IsTrue(str);
+        }
+
+        [TestMethod]
+        public void KeyExists2()
+        {
+            var actual = _command.KeyExists("StudentName",1);
+            Assert.IsFalse(actual);
+
+            _command.StringSet("StudentName", "YY",1);
+            actual = _command.KeyExists("StudentName", 1);
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
@@ -145,10 +171,21 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void KeyDelete()
+        {
+            _command.StringSet("City", "WuHan",1);
+            _command.StringSet("Country", "China",1);
+
+            string[] array = { "City","Country" };
+            var actual =  _command.KeyDelete(array, 1);
+            Assert.AreEqual(2, actual);
+        }
+        
+        [TestMethod]
         public void Keys()
         {
             var keys = _command.Keys("*");
-            Assert.AreEqual(9, keys.Count);
+            Assert.AreEqual(13, keys.Count);
         }
 
         [TestMethod]
@@ -176,18 +213,33 @@ namespace XCYN.Common
         }
 
         [TestMethod]
+        public void StringAppend2()
+        {
+            var len = _command.StringAppend("StudentName", "XC",1);
+            Assert.AreEqual(2, len);
+        }
+
+        [TestMethod]
         public void StringDesc()
         {
             var num = _command.StringDecr("myCount");
 
             Assert.AreEqual(-1, num);
-            
+
+            //往DB1库中添加myCount 字符串
+            num = _command.StringDecr("myCount",1);
+
+            Assert.AreEqual(-1, num);
         }
 
         [TestMethod]
         public void StringDescBy()
         {
             var num = _command.StringDecrBy("myCount",10);
+
+            Assert.AreEqual(-10, num);
+
+            num = _command.StringDecrBy("myCount", 10,1);
 
             Assert.AreEqual(-10, num);
         }
@@ -203,6 +255,8 @@ namespace XCYN.Common
 
             Assert.AreEqual(3, str2.Count);
         }
+
+
 
         [TestMethod]
         public void StringGetRange()
@@ -298,15 +352,40 @@ namespace XCYN.Common
             };
             string[] values = new string[2]
             {
-                "2",
-                "3"
+                "A",
+                "B"
             };
             _command.StringSet(keys, values);
             var myCount2 = _command.StringGet("myCount2");
             var myCount3 = _command.StringGet("myCount3");
 
-            Assert.AreEqual("2", myCount2);
-            Assert.AreEqual("3", myCount3);
+            Assert.AreEqual("A", myCount2);
+            Assert.AreEqual("B", myCount3);
+
+            keys = new string[2]
+            {
+                "myCount2" ,
+                "myCount3"
+            };
+            values = new string[2]
+            {
+                "C",
+                "D"
+            };
+            _command.StringSet(keys, values,1);
+            myCount2 = _command.StringGet("myCount2",1);
+            myCount3 = _command.StringGet("myCount3",1);
+
+            Assert.AreEqual("C", myCount2);
+            Assert.AreEqual("D", myCount3);
+        }
+
+        [TestMethod]
+        public void StringSet2()
+        {
+            _command.StringSet("myCount1", "1", 1);
+            var actual =  _command.StringGet("myCount1", 1);
+            Assert.AreEqual("1", actual);
         }
 
         [TestMethod]
@@ -372,18 +451,25 @@ namespace XCYN.Common
         {
             var str = _command.StringGetAsync("myStr");
             Assert.AreEqual("hello world", str);
+
+            str = _command.StringGetAsync("myStr",1);
+            Assert.AreEqual("hello world2", str);
         }
 
         [TestMethod]
         public void StringSetAsync()
         {
             var flag = _command.StringSetAsync("myStr", "123").Result;
-
             Assert.IsTrue(flag);
 
             var str = _command.StringGetAsync("myStr");
-
             Assert.AreEqual("123", str);
+
+            flag = _command.StringSetAsync("myStr", "1234",1).Result;
+            Assert.IsTrue(flag);
+
+            str = _command.StringGetAsync("myStr",1);
+            Assert.AreEqual("1234", str);
         }
 
         [TestMethod]
@@ -1063,6 +1149,93 @@ namespace XCYN.Common
             Assert.AreEqual(1, num);
         }
         #endregion
-        
+
+        #region 地理信息
+
+        [TestMethod]
+        public void GeoAdd()
+        {
+             var flag = _command.GeoAdd("MyMap", 114.31, 30.52,"WuHan");
+            _command.GeoAdd("MyMap", 121.48, 31.22, "ShangHai");
+            _command.GeoAdd("MyMap", 116.46, 39.92, "BeiJing");
+            Assert.AreEqual(true, flag);
+        }
+
+        [TestMethod]
+        public void GeoDistance()
+        {
+            var dist = _command.GeoDistance("MyMap", "WuHan", "ShangHai",StackExchange.Redis.GeoUnit.Kilometers,2);
+            Assert.IsTrue(dist > 500);  //武汉到上海的距离超过500km
+        }
+
+        [TestMethod]
+        public void GeoHash()
+        {
+            var dist = _command.GeoHash("MyMap", "WuHan", 2);
+            //Assert.IsTrue(dist > 500);  //武汉到上海的距离超过500km
+        }
+
+        [TestMethod]
+        public void GeoPosition()
+        {
+            var pos = _command.GeoPosition("MyMap", "WuHan",2);
+            Assert.AreEqual("114.31", pos.Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("30.52", pos.Value.Latitude.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void GeoPosition2()
+        {
+            string[] member = new string[] {
+                "WuHan",
+                "ShangHai"
+            };
+            var pos = _command.GeoPosition("MyMap", member, 2);
+            Assert.AreEqual("114.31", pos[0].Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("30.52", pos[0].Value.Latitude.ToString("0.00"));
+
+            Assert.AreEqual("121.48", pos[1].Value.Longitude.ToString("0.00"));
+            Assert.AreEqual("31.22", pos[1].Value.Latitude.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void GeoRadius()
+        {
+            //岳阳距离武汉150km
+            var actual = _command.GeoRadius("MyMap", 113.31, 29.52,200,2);
+            Assert.AreEqual(2, actual.Length);
+
+            actual = _command.GeoRadius("MyMap", 113.31, 29.52, 900, 2);
+            Assert.AreEqual(3, actual.Length);
+
+            actual = _command.GeoRadius("MyMap", 113.31, 29.52, 1300, 2);
+            Assert.AreEqual(4, actual.Length);
+        }
+
+        [TestMethod]
+        public void GeoRadiusByMember()
+        {
+            var actual = _command.GeoRadiusByMember("MyMap", "YueYang", 200, 2);
+            Assert.AreEqual(2, actual.Length);
+
+            actual = _command.GeoRadiusByMember("MyMap", "YueYang", 900, 2);
+            Assert.AreEqual(3, actual.Length);
+
+            actual = _command.GeoRadiusByMember("MyMap", "YueYang", 1200, 2);
+            Assert.AreEqual(4, actual.Length);
+        }
+
+        [TestMethod]
+        public void GeoRemove()
+        {
+            var flag = _command.GeoRemove("MyMap", "YueYang", 2);
+            Assert.IsTrue(flag);
+
+            var pos = _command.GeoPosition("MyMap", "YueYang", 2);
+            Assert.IsNull(pos);
+        }
+
+        #endregion
+
     }
 }

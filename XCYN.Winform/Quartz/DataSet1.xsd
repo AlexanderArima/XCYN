@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TimerConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TimerConnectionString (Settings)" PropertyReference="ApplicationSettings.XCYN.Winform.Properties.Settings.GlobalReference.Default.TimerConnectionString" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="T_SimpleTrigger" msprop:Generator_TableClassName="T_SimpleTriggerDataTable" msprop:Generator_TableVarName="tableT_SimpleTrigger" msprop:Generator_TablePropName="T_SimpleTrigger" msprop:Generator_RowDeletingName="T_SimpleTriggerRowDeleting" msprop:Generator_RowChangingName="T_SimpleTriggerRowChanging" msprop:Generator_RowEvHandlerName="T_SimpleTriggerRowChangeEventHandler" msprop:Generator_RowDeletedName="T_SimpleTriggerRowDeleted" msprop:Generator_UserTableName="T_SimpleTrigger" msprop:Generator_RowChangedName="T_SimpleTriggerRowChanged" msprop:Generator_RowEvArgName="T_SimpleTriggerRowChangeEvent" msprop:Generator_RowClassName="T_SimpleTriggerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="StartTime" msdata:Caption="起始时间" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndTime" msdata:Caption="结束时间" msprop:Generator_ColumnVarNameInTable="columnEndTime" msprop:Generator_ColumnPropNameInRow="EndTime" msprop:Generator_ColumnPropNameInTable="EndTimeColumn" msprop:Generator_UserColumnName="EndTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RepeatTime" msdata:Caption="重复次数" msprop:Generator_ColumnVarNameInTable="columnRepeatTime" msprop:Generator_ColumnPropNameInRow="RepeatTime" msprop:Generator_ColumnPropNameInTable="RepeatTimeColumn" msprop:Generator_UserColumnName="RepeatTime" type="xs:int" minOccurs="0" />
+              <xs:element name="RepeatInterval" msdata:Caption="重复间隔" msprop:Generator_ColumnVarNameInTable="columnRepeatInterval" msprop:Generator_ColumnPropNameInRow="RepeatInterval" msprop:Generator_ColumnPropNameInTable="RepeatIntervalColumn" msprop:Generator_UserColumnName="RepeatInterval" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TimerForm_DataSet1" msprop:Generator_TableClassName="TimerForm_DataSet1DataTable" msprop:Generator_TableVarName="tableTimerForm_DataSet1" msprop:Generator_RowChangedName="TimerForm_DataSet1RowChanged" msprop:Generator_TablePropName="TimerForm_DataSet1" msprop:Generator_RowDeletingName="TimerForm_DataSet1RowDeleting" msprop:Generator_RowChangingName="TimerForm_DataSet1RowChanging" msprop:Generator_RowEvHandlerName="TimerForm_DataSet1RowChangeEventHandler" msprop:Generator_RowDeletedName="TimerForm_DataSet1RowDeleted" msprop:Generator_RowClassName="TimerForm_DataSet1Row" msprop:Generator_UserTableName="TimerForm_DataSet1" msprop:Generator_RowEvArgName="TimerForm_DataSet1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="StartTime" msdata:Caption="起始时间" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndTime" msdata:Caption="结束时间" msprop:Generator_ColumnVarNameInTable="columnEndTime" msprop:Generator_ColumnPropNameInRow="EndTime" msprop:Generator_ColumnPropNameInTable="EndTimeColumn" msprop:Generator_UserColumnName="EndTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RepeatTime" msdata:Caption="重复次数" msprop:Generator_ColumnVarNameInTable="columnRepeatTime" msprop:Generator_ColumnPropNameInRow="RepeatTime" msprop:Generator_ColumnPropNameInTable="RepeatTimeColumn" msprop:Generator_UserColumnName="RepeatTime" type="xs:int" minOccurs="0" />
+              <xs:element name="RepeatInterval" msdata:Caption="重复间隔" msprop:Generator_ColumnVarNameInTable="columnRepeatInterval" msprop:Generator_ColumnPropNameInRow="RepeatInterval" msprop:Generator_ColumnPropNameInTable="RepeatIntervalColumn" msprop:Generator_UserColumnName="RepeatInterval" type="xs:int" minOccurs="0" />
+              <xs:element name="SID" msprop:Generator_ColumnVarNameInTable="columnSID" msprop:Generator_ColumnPropNameInRow="SID" msprop:Generator_ColumnPropNameInTable="SIDColumn" msprop:Generator_UserColumnName="SID" type="xs:int" minOccurs="0" />
+              <xs:element name="ServiceName" msdata:Caption="服务名" msprop:Generator_ColumnVarNameInTable="columnServiceName" msprop:Generator_ColumnPropNameInRow="ServiceName" msprop:Generator_ColumnPropNameInTable="ServiceNameColumn" msprop:Generator_UserColumnName="ServiceName" type="xs:string" minOccurs="0" />
+              <xs:element name="NextExecuteTime" msdata:Caption="下次执行时间" msprop:Generator_ColumnVarNameInTable="columnNextExecuteTime" msprop:Generator_ColumnPropNameInRow="NextExecuteTime" msprop:Generator_ColumnPropNameInTable="NextExecuteTimeColumn" msprop:Generator_UserColumnName="NextExecuteTime" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="T_ServiceList" msprop:Generator_TableClassName="T_ServiceListDataTable" msprop:Generator_TableVarName="tableT_ServiceList" msprop:Generator_TablePropName="T_ServiceList" msprop:Generator_RowDeletingName="T_ServiceListRowDeleting" msprop:Generator_RowChangingName="T_ServiceListRowChanging" msprop:Generator_RowEvHandlerName="T_ServiceListRowChangeEventHandler" msprop:Generator_RowDeletedName="T_ServiceListRowDeleted" msprop:Generator_UserTableName="T_ServiceList" msprop:Generator_RowChangedName="T_ServiceListRowChanged" msprop:Generator_RowEvArgName="T_ServiceListRowChangeEvent" msprop:Generator_RowClassName="T_ServiceListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="ServiceName" msprop:Generator_ColumnVarNameInTable="columnServiceName" msprop:Generator_ColumnPropNameInRow="ServiceName" msprop:Generator_ColumnPropNameInTable="ServiceNameColumn" msprop:Generator_UserColumnName="ServiceName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AssemblyName" msprop:Generator_ColumnVarNameInTable="columnAssemblyName" msprop:Generator_ColumnPropNameInRow="AssemblyName" msprop:Generator_ColumnPropNameInTable="AssemblyNameColumn" msprop:Generator_UserColumnName="AssemblyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NameSpace" msprop:Generator_ColumnVarNameInTable="columnNameSpace" msprop:Generator_ColumnPropNameInRow="NameSpace" msprop:Generator_ColumnPropNameInTable="NameSpaceColumn" msprop:Generator_UserColumnName="NameSpace" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ClassName" msprop:Generator_ColumnVarNameInTable="columnClassName" msprop:Generator_ColumnPropNameInRow="ClassName" msprop:Generator_ColumnPropNameInTable="ClassNameColumn" msprop:Generator_UserColumnName="ClassName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MethodName" msprop:Generator_ColumnVarNameInTable="columnMethodName" msprop:Generator_ColumnPropNameInRow="MethodName" msprop:Generator_ColumnPropNameInTable="MethodNameColumn" msprop:Generator_UserColumnName="MethodName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsDelete" msprop:Generator_ColumnVarNameInTable="columnIsDelete" msprop:Generator_ColumnPropNameInRow="IsDelete" msprop:Generator_ColumnPropNameInTable="IsDeleteColumn" msprop:Generator_UserColumnName="IsDelete" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ServiceForm_DataSet1" msprop:Generator_TableClassName="ServiceForm_DataSet1DataTable" msprop:Generator_TableVarName="tableServiceForm_DataSet1" msprop:Generator_TablePropName="ServiceForm_DataSet1" msprop:Generator_RowDeletingName="ServiceForm_DataSet1RowDeleting" msprop:Generator_RowChangingName="ServiceForm_DataSet1RowChanging" msprop:Generator_RowEvHandlerName="ServiceForm_DataSet1RowChangeEventHandler" msprop:Generator_RowDeletedName="ServiceForm_DataSet1RowDeleted" msprop:Generator_UserTableName="ServiceForm_DataSet1" msprop:Generator_RowChangedName="ServiceForm_DataSet1RowChanged" msprop:Generator_RowEvArgName="ServiceForm_DataSet1RowChangeEvent" msprop:Generator_RowClassName="ServiceForm_DataSet1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="ServiceName" msdata:Caption="服务名" msprop:Generator_ColumnVarNameInTable="columnServiceName" msprop:Generator_ColumnPropNameInRow="ServiceName" msprop:Generator_ColumnPropNameInTable="ServiceNameColumn" msprop:Generator_UserColumnName="ServiceName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AssemblyName" msdata:Caption="程序集" msprop:Generator_ColumnVarNameInTable="columnAssemblyName" msprop:Generator_ColumnPropNameInRow="AssemblyName" msprop:Generator_ColumnPropNameInTable="AssemblyNameColumn" msprop:Generator_UserColumnName="AssemblyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NameSpace" msdata:Caption="命名空间" msprop:Generator_ColumnVarNameInTable="columnNameSpace" msprop:Generator_ColumnPropNameInRow="NameSpace" msprop:Generator_ColumnPropNameInTable="NameSpaceColumn" msprop:Generator_UserColumnName="NameSpace" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ClassName" msdata:Caption="类名" msprop:Generator_ColumnVarNameInTable="columnClassName" msprop:Generator_ColumnPropNameInRow="ClassName" msprop:Generator_ColumnPropNameInTable="ClassNameColumn" msprop:Generator_UserColumnName="ClassName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MethodName" msdata:Caption="方法名" msprop:Generator_ColumnVarNameInTable="columnMethodName" msprop:Generator_ColumnPropNameInRow="MethodName" msprop:Generator_ColumnPropNameInTable="MethodNameColumn" msprop:Generator_UserColumnName="MethodName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsDelete" msdata:Caption="是否删除" msprop:Generator_ColumnVarNameInTable="columnIsDelete" msprop:Generator_ColumnPropNameInRow="IsDelete" msprop:Generator_ColumnPropNameInTable="IsDeleteColumn" msprop:Generator_UserColumnName="IsDelete" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:T_SimpleTrigger" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="TimerForm_DataSet1_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TimerForm_DataSet1" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

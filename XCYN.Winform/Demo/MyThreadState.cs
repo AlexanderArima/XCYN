@@ -30,6 +30,7 @@ namespace XCYN.Winform.Demo
                     try
                     {
                         Thread.Sleep(1000);
+                        //更新工作线程UI
                         textBox1.Invoke(new Action(() => {
                             textBox1.AppendText(_index + ",");
                         }));

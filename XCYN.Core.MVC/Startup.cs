@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using XCYN.Core.MVC.Models;
 
 namespace XCYN.Core.MVC
 {
@@ -38,7 +43,20 @@ namespace XCYN.Core.MVC
             });
 
             //注册MVC各个服务，并兼容2.1版本
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(option => {
+                option.RespectBrowserAcceptHeader = true;   //后台服务考虑浏览器的Accept头
+                
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc().AddJsonOptions(options => {
+                //设置不使用驼峰格式处理，由后台字段确定大小写
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //不返回值为NULL的属性
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
+
+            services.AddTransient(typeof(IFormula),typeof(MainFormula));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +67,7 @@ namespace XCYN.Core.MVC
         /// <param name="env">运行环境</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory)
         {
+           
             var logger = factory.CreateLogger("");
             
             app.Use(async(context,next) => {
