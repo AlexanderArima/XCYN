@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        var s = 100;
+        function add() {
+            var a = 10;
+            function sub() {
+                var b = 1000;
+                function sub2() {
+                    var head = document.getElementsByTagName("head")[0];
+                }
+                sub2();
+            }
+            sub();
+        }
+        var start = new Date();
+        console.log(start.getSeconds() + ":" +start.getMilliseconds());
+        for (var i = 0; i < 100000; i++) {
+            add();
+        }
+        var end = new Date();
+        console.log(end.getSeconds() + ":" + end.getMilliseconds());
+        console.log(s);
+    </script>
+</body>
+</html>

@@ -220,6 +220,7 @@
     <Compile Include="Basic\ListDictSetTest.cs" />
     <Compile Include="Basic\MyCommand.cs" />
     <Compile Include="Basic\MyConnection.cs" />
+    <Compile Include="Basic\Nullable.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="FileSystem\MyDirectory.cs" />
     <Compile Include="FileSystem\MyStream.cs" />
     <Compile Include="Generics\DocumentManager.cs" />
+    <Compile Include="Generics\GenericBasic.cs" />
     <Compile Include="Generics\GenericsConstraint.cs" />
     <Compile Include="Generics\GenericsFunc.cs" />
     <Compile Include="Generics\KangBianXieBian.cs" />

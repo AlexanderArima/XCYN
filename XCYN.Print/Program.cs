@@ -40,6 +40,7 @@ using XCYN.Print.DesignPattern.Builder.Rest;
 using XCYN.Print.DesignPattern.Adapter.Object;
 using XCYN.Print.rabbitmq;
 using XCYN.Print.Quartz;
+using System.Collections;
 
 namespace XCYN.Print
 {
@@ -47,15 +48,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            try
-            {
-                MyCommand command = new MyCommand();
-                command.Fun1();
-            }
-            catch
-            {
-
-            }
+            
             Console.Read();
         }
 

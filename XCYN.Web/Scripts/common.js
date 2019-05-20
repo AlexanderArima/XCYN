@@ -329,14 +329,14 @@ var CookieUtil = {
     set: function (name, value, expires, path, domain, secure) {
         var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
         if (expires instanceof Date) {
-            cookieText += ";expires=" + expires.toUTCString(); 
+            cookieText += ";expires=" + expires.toUTCString();
         }
-        if (path) { 
+        if (path) {
             cookieText += ";path=" + path;
         }
         if (domain) {
             cookieText += ";domain=" + domain;
-        } 
+        }
         if (secure) {
             cookieText += ";secure";
         }
@@ -346,4 +346,19 @@ var CookieUtil = {
     unset: function (name, path, domain, secure) {
         this.set(name, "", new Date(0), path, domain, secure);
     }
+};
+
+/**
+ * 动态加载JavaScript
+ * @param {any} url 下载的URL
+ * @param {any} callback 回调函数
+ */
+function loadScript(url, callback) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url;
+    script.onload = function () {
+        callback();
+    };
+    document.getElementsByTagName("head")[0].appendChild(script);
 }
