@@ -47,8 +47,15 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MyCommand command = new MyCommand();
-            command.Fun1();
+            try
+            {
+                MyCommand command = new MyCommand();
+                command.Fun1();
+            }
+            catch
+            {
+
+            }
             Console.Read();
         }
 

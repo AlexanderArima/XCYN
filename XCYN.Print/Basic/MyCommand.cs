@@ -12,14 +12,8 @@ namespace XCYN.Print.Basic
         {
             using (MyConnection conn = new MyConnection())
             {
-                try
-                {
-                    conn.Open();
-                }
-                finally
-                {
-                    conn.Dispose();
-                }
+                conn.Open();
+                throw new Exception("");
             }
         }
     }
