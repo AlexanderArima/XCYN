@@ -216,11 +216,13 @@
     <Compile Include="Alg\SortOrder.cs" />
     <Compile Include="Alg\SortOrderTest.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
+    <Compile Include="Basic\AutoProperies.cs" />
     <Compile Include="Basic\DefineUndef.cs" />
     <Compile Include="Basic\ListDictSetTest.cs" />
     <Compile Include="Basic\MyCommand.cs" />
     <Compile Include="Basic\MyConnection.cs" />
     <Compile Include="Basic\Nullable.cs" />
+    <Compile Include="Basic\ObjectInit.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
