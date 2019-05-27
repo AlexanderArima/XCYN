@@ -207,7 +207,12 @@ namespace XCYN.Common
         [TestMethod]
         public void StringAppend()
         {
-            var len = _command.StringAppend("myStr", "wuhan");
+            //常规调用方法
+            var len = _command.StringAppend("myStr", "wuhan", -1);
+
+            //命名参数，顺序可变
+            //可选参数，方法在声明时已经指定了默认值时，可选
+            len = _command.StringAppend(value: "wuhan", key: "mystr");
 
             Assert.AreEqual(16, len);
         }

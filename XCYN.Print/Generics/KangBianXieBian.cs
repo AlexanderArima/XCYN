@@ -17,28 +17,39 @@ namespace XCYN.Print.Generics
             //协变例子
             IEnergy<Person> p4 = new Person();
             IEnergy<Man> p5 = new Man();
+            //p5 = p4;  
             p4 = p5;
 
             //抗变例子
             IPhysiclalStatus<Person> p7 = new Person();
             IPhysiclalStatus<Man> p8 = new Man();
+            //p7 = p8;
             p8 = p7;
+
         }
     }
 
+    /// <summary>
+    /// 接口实现类
+    /// </summary>
     public class Person : IEnergy<Person>, IPhysiclalStatus<Person>
     {
+        //协变
         public Person Fun1()
         {
             throw new NotImplementedException();
         }
 
+        //抗变
         public void Fun1(Person obj)
         {
             throw new NotImplementedException();
         }
     }
 
+    /// <summary>
+    /// Person的子类
+    /// </summary>
     public class Man : Person, IEnergy<Man>,IPhysiclalStatus<Man>
     {
 

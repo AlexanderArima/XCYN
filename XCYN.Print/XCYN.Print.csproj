@@ -223,6 +223,7 @@
     <Compile Include="Basic\MyConnection.cs" />
     <Compile Include="Basic\Nullable.cs" />
     <Compile Include="Basic\ObjectInit.cs" />
+    <Compile Include="Basic\OptionParams.cs" />
     <Compile Include="Basic\Point.cs" />
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Calculator\IStrategy.cs" />
