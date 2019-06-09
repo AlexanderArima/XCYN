@@ -92,6 +92,17 @@ namespace XCYN.Common.Sql.redis
         }
 
         /// <summary>
+        /// 判断Key是否存在
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public async Task<bool> KeyExistsAsync(string key,int db)
+        {
+            return await RedisManager.ReadDataBase(db).KeyExistsAsync(key);
+        }
+
+        /// <summary>
         /// 查找所有符合pattern的key
         /// </summary>
         /// <param name="key"></param>

@@ -970,3 +970,5 @@ E:\GitProject\XCYN\XCYN.Test\bin\Debug\ru\DevExpress.Office.v16.2.Core.resources
 E:\GitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CopyComplete
 E:\GitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 E:\GitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
+E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csprojAssemblyReference.cache
+E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CoreCompileInputs.cache
