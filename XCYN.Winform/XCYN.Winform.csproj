@@ -138,6 +138,24 @@
     <Compile Include="LogViewer\LogMain.Designer.cs">
       <DependentUpon>LogMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="MaskLayer\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaskLayer\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaskLayer\MaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaskLayer\MaskForm.Designer.cs">
+      <DependentUpon>MaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaskLayer\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaskLayer\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MeiTuan\ChangeCity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +297,15 @@
     <EmbeddedResource Include="LogViewer\LogMain.resx">
       <DependentUpon>LogMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MaskLayer\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaskLayer\MaskForm.resx">
+      <DependentUpon>MaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaskLayer\MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MeiTuan\ChangeCity.resx">
       <DependentUpon>ChangeCity.cs</DependentUpon>
     </EmbeddedResource>
@@ -416,6 +443,7 @@
     <Content Include="Image\icons\sum.png" />
     <Content Include="Image\icons\tip.png" />
     <Content Include="Image\icons\undo.png" />
+    <Content Include="MaskLayer\错误.png" />
     <Content Include="Model\MeiTuan\EF\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

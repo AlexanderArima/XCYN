@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using XCYN.Winform.LogViewer;
+using XCYN.Winform.MaskLayer;
 using XCYN.Winform.MeiTuan;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
@@ -29,7 +30,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogMain());
+            Application.Run(new MainForm());
 
             //方式1
             //Application app = new Application();

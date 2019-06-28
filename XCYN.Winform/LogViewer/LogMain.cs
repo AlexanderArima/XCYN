@@ -84,6 +84,7 @@ namespace XCYN.Winform.LogViewer
                     return;
                 }
                 var list = model.GetList(_file_path,message, level, startTime, endTime);
+                list.Reverse();
                 dataGridView1.DataSource = list;
             }
             catch(Exception ex)

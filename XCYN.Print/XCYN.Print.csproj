@@ -234,6 +234,7 @@
     <Compile Include="Crawler\Crawler.cs" />
     <Compile Include="Dapper\ExampleSample.cs" />
     <Compile Include="delegates\EventTest.cs" />
+    <Compile Include="delegates\FuncLambda.cs" />
     <Compile Include="delegates\LambdaTest.cs" />
     <Compile Include="delegates\MulticastDelegateTest.cs" />
     <Compile Include="DesignPattern\Adapter\Class\PowerAdapter.cs" />
