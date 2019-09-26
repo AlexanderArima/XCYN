@@ -49,13 +49,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            
-            RedisCommand command = new RedisCommand();
-            var flag = command.KeyExistsAsync("city", 1).Result;
-            if(flag == true)
-            {
-                command.KeyDelete("city", 1);
-            }
+            MyQuartz.Fun3();
             Console.Read();
         }
 

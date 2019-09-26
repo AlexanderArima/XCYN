@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.rabbitmq;
@@ -14,17 +15,20 @@ namespace XCYN.Print.Quartz
 {
     public class MyQuartz
     {
+        /// <summary>
+        /// 每隔3s触发一次，永远重复
+        /// </summary>
         public static void Fun1()
         {
             var scheduler = StdSchedulerFactory.GetDefaultScheduler();
-
             scheduler.Start();
-
+            
+            //将键值对传给定时器
             var job = JobBuilder.Create<ConsumerJob>()
                                                 .UsingJobData("UserName", "Cheng")
                                                  .UsingJobData("Password", 123456)
                                                  .Build();
-
+            
             var trigger = TriggerBuilder.Create()
                                                 .WithSimpleSchedule(m => m.WithIntervalInSeconds(3).RepeatForever())
                                                  .StartNow()
@@ -33,6 +37,9 @@ namespace XCYN.Print.Quartz
             scheduler.ScheduleJob(job, trigger);
         }
 
+        /// <summary>
+        ///  每隔1s出发一次，执行1次
+        /// </summary>
         public static void Fun2()
         {
             var scheduler = StdSchedulerFactory.GetDefaultScheduler();
@@ -51,6 +58,27 @@ namespace XCYN.Print.Quartz
 
             scheduler.ScheduleJob(job, trigger);
         }
+
+        /// <summary>
+        /// 通过 OfType + 反射 的方式执行定时任务
+        /// </summary>
+        public static void Fun3()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();            
+
+            //job
+            string path = string.Format("{0}XCYN.Common.dll", System.AppDomain.CurrentDomain.BaseDirectory);
+            var type = Assembly.LoadFile(path).CreateInstance("XCYN.Common.MyJob").GetType();
+            var job = JobBuilder.Create().OfType(type).Build();
+
+            //trigger
+            var trigger = TriggerBuilder.Create().
+                                  WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                 .StartNow().Build();
+
+            sche.ScheduleJob(job, trigger);
+        }
     }
 
     /// <summary>
@@ -68,7 +96,7 @@ namespace XCYN.Print.Quartz
             var map = context.JobDetail.JobDataMap;
             var UserName = map.GetString("UserName");
             var password = map.GetInt("Password");
-             ConsumerJob.ConsumerBasic("test",50);
+            ConsumerJob.ConsumerBasic("test", 50);
         }
 
         /// <summary>
@@ -103,7 +131,7 @@ namespace XCYN.Print.Quartz
                 }
             }
         }
-
+        
     }
 
     /// <summary>
@@ -157,5 +185,6 @@ namespace XCYN.Print.Quartz
                 }
             }
         }
+        
     }
 }
