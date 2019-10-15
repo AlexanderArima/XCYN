@@ -42,6 +42,7 @@ using XCYN.Print.rabbitmq;
 using XCYN.Print.Quartz;
 using System.Collections;
 using XCYN.Common.Sql.redis;
+using XCYN.Print.Quartz1;
 
 namespace XCYN.Print
 {
@@ -49,7 +50,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MyQuartz.Fun3();
+            Schedule.Fun2();
             Console.Read();
         }
 
