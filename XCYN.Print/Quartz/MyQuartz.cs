@@ -1,9 +1,11 @@
 ﻿using Quartz;
 using Quartz.Impl;
+using Quartz.Impl.Matchers;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XCYN.Print.rabbitmq;
 
-namespace XCYN.Print.Quartz
+namespace XCYN.Print.Quartz1
 {
     public class MyQuartz
     {
@@ -79,8 +81,117 @@ namespace XCYN.Print.Quartz
 
             sche.ScheduleJob(job, trigger);
         }
-    }
 
+        /// <summary>
+        ///  JobBuilder对象 & IJobDetail 常用方法
+        /// </summary>
+        public static void Fun4()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            //job
+            //string path = string.Format("{0}XCYN.Common.dll", System.AppDomain.CurrentDomain.BaseDirectory);
+            //var type = Assembly.LoadFile(path).CreateInstance("XCYN.Common.MyJob").GetType();
+            var dict = new Dictionary<string, string>();
+            dict["username"] = "aisino";
+
+            var job = JobBuilder.Create<MyJob>()
+                            .WithDescription("Job名字是Fun4")  //给Job添加一个描述
+                            .WithIdentity("Aisino") //给Job命名，默认随机生成一个Guid作为名字
+                            .RequestRecovery(true)  //当执行失败时，是否恢复执行
+                            .StoreDurably(true) //是否持久化（默认当没有Trigger指向Job时，Job会被删掉）
+                            .SetJobData(new JobDataMap(dict))   //发送字典对象
+                            .Build();
+
+            //trigger
+            var trigger = TriggerBuilder.Create().
+                                  WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                 .StartNow().Build();
+
+            //var trigger2 = TriggerBuilder.Create().
+            //                   WithSimpleSchedule(m => m.WithIntervalInSeconds(5).RepeatForever())
+            //                  .StartNow().Build();
+            //System.Collections.Generic.ISet<ITrigger> set = new System.Collections.Generic.HashSet<ITrigger>();
+            //set.Add(trigger);
+            //set.Add(trigger2);
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        ///  在一分钟后启动触发器
+        /// </summary>
+        public static void Fun5()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+            
+            var job = JobBuilder.Create<MyJob>()
+                            .Build();
+
+            //trigger
+            var trigger = TriggerBuilder.Create().StartAt(DateBuilder.EvenMinuteDateAfterNow())  //在一分钟后启动触发器
+                                                                        .WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                                                        .Build();
+            
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// 在一分钟后关闭触发器
+        /// </summary>
+        public static void Fun6()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyJob>()
+                            .Build();
+
+            //trigger
+            var trigger = TriggerBuilder.Create() .StartNow()
+                                                                        .EndAt(DateTimeOffset.Now.AddMinutes(1))  //在一分钟后关闭触发器
+                                                                        .WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                                                        .Build();
+
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// 优先级调用（数字越大优先级越高）
+        /// </summary>
+        public static void Fun7()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyJob>()
+                            .Build();
+
+            //trigger
+            var trigger = TriggerBuilder.Create().StartNow()
+                                                                        .WithPriority(1)
+                                                                        .UsingJobData("Name","Trigger1")
+                                                                        .EndAt(DateTimeOffset.Now.AddMinutes(1))  //在一分钟后关闭触发器
+                                                                        .WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                                                        .Build();
+
+            //trigger2
+            var trigger2 = TriggerBuilder.Create().StartNow()
+                                                                        .WithPriority(999999)
+                                                                        .UsingJobData("Name", "Trigger2")
+                                                                        .EndAt(DateTimeOffset.Now.AddMinutes(1))  //在一分钟后关闭触发器
+                                                                        .WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
+                                                                        .Build();
+            //Quartz.Collection.HashSet<ITrigger> list = new HashSet<ITrigger>();
+            Quartz.Collection.HashSet<ITrigger> list = new Quartz.Collection.HashSet<ITrigger>();
+            list.Add(trigger);
+            list.Add(trigger2);
+
+            sche.ScheduleJob(job, list, true);
+        }
+    }
+    
     /// <summary>
     /// 出队的业务逻辑
     /// </summary>
@@ -186,5 +297,29 @@ namespace XCYN.Print.Quartz
             }
         }
         
+    }
+
+    /// <summary>
+    /// 自定义任务
+    /// </summary>
+    public class MyJob : IJob
+    {
+
+        static int Count = 0;
+
+        public void Execute(IJobExecutionContext context)
+        {
+            //Count++;
+            //if(Count >= 5)
+            //{
+            //    var trigger = context.Scheduler.GetTriggerKeys(GroupMatcher<TriggerKey>.AnyGroup());
+            //    context.Scheduler.UnscheduleJob(trigger.ElementAt(0));
+            //}
+            //var keys = context.Scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
+            //Console.WriteLine(keys.Count);
+            //var dict = context.MergedJobDataMap;
+            //Console.WriteLine(dict.Keys.ElementAt(0) + ":" + dict.Values.ElementAt(0));
+            Console.WriteLine("定时执行");
+        }
     }
 }
