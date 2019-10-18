@@ -39,9 +39,9 @@ using XCYN.Print.MySQL;
 using XCYN.Print.DesignPattern.Builder.Rest;
 using XCYN.Print.DesignPattern.Adapter.Object;
 using XCYN.Print.rabbitmq;
-using XCYN.Print.Quartz;
 using System.Collections;
 using XCYN.Common.Sql.redis;
+using XCYN.Print.Quartz1;
 
 namespace XCYN.Print
 {
@@ -49,7 +49,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MyQuartz.Fun5();
+            MyQuartz.Fun10();
             Console.Read();
         }
 

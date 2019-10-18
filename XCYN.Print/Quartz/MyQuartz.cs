@@ -190,6 +190,78 @@ namespace XCYN.Print.Quartz1
 
             sche.ScheduleJob(job, list, true);
         }
+
+        /// <summary>
+        /// WithDailyTimeIntervalSchedule 可以设置某个时间段内执行定时任务
+        /// </summary>
+        public static void Fun8()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            //8：00 - 20：00执行任务，每隔1min执行一次
+            var trigger = TriggerBuilder.Create().StartNow()
+                                                                        .UsingJobData("Name", "Trigger1")
+                                                                        .WithDailyTimeIntervalSchedule(m => 
+                                                                            m.OnEveryDay().
+                                                                            StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(8,0)).
+                                                                            EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(20,0)).
+                                                                            WithIntervalInMinutes(1)
+                                                                        ).Build();
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// WithDailyTimeIntervalSchedule 可以设置某个时间段内执行定时任务
+        /// </summary>
+        public static void Fun9()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            //周一至周五的 8：00 - 20：00执行任务，每隔1min执行一次
+            var trigger = TriggerBuilder.Create().StartNow()
+                                                                        .UsingJobData("Name", "Trigger1")
+                                                                        .WithDailyTimeIntervalSchedule(m =>
+                                                                            m.OnMondayThroughFriday().
+                                                                            StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(8, 0)).
+                                                                            EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(20, 0)).
+                                                                            WithIntervalInMinutes(1)
+                                                                        ).Build();
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// CronSchedule 根据字符串来替代之前的简单计划表，日历计划表，每天计划表
+        /// </summary>
+        public static void Fun10()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+            //秒 分 时 天 月 年 周
+            //1. 天或者周必须有一个是？（？表示模糊）
+            //2. * 表示所有值即，秒位为*表示每秒执行一次
+            //3. - 表示范围，分钟位为10-12表示每个小时的10，11，12分执行一次
+            //4. , 表示每个值即，分钟位为10，20，30表示每个小时的10，20，30分执行一次
+            //5. / 表示递增，秒位为0/5表示0，5，10，15，20，25，30，35，40，45，50，55秒执行一次
+            //例子：
+            // * * * * * ?       => 每秒执行一次
+            // 0/5 * * * * ?   => 5s执行一次
+            // 0 * * * * ?       => 1min执行一次
+            // 0 0 1 * * ?       => 每个月1号执行一次
+            // 地址：https://www.quartz-scheduler.net/documentation/quartz-2.x/tutorial/crontrigger.html
+            var trigger = TriggerBuilder.Create().StartNow().WithCronSchedule("0 * * * * ?").Build();
+            sche.ScheduleJob(job, trigger);
+        }
     }
     
     /// <summary>
