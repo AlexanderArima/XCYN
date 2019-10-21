@@ -1,0 +1,92 @@
+﻿@using XCYN.MVC.Controllers;
+@{
+    ViewBag.Title = "Index";
+}
+<h3>定时框架</h3>
+<table style="border:1px solid black">
+    <th>Schedule名称</th>
+    <th>Schedule编号</th>
+    <th>Schedule是否启用</th>
+    <th>Schedule是否关闭</th>
+    <th>版本号</th>
+    <th>Job数量</th>
+    @{
+        var obj = @ViewData["scheObj"] as ScheduleObject;
+    }
+    <tr>
+        <td style="border:0px;padding:2px;">@obj.Name</td>
+        <td style="border:0px;padding:2px;">@obj.ID</td>
+        <td style="border:0px;padding:2px;">@(obj.IsStarted == "1" ? "启用" : "禁用")</td>
+        <td style="border:0px;padding:2px;">@(obj.IsShutdown == "1" ? "启用" : "禁用")</td>
+        <td style="border:0px;padding:2px;">@obj.Version</td>
+        <td style="border:0px;padding:2px;">@obj.JobNumbers</td>
+    </tr>
+</table>
+<h3>Job设置</h3>
+<div>Job列表</div>
+<table>
+    <tr>
+        <th>Job名称</th>
+        <th>Group名称</th>
+    </tr>
+    @{
+        var list_job = ViewData["jobObj"] as List<JobObj>;
+    }
+    @for (int i = 0; i < list_job.Count; i++)
+    {
+        <tr>
+            <td>@list_job.ElementAt(i).Name</td>
+            <td>@list_job.ElementAt(i).GroupName</td>
+        </tr>
+    }
+</table>
+<div>Job编辑</div>
+<form method="post" action="AddJob" id="formJob">
+    <table>
+        <tr>
+            <td>Job名称</td>
+            <td>
+                <input type="text" name="jobName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Group名称</td>
+            <td>
+                <input type="text" name="groupName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Class名称</td>
+            <td>
+                <input type="text" name="className" />
+            </td>
+        </tr>
+        <tr>
+            <td>Namespace名称</td>
+            <td>
+                <input type="text" name="namespaceName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input type="text" name="description" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="提交" id="buttonAdd" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $("#buttonAdd").click(function () {
+        console.log($("#formJob").serialize());
+        $.post("AddJob", $("#formJob").serialize(), function (data) {
+            console.log(data);
+        });
+    });
+</script>
