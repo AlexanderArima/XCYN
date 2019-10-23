@@ -194,6 +194,12 @@
   <ItemGroup>
     <Folder Include="Views\Stock\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCYN.Common\XCYN.Common.csproj">
+      <Project>{b3c9d415-a7e9-4884-a908-434b9404f696}</Project>
+      <Name>XCYN.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

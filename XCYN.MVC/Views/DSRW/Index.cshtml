@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>定时框架</h3>
+<h2>定时框架</h2>
 <table style="border:1px solid black">
     <th>Schedule名称</th>
     <th>Schedule编号</th>
@@ -22,25 +22,37 @@
         <td style="border:0px;padding:2px;">@obj.JobNumbers</td>
     </tr>
 </table>
-<h3>Job设置</h3>
-<div>Job列表</div>
+<h2>Job设置</h2>
+<h3>Job列表</h3>
 <table>
     <tr>
         <th>Job名称</th>
         <th>Group名称</th>
+        <th>描述</th>
+        <th>是否持久化</th>
+        <th>Job类型名称</th>
+        <th>操作</th>
     </tr>
     @{
         var list_job = ViewData["jobObj"] as List<JobObj>;
     }
     @for (int i = 0; i < list_job.Count; i++)
     {
-        <tr>
-            <td>@list_job.ElementAt(i).Name</td>
-            <td>@list_job.ElementAt(i).GroupName</td>
-        </tr>
+    <tr>
+        <td>@list_job.ElementAt(i).Name</td>
+        <td>@list_job.ElementAt(i).GroupName</td>
+        <td>@list_job.ElementAt(i).Description</td>
+        <td>@(list_job.ElementAt(i).IsDurable == true ? "是" : "否")</td>
+        <td>@list_job.ElementAt(i).Type</td>
+        <td>
+            <input type="button" value="删除" class="button_del" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
+            <input type="button" value="暂停" class="button_pause" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName"/>
+            <input type="button" value="恢复" class="button_resume" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName"/>
+        </td>
+    </tr>
     }
 </table>
-<div>Job编辑</div>
+<h3>Job编辑</h3>
 <form method="post" action="AddJob" id="formJob">
     <table>
         <tr>
@@ -80,13 +92,69 @@
         </tr>
     </table>
 </form>
-
+<h2>Trigger设置</h2>
+<table>
+    <tr>
+        <th>Trigger名称</th>
+        <th>Group名称</th>
+    </tr>
+</table>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script type="text/javascript">
     $("#buttonAdd").click(function () {
         console.log($("#formJob").serialize());
         $.post("AddJob", $("#formJob").serialize(), function (data) {
-            console.log(data);
+            //var obj = eval("(" + data + ")");
+            if (data.code == "1") {
+                alert("添加成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
         });
     });
+
+    $(".button_del").click(function () {
+        var jobName = $(this).attr("jobName");
+        var groupName = $(this).attr("groupName");
+        $.post("DeleteJob", { "jobName": jobName, "groupName": groupName }, function (data) {
+            if (data.code == "1") {
+                alert("删除成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $(".button_pause").click(function () {
+        var jobName = $(this).attr("jobName");
+        var groupName = $(this).attr("groupName");
+        $.post("PauseJob", { "jobName": jobName, "groupName": groupName }, function (data) {
+            if (data.code == "1") {
+                alert("暂停成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $(".button_resume").click(function () {
+        var jobName = $(this).attr("jobName");
+        var groupName = $(this).attr("groupName");
+        $.post("ResumeJob", { "jobName": jobName, "groupName": groupName }, function (data) {
+            if (data.code == "1") {
+                alert("恢复成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
 </script>
