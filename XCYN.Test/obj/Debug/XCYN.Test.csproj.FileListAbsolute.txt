@@ -829,7 +829,6 @@ E:\GitProject\XCYN\XCYN.Test\bin\Debug\System.Web.Http.SelfHost.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\Quartz.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\MongoDB.Driver.GridFS.dll
-E:\GitProject\XCYN\XCYN.Test\bin\Debug\CSkin.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.XtraEditors.v16.2.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.Utils.v16.2.dll
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.XtraBars.v16.2.dll
@@ -893,7 +892,6 @@ E:\GitProject\XCYN\XCYN.Test\bin\Debug\RabbitMQ.Client.xml
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\Quartz.pdb
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\Quartz.xml
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\MongoDB.Driver.GridFS.xml
-E:\GitProject\XCYN\XCYN.Test\bin\Debug\CSkin.xml
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.XtraEditors.v16.2.xml
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.Utils.v16.2.xml
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\DevExpress.XtraBars.v16.2.xml
@@ -972,3 +970,5 @@ E:\GitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.dll
 E:\GitProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.pdb
 E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csprojAssemblyReference.cache
 E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CoreCompileInputs.cache
+E:\GitProject\XCYN\XCYN.Test\bin\Debug\Config\LogFilePath.txt
+E:\GitProject\XCYN\XCYN.Test\bin\Debug\Html\LogDetail.html
