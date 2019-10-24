@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using XCYN.MVC.ViewModel;
 
 namespace XCYN.MVC.Controllers
 {
@@ -50,13 +51,22 @@ namespace XCYN.MVC.Controllers
             foreach (var item in jobs)
             {
                 var detail = scheduler.GetJobDetail(item);
-                list_job.Add(new JobObj {
+                JobObj job = new JobObj
+                {
                     Name = item.Name,
                     GroupName = item.Group,
                     Description = detail.Description,
                     IsDurable = detail.Durable,
                     Type = detail.JobType.FullName
-                });
+                };
+                var list_trig = scheduler.GetTriggersOfJob(new JobKey(item.Name, item.Group));
+                List<string> list_temp1 = new List<string>();
+                foreach (var item2 in list_trig)
+                {
+                    list_temp1.Add(item2.Key.Group + "." + item2.Key.Name);
+                }
+                job.Trigger = string.Join(",", list_temp1);
+                list_job.Add(job);
             }
             ViewData["jobObj"] = list_job;
             //触发器(Trigger)
@@ -69,11 +79,15 @@ namespace XCYN.MVC.Controllers
                     Name = item.Name,
                     GroupName = item.Group,
                     Description = detail.Description,
-                    StartTime = detail.StartTimeUtc.ToString("yyyy-MM-dd HH:mm:ss"),
-                    EndTime = detail.EndTimeUtc.HasValue? detail.EndTimeUtc.Value.ToString("yyyy-MM-dd HH:mm:ss") : "",
-                    LastTime = detail.FinalFireTimeUtc.HasValue ? detail.FinalFireTimeUtc.Value.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    StartTime = detail.StartTimeUtc.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                    EndTime = detail.EndTimeUtc.HasValue? detail.EndTimeUtc.Value.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    NextTime = detail.GetNextFireTimeUtc().HasValue ? detail.GetNextFireTimeUtc().Value.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    PreviousTime = detail.GetPreviousFireTimeUtc().HasValue ? detail.GetPreviousFireTimeUtc().Value.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    State = scheduler.GetTriggerState(new TriggerKey(item.Name, item.Group)).ToString(),
                 });
+                
             }
+            ViewData["triggerObj"] = list_trigger;
             return View();
         }
 
@@ -207,6 +221,90 @@ namespace XCYN.MVC.Controllers
                 });
             }
         }
+
+        /// <summary>
+        /// 添加触发器
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult AddTrigger(DSRWControlViewModel_AddTrigger model)
+        {
+            try
+            {
+                var trigger = TriggerBuilder.Create()
+                                                       .StartNow()
+                                                       .ForJob(model.jobName, model.jobGroupName)
+                                                       .WithIdentity(model.triggerName, model.triggerGroupName)
+                                                       .WithCronSchedule(model.cornExpression)
+                                                       .WithDescription(model.description)
+                                                       .Build();
+                scheduler.ScheduleJob(trigger);
+                return Json(new {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch(Exception ex)
+            {
+                return Json(new {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
+
+        /// <summary>
+        /// 暂停Trigger
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public JsonResult PauseTrigger(string triggerName, string groupName)
+        {
+            try
+            {
+                scheduler.PauseTrigger(new TriggerKey(triggerName, groupName));
+                return Json(new
+                {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
+
+        /// <summary>
+        /// 恢复Trigger
+        /// </summary>
+        /// <param name="triggerName"></param>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public JsonResult ResumeTrigger(string triggerName,string groupName)
+        {
+            try
+            {
+                scheduler.ResumeTrigger(new TriggerKey(triggerName, groupName));
+                return Json(new
+                {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
     }
 
     public class ScheduleObject
@@ -251,6 +349,11 @@ namespace XCYN.MVC.Controllers
         /// 类型名称(带命名空间)
         /// </summary>
         public string Type { get; set; }
+
+        /// <summary>
+        /// 与Job绑定的Trigger列表
+        /// </summary>
+        public string Trigger { get; set; }
     }
 
     public class TriggerObj
@@ -281,8 +384,18 @@ namespace XCYN.MVC.Controllers
         public string EndTime { get; set; }
 
         /// <summary>
-        /// 最近一次执行时间
+        /// 下一次执行时间
         /// </summary>
-        public string LastTime { get; set; }
+        public string NextTime { get; set; }
+
+        /// <summary>
+        /// 上一次执行时间
+        /// </summary>
+        public string PreviousTime { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string State { get; set; }
     }
 }
