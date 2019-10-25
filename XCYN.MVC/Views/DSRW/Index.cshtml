@@ -11,6 +11,7 @@
         <th>Schedule是否关闭</th>
         <th>版本号</th>
         <th>Job数量</th>
+        <th>操作</th>
     </tr>
     @{
         var obj = @ViewData["scheObj"] as ScheduleObject;
@@ -22,6 +23,11 @@
         <td style="border:0px;padding:2px;">@(obj.IsShutdown == "1" ? "启用" : "禁用")</td>
         <td style="border:0px;padding:2px;">@obj.Version</td>
         <td style="border:0px;padding:2px;">@obj.JobNumbers</td>
+        <td style="border:0px;padding:2px;">
+            <input type="button" value="暂停" id="button_sche_pause" />
+            <input type="button" value="恢复" id="button_sche_resume"/>
+            <input type="button" value="关闭" id="button_sche_close"/>
+        </td>
     </tr>
 </table>
 <h2>Job设置</h2>
@@ -268,6 +274,42 @@
         $.post("ResumeTrigger", { "triggerName": triggerName, "groupName": groupName }, function (data) {
             if (data.code == "1") {
                 alert("恢复成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $("#button_sche_pause").click(function () {
+        $.post("PauseSchedule", function (data) {
+            if (data.code == "1") {
+                alert("暂停成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $("#button_sche_resume").click(function () {
+        $.post("ResumeSchedule", function (data) {
+            if (data.code == "1") {
+                alert("恢复成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $("#button_sche_close").click(function () {
+        $.post("CloseSchedule", function (data) {
+            if (data.code == "1") {
+                alert("关闭成功");
                 location.reload();
             }
             else {

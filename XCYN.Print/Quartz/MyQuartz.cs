@@ -1,5 +1,6 @@
 ﻿using Quartz;
 using Quartz.Impl;
+using Quartz.Impl.Calendar;
 using Quartz.Impl.Matchers;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -262,6 +264,122 @@ namespace XCYN.Print.Quartz1
             var trigger = TriggerBuilder.Create().StartNow().WithCronSchedule("0 * * * * ?").Build();
             sche.ScheduleJob(job, trigger);
         }
+
+        /// <summary>
+        /// 动态改变定时任务执行的时间
+        /// </summary>
+        public static void Fun11()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+            
+            //使任务在14点到15点间不再执行
+            DailyCalendar cale = new DailyCalendar(
+               DateBuilder.DateOf(14, 0, 0).DateTime,
+               DateBuilder.DateOf(15, 0, 0).DateTime
+               );
+            sche.AddCalendar("myCalendar", cale, true, true);   
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1) 
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// 动态改变定时任务执行的星期
+        /// </summary>
+        public static void Fun12()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+            
+            WeeklyCalendar cale = new WeeklyCalendar();
+            cale.SetDayExcluded(DayOfWeek.Thursday, true);  //让星期四不触发Schedule
+            cale.SetDayExcluded(DayOfWeek.Thursday, false); //让星期四触发Schedule
+            sche.AddCalendar("myCalendar", cale, true, true);
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1)
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
+            
+        }
+
+        /// <summary>
+        /// 动态改变定时任务执行的日期
+        /// </summary>
+        public static void Fun13()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            HolidayCalendar cale = new HolidayCalendar();
+            cale.AddExcludedDate(DateTime.Now); //排除今天不处理
+            sche.AddCalendar("myCalendar", cale, true, true);
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1)
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
+
+        }
+
+        /// <summary>
+        /// 动态改变定时任务执行的日期
+        /// </summary>
+        public static void Fun14()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            MonthlyCalendar cale = new MonthlyCalendar();
+            cale.AreAllDaysExcluded();
+            sche.AddCalendar("myCalendar", cale, true, true);
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1)
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
+
+        }
+
     }
     
     /// <summary>
@@ -381,17 +499,10 @@ namespace XCYN.Print.Quartz1
 
         public void Execute(IJobExecutionContext context)
         {
-            //Count++;
-            //if(Count >= 5)
-            //{
-            //    var trigger = context.Scheduler.GetTriggerKeys(GroupMatcher<TriggerKey>.AnyGroup());
-            //    context.Scheduler.UnscheduleJob(trigger.ElementAt(0));
-            //}
-            //var keys = context.Scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
-            //Console.WriteLine(keys.Count);
-            //var dict = context.MergedJobDataMap;
-            //Console.WriteLine(dict.Keys.ElementAt(0) + ":" + dict.Values.ElementAt(0));
-            Console.WriteLine("定时执行");
+            Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
+                context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                Count++);
         }
     }
 }

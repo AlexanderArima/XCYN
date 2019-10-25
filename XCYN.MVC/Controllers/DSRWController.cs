@@ -230,6 +230,13 @@ namespace XCYN.MVC.Controllers
         {
             try
             {
+                if(scheduler.CheckExists(new TriggerKey(model.triggerName,model.triggerGroupName)) == true)
+                {
+                    return Json(new {
+                        code = "999999",
+                        msg = "该触发器已存在"
+                    });
+                }
                 var trigger = TriggerBuilder.Create()
                                                        .StartNow()
                                                        .ForJob(model.jobName, model.jobGroupName)
@@ -290,6 +297,87 @@ namespace XCYN.MVC.Controllers
             try
             {
                 scheduler.ResumeTrigger(new TriggerKey(triggerName, groupName));
+                return Json(new
+                {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
+
+        /// <summary>
+        /// 暂停Schedule
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult PauseSchedule()
+        {
+            try
+            {
+                scheduler.Standby();
+                scheduler.PauseAll();
+                return Json(new {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
+
+        /// <summary>
+        /// 恢复Schedule
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ResumeSchedule()
+        {
+            try
+            {
+                if(scheduler.IsStarted == false)
+                {
+                    scheduler.Start();
+                }
+                scheduler.ResumeAll();
+                return Json(new
+                {
+                    code = "1",
+                    msg = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = "999999",
+                    msg = ex.Message
+                });
+            }
+        }
+
+        /// <summary>
+        /// 关闭Schedule
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult CloseSchedule()
+        {
+            try
+            {
+                if(scheduler.IsShutdown == false)
+                {
+                    scheduler.Shutdown(false);
+                }
                 return Json(new
                 {
                     code = "1",

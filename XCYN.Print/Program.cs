@@ -49,7 +49,7 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MyQuartz.Fun10();
+            MyQuartz.Fun13();
             Console.Read();
         }
 
