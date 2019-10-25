@@ -361,7 +361,7 @@ namespace XCYN.Print.Quartz1
             sche.Start();
 
             MonthlyCalendar cale = new MonthlyCalendar();
-            cale.AreAllDaysExcluded();
+            cale.SetDayExcluded(25, true);  //排除每个月25号执行
             sche.AddCalendar("myCalendar", cale, true, true);
 
             var job = JobBuilder.Create<MyJob>()
@@ -378,6 +378,61 @@ namespace XCYN.Print.Quartz1
             //ModifiedByCalendar 将ICalendar的设置应用到触发器中
             sche.ScheduleJob(job, trigger);
 
+        }
+
+        /// <summary>
+        /// 动态改变定时任务执行的月份
+        /// </summary>
+        public static void Fun15()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+            
+            AnnualCalendar cale = new AnnualCalendar();
+            cale.SetDayExcluded(new DateTimeOffset(2019, 9, 1, 12, 0, 0, TimeSpan.FromHours(8)), true);  
+            //排除9月份执行
+            sche.AddCalendar("myCalendar", cale, true, true);
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1)
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
+        }
+
+        /// <summary>
+        /// 通过Cron表达式改变定时任务执行的时分秒，年月日
+        /// </summary>
+        public static void Fun16()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            CronCalendar cale = new CronCalendar("* * * 25 9 ?");
+            //排除9月25号份执行
+            sche.AddCalendar("myCalendar", cale, true, true);
+
+            var job = JobBuilder.Create<MyJob>()
+                          .Build();
+
+            var trigger = TriggerBuilder.Create().StartNow().WithDailyTimeIntervalSchedule(
+                                                                                            m => m.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                                                                                                          .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 0))
+                                                                                                          .WithIntervalInSeconds(1)
+                                                                                                          .Build()  //是任务在7点-19点间执行，执行频率：每秒执行一次
+                                                                                        )
+                                                                                        .ModifiedByCalendar("myCalendar")
+                                                                                        .Build();
+            //ModifiedByCalendar 将ICalendar的设置应用到触发器中
+            sche.ScheduleJob(job, trigger);
         }
 
     }
@@ -502,7 +557,7 @@ namespace XCYN.Print.Quartz1
             Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
                 context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
                 context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-                Count++);
+                ++Count);
         }
     }
 }
