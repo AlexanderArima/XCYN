@@ -25,8 +25,8 @@
         <td style="border:0px;padding:2px;">@obj.JobNumbers</td>
         <td style="border:0px;padding:2px;">
             <input type="button" value="暂停" id="button_sche_pause" />
-            <input type="button" value="恢复" id="button_sche_resume"/>
-            <input type="button" value="关闭" id="button_sche_close"/>
+            <input type="button" value="恢复" id="button_sche_resume" />
+            <input type="button" value="关闭" id="button_sche_close" />
         </td>
     </tr>
 </table>
@@ -47,19 +47,19 @@
     }
     @for (int i = 0; i < list_job.Count; i++)
     {
-    <tr>
-        <td>@list_job.ElementAt(i).Name</td>
-        <td>@list_job.ElementAt(i).GroupName</td>
-        <td>@list_job.ElementAt(i).Description</td>
-        <td>@(list_job.ElementAt(i).IsDurable == true ? "是" : "否")</td>
-        <td>@list_job.ElementAt(i).Type</td>
-        <td>@list_job.ElementAt(i).Trigger</td>
-        <td>
-            <input type="button" value="删除" class="button_del" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
-            <input type="button" value="暂停" class="button_pause" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
-            <input type="button" value="恢复" class="button_resume" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
-        </td>
-    </tr>
+        <tr>
+            <td>@list_job.ElementAt(i).Name</td>
+            <td>@list_job.ElementAt(i).GroupName</td>
+            <td>@list_job.ElementAt(i).Description</td>
+            <td>@(list_job.ElementAt(i).IsDurable == true ? "是" : "否")</td>
+            <td>@list_job.ElementAt(i).Type</td>
+            <td>@list_job.ElementAt(i).Trigger</td>
+            <td>
+                <input type="button" value="删除" class="button_del" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
+                <input type="button" value="暂停" class="button_pause" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
+                <input type="button" value="恢复" class="button_resume" jobName="@list_job.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />
+            </td>
+        </tr>
     }
 </table>
 <h3>Job编辑</h3>
@@ -68,36 +68,37 @@
         <tr>
             <td>Job名称</td>
             <td>
-                <input type="text" name="jobName" />
+                <input type="text" name="jobName" value="Job1" />
             </td>
         </tr>
         <tr>
             <td>Group名称</td>
             <td>
-                <input type="text" name="groupName" />
+                <input type="text" name="groupName" value="Group1" />
             </td>
         </tr>
         <tr>
             <td>Class名称</td>
             <td>
-                <input type="text" name="className" />
+                <input type="text" name="className" value="MyJob" />
             </td>
         </tr>
         <tr>
             <td>Namespace名称</td>
             <td>
-                <input type="text" name="namespaceName" />
+                <input type="text" name="namespaceName" value="XCYN.Common" />
             </td>
         </tr>
         <tr>
             <td>Description</td>
             <td>
-                <input type="text" name="description" />
+                <input type="text" name="description" value="定时触发" />
             </td>
         </tr>
         <tr>
             <td>
                 <input type="button" value="提交" id="buttonAdd" />
+                <input type="button" value="编辑" id="buttonEdit" />
             </td>
         </tr>
     </table>
@@ -120,20 +121,20 @@
     }
     @for (int i = 0; i < list_trigger.Count; i++)
     {
-    <tr>
-        <td>@list_trigger[i].Name</td>
-        <td>@list_trigger[i].GroupName</td>
-        <td>@list_trigger[i].Description</td>
-        <td>@list_trigger[i].StartTime</td>
-        <td>@list_trigger[i].PreviousTime</td>
-        <td>@list_trigger[i].NextTime</td>
-        <td>@list_trigger[i].State</td>
-        <td>
-            @*<input type="button" value="删除" class="button_trigger_del" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />*@
-            <input type="button" value="暂停" class="button_trigger_pause" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
-            <input type="button" value="恢复" class="button_trigger_resume" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
-        </td>
-    </tr>
+        <tr>
+            <td>@list_trigger[i].Name</td>
+            <td>@list_trigger[i].GroupName</td>
+            <td>@list_trigger[i].Description</td>
+            <td>@list_trigger[i].StartTime</td>
+            <td>@list_trigger[i].PreviousTime</td>
+            <td>@list_trigger[i].NextTime</td>
+            <td>@list_trigger[i].State</td>
+            <td>
+                @*<input type="button" value="删除" class="button_trigger_del" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />*@
+                <input type="button" value="暂停" class="button_trigger_pause" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
+                <input type="button" value="恢复" class="button_trigger_resume" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
+            </td>
+        </tr>
     }
 </table>
 <h3>Trigger编辑</h3>
@@ -142,42 +143,122 @@
         <tr>
             <td>Trigger名称</td>
             <td>
-                <input type="text" name="triggerName" />
+                <input type="text" name="triggerName" value="Trigger1" />
             </td>
         </tr>
         <tr>
             <td>Trigger组名</td>
             <td>
-                <input type="text" name="triggerGroupName" />
+                <input type="text" name="triggerGroupName" value="Group1" />
             </td>
         </tr>
         <tr>
             <td>描述</td>
             <td>
-                <input type="text" name="description" />
+                <input type="text" name="description" value="每秒执行一次"/>
             </td>
         </tr>
         <tr>
             <td>Corn名称</td>
             <td>
-                <input type="text" name="cornExpression" />
+                <input type="text" name="cornExpression" value="* * * * * ?" />
             </td>
         </tr>
         <tr>
             <td>Job名称</td>
             <td>
-                <input type="text" name="jobName" />
+                <input type="text" name="jobName" value="Job1" />
             </td>
         </tr>
         <tr>
             <td>Job组名</td>
             <td>
-                <input type="text" name="jobGroupName" />
+                <input type="text" name="jobGroupName" value="Group1" />
             </td>
         </tr>
         <tr>
             <td>
                 <input type="button" value="提交" id="buttonAddTrigger" />
+                <input type="button" value="编辑" id="buttonEditTrigger" />
+            </td>
+        </tr>
+    </table>
+</form>
+<h3>Calendar列表</h3>
+<table>
+    <tr>
+        <th>Calendar名称</th>
+        <th>开始执行时间</th>
+        <th>结束执行时间</th>
+        <th>类型</th>
+    </tr>
+    @{
+        var list_calendar = ViewData["calendarObj"] as List<CalendarObj>;
+    }
+    @for (int i = 0; i < list_calendar.Count; i++)
+    {
+        <tr>
+            <td>@list_calendar[i].calendarName</td>
+            <td>@list_calendar[i].startTime</td>
+            <td>@list_calendar[i].endTime</td>
+            <td>@list_calendar[i].calendarType</td>
+            <td>
+                <input type="button" value="删除" class="button_calendar_del" calendarName="@list_calendar.ElementAt(i).calendarName"  />
+                @*<input type="button" value="暂停" class="button_trigger_pause" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
+                <input type="button" value="恢复" class="button_trigger_resume" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />*@
+            </td>
+        </tr>
+    }
+</table>
+<h2>Calendar设置</h2>
+<form method="post" action="AddCalendar" id="formCalendar">
+    <table>
+        <tr>
+            <td>Calendar名称</td>
+            <td>
+                <input type="text" name="calendarName" value="Calendar1" />
+            </td>
+        </tr>
+        <tr>
+            <td>Calendar类型</td>
+            <td>
+                <input type="text" name="calendarType" value="DailyCalendar" />
+            </td>
+        </tr>
+        <tr>
+            <td>起始时间</td>
+            <td>
+                <input type="text" name="startTime" value="8:00:00" />
+            </td>
+        </tr>
+        <tr>
+            <td>结束时间</td>
+            <td>
+                <input type="text" name="endTime" value="20:00:00" />
+            </td>
+        </tr>
+        <tr>
+            <td>Trigger的Group</td>
+            <td>
+                <input type="text" name="triggerGroup" value="Group1" />
+            </td>
+        </tr>
+        <tr>
+            <td>Trigger的Name</td>
+            <td>
+                <input type="text" name="triggerName" value="Trigger1" />
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input type="text" name="description" value="8点至20点不执行定时任务" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="提交" id="buttonAddCalendar" />
+                <input type="button" value="编辑" id="buttonEditCalendar" />
             </td>
         </tr>
     </table>
@@ -191,6 +272,20 @@
             //var obj = eval("(" + data + ")");
             if (data.code == "1") {
                 alert("添加成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+      $("#buttonEdit").click(function () {
+        console.log($("#formJob").serialize());
+        $.post("EditJob", $("#formJob").serialize(), function (data) {
+            //var obj = eval("(" + data + ")");
+            if (data.code == "1") {
+                alert("修改成功");
                 location.reload();
             }
             else {
@@ -246,6 +341,19 @@
         $.post("AddTrigger", $("#formTrigger").serialize(), function (data) {
             if (data.code == "1") {
                 alert("添加成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
+
+    $("#buttonEditTrigger").click(function () {
+        console.log($("#formTrigger").serialize());
+        $.post("EditTrigger", $("#formTrigger").serialize(), function (data) {
+            if (data.code == "1") {
+                alert("修改成功");
                 location.reload();
             }
             else {
@@ -318,4 +426,44 @@
         });
     });
 
+    $("#buttonAddCalendar").click(function () {
+        console.log($("#formCalendar").serialize());
+        $.post("AddCalendar", $("#formCalendar").serialize(), function (data) {
+            //var obj = eval("(" + data + ")");
+            if (data.code == "1") {
+                alert("添加成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    }); 
+
+    $("#buttonEditCalendar").click(function () {
+        console.log($("#formCalendar").serialize());
+        $.post("EditCalendar", $("#formCalendar").serialize(), function (data) {
+            //var obj = eval("(" + data + ")");
+            if (data.code == "1") {
+                alert("修改成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    }); 
+
+    $(".button_calendar_del").click(function () {
+        var calendarName = $(this).attr("calendarName");
+        $.post("DeleteCalendar", { "calendarName": calendarName }, function (data) {
+            if (data.code == "1") {
+                alert("删除成功");
+                location.reload();
+            }
+            else {
+                alert(data.msg);
+            }
+        });
+    });
 </script>
