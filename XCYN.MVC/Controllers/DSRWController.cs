@@ -23,8 +23,11 @@ namespace XCYN.MVC.Controllers
 
         public DSRWController()
         {
-            scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.Start();
+            if(scheduler == null)
+            {
+                scheduler = StdSchedulerFactory.GetDefaultScheduler();
+                scheduler.Start();
+            }
         }
 
         // GET: DSRW
@@ -86,8 +89,9 @@ namespace XCYN.MVC.Controllers
                     NextTime = detail.GetNextFireTimeUtc().HasValue ? detail.GetNextFireTimeUtc().Value.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss") : "",
                     PreviousTime = detail.GetPreviousFireTimeUtc().HasValue ? detail.GetPreviousFireTimeUtc().Value.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss") : "",
                     State = scheduler.GetTriggerState(new TriggerKey(item.Name, item.Group)).ToString(),
+                    CalendarName = detail.CalendarName
                 });
-                
+               
             }
             ViewData["triggerObj"] = list_trigger;
             //排除日历(Calendar)
@@ -551,8 +555,7 @@ namespace XCYN.MVC.Controllers
                 });
             }
         }
-
-
+        
         /// <summary>
         /// 修改Calendar
         /// </summary>
@@ -619,27 +622,34 @@ namespace XCYN.MVC.Controllers
             foreach (var item in triggerKey)
             {
                 var trigger = scheduler.GetTrigger(item);
+                bool flag = false;
                 if(calendarName == trigger.CalendarName)
                 {
+                    //该Calendar和Trigger绑定，需要先解绑再删除
                     var newTrigger = trigger.GetTriggerBuilder().ModifiedByCalendar(null).Build();
                     scheduler.RescheduleJob(item, newTrigger);
-                    var flag = scheduler.DeleteCalendar(calendarName);
-                    if (flag == true)
+                    flag = scheduler.DeleteCalendar(calendarName);
+                }
+                else
+                {
+                    //Calendar没有和Trigger绑定，直接删除
+                    flag = scheduler.DeleteCalendar(calendarName);
+                }
+                if (flag == true)
+                {
+                    return Json(new
                     {
-                        return Json(new
-                        {
-                            code = "1",
-                            msg = ""
-                        });
-                    }
-                    else
+                        code = "1",
+                        msg = ""
+                    });
+                }
+                else
+                {
+                    return Json(new
                     {
-                        return Json(new
-                        {
-                            code = "101",
-                            msg = "删除失败"
-                        });
-                    }
+                        code = "101",
+                        msg = "删除失败"
+                    });
                 }
             }
             return Json(new
@@ -741,6 +751,11 @@ namespace XCYN.MVC.Controllers
         /// 状态
         /// </summary>
         public string State { get; set; }
+
+        /// <summary>
+        /// 排除&包含某个特定时间的名称
+        /// </summary>
+        public string CalendarName { get; set; }
     }
 
     public class CalendarObj

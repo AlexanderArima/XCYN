@@ -114,6 +114,7 @@
         <th>上一次执行时间</th>
         <th>下次执行时间</th>
         <th>状态</th>
+        <th>Calendar名称</th>
         <th>操作</th>
     </tr>
     @{
@@ -121,20 +122,21 @@
     }
     @for (int i = 0; i < list_trigger.Count; i++)
     {
-        <tr>
-            <td>@list_trigger[i].Name</td>
-            <td>@list_trigger[i].GroupName</td>
-            <td>@list_trigger[i].Description</td>
-            <td>@list_trigger[i].StartTime</td>
-            <td>@list_trigger[i].PreviousTime</td>
-            <td>@list_trigger[i].NextTime</td>
-            <td>@list_trigger[i].State</td>
-            <td>
-                @*<input type="button" value="删除" class="button_trigger_del" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />*@
-                <input type="button" value="暂停" class="button_trigger_pause" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
-                <input type="button" value="恢复" class="button_trigger_resume" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
-            </td>
-        </tr>
+    <tr>
+        <td>@list_trigger[i].Name</td>
+        <td>@list_trigger[i].GroupName</td>
+        <td>@list_trigger[i].Description</td>
+        <td>@list_trigger[i].StartTime</td>
+        <td>@list_trigger[i].PreviousTime</td>
+        <td>@list_trigger[i].NextTime</td>
+        <td>@list_trigger[i].State</td>
+        <td>@list_trigger[i].CalendarName</td>
+        <td>
+            @*<input type="button" value="删除" class="button_trigger_del" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_job.ElementAt(i).GroupName" />*@
+            <input type="button" value="暂停" class="button_trigger_pause" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
+            <input type="button" value="恢复" class="button_trigger_resume" triggerName="@list_trigger.ElementAt(i).Name" groupName="@list_trigger.ElementAt(i).GroupName" />
+        </td>
+    </tr>
     }
 </table>
 <h3>Trigger编辑</h3>
@@ -222,7 +224,15 @@
         <tr>
             <td>Calendar类型</td>
             <td>
-                <input type="text" name="calendarType" value="DailyCalendar" />
+                <select name="calendarType">
+                    <option value="DailyCalendar">DailyCalendar</option>
+                    <option value="WeeklyCalendar">WeeklyCalendar</option>
+                    <option value="HolidayCalendar">HolidayCalendar</option>
+                    <option value="MonthlyCalendar">MonthlyCalendar</option>
+                    <option value="AnnualCalendar">AnnualCalendar</option>
+                    <option value="CronCalendar">CronCalendar</option>
+                </select>
+                @*<input type="text" name="calendarType" value="DailyCalendar" />*@
             </td>
         </tr>
         <tr>

@@ -325,7 +325,7 @@ namespace XCYN.Print.Quartz1
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的日期
+        /// 动态改变定时任务执行的某一天
         /// </summary>
         public static void Fun13()
         {
@@ -353,7 +353,7 @@ namespace XCYN.Print.Quartz1
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的日期
+        /// 动态改变定时任务执行的每月的某一天
         /// </summary>
         public static void Fun14()
         {
@@ -381,7 +381,7 @@ namespace XCYN.Print.Quartz1
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的月份
+        /// 动态改变定时任务执行的某天
         /// </summary>
         public static void Fun15()
         {
@@ -389,7 +389,7 @@ namespace XCYN.Print.Quartz1
             sche.Start();
             
             AnnualCalendar cale = new AnnualCalendar();
-            cale.SetDayExcluded(new DateTimeOffset(2019, 9, 1, 12, 0, 0, TimeSpan.FromHours(8)), true);  
+            cale.SetDayExcluded(new DateTimeOffset(2019, 10, 1, 12, 0, 0, TimeSpan.FromHours(8)), true);  
             //排除9月份执行
             sche.AddCalendar("myCalendar", cale, true, true);
 
