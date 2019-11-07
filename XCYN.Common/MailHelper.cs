@@ -28,7 +28,6 @@ namespace XCYN.Common
             {
                 _smtpClient.EnableSsl = true;
             }
-
             MailAddress _from = new MailAddress(strfrom, nickName);
             MailAddress _to = new MailAddress(strto);
             MailMessage _mailMessage = new MailMessage(_from, _to);
@@ -37,6 +36,7 @@ namespace XCYN.Common
             _mailMessage.BodyEncoding = System.Text.Encoding.Default;//正文编码
             _mailMessage.IsBodyHtml = true;//设置为HTML格式
             _mailMessage.Priority = MailPriority.Normal;//优先级
+            //还能够发送附件attachment
             try
             {
                 _smtpClient.Send(_mailMessage);
