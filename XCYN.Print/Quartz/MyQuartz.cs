@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using XCYN.Print.rabbitmq;
 
@@ -261,7 +262,7 @@ namespace XCYN.Print.Quartz1
             // 0 * * * * ?       => 1min执行一次
             // 0 0 1 * * ?       => 每个月1号执行一次
             // 地址：https://www.quartz-scheduler.net/documentation/quartz-2.x/tutorial/crontrigger.html
-            var trigger = TriggerBuilder.Create().StartNow().WithCronSchedule("0 * * * * ?").Build();
+            var trigger = TriggerBuilder.Create().StartNow().WithCronSchedule("0/1 * * * * ?").Build();
             sche.ScheduleJob(job, trigger);
         }
 
@@ -435,6 +436,38 @@ namespace XCYN.Print.Quartz1
             sche.ScheduleJob(job, trigger);
         }
 
+        /// <summary>
+        /// 多个Trigger同时调用Job时，会产生冲突，这时使用DisallowConcurrentExecution就可以让线程同步
+        /// </summary>
+        public static void Fun17()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyConcurrentJob>()
+                          .Build();
+            // 地址：https://www.quartz-scheduler.net/documentation/quartz-2.x/tutorial/crontrigger.html
+            var trigger = TriggerBuilder.Create().WithIdentity("trigger1").StartNow().WithCronSchedule("0/1 * * * * ?").Build();
+            var trigger2 = TriggerBuilder.Create().WithIdentity("trigger2").StartNow().WithCronSchedule("0/1 * * * * ?").Build();
+            var dictionary = new Dictionary<IJobDetail, Quartz.Collection.ISet<ITrigger>>();
+            dictionary.Add(job, new Quartz.Collection.HashSet<ITrigger>() { trigger, trigger2 });
+            sche.ScheduleJobs(dictionary, true);
+        }
+
+        /// <summary>
+        /// 有时候我们希望让Job保持状态，这时就可以使用PersistJobDataAfterExecution 持久化Job中的数据
+        /// </summary>
+        public static void Fun18()
+        {
+            var sche = StdSchedulerFactory.GetDefaultScheduler();
+            sche.Start();
+
+            var job = JobBuilder.Create<MyConcurrentJob>().UsingJobData("count", 0)
+                          .Build();
+            var trigger = TriggerBuilder.Create().StartNow().WithCronSchedule("0/1 * * * * ?").Build();
+            sche.ScheduleJob(job, trigger);
+        }
+
     }
     
     /// <summary>
@@ -550,14 +583,45 @@ namespace XCYN.Print.Quartz1
     public class MyJob : IJob
     {
 
-        static int Count = 0;
+        public void Execute(IJobExecutionContext context)
+        {
+            Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
+                context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                context.JobDetail.JobDataMap["count"]
+                );
+            context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
+        }
+    }
+
+    /// <summary>
+    /// 持久化作业中的缓存数据
+    /// </summary>
+    [PersistJobDataAfterExecution]
+    public class MyPersistJob : IJob
+    {
 
         public void Execute(IJobExecutionContext context)
         {
             Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
                 context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
                 context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-                ++Count);
+                context.JobDetail.JobDataMap["count"]
+                );
+            context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
+        }
+    }
+    
+    /// <summary>
+    /// 多个Trigger同步等待执行Job
+    /// </summary>
+    [DisallowConcurrentExecution]
+    public class MyConcurrentJob : IJob
+    {
+        public void Execute(IJobExecutionContext context)
+        {
+            Console.WriteLine("当前时间：{0}，当前Trigger名称：{1}", DateTime.Now.ToString() , context.Trigger.Key.Name);
+            Thread.Sleep(5000);
         }
     }
 }
