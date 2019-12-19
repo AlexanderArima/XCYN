@@ -16,9 +16,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using XCYN.Print.rabbitmq;
 
-namespace XCYN.Print.Quartz1
+namespace XCYN.Print.MyQuartz
 {
-    public class MyQuartz
+    /// <summary>
+    /// Quartz常用方法
+    /// </summary>
+    public class QuartzUsualMethod
     {
         /// <summary>
         /// 每隔3s触发一次，永远重复

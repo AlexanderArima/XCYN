@@ -996,7 +996,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Quartz\MyQuartz.cs" />
+    <Compile Include="MyQuartz\QuartzUsualMethod.cs" />
+    <Compile Include="MyQuartz\QuartzConfig.cs" />
     <Compile Include="rabbitmq\Consumer.cs" />
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />

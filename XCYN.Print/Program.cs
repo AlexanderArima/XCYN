@@ -41,7 +41,7 @@ using XCYN.Print.DesignPattern.Adapter.Object;
 using XCYN.Print.rabbitmq;
 using System.Collections;
 using XCYN.Common.Sql.redis;
-using XCYN.Print.Quartz1;
+using XCYN.Print.MyQuartz;
 
 namespace XCYN.Print
 {
@@ -49,16 +49,22 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            MyQuartz.Fun17();
+            QuartzConfig.Fun2();
             Console.Read();
         }
 
+        /// <summary>
+        /// 装箱
+        /// </summary>
         static void Box()
         {
             object i = 10;
             Console.WriteLine(i);
         }
 
+        /// <summary>
+        /// 拆箱
+        /// </summary>
         static void Unbox()
         {
             object i = 10;
