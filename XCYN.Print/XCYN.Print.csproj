@@ -982,6 +982,7 @@
     <Compile Include="MultiThread\DemoTMP.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
+    <Compile Include="MyQuartz\QuartzMisfire.cs" />
     <Compile Include="MySQL\MySQLTest.cs" />
     <Compile Include="Operators\MultiplicationOperators.cs" />
     <Compile Include="Operators\NullOperators.cs" />

@@ -596,7 +596,6 @@ namespace XCYN.Print.MyQuartz
             //    context.JobDetail.JobDataMap["count"]
             //    );
             //context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
-
             Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}",
                 context.ScheduledFireTimeUtc == null ? "不存在" : context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
                 context.NextFireTimeUtc == null ? "不存在" : context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss")
