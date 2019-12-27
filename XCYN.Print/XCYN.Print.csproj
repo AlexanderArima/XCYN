@@ -1097,6 +1097,12 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="Operators\info.txt" />
+    <Content Include="quartz_jobs.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="quartz.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ReadMe.md" />
     <Content Include="XmlAndJson\books.xml">
       <SubType>Designer</SubType>

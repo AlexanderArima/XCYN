@@ -134,7 +134,7 @@ namespace XCYN.Print.MyQuartz
             
             var job = JobBuilder.Create<MyJob>()
                             .Build();
-
+            var timer = DateBuilder.EvenMinuteDateAfterNow();
             //trigger
             var trigger = TriggerBuilder.Create().StartAt(DateBuilder.EvenMinuteDateAfterNow())  //在一分钟后启动触发器
                                                                         .WithSimpleSchedule(m => m.WithIntervalInSeconds(1).RepeatForever())
@@ -588,12 +588,17 @@ namespace XCYN.Print.MyQuartz
 
         public void Execute(IJobExecutionContext context)
         {
-            Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
-                context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-                context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-                context.JobDetail.JobDataMap["count"]
+            //Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
+            //    context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+            //    context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+            //    context.JobDetail.JobDataMap["count"]
+            //    );
+            //context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
+
+            Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}",
+                context.ScheduledFireTimeUtc == null ? "不存在" : context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                context.NextFireTimeUtc == null ? "不存在" : context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss")
                 );
-            context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
         }
     }
 
