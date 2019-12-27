@@ -270,18 +270,18 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的时间
+        /// DailyCalendar 排除每天某个时间段任务的执行
         /// </summary>
         public static void Fun11()
         {
             var sche = StdSchedulerFactory.GetDefaultScheduler();
             sche.Start();
-            
-            //使任务在14点到15点间不再执行
+
+            //使任务在10点到11点间不再执行
             DailyCalendar cale = new DailyCalendar(
-               DateBuilder.DateOf(14, 0, 0).DateTime,
-               DateBuilder.DateOf(15, 0, 0).DateTime
-               );
+               DateBuilder.DateOf(10, 0, 0).DateTime,
+               DateBuilder.DateOf(11, 0, 0).DateTime
+            );
             sche.AddCalendar("myCalendar", cale, true, true);   
 
             var job = JobBuilder.Create<MyJob>()
@@ -300,7 +300,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的星期
+        /// WeeklyCalendar 排除每周某个星期的任务的执行
         /// </summary>
         public static void Fun12()
         {
@@ -309,7 +309,7 @@ namespace XCYN.Print.MyQuartz
             
             WeeklyCalendar cale = new WeeklyCalendar();
             cale.SetDayExcluded(DayOfWeek.Thursday, true);  //让星期四不触发Schedule
-            cale.SetDayExcluded(DayOfWeek.Thursday, false); //让星期四触发Schedule
+            //cale.SetDayExcluded(DayOfWeek.Thursday, false); //让星期四触发Schedule
             sche.AddCalendar("myCalendar", cale, true, true);
 
             var job = JobBuilder.Create<MyJob>()
@@ -329,7 +329,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的某一天
+        /// HolidayCalendar 排除某一天的任务的执行(如果涉及到同一天跨年的情况，需要多次添加不同年份)
         /// </summary>
         public static void Fun13()
         {
@@ -337,6 +337,7 @@ namespace XCYN.Print.MyQuartz
             sche.Start();
 
             HolidayCalendar cale = new HolidayCalendar();
+            cale.AddExcludedDate(DateTime.Now.AddYears(-1)); //排除去年的今天不处理
             cale.AddExcludedDate(DateTime.Now); //排除今天不处理
             sche.AddCalendar("myCalendar", cale, true, true);
 
@@ -357,7 +358,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的每月的某一天
+        /// MonthlyCalendar 排除每月某一天的任务的执行
         /// </summary>
         public static void Fun14()
         {
@@ -385,7 +386,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 动态改变定时任务执行的某天
+        /// AnnualCalendar 排除每年某一天的任务的执行
         /// </summary>
         public static void Fun15()
         {
@@ -393,8 +394,8 @@ namespace XCYN.Print.MyQuartz
             sche.Start();
             
             AnnualCalendar cale = new AnnualCalendar();
-            cale.SetDayExcluded(new DateTimeOffset(2019, 10, 1, 12, 0, 0, TimeSpan.FromHours(8)), true);  
-            //排除9月份执行
+            //12月25号不执行
+            cale.SetDayExcluded(new DateTimeOffset(2018, 12, 25, 12, 0, 0, TimeSpan.FromHours(8)), true);  
             sche.AddCalendar("myCalendar", cale, true, true);
 
             var job = JobBuilder.Create<MyJob>()
@@ -413,15 +414,16 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 通过Cron表达式改变定时任务执行的时分秒，年月日
+        /// CronCalendar 通过Cron表达式排除任务的执行
         /// </summary>
         public static void Fun16()
         {
             var sche = StdSchedulerFactory.GetDefaultScheduler();
             sche.Start();
 
-            CronCalendar cale = new CronCalendar("* * * 25 9 ?");
-            //排除9月25号份执行
+            //只在营业时间执行8AM-5PM
+            CronCalendar cale = new CronCalendar("* * 0-7,18-23 ? * *");
+
             sche.AddCalendar("myCalendar", cale, true, true);
 
             var job = JobBuilder.Create<MyJob>()
@@ -629,7 +631,6 @@ namespace XCYN.Print.MyQuartz
         public void Execute(IJobExecutionContext context)
         {
             Console.WriteLine("当前时间：{0}，当前Trigger名称：{1}", DateTime.Now.ToString() , context.Trigger.Key.Name);
-            Thread.Sleep(5000);
         }
     }
 }

@@ -49,8 +49,8 @@ namespace XCYN.Print
     {
         static void Main(string[] args)
         {
-            QuartzConfig.Fun5();
-            //QuartzConfig.Fun4();
+            //QuartzConfig.Fun5();
+            QuartzUsualMethod.Fun17();
             Console.Read();
         }
 
