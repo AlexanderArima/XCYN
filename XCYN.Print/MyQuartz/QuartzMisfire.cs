@@ -15,6 +15,7 @@ namespace XCYN.Print.MyQuartz
     {
         /// <summary>
         /// 哑火策略：WithMisfireHandlingInstructionFireNow
+        /// 如果有触发哑火，立即执行
         /// </summary>
         public static void Fun1()
         {
@@ -36,35 +37,9 @@ namespace XCYN.Print.MyQuartz
 
             scheduler.ScheduleJob(job, trigger);
         }
-
-
+        
         /// <summary>
-        /// 默认哑火策略：WithMisfireHandlingInstructionNextWithRemainingCount
-        /// 如果有触发哑火，没有执行过的不再执行了，下次任务正常调度
-        /// </summary>
-        public static void Fun2()
-        {
-            var scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.Start();
-
-            //将键值对传给定时器
-            var job = JobBuilder.Create<MyJob>()
-                                                 .Build();
-
-            var trigger = TriggerBuilder.Create()
-                                                .StartAt(DateBuilder.DateOf(12, 0, 0))
-                                                .WithSimpleSchedule(m =>
-                                                    m.WithIntervalInHours(1)
-                                                        .WithRepeatCount(10)
-                                                        //如果有触发哑火，没有执行过的不再执行了，下次任务正常调度
-                                                        .WithMisfireHandlingInstructionNextWithRemainingCount()
-                                                ).Build();
-
-            scheduler.ScheduleJob(job, trigger);
-        }
-
-        /// <summary>
-        /// 默认哑火策略：WithMisfireHandlingInstructionIgnoreMisfires
+        /// 哑火策略：WithMisfireHandlingInstructionIgnoreMisfires
         /// 错过的立即追赶，然后正常调度
         /// </summary>
         public static void Fun3()
@@ -143,6 +118,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
+        /// WithCronSchedule的哑火策略
         /// 哑火策略：WithMisfireHandlingInstructionFireAndProceed
         /// 哑火的任务合并到一次执行，下次正常执行
         /// 
