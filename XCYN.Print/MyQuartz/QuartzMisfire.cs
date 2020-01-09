@@ -15,7 +15,7 @@ namespace XCYN.Print.MyQuartz
     {
         /// <summary>
         /// 哑火策略：WithMisfireHandlingInstructionFireNow
-        /// 如果有触发哑火，立即执行
+        /// 不追赶哑火，如果有触发哑火，立即执行，更新下次执行时间
         /// </summary>
         public static void Fun1()
         {
@@ -27,10 +27,10 @@ namespace XCYN.Print.MyQuartz
                                                  .Build();
 
             var trigger = TriggerBuilder.Create()
-                                                .StartAt(DateBuilder.DateOf(12,0,0))
+                                                .StartAt(DateBuilder.DateOf(7,0,0))
                                                 .WithSimpleSchedule(m => 
                                                     m.WithIntervalInHours(1)
-                                                        .WithRepeatCount(10)
+                                                        .WithRepeatCount(100)
                                                         //如果有触发哑火，立即执行，如果之前定义的是12：00触发，调度时间变成了现在的时间
                                                         .WithMisfireHandlingInstructionFireNow()    
                                                 ).Build();
@@ -40,7 +40,7 @@ namespace XCYN.Print.MyQuartz
         
         /// <summary>
         /// 哑火策略：WithMisfireHandlingInstructionIgnoreMisfires
-        /// 错过的立即追赶，然后正常调度
+        /// 错过的立即追赶，下次执行时间不变
         /// </summary>
         public static void Fun3()
         {
@@ -49,13 +49,14 @@ namespace XCYN.Print.MyQuartz
 
             //将键值对传给定时器
             var job = JobBuilder.Create<MyJob>()
-                                                 .Build();
+                                                .UsingJobData("count", 0)
+                                                .Build();
 
             var trigger = TriggerBuilder.Create()
-                                                .StartAt(DateBuilder.DateOf(12, 0, 0))
+                                                .StartAt(DateBuilder.DateOf(7, 0, 0))
                                                 .WithSimpleSchedule(m =>
                                                     m.WithIntervalInHours(1)
-                                                        .WithRepeatCount(10)
+                                                        .WithRepeatCount(100)
                                                         //错过的立即追赶，然后正常调度
                                                         .WithMisfireHandlingInstructionIgnoreMisfires()
                                                 ).Build();
@@ -65,7 +66,7 @@ namespace XCYN.Print.MyQuartz
 
         /// <summary>
         /// 哑火策略：WithMisfireHandlingInstructionNext
-        /// 正常执行，但不追赶哑火的
+        /// 不追赶哑火，正常执行，由于是正常执行下次执行时间不变了
         /// </summary>
         public static void Fun4()
         {
@@ -77,10 +78,10 @@ namespace XCYN.Print.MyQuartz
                                                  .Build();
 
             var trigger = TriggerBuilder.Create()
-                                                .StartAt(DateBuilder.DateOf(14, 25, 0))
+                                                .StartAt(DateBuilder.DateOf(7, 0, 0))
                                                 .WithSimpleSchedule(m =>
                                                          m.WithIntervalInHours(1)
-                                                        .WithRepeatCount(12)
+                                                        .WithRepeatCount(100)
                                                         //正常调度，执行次数 = 预计执行次数 - 错过的次数
                                                         //.WithMisfireHandlingInstructionNextWithRemainingCount()
                                                         //正常调度，执行次数不变
@@ -92,7 +93,7 @@ namespace XCYN.Print.MyQuartz
 
         /// <summary>
         /// 哑火策略：WithMisfireHandlingInstructionNow
-        /// 立即执行，但不追赶哑火的
+        /// 立即执行，但不追赶哑火的，更新下次执行时间
         /// </summary>
         public static void Fun5()
         {
@@ -104,10 +105,10 @@ namespace XCYN.Print.MyQuartz
                                                  .Build();
 
             var trigger = TriggerBuilder.Create()
-                                                 .StartAt(DateBuilder.DateOf(14, 25, 0))
+                                                 .StartAt(DateBuilder.DateOf(7, 0, 0))
                                                 .WithSimpleSchedule(m =>
                                                     m.WithIntervalInHours(1)
-                                                        .WithRepeatCount(12)
+                                                        .WithRepeatCount(100)
                                                         //立即执行，执行次数 = 预计执行次数 - 错过的次数
                                                         //.WithMisfireHandlingInstructionNowWithRemainingCount()
                                                         //立即执行，执行次数不变
@@ -138,8 +139,8 @@ namespace XCYN.Print.MyQuartz
                                                  .Build();
 
             var trigger = TriggerBuilder.Create()
-                                                .StartAt(DateBuilder.DateOf(12, 25, 0))
-                                                .WithCronSchedule("0 0 8-20 ? * MON-FRI",   //工作日8AM - 8PM每小时执行一次
+                                                .StartAt(DateBuilder.DateOf(7, 0, 0))
+                                                .WithCronSchedule("0 0 7-20 ? * MON-FRI",   //工作日8AM - 8PM每小时执行一次
                                                     //哑火的任务合并到一次执行，下次正常执行
                                                     //m => m.WithMisfireHandlingInstructionFireAndProceed()
                                                     //追赶执行哑火的任务，下次正常执行

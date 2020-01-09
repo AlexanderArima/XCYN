@@ -587,19 +587,24 @@ namespace XCYN.Print.MyQuartz
     /// </summary>
     public class MyJob : IJob
     {
-
+        
         public void Execute(IJobExecutionContext context)
         {
-            //Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}，执行次数：{2}",
-            //    context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-            //    context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-            //    context.JobDetail.JobDataMap["count"]
-            //    );
             //context.JobDetail.JobDataMap["count"] = Convert.ToInt32(context.JobDetail.JobDataMap["count"]) + 1;
             Console.WriteLine("本地执行时间：{0}，下次执行时间：{1}",
-                context.ScheduledFireTimeUtc == null ? "不存在" : context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
-                context.NextFireTimeUtc == null ? "不存在" : context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss")
+                context.ScheduledFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"),
+                context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss")
+                //context.JobDetail.JobDataMap["count"]
                 );
+            
+            //Console.WriteLine("上次执行时间：{0}", context.PreviousFireTimeUtc == null ? "不存在" : context.PreviousFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"));
+            //Console.WriteLine("本次执行时间：{0}", context.FireTimeUtc == null ? "不存在" : context.FireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"));
+            //Console.WriteLine("下次执行时间：{0}", context.NextFireTimeUtc == null ? "不存在" : context.NextFireTimeUtc.Value.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy-MM-dd HH:mm:ss"));
+            //var st = context.Trigger as ISimpleTrigger;
+            //if(st != null)
+            //{
+            //    Console.WriteLine("当前次数：{0} " , st.TimesTriggered);
+            //}
         }
     }
 
