@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace XCYN.WebApi.Controllers
 {
@@ -21,6 +22,7 @@ namespace XCYN.WebApi.Controllers
             return "value";
         }
 
+        //[ApiExplorerSettings(IgnoreApi = true)]
         // POST api/values
         public void Post([FromBody]string value)
         {
