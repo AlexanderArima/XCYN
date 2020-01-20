@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../Plugins/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="layui-inline">
+        <label class="layui-form-label">日期时间选择器</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss" timedefault="235959">
+        </div>
+    </div>
+    <script src="../../Plugins/jquery/jquery-1.10.2.js"></script>
+    <script src="../../Plugins/layui/layui.all.js"></script>
+    <script>
+
+        var laydate_change = false;
+        var laydate_hours = "";
+        var laydate_minutes = "";
+        var laydate_seconds = "";
+
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#test5'
+                , type: 'datetime'
+                , done: function (value, date) {
+                    //点击确定触发
+                    //console.log('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
+                    var obj = JSON.stringify(date);
+                    if (laydate_change == true) {
+                        //console.log(this);
+                        if (laydate_hours == date.hours && laydate_minutes == date.minutes && laydate_seconds == date.seconds) {
+                            //时间相同只选择了日期，时间改成23：59：59
+                            //console.log("时间相同只选择了日期，时间改成23：59：59");
+                            this.dateTime.year = date.year
+                            this.dateTime.month = date.month - 1;
+                            this.dateTime.date = date.date;
+                            this.dateTime.hours = 23;
+                            this.dateTime.minutes = 59;
+                            this.dateTime.seconds = 59;
+                            return;
+                        }
+                        else {
+                            //改变了时间&日期
+                            //console.log("改变了时间");
+                            this.dateTime.year = date.year
+                            this.dateTime.month = date.month - 1;
+                            this.dateTime.date = date.date;
+                            this.dateTime.hours = date.hours;
+                            this.dateTime.minutes = date.minutes;
+                            this.dateTime.seconds = date.seconds;
+                        }
+                        laydate_change = false;
+                    } else {
+                        //只改变了时间
+                        //console.log("改变了时间");
+                        this.dateTime.year = date.year
+                        this.dateTime.month = date.month - 1;
+                        this.dateTime.date = date.date;
+                        this.dateTime.hours = date.hours;
+                        this.dateTime.minutes = date.minutes;
+                        this.dateTime.seconds = date.seconds;
+                    }
+                }
+                , change: function (value, date) {
+                    //选择日期&时间出发
+                    if ($(this.elem[0]).attr("timedefault") != undefined) {
+                        laydate_change = true;
+                    }
+                    var obj = JSON.stringify(date);
+                    laydate_hours = date.hours;
+                    laydate_minutes = date.minutes;
+                    laydate_seconds = date.seconds;
+                    //console.log('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
