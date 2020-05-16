@@ -28,5 +28,15 @@
             <asp:TextBox ID="TextBox4" runat="server" Height="100px" TextMode="MultiLine" Width="472px"></asp:TextBox>
         </div>
     </form>
+    <script>
+        window.onload = function(){
+            console.log("jflsdfjlsdfj");
+        }
+
+        function Fun1(){
+            window.location.href =  "";
+
+        }
+    </script>
 </body>
 </html>

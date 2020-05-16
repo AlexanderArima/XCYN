@@ -10,9 +10,10 @@ namespace XCYN.WebApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            return Redirect("~/swagger/ui/index");
+            //ViewBag.Title = "Home Page";
 
-            return View();
+            //return View();
         }
     }
 }

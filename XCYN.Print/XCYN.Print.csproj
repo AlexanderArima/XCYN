@@ -982,6 +982,7 @@
     <Compile Include="MultiThread\DemoTMP.cs" />
     <Compile Include="MultiThread\DemoTResult.cs" />
     <Compile Include="MultiThread\DemoWait.cs" />
+    <Compile Include="MyQuartz\QuartzMisfire.cs" />
     <Compile Include="MySQL\MySQLTest.cs" />
     <Compile Include="Operators\MultiplicationOperators.cs" />
     <Compile Include="Operators\NullOperators.cs" />
@@ -996,8 +997,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Quartz\MyQuartz.cs" />
-    <Compile Include="Quartz\Schedule.cs" />
+    <Compile Include="MyQuartz\QuartzUsualMethod.cs" />
+    <Compile Include="MyQuartz\QuartzConfig.cs" />
     <Compile Include="rabbitmq\Consumer.cs" />
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
@@ -1097,6 +1098,12 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="Operators\info.txt" />
+    <Content Include="quartz_jobs.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="quartz.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ReadMe.md" />
     <Content Include="XmlAndJson\books.xml">
       <SubType>Designer</SubType>
