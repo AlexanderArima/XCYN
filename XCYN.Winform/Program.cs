@@ -1,6 +1,7 @@
 ﻿using log4net.Config;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using XCYN.Winform.GridView;
@@ -14,12 +15,17 @@ namespace XCYN.Winform
 {
     public class Program
     {
+
+        [DllImport("User32.dll")]
+        public static extern int MessageBox(int h, string m, string c, int type);
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
+            return;
             // 代码摘自：http://www.cnblogs.com/wangshenhe/archive/2012/11/14/2769605.html
             //设置应用程序处理异常方式：ThreadException处理  
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
@@ -54,20 +60,20 @@ namespace XCYN.Winform
         private static void InitLog4Net()
         {
             var logCfg = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config");
-            XmlConfigurator.ConfigureAndWatch(logCfg);
+            //log4net.Config.XmlConfigurator.ConfigureAndWatch(logCfg);
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             string str = GetExceptionMsg(e.Exception, e.ToString());
-            MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            System.Windows.Forms.MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //LogManager.WriteLog(str);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             string str = GetExceptionMsg(e.ExceptionObject as Exception, e.ToString());
-            MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            System.Windows.Forms.MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //LogManager.WriteLog(str);
         }
 
