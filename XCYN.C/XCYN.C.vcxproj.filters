@@ -18,5 +18,20 @@
     <ClCompile Include="hello.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="number.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="str.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="jiajianchengchu.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="outPut_inPut.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="input.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
