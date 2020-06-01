@@ -124,15 +124,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fenZhiYuJu.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="jiajianchengchu.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="number.c" />
     <ClCompile Include="outPut_inPut.c" />
     <ClCompile Include="str.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fenZhiYuJu.h" />
+    <ClInclude Include="input.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 #include <conio.h>
 
 //int Fun6() {
-int main() {
+int Fun6() {
 	int a, b = 0;
 	//&称为取地址符，也就是获取变量在内存中的地址
 	//scanf()：和 printf() 类似，scanf() 可以输入多种类型的数据。
@@ -28,10 +28,45 @@ int main() {
 	//printf("f = %c\n", f);
 
 	//gets()方法和scanf()的区别在于gets()只能输入字符串类型并且可以打印空格，scanf()可以输入多种类型，但不能打印空格
-	char g[20];
-	gets(g);
-	//scanf("%s", g);
-	printf("g = %s\n", g);
-	system("pause");
+	//char g[20];
+	//gets(g);
+	////scanf("%s", g);
+	//printf("g = %s\n", g);
+	ZSSJT();
+	//system("pause");
+	return 0;
+}
+
+//阻塞式监听
+int ZSSJT() {
+	char ch;
+	int i = 0;
+	while (ch = _getch()) {
+		if (ch == 27) {
+			break;
+		}
+		else {
+			printf("Number：%d\n", ++i);
+		}
+	}
+	return 0;
+}
+
+//非阻塞式监听
+int FZSSJT() {
+	char ch;
+	int i = 0;
+	while (1) {
+		if (_kbhit()) {	//检测缓冲区中是否有数据
+			ch = _getch();	//将缓冲区中的数据以字符的形式读出
+			if (ch == 27) {
+				break;
+			}
+			else {
+				printf("Number：%d\n", ++i);
+			}
+		}
+		Sleep(1000);  //暂停1秒
+	}
 	return 0;
 }
