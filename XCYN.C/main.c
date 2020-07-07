@@ -4,6 +4,6 @@
 #include "ShuZu.h"
 
 int main() {
-	Fun8();
+	Fun13();
 	return 0;
 }
