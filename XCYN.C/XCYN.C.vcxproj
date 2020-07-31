@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bubbleSort.c" />
     <ClCompile Include="fenZhiYuJu.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
@@ -138,6 +139,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bubbleSort.h" />
     <ClInclude Include="fenZhiYuJu.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="ShuZu.h" />

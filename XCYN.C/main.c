@@ -4,6 +4,6 @@
 #include "ShuZu.h"
 
 int main() {
-	Fun13();
+	BubbleSort();
 	return 0;
 }

@@ -10,3 +10,7 @@ void Fun11();
 void Fun12();
 
 void Fun13();
+
+void Fun14();
+
+void display_array(int arr[], int len);

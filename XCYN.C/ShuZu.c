@@ -88,3 +88,28 @@ void Fun13() {
 	int result =strcmp(a, b);	//a大于b，返回1，b大于a返回-1，a等于b返回0
 	printf("The result is %d", result);
 }
+
+void display_array(int arr[] ,int len) {
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+//删除指定下标的元素
+void Fun14() {
+	int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	int arr_new1[9];
+	//将第六个元素删除
+	for (int i = 0; i < 10; i++)
+	{
+		if (i < 5) {
+			arr_new1[i] = arr[i];
+		}
+		else if (i > 5) {
+			arr_new1[i - 1] = arr[i];	//跳过第6个元素
+		}
+	}
+	display_array(arr_new1, 9);
+}
