@@ -1374,6 +1374,7 @@
     <Content Include="Plugins\layui\font\iconfont.ttf" />
     <Content Include="Plugins\layui\font\iconfont.woff" />
     <Content Include="Plugins\layui\font\iconfont.woff2" />
+    <Content Include="Pages\typescript\tsconfig.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\javascript\FindMaxOfArray.js" />
@@ -1674,6 +1675,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Pages\typescript\Demo.ts" />
     <TypeScriptCompile Include="Plugins\vue\types\index.d.ts" />
     <TypeScriptCompile Include="Plugins\vue\types\options.d.ts" />
     <TypeScriptCompile Include="Plugins\vue\types\plugin.d.ts" />
