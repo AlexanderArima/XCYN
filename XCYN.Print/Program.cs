@@ -43,6 +43,7 @@ using System.Collections;
 using XCYN.Common.Sql.redis;
 using XCYN.Print.MyQuartz;
 
+
 namespace XCYN.Print
 {
     class Program
@@ -51,7 +52,11 @@ namespace XCYN.Print
         {
             //QuartzConfig.Fun5();
             //QuartzUsualMethod.Fun17();
-            QuartzMisfire.Fun6();
+            Console.WriteLine("起始时间：{0}", DateTime.Now.ToString("hh:mm:ss.fff"));
+            Algorithm a = new Algorithm();
+            var sum = a.FibonacciRecursive(42);
+            Console.WriteLine("第{0}位的斐波那契值为：{0}", sum);
+            Console.WriteLine("结束时间：{0}", DateTime.Now.ToString("hh:mm:ss.fff"));
             Console.Read();
         }
 

@@ -111,21 +111,37 @@ namespace XCYN.Print.MianShiTi
         #region 递推思想
 
         /// <summary>
-        /// 斐波那契数列
+        /// 以迭代的方式实现斐波那契数列，效率比下面的以递归的方式效率快了近100倍
         /// </summary>
-        public static void Fibonacci()
+        public int Fibonacci(int num)
         {
-            int month = 12;
-            int[] fab = new int[month];
+            //int month = 42;
+            int[] fab = new int[num];
             fab[0] = 1;
             fab[1] = 1;
-            for (int i = 2; i < month; i++)
+            for (int i = 2; i < num; i++)
             {
                 fab[i] = fab[i - 1] + fab[i - 2];
             }
-            for (int i = 0; i < fab.Length; i++)
+            //for (int i = 0; i < fab.Length; i++)
+            //{
+                //Console.WriteLine($"第{i + 1}个月的小兔子为:{fab[i]}");
+            //}
+            return fab[fab.Count() - 1];
+        }
+
+        /// <summary>
+        /// 以递归的方式计算斐波那契数列
+        /// </summary>
+        public int FibonacciRecursive(int num)
+        {
+            if (num <= 2)
             {
-                Console.WriteLine($"第{i + 1}个月的小兔子为:{fab[i]}");
+                return 1;
+            }
+            else
+            {
+                return FibonacciRecursive(num - 1) + FibonacciRecursive(num - 2);
             }
         }
 
