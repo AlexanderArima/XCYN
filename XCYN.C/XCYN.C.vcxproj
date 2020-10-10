@@ -101,6 +101,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,14 +127,19 @@
   <ItemGroup>
     <ClCompile Include="bubbleSort.c" />
     <ClCompile Include="fenZhiYuJu.c" />
+    <ClCompile Include="globalVariable.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="jiajianchengchu.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="number.c" />
     <ClCompile Include="outPut_inPut.c" />
+    <ClCompile Include="qiuSuSu.c" />
     <ClCompile Include="ShuZu.c" />
     <ClCompile Include="str.c" />
+    <ClCompile Include="TypedefDemo.c" />
+    <ClCompile Include="yuDingYiHong.c" />
+    <ClCompile Include="zhiZhen01.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -141,8 +147,13 @@
   <ItemGroup>
     <ClInclude Include="bubbleSort.h" />
     <ClInclude Include="fenZhiYuJu.h" />
+    <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="qiuSuSu.h" />
     <ClInclude Include="ShuZu.h" />
+    <ClInclude Include="TypedefDemo.h" />
+    <ClInclude Include="yuDingYiHong.h" />
+    <ClInclude Include="zhiZhen01.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

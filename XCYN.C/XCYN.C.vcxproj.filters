@@ -45,6 +45,21 @@
     <ClCompile Include="bubbleSort.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="qiuSuSu.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="globalVariable.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TypedefDemo.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="yuDingYiHong.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="zhiZhen01.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -60,6 +75,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="bubbleSort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="qiuSuSu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="globalVariable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TypedefDemo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yuDingYiHong.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zhiZhen01.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
