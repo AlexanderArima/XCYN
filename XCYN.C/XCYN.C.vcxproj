@@ -88,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +141,8 @@
     <ClCompile Include="TypedefDemo.c" />
     <ClCompile Include="yuDingYiHong.c" />
     <ClCompile Include="zhiZhen01.c" />
+    <ClCompile Include="zhiZhen02.c" />
+    <ClCompile Include="zhiZhen03.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -154,6 +157,8 @@
     <ClInclude Include="TypedefDemo.h" />
     <ClInclude Include="yuDingYiHong.h" />
     <ClInclude Include="zhiZhen01.h" />
+    <ClInclude Include="zhiZhen02.h" />
+    <ClInclude Include="zhiZhen03.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
