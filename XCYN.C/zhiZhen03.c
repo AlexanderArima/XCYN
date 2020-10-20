@@ -111,3 +111,17 @@ int Fun31() {
 	printf("&p2：%#X，p3：%#X", &p2, p3);
 	return 0;
 }
+
+int Fun32() {
+	char *str = NULL;		//强烈建议对没有初始化的指针赋值为 NULL
+	char *str_arr[10] = { '\0' };
+	str = &str_arr;
+	if (str == NULL) {
+		//这样能够从很大程度上增加程序的健壮性，防止对空指针进行无意义的操作。
+		printf("请初始化字符串!");
+		return 0;
+	}
+	gets(str);
+	printf("%s\n", str);
+	return 0;
+}
