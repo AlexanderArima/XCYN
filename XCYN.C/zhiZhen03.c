@@ -63,3 +63,51 @@ int Fun27() {
 	printf("str2：%s", str2);
 	return 0;
 }
+
+//交换两个数字的值
+int Fun28(int *num1,int *num2) {
+	printf("*num1：%d", *num1);	//这里的num1和num2是一个指针变量
+	int temp;
+	temp = *num1;	//通过指针变量获取内存上的数据
+	*num1 = *num2;	//通过指针变量获取，修改内存上的数据
+	*num2 = temp;	//通过指针变量修改内存上的数据
+	return 0;
+}
+
+//取出数组中的最大值
+int Fun29(int arr[], int len) {
+	int max = arr[0];
+	for (int i = 1; i < len; i++)
+	{
+		if (arr[i] > max) 
+		{
+			max = arr[i];
+		}
+	}
+	return max;
+}
+
+//返回字符串的指针
+char *Fun30(char *str1, char *str2) {
+	if (strlen(str1) >= strlen(str2)) {
+		return str1;
+	}
+	else {
+		return str2;
+	}
+}
+
+//指向指针的指针
+int Fun31() {
+	int a = 100;
+	int *p1 = &a;
+	int **p2 = &p1;
+	int ***p3 = &p2;
+	printf("%d, %d, %d, %d\n", a, *p1, **p2, ***p3);
+	//&a得到a的地址，p1=&a，*p2指向p1，p1又等于&a，所以它们的地址是同一个
+	printf("&a：%#X，p1：%#X，*p2：%#X，**p3：%#X\n", &a, p1, *p2, **p3);
+	//&p1得到的是p1的地址，p2存放的值为p1的地址，*p3指向p2的值，也就是p1的地址
+	printf("&p1：%#X，p2：%#X，*p3：%#X\n", &p1, p2, *p3);
+	printf("&p2：%#X，p3：%#X", &p2, p3);
+	return 0;
+}

@@ -6,11 +6,16 @@
 #include "TypedefDemo.h"
 #include "zhiZhen01.h"
 #include "zhiZhen02.h"
+#include "zhiZhen03.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
-	//Ìõ¼ş±àÒë
-	Fun27();
+	//char str1[30], str2[30], *str;
+	//gets(str1);
+	//gets(str2);
+	//str = Fun30(str1, str2);
+	//printf("Longer string: %s\n", str);
+	Fun31();
 	return 0;
 }
