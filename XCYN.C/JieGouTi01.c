@@ -46,3 +46,21 @@ int Fun36() {
 	printf("%s\n", stu.name);	//直接从结构体对象中取直接用.就行
 	return 0;
 }
+
+//使用typedef为类型(Teacher) 起一个别名(TeacherViewModel) 
+//一般用法：typedef  oldName  newName;
+typedef struct Teacher {
+	char *name;	//	姓名
+	int age;	//年龄
+	char sex;	//性别
+} TeacherViewModel;
+
+//使用typedef定义的别名结构体
+int Fun37() {
+	TeacherViewModel teacher1;
+	teacher1.name = "李四";
+	teacher1.age = 24;
+	teacher1.sex = 'M';
+	printf("name：%s，age：%d，sex：%c", teacher1.name, teacher1.age, teacher1.sex);
+	return 0;
+}

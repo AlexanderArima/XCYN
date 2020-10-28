@@ -16,6 +16,6 @@ int main()
 	//gets(str2);
 	//str = Fun30(str1, str2);
 	//printf("Longer string: %s\n", str);
-	Fun36();
+	Fun39();
 	return 0;
 }
