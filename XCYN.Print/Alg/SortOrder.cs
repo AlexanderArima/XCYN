@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace XCYN.Print.Alg
 {
     public class SortOrder
