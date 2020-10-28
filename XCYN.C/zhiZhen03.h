@@ -12,3 +12,9 @@ int Fun29(int arr[], int len);
 char *Fun30(char *str1, char *str2);
 
 int Fun31();
+
+int Fun32();
+
+int Fun33();
+
+int Fun34();

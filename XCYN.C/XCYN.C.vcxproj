@@ -132,6 +132,7 @@
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="jiajianchengchu.c" />
+    <ClCompile Include="JieGouTi01.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="number.c" />
     <ClCompile Include="outPut_inPut.c" />
@@ -152,6 +153,7 @@
     <ClInclude Include="fenZhiYuJu.h" />
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="JieGouTi01.h" />
     <ClInclude Include="qiuSuSu.h" />
     <ClInclude Include="ShuZu.h" />
     <ClInclude Include="TypedefDemo.h" />

@@ -66,6 +66,9 @@
     <ClCompile Include="zhiZhen03.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="JieGouTi01.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -102,6 +105,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="zhiZhen03.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JieGouTi01.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

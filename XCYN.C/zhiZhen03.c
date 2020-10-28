@@ -125,3 +125,18 @@ int Fun32() {
 	printf("%s\n", str);
 	return 0;
 }
+
+int Fun33() {
+	char *str = NULL;		//强烈建议对没有初始化的指针赋值为 NULL
+	char str_arr[] = "after";
+	str = str_arr;
+	printf("%s\n", str);
+	return 0;
+}
+
+int Fun34() {
+	int num = 100;
+	int *num2 = &num;
+	int **num3 = &num2;
+	printf("%d", **num3);
+}
