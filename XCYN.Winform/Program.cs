@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using XCYN.Winform.Demo;
 using XCYN.Winform.GridView;
 using XCYN.Winform.LogViewer;
 using XCYN.Winform.MaskLayer;
@@ -25,7 +26,7 @@ namespace XCYN.Winform
         [STAThread]
         static void Main(string[] args)
         {
-            return;
+            //return;
             // 代码摘自：http://www.cnblogs.com/wangshenhe/archive/2012/11/14/2769605.html
             //设置应用程序处理异常方式：ThreadException处理  
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
@@ -37,7 +38,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SchoolForm());
+            Application.Run(new MouseClickForm());
 
             //方式1
             //Application app = new Application();
