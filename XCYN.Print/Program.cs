@@ -1,54 +1,43 @@
-﻿using log4net;
-using log4net.Config;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.SelfHost;
-using XCYN.Common;
-using XCYN.Print.DesignPattern.Bridge;
-using XCYN.Print.DesignPattern.ChainOfResponsibility;
-using XCYN.Print.DesignPattern.Command;
-using XCYN.Print.DesignPattern.Composite;
-using XCYN.Print.DesignPattern.Factory;
-using XCYN.Print.DesignPattern.Filter;
-using XCYN.Print.DesignPattern.Flyweight;
-using XCYN.Print.DesignPattern.Mediator;
-using XCYN.Print.DesignPattern.Memento;
-using XCYN.Print.DesignPattern.Observer;
-using XCYN.Print.DesignPattern.Proxy;
-using XCYN.Print.DesignPattern.State;
-using XCYN.Print.DesignPattern.Strategy;
-using XCYN.Print.FileSystem;
-using XCYN.Print.Generics;
-using XCYN.Print.MianShiTi;
-using XCYN.Print.MultiThread;
-using XCYN.Print.Operators;
-using System.Linq;
-using System.Text.RegularExpressions;
-using XCYN.Print.delegates;
-using XCYN.Print.Alg;
-using XCYN.Print.WCF;
-using XCYN.Print.MongoDB;
-using XCYN.Print.Basic;
-using System.Threading;
-using XCYN.Print.MySQL;
-using XCYN.Print.DesignPattern.Builder.Rest;
-using XCYN.Print.DesignPattern.Adapter.Object;
-using XCYN.Print.rabbitmq;
-using System.Collections;
-using XCYN.Common.Sql.redis;
-using XCYN.Print.MyQuartz;
-using XCYN.Print.AsyncProgram;
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace XCYN.Print
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net.Http;
+    using System.ServiceModel;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.SelfHost;
+    using log4net;
+    using log4net.Config;
+    using XCYN.Common;
+    using XCYN.Print.AsyncProgram;
+    using XCYN.Print.Basic;
+    using XCYN.Print.DesignPattern.Bridge;
+    using XCYN.Print.DesignPattern.ChainOfResponsibility;
+    using XCYN.Print.DesignPattern.Command;
+    using XCYN.Print.DesignPattern.Composite;
+    using XCYN.Print.DesignPattern.Filter;
+    using XCYN.Print.DesignPattern.Flyweight;
+    using XCYN.Print.DesignPattern.Mediator;
+    using XCYN.Print.DesignPattern.Memento;
+    using XCYN.Print.DesignPattern.Observer;
+    using XCYN.Print.DesignPattern.Proxy;
+    using XCYN.Print.DesignPattern.State;
+    using XCYN.Print.DesignPattern.Strategy;
+    using XCYN.Print.FileSystem;
+    using XCYN.Print.Generics;
+    using XCYN.Print.MianShiTi;
+    using XCYN.Print.MultiThread;
+    using XCYN.Print.Operators;
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //QuartzConfig.Fun5();
             //QuartzUsualMethod.Fun17();
@@ -376,6 +365,7 @@ namespace XCYN.Print
                     demo.Fun3();
                 });
             }
+
             Console.Read();
         }
 
@@ -404,7 +394,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 读写锁
+        /// 读写锁.
         /// </summary>
         private static void DemoReadWriteLock()
         {
@@ -418,7 +408,7 @@ namespace XCYN.Print
         private static void DemoLock()
         {
             DemoLock demo = new DemoLock();
-            
+
             for (int i = 0; i < 5; i++)
             {
                 Task.Factory.StartNew(() => {
@@ -430,7 +420,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// WebAPI托管(Windows自托管)
+        /// WebAPI托管(Windows自托管).
         /// </summary>
         private static void WebAPIHost()
         {
@@ -448,9 +438,9 @@ namespace XCYN.Print
             Console.Read();
             host.CloseAsync().Wait();
         }
-        
+
         /// <summary>
-        /// WebAPI客户端
+        /// WebAPI客户端.
         /// </summary>
         private static void WebAPIClient()
         {
@@ -473,7 +463,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 组合模式
+        /// 组合模式.
         /// </summary>
         private static void Composite()
         {
@@ -492,7 +482,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 享元模式
+        /// 享元模式.
         /// </summary>
         private static void FlyWeightCommand()
         {
@@ -508,7 +498,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 桥接模式
+        /// 桥接模式.
         /// </summary>
         private static void BridgeCommand()
         {
@@ -522,30 +512,34 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 责任链模式
+        /// 责任链模式.
         /// </summary>
         private static void ChainCommand()
         {
             AbstractHandler handler = new ConcreteHander1();
             AbstractHandler handler2 = new ConcreteHander2();
             AbstractHandler handler3 = new ConcreteHander3();
+
             //链式调用 handler1保存handler2的引用，handler2保存handler3的引用，这样就能逐级调用
             handler.SetHandler(handler2);
             handler2.SetHandler(handler3);
+
             //执行
             handler.Request(2);
             Console.Read();
         }
 
         /// <summary>
-        /// 命令模式
+        /// 命令模式.
         /// </summary>
         private static void HandleCommand()
         {
             Received recieved = new Received();
+
             //创建命令
             ICommand add = new AddCommand(recieved);
             ICommand remove = new RemoveCommand(recieved);
+
             //添加命令
             Invoker invoker = new Invoker();
             invoker.SetCommand(add);
@@ -561,7 +555,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 状态模式
+        /// 状态模式.
         /// </summary>
         private static void HandleState()
         {
@@ -581,6 +575,7 @@ namespace XCYN.Print
 
             //创建一个备份
             Memento backup = o.CreateMemento();
+
             //将备份保存到Caretaker中去
             Caretaker c = new Caretaker()
             {
@@ -599,7 +594,7 @@ namespace XCYN.Print
         }
 
         /// <summary>
-        /// 工厂方法
+        /// 工厂方法.
         /// </summary>
         private static void HandleFactory()
         {
@@ -618,7 +613,7 @@ namespace XCYN.Print
         private static void HandleMediator()
         {
             AbstractMediator mediator = new QQMediator();
-            
+
             AbstractColleague colleague = new Colleague(mediator);
             colleague.UserName = "紫涵";
 
@@ -668,27 +663,28 @@ namespace XCYN.Print
                 {
                    age = 19,
                    name = "cheng",
-                   sex = 0
+                   sex = 0,
                 },
                 new DesignPattern.Filter.Person()
                 {
                    age = 18,
                    name = "xheng",
-                   sex = 0
+                   sex = 0,
                 },
                 new DesignPattern.Filter.Person()
                 {
                    age = 19,
                    name = "xie",
-                   sex = 0
+                   sex = 0,
                 },
                 new DesignPattern.Filter.Person()
                 {
                    age = 19,
                    name = "cheng",
-                   sex = 1
+                   sex = 1,
                 },
             };
+
             //NameFilter namefilter = new NameFilter();
             //list_person = namefilter.Filter(list_person);
             //AndFilter andfilter = new AndFilter(new List<IFilter>()
@@ -717,6 +713,7 @@ namespace XCYN.Print
         private void HandleSignleton()
         {
             Console.WriteLine("主线程时间：{0}", DateTime.Now);
+
             //var db = XCYN.Print.DesignPattern.Singleton.hungry.DB.GetInstance();
             //Console.WriteLine("Show调用的时间：{0}", db.Show());
             //Console.WriteLine("Show调用的时间：{0}", XCYN.Print.DesignPattern.Singleton.hungry.DB.Show());
