@@ -7,15 +7,18 @@
 #include "zhiZhen01.h"
 #include "zhiZhen02.h"
 #include "zhiZhen03.h"
+#include "SequenceTable.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
-	//char str1[30], str2[30], *str;
-	//gets(str1);
-	//gets(str2);
-	//str = Fun30(str1, str2);
-	//printf("Longer string: %s\n", str);
-	Fun39();
+	table t = initTable();
+	for (int i = 0; i < Size; i++)
+	{
+		t.head[i] = i + 1;
+		t.length++;
+	}
+	printf("顺序表中存储的元素分别是：\n");
+	displayTable(t);
 	return 0;
 }

@@ -138,6 +138,7 @@
     <ClCompile Include="outPut_inPut.c" />
     <ClCompile Include="qiuSuSu.c" />
     <ClCompile Include="randomDemo.c" />
+    <ClCompile Include="SequenceTable.c" />
     <ClCompile Include="ShuZu.c" />
     <ClCompile Include="str.c" />
     <ClCompile Include="TypedefDemo.c" />
@@ -157,6 +158,7 @@
     <ClInclude Include="JieGouTi01.h" />
     <ClInclude Include="qiuSuSu.h" />
     <ClInclude Include="randomDemo.h" />
+    <ClInclude Include="SequenceTable.h" />
     <ClInclude Include="ShuZu.h" />
     <ClInclude Include="TypedefDemo.h" />
     <ClInclude Include="yuDingYiHong.h" />
