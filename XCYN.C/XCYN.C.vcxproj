@@ -133,6 +133,7 @@
     <ClCompile Include="input.c" />
     <ClCompile Include="jiajianchengchu.c" />
     <ClCompile Include="JieGouTi01.c" />
+    <ClCompile Include="LinkTable.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="number.c" />
     <ClCompile Include="outPut_inPut.c" />
@@ -156,6 +157,7 @@
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="JieGouTi01.h" />
+    <ClInclude Include="LinkTable.h" />
     <ClInclude Include="qiuSuSu.h" />
     <ClInclude Include="randomDemo.h" />
     <ClInclude Include="SequenceTable.h" />
