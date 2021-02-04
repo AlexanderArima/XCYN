@@ -14,6 +14,19 @@
 int main()
 {
 	link * k = initLink();
+	insertLink(k, 99, 2);
+	displayLink(k);
+	int find_elem = 19;
+	int index = selectElem(k, find_elem);
+	if (index != -1) {
+		printf("%d存在于链表中\n", find_elem);
+	}
+	else {
+		printf("%d不存在于链表中\n", find_elem);
+	}
+
+	//修改指定位置的元素的值
+	k = updateLink(k, 9, 100);
 	displayLink(k);
 	return 0;
 }
