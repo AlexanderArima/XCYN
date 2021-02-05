@@ -78,6 +78,9 @@
     <ClCompile Include="LinkTable.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SequenceStack.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -126,6 +129,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LinkTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SequenceStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

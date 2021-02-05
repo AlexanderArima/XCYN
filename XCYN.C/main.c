@@ -9,10 +9,29 @@
 #include "zhiZhen03.h"
 #include "SequenceTable.h"
 #include "LinkTable.h"
+#include "SequenceStack.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	int a[100];
+	int top = -1;
+	top = push(a, top, 1);
+	top = push(a, top, 2);
+	top = push(a, top, 3);
+	top = push(a, top, 4);
+	top = push(a, top, 5);
+	top = pop(a, top);
+	top = pop(a, top);
+	top = pop(a, top);
+	top = pop(a, top);
+	top = pop(a, top);
+	top = pop(a, top);
+	return 0;
+}
+
+//调用链表
+void MainFunc02() {
 	link * k = initLink();
 	insertLink(k, 99, 2);
 	displayLink(k);
@@ -28,7 +47,6 @@ int main()
 	//修改指定位置的元素的值
 	k = updateLink(k, 9, 100);
 	displayLink(k);
-	return 0;
 }
 
 //调用顺序表
