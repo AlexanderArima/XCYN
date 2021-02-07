@@ -142,6 +142,7 @@
     <ClCompile Include="outPut_inPut.c" />
     <ClCompile Include="qiuSuSu.c" />
     <ClCompile Include="randomDemo.c" />
+    <ClCompile Include="SequenceQueue.c" />
     <ClCompile Include="SequenceStack.c" />
     <ClCompile Include="SequenceTable.c" />
     <ClCompile Include="ShuZu.c" />
@@ -164,6 +165,7 @@
     <ClInclude Include="LinkTable.h" />
     <ClInclude Include="qiuSuSu.h" />
     <ClInclude Include="randomDemo.h" />
+    <ClInclude Include="SequenceQueue.h" />
     <ClInclude Include="SequenceStack.h" />
     <ClInclude Include="SequenceTable.h" />
     <ClInclude Include="ShuZu.h" />

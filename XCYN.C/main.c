@@ -11,15 +11,40 @@
 #include "LinkTable.h"
 #include "SequenceStack.h"
 #include "LinkStack.h"
+#include "SequenceQueue.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
 	// 初始化
+	int a[100];
+	int rear = 0;
+	int front = 0;
+	rear = SequenceQueue_Entry(a, rear, 0);
+	rear = SequenceQueue_Entry(a, rear, 1);
+	rear = SequenceQueue_Entry(a, rear, 2);
+
+	front = SequenceQueue_Out(a, front, rear);
+	front = SequenceQueue_Out(a, front, rear);
+	front = SequenceQueue_Out(a, front, rear);
+	front = SequenceQueue_Out(a, front, rear);
+
+	rear = SequenceQueue_Entry(a, rear, 3);
+	rear = SequenceQueue_Entry(a, rear, 4);
+
+	front = SequenceQueue_Out(a, front, rear);
+	front = SequenceQueue_Out(a, front, rear);
+	
+	return 0;
+}
+
+// 链栈测试方法
+void MainFunc04() {
+	// 初始化
 	linkStack *link = NULL;
 
 	// 入栈
-    link = LinkPush(link, 0);
+	link = LinkPush(link, 0);
 	link = LinkPush(link, 1);
 	link = LinkPush(link, 2);
 	link = LinkPush(link, 3);
@@ -32,10 +57,9 @@ int main()
 	link = LinkPop(link);
 	link = LinkPop(link);
 	link = LinkPop(link);
-	return 0;
 }
 
-// 顺序栈
+// 顺序栈测试方法
 void  MainFunc03() {
 	int a[100];
 	int top = -1;
@@ -52,7 +76,7 @@ void  MainFunc03() {
 	top = pop(a, top);
 }
 
-//调用链表
+//链表测试方法
 void MainFunc02() {
 	link * k = initLink();
 	insertLink(k, 99, 2);
@@ -71,7 +95,7 @@ void MainFunc02() {
 	displayLink(k);
 }
 
-//调用顺序表
+//顺序表测试方法
 void MainFunc01() {
 	table t = initTable();
 	for (int i = 0; i < Size; i++)
