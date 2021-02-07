@@ -10,10 +10,33 @@
 #include "SequenceTable.h"
 #include "LinkTable.h"
 #include "SequenceStack.h"
+#include "LinkStack.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	// 初始化
+	linkStack *link = NULL;
+
+	// 入栈
+    link = LinkPush(link, 0);
+	link = LinkPush(link, 1);
+	link = LinkPush(link, 2);
+	link = LinkPush(link, 3);
+	link = LinkPush(link, 4);
+
+	// 出栈
+	link = LinkPop(link);	//务必更新局部变量link的值为每一个方法的返回值.
+	link = LinkPop(link);
+	link = LinkPop(link);
+	link = LinkPop(link);
+	link = LinkPop(link);
+	link = LinkPop(link);
+	return 0;
+}
+
+// 顺序栈
+void  MainFunc03() {
 	int a[100];
 	int top = -1;
 	top = push(a, top, 1);
@@ -27,7 +50,6 @@ int main()
 	top = pop(a, top);
 	top = pop(a, top);
 	top = pop(a, top);
-	return 0;
 }
 
 //调用链表
