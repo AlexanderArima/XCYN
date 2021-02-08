@@ -12,10 +12,30 @@
 #include "SequenceStack.h"
 #include "LinkStack.h"
 #include "SequenceQueue.h"
+#include "LinkQueue.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	linkQueue * queue, *top, *rear;
+	queue = top = rear = LinkQueueInit();	//创建头结点
+	rear = LinkQueueEntry(rear, 0);	//开始入队
+	rear = LinkQueueEntry(rear, 1);
+	rear = LinkQueueEntry(rear, 2);
+	rear = LinkQueueEntry(rear, 3);
+	rear = LinkQueueEntry(rear, 4);
+
+	LinkQueueOut(top, rear);	//开始出队
+	LinkQueueOut(top, rear);
+	LinkQueueOut(top, rear);
+	LinkQueueOut(top, rear);
+	LinkQueueOut(top, rear);
+	LinkQueueOut(top, rear);	//队列为空
+	return 0;
+}
+
+// 顺序队列测试方法
+void MainFunc05() {
 	// 初始化
 	int a[100];
 	int rear = 0;
@@ -34,8 +54,6 @@ int main()
 
 	front = SequenceQueue_Out(a, front, rear);
 	front = SequenceQueue_Out(a, front, rear);
-	
-	return 0;
 }
 
 // 链栈测试方法
