@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bubbleSort.c" />
+    <ClCompile Include="CharStringStroage.c" />
     <ClCompile Include="fenZhiYuJu.c" />
     <ClCompile Include="globalVariable.c" />
     <ClCompile Include="hello.c" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bubbleSort.h" />
+    <ClInclude Include="CharStringStorage.h" />
     <ClInclude Include="fenZhiYuJu.h" />
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />

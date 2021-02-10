@@ -13,10 +13,24 @@
 #include "LinkStack.h"
 #include "SequenceQueue.h"
 #include "LinkQueue.h"
+#include "CharStringStorage.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	char *a = "wataxiwadannsenndesi";
+	char *b = "desi";
+	int result = CharStringStroageFun03(a, b);
+	if (result == 0) {
+		printf("字符串%s与字符串%s不匹配", a, b);
+	}
+	else {
+		printf("字符串%s与字符串%s匹配", a, b);
+	}
+	return 0;
+}
+
+void MainFunc06() {
 	linkQueue * queue, *top, *rear;
 	queue = top = rear = LinkQueueInit();	//创建头结点
 	rear = LinkQueueEntry(rear, 0);	//开始入队
@@ -31,7 +45,6 @@ int main()
 	LinkQueueOut(top, rear);
 	LinkQueueOut(top, rear);
 	LinkQueueOut(top, rear);	//队列为空
-	return 0;
 }
 
 // 顺序队列测试方法

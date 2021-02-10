@@ -93,6 +93,9 @@
     <ClCompile Include="LinkQueue.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CharStringStroage.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -150,6 +153,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LinkQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CharStringStorage.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
