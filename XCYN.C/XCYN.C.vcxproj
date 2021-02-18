@@ -135,6 +135,7 @@
     <ClCompile Include="input.c" />
     <ClCompile Include="jiajianchengchu.c" />
     <ClCompile Include="JieGouTi01.c" />
+    <ClCompile Include="LinkLists.c" />
     <ClCompile Include="LinkQueue.c" />
     <ClCompile Include="LinkStack.c" />
     <ClCompile Include="LinkStack.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="JieGouTi01.h" />
+    <ClInclude Include="LinkLists.h" />
     <ClInclude Include="LinkQueue.h" />
     <ClInclude Include="LinkTable.h" />
     <ClInclude Include="qiuSuSu.h" />

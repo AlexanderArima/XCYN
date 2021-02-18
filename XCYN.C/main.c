@@ -14,10 +14,18 @@
 #include "SequenceQueue.h"
 #include "LinkQueue.h"
 #include "CharStringStorage.h"
+#include "LinkLists.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	Glist c = NULL;
+	c = CreateLists(c);
+	return 0;
+}
+
+//串的BF算法
+void MainFunc07() {
 	char *a = "wataxiwadannsenndesi";
 	char *b = "desi";
 	int result = CharStringStroageFun03(a, b);
@@ -27,9 +35,9 @@ int main()
 	else {
 		printf("字符串%s与字符串%s匹配", a, b);
 	}
-	return 0;
 }
 
+//链表队列测试方法
 void MainFunc06() {
 	linkQueue * queue, *top, *rear;
 	queue = top = rear = LinkQueueInit();	//创建头结点
