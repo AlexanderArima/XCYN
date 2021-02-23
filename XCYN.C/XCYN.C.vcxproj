@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BiTree.c" />
     <ClCompile Include="bubbleSort.c" />
     <ClCompile Include="CharStringStroage.c" />
     <ClCompile Include="fenZhiYuJu.c" />
@@ -160,6 +161,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BiTree.h" />
     <ClInclude Include="bubbleSort.h" />
     <ClInclude Include="CharStringStorage.h" />
     <ClInclude Include="fenZhiYuJu.h" />

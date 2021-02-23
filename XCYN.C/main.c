@@ -15,13 +15,30 @@
 #include "LinkQueue.h"
 #include "CharStringStorage.h"
 #include "LinkLists.h"
+#include "BiTree.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
-	Glist c = NULL;
-	c = CreateLists(c);
+	BiTree tree = NULL;	//定义了一个非指针的变量
+	CreateBiTree(&tree);	//将该变量的地址传入函数
+	//proOrderLists(tree);		//前序遍历
+	//middleOrderList(tree);	//中序遍历
+	postOrderList(tree);		//后序遍历
 	return 0;
+}
+
+// 初始化二叉树
+void MainFunc08() {
+	// 官方例子
+	BiTree tree = NULL;	//定义了一个非指针的变量
+	CreateBiTree(&tree);	//将该变量的地址传入函数
+	printf("%d\n", tree->lchild->data);
+
+	// 我的例子
+	BiTNode *tree2 = NULL;
+	tree2 = OtherCreateBiTree(tree2);
+	printf("%d", tree2->data);
 }
 
 //串的BF算法
