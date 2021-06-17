@@ -74,6 +74,7 @@ void middleOrderList(BiTree tree) {
 	return;
 }
 
+// ºóÐò±éÀú
 void postOrderList(BiTree tree) {
 	if (tree) {
 		postOrderList(tree->lchild);

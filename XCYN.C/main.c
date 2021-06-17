@@ -16,16 +16,29 @@
 #include "CharStringStorage.h"
 #include "LinkLists.h"
 #include "BiTree.h"
+#include "CommonTree.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
+	PTree tree;
+	//初始化树
+	for (int i = 0; i < 10; i++) {
+		tree.tNode[i].data = ' ';
+		tree.tNode[i].parent = 0;	
+	}
+	tree = InitPNode(tree);
+	printf("根结点的值为：%c", tree.tNode[0].data);
+	return 0;
+}
+
+// 二叉树的前序，中序，后序遍历
+void MainFunc09() {
 	BiTree tree = NULL;	//定义了一个非指针的变量
 	CreateBiTree(&tree);	//将该变量的地址传入函数
 	//proOrderLists(tree);		//前序遍历
 	//middleOrderList(tree);	//中序遍历
 	postOrderList(tree);		//后序遍历
-	return 0;
 }
 
 // 初始化二叉树

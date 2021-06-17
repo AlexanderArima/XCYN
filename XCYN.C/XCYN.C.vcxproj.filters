@@ -102,6 +102,12 @@
     <ClCompile Include="BiTree.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CommonTree.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertSortAlg.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -168,6 +174,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BiTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertSortAlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

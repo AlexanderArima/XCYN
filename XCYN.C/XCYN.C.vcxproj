@@ -69,7 +69,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\OutPut</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -130,10 +132,12 @@
     <ClCompile Include="BiTree.c" />
     <ClCompile Include="bubbleSort.c" />
     <ClCompile Include="CharStringStroage.c" />
+    <ClCompile Include="CommonTree.c" />
     <ClCompile Include="fenZhiYuJu.c" />
     <ClCompile Include="globalVariable.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
+    <ClCompile Include="InsertSortAlg.c" />
     <ClCompile Include="jiajianchengchu.c" />
     <ClCompile Include="JieGouTi01.c" />
     <ClCompile Include="LinkLists.c" />
@@ -164,9 +168,11 @@
     <ClInclude Include="BiTree.h" />
     <ClInclude Include="bubbleSort.h" />
     <ClInclude Include="CharStringStorage.h" />
+    <ClInclude Include="CommonTree.h" />
     <ClInclude Include="fenZhiYuJu.h" />
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="InsertSortAlg.h" />
     <ClInclude Include="JieGouTi01.h" />
     <ClInclude Include="LinkLists.h" />
     <ClInclude Include="LinkQueue.h" />
