@@ -137,7 +137,6 @@
     <ClCompile Include="globalVariable.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
-    <ClCompile Include="InsertSortAlg.c" />
     <ClCompile Include="jiajianchengchu.c" />
     <ClCompile Include="JieGouTi01.c" />
     <ClCompile Include="LinkLists.c" />
@@ -172,7 +171,6 @@
     <ClInclude Include="fenZhiYuJu.h" />
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
-    <ClInclude Include="InsertSortAlg.h" />
     <ClInclude Include="JieGouTi01.h" />
     <ClInclude Include="LinkLists.h" />
     <ClInclude Include="LinkQueue.h" />
