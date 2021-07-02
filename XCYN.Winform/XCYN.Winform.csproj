@@ -136,6 +136,12 @@
     <Compile Include="CalculatorForm.Designer.cs">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Demo\AsyncAndAwaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Demo\AsyncAndAwaitForm.Designer.cs">
+      <DependentUpon>AsyncAndAwaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Demo\MouseClickForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </Compile>
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Demo\AsyncAndAwaitForm.resx">
+      <DependentUpon>AsyncAndAwaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Demo\MouseClickForm.resx">
       <DependentUpon>MouseClickForm.cs</DependentUpon>
