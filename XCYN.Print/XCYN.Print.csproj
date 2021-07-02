@@ -224,6 +224,7 @@
     <Compile Include="Basic\ListDictSetTest.cs" />
     <Compile Include="Basic\MyCommand.cs" />
     <Compile Include="Basic\MyConnection.cs" />
+    <Compile Include="Basic\NiMingType.cs" />
     <Compile Include="Basic\Nullable.cs" />
     <Compile Include="Basic\ObjectInit.cs" />
     <Compile Include="Basic\OptionParams.cs" />

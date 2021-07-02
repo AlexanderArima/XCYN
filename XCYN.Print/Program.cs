@@ -46,7 +46,9 @@ namespace XCYN.Print
             //var sum = a.FibonacciRecursive(42);
             //Console.WriteLine("第{0}位的斐波那契值为：{0}", sum);
             //Console.WriteLine("结束时间：{0}", DateTime.Now.ToString("hh:mm:ss.fff"));
-            JiaMiYuanLi.Fun2();
+            //JiaMiYuanLi.Fun2();
+            //NiMingType.Fun01();
+            MyCommand.Fun02();
             Console.Read();
         }
 
