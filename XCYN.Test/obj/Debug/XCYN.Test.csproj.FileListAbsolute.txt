@@ -972,3 +972,5 @@ E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csprojAssemblyReference.cache
 E:\MyProject\XCYN\XCYN.Test\obj\Debug\XCYN.Test.csproj.CoreCompileInputs.cache
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\Config\LogFilePath.txt
 E:\GitProject\XCYN\XCYN.Test\bin\Debug\Html\LogDetail.html
+E:\GitProject\XCYN\XCYN.Test\bin\Debug\quartz_jobs.xml
+E:\GitProject\XCYN\XCYN.Test\bin\Debug\Gma.System.MouseKeyHook.dll

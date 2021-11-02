@@ -143,6 +143,7 @@
     <Compile Include="ActiveX\SerialPortControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="BinaryConvert.cs" />
     <Compile Include="ChinaDate.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="CrossThreadCalls.cs" />

@@ -214,6 +214,7 @@
     <Compile Include="cdbWeb\ExcelHelper.cs" />
     <Compile Include="cdbWeb\JsonResult.cs" />
     <Compile Include="cdbWeb\SqlHelper.cs" />
+    <Compile Include="Common\BinaryConvertTestCase.cs" />
     <Compile Include="Common\CacheTestCase.cs" />
     <Compile Include="Common\IPAddressTest.cs" />
     <Compile Include="Common\MySQLTestCase.cs" />
