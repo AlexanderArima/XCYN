@@ -9,6 +9,7 @@ using XCYN.Winform.GridView;
 using XCYN.Winform.LogViewer;
 using XCYN.Winform.MaskLayer;
 using XCYN.Winform.MeiTuan;
+using XCYN.Winform.NPOI;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
 
@@ -38,7 +39,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AsyncAndAwaitForm());
+            Application.Run(new CreateWordForm());
 
             //方式1
             //Application app = new Application();

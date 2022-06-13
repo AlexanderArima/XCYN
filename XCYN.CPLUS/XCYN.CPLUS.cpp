@@ -1,32 +1,10 @@
 ﻿// XCYN.CPLUS.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-//#include <stdio.h>
-//#include <stdlib.h>
 #include <cstdio>
 #include <string>
 #include <iostream>
 #include "Student.cpp"
 
-int main()
-{
-	// 声明命名空间
-	using namespace std;
-
-	bool flag;
-	int a;
-	int b;
-	cout << "请输入两个数字，将会输出最大的" << endl;
-	cin >> a >> b;
-	flag = a > b;
-	if (flag) {
-		cout << "最大的数是：" << a << endl;
-	}
-	else {
-		cout << "最大的数是：" << b << endl;
-	}
-
-	return 0;
-}
+void swap(int *a, int *b);
 
 // 使用命名空间
 // 格式：命名空间名称:变量名称or类名or函数or构造体
@@ -64,6 +42,7 @@ void UseNameSpace03() {
 
 }
 
+// bool类型
 void BoolFunc() {
 	// 声明命名空间
 	using namespace std;
@@ -80,6 +59,34 @@ void BoolFunc() {
 	else {
 		cout << "最大的数是：" << b << endl;
 	}
+
+}
+
+// 分配&释放内存
+ void NewAndDeleteFunc() {
+	int *num = new int;	// 分配1个int型的内存空间
+	delete num;		// 释放内存
+}
+
+// 使用inline关键字生命一个内联函数
+inline void swap(int *a, int *b) {
+	int temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+// 调用swap函数的Demo
+void InvokeSwap() {
+	using namespace std;
+	int a;
+	int b;
+	cout << "交换函数，请输入一个数字" << endl;
+	cin >> a;
+	cout << "请再输入一个数字" << endl;
+	cin >> b;
+	swap(&a, &b);
+	cout << "交换后的结果：a = " << a << "，b = " << b << endl;
 
 }
 

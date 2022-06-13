@@ -21,6 +21,9 @@
     <ClCompile Include="Student.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Primer001.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student.h">
