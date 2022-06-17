@@ -170,6 +170,12 @@
     <Compile Include="GridView\SchoolForm.Designer.cs">
       <DependentUpon>SchoolForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HtmlTagRemoverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HtmlTagRemoverForm.Designer.cs">
+      <DependentUpon>HtmlTagRemoverForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogViewer\LogDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GridView\SchoolForm.resx">
       <DependentUpon>SchoolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTagRemoverForm.resx">
+      <DependentUpon>HtmlTagRemoverForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogViewer\LogDetail.resx">
       <DependentUpon>LogDetail.cs</DependentUpon>

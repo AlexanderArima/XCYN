@@ -39,7 +39,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateWordForm());
+            Application.Run(new HtmlTagRemoverForm());
 
             //方式1
             //Application app = new Application();
