@@ -12,6 +12,7 @@ using XCYN.Winform.MeiTuan;
 using XCYN.Winform.NPOI;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
+using XCYN.Winform.Spire;
 
 namespace XCYN.Winform
 {
@@ -39,7 +40,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HtmlTagRemoverForm());
+            Application.Run(new InsertImageForm());
 
             //方式1
             //Application app = new Application();

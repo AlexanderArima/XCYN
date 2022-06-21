@@ -156,6 +156,7 @@
     <Compile Include="Log4NetHelper.cs" />
     <Compile Include="MyJob.cs" />
     <Compile Include="mysql\MySqlHelper.cs" />
+    <Compile Include="PathHelper.cs" />
     <Compile Include="PrintHelper.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="RequestHelper.cs" />

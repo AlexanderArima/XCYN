@@ -119,6 +119,15 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Spire.Doc, Version=10.2.5.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.4.0.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=8.2.2.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.10.2.0\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -350,6 +359,12 @@
     <Compile Include="SocketServer.Designer.cs">
       <DependentUpon>SocketServer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Spire\InsertImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spire\InsertImageForm.Designer.cs">
+      <DependentUpon>InsertImageForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -427,6 +442,9 @@
     <EmbeddedResource Include="SocketServer.resx">
       <DependentUpon>SocketServer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Spire\InsertImageForm.resx">
+      <DependentUpon>InsertImageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\MeiTuan\EF\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -468,6 +486,9 @@
     </None>
     <None Include="Quartz\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Spire\Doc\1.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -540,6 +561,9 @@
     <Content Include="Model\Spider\regex.txt" />
     <Content Include="Quartz\Timer.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Spire\Doc\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
