@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <div>
+            <form method="get">
+                <table>
+                    <tr>
+                        <td>用户名：</td>
+                        <td>
+                            <!-- 用户名 -->
+                            <input type="text" id="text_yhm" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>证件照：</td>
+                        <td>
+                            <!-- 证件照-->
+                            <img id="img_zjz" style="width:140px;height:140px" src="../resource/default.jpg" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="button_invokeCSharp" type="button" value="调用C#方法" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        // C#调用JS方法
+        function FillForm(yhm, zjz) {
+            // 给输入框赋值
+            var text_yhm = document.getElementById("text_yhm");
+            text_yhm.setAttribute("value", yhm);
+
+            // 给图片设置Base64字符串
+            var img_zjz = document.getElementById("img_zjz");
+            img_zjz.setAttribute("src", "data:image/jpeg;base64," + zjz);
+        }
+
+        // JS方法调用C#
+        window.onload = function () {
+            // 注册按钮的Click事件
+            var elem = document.getElementById('button_invokeCSharp');
+            elem.addEventListener('click', function (e) {
+                if (!window.boundEvent) {
+                    // 判断C#是否定义了类boundEvent
+                    console.log('boundEvent类不存在.');
+                    return;
+                }
+
+                // 调用C#的boundEvent类的raiseEvent方法，参数可选
+                window.boundEvent.raiseEvent('click', {
+                    id: e.target.id,
+                    tagName: e.target.tagName
+                });
+            });
+        };
+
+    </script>
+</body>
+</html>
