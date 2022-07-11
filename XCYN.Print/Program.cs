@@ -12,6 +12,7 @@ namespace XCYN.Print
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.SelfHost;
+    using ChinhDo.Transactions;
     using log4net;
     using log4net.Config;
     using XCYN.Common;
@@ -34,6 +35,7 @@ namespace XCYN.Print
     using XCYN.Print.MianShiTi;
     using XCYN.Print.MultiThread;
     using XCYN.Print.Operators;
+    using XCYN.Print.TxFileManager;
 
     internal class Program
     {
@@ -48,7 +50,8 @@ namespace XCYN.Print
             //Console.WriteLine("结束时间：{0}", DateTime.Now.ToString("hh:mm:ss.fff"));
             //JiaMiYuanLi.Fun2();
             //NiMingType.Fun01();
-            MyCommand.Fun02();
+            // MyCommand.Fun02();
+            CreateFiles.Fun02();
             Console.Read();
         }
 

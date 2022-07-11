@@ -59,6 +59,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChinhDo.Transactions.FileManager, Version=1.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TxFileManager.1.5.0.1\lib\netstandard2.0\ChinhDo.Transactions.FileManager.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
@@ -1007,6 +1010,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
+    <Compile Include="TxFileManager\CreateFiles.cs" />
     <Compile Include="WCF\HandleAllClient.cs" />
     <Compile Include="WCF\HandleBinding.cs" />
     <Compile Include="WCF\HandleOrderClient.cs" />
@@ -1102,6 +1106,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="Log\1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Operators\info.txt" />
     <Content Include="quartz_jobs.xml">
