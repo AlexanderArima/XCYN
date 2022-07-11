@@ -51,7 +51,7 @@ namespace XCYN.Print
             //JiaMiYuanLi.Fun2();
             //NiMingType.Fun01();
             // MyCommand.Fun02();
-            CreateFiles.Fun02();
+            FileManager.Fun02();
             Console.Read();
         }
 

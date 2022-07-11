@@ -1010,7 +1010,7 @@
     <Compile Include="rabbitmq\Publish.cs" />
     <Compile Include="Redis\BetchTest.cs" />
     <Compile Include="Redis\RecentLog.cs" />
-    <Compile Include="TxFileManager\CreateFiles.cs" />
+    <Compile Include="TxFileManager\FileManager.cs" />
     <Compile Include="WCF\HandleAllClient.cs" />
     <Compile Include="WCF\HandleBinding.cs" />
     <Compile Include="WCF\HandleOrderClient.cs" />
