@@ -200,6 +200,8 @@
     <Content Include="Pages\layui\laydate235959.html" />
     <Content Include="Pages\redis\Index.aspx" />
     <Content Include="Pages\redis\Login.aspx" />
+    <Content Include="Pages\SSE\Index.aspx" />
+    <Content Include="Pages\SSE\备忘录.txt" />
     <Content Include="Pages\test\AjaxFormTest.html" />
     <Content Include="Pages\test\ArrayTest.aspx" />
     <Content Include="Pages\test\ArrayTest2.aspx" />
@@ -1375,6 +1377,7 @@
     <Content Include="Plugins\layui\font\iconfont.woff" />
     <Content Include="Plugins\layui\font\iconfont.woff2" />
     <Content Include="Pages\typescript\tsconfig.json" />
+    <Content Include="Pages\SSE\SSEHandler.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\javascript\FindMaxOfArray.js" />
@@ -1455,6 +1458,16 @@
     </Compile>
     <Compile Include="Pages\redis\UserHandler.ashx.cs">
       <DependentUpon>UserHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SSE\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SSE\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SSE\SSEHandler.ashx.cs">
+      <DependentUpon>SSEHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\test\ArrayTest.aspx.cs">
       <DependentUpon>ArrayTest.aspx</DependentUpon>
