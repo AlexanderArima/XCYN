@@ -152,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DefDiscountHelp.cs" />
+    <Compile Include="Models\EventStream.cs" />
     <Compile Include="Models\IDiscountHelper.cs" />
     <Compile Include="Models\IValueCalc.cs" />
     <Compile Include="Models\LinqValueCalc.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DSRWControlViewModel.cs" />
+    <Compile Include="Controllers\SSEController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -185,6 +187,7 @@
     <Content Include="Views\Home\GetUrls.cshtml" />
     <Content Include="Views\Home\GetValue.cshtml" />
     <Content Include="Views\DSRW\Index.cshtml" />
+    <Content Include="Views\SSE\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,6 +196,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>

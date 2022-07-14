@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexView</title>
+</head>
+<body>
+    <div id="eventstream">
+    </div>
+    <script>
+        window.onload = function ()
+        {
+            // 调用一个SSE服务
+            if (typeof (EventSource) !== "undefined") {
+                console.log("浏览器支持 Server-Sent事件");
+                var source = new EventSource("/SSE/SentNotice");
+                source.onmessage = function (event) {
+                    console.log(event);
+                };
+            }
+            else {
+                console.log("浏览器不支持 Server-Sent事件");
+            }
+            
+        };
+    </script>
+</body>
+</html>

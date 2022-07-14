@@ -18,7 +18,7 @@ namespace XCYN.MVC
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                new { controller = "SSE", action = "Index", id = UrlParameter.Optional }
                 //,new { controller = "^H.*" ,action = "^Index$|^About$",id = new RangeRouteConstraint(10,20)}  //约束Controller只能以H打头，Action必须是Index或者About，ID的值在10-20之间
             );
 
