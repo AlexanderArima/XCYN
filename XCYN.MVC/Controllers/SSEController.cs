@@ -35,11 +35,12 @@ namespace XCYN.MVC.Views.SSE
                 HttpContext.Response.Headers["Keep-alive"] = "timeout=5";
                 HttpContext.Response.Expires = -1;
                 HttpContext.Response.StatusCode = 200;
-                for (int i = 0; ;)
+                for (int i = 0; ;i ++)
                 {
                     try
                     {
-                        HttpContext.Response.Write(string.Format("id:11\nevent:message\ndata:{0}\n\n", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                        LastEventID = i;    // 设置Last-Event-Id的意义在于保证数据的完整性，因为SSE有自动断点重连的的机制，重连成功会将这个属性回传到服务器，服务器接收到这个后就可以做某些处理。
+                        HttpContext.Response.Write(string.Format("id:{1}\nevent:message\ndata:{0}\n\n", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), LastEventID));
                         Response.Flush();
                     }
                     catch

@@ -19,9 +19,26 @@
             if (typeof (EventSource) !== "undefined") {
                 console.log("浏览器支持 Server-Sent事件");
                 var source = new EventSource("/SSE/SentNotice");
+                source.onopen = function (event) {
+                    console.log("连接成功");
+                }
+
                 source.onmessage = function (event) {
+                    // 接收到服务器推送的数据
                     console.log(event);
                 };
+
+                source.onerror = function (event) {
+                    // 连接状态异常
+                    if (event.target.readyState === EventSource.CLOSED) {
+                        console.log('连接断开');
+                    } else if (event.target.readyState === EventSource.CONNECTING) {
+                        console.log('正在连接...');
+                    }
+                }
+
+                // 关闭连接
+                // source.close();
             }
             else {
                 console.log("浏览器不支持 Server-Sent事件");
