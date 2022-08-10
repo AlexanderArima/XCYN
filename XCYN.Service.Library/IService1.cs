@@ -30,5 +30,13 @@ namespace XCYN.Service.Library
             UriTemplate = "LimitRequest")]
         string LimitRequest();
 
+        [OperationContract]
+        [WebInvoke(
+            Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "LoadBalance")]
+        string LoadBalance();
     }
 }

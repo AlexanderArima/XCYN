@@ -46,6 +46,10 @@ namespace XCYN.Service.Library
             return "";
         }
 
+        /// <summary>
+        /// 验证请求次数是否超过限制.
+        /// </summary>
+        /// <returns></returns>
         private bool TryAcquire()
         {
             if (DateTime.Now.Ticks - Service1.START_TIME > TIME_WINDOWS)
@@ -86,6 +90,66 @@ namespace XCYN.Service.Library
                 Debug.WriteLine(DateTime.Now.ToString() + "：" + ex.Message);
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// 服务器列表.
+        /// </summary>
+        private List<IPAddressRight> _service_map = new List<IPAddressRight>()
+        {
+            new IPAddressRight("192.168.1.1", 2 ),
+            new IPAddressRight("192.168.1.2", 2 ),
+            new IPAddressRight("192.168.1.3", 2 ),
+            new IPAddressRight("192.168.1.4", 4 ),
+        };
+
+        /// <summary>
+        /// 访问下标.
+        /// </summary>
+        private int index = 0;
+
+        /// <summary>
+        /// 负载均衡加权算法.
+        /// </summary>
+        /// <returns></returns>
+        public string LoadBalance()
+        {
+            List<string> list_temp = new List<string>();
+            for (int i = 0; i < _service_map.Count; i++)
+            {
+                for (int j = 0; j < _service_map.ElementAt(i).Right; j++)
+                {
+                    // 优先级高的在列表中的数量就多
+                    list_temp.Add(_service_map.ElementAt(i).Address);
+                }
+            }
+            
+            if(index == list_temp.Count)
+            {
+                index = 0;
+            }
+            
+            // 被调用的服务器地址
+            string invokeServiceName = list_temp.ElementAt(index);
+            int indexOfServiceMap = this._service_map.FindIndex(m => m.Address.Equals(invokeServiceName));
+            if(indexOfServiceMap >= 0)
+            {
+                this._service_map.ElementAt(indexOfServiceMap).Count++;
+            }
+
+            // 日志输出
+            Debug.WriteLine(DateTime.Now.ToString() + "：调用" + invokeServiceName);
+            StringBuilder builder = new StringBuilder();
+
+            Debug.WriteLine("统计：");
+            for (int i = 0; i < this._service_map.Count; i++)
+            {
+                builder.AppendFormat("调用{0}，{1}次\r\n", this._service_map[i].Address, this._service_map[i].Count);
+            }
+
+            Debug.WriteLine(builder.ToString());
+            index++;
+            return invokeServiceName + "\r\n" + builder.ToString();
         }
     }
 }
