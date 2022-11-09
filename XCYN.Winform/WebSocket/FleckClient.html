@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>websocket client</title>
+    
+</head>
+<body>
+    <pre id="incomming"></pre>
+    <br/>
+    <form id="sendForm" onsubmit="return false">
+        <label id="UserName_label">你好，游客</label><br /><br />
+        <input id="sendText" type="text" placeholder="请输入留言" />
+        <input id="Msg_button" value="发送" type="button" onkeydown="javascript: void (0);"/>
+    </form>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        
+
+        var start = function () {
+            /**
+             * 后台随机产生一个昵称和唯一标识，并返回到前台
+             * */
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8793/FleckService/CreateUserName',
+                contentType: 'text/json',
+                dataType: "jsonp",
+                jsonp: "jsonpCallback",
+                timeout: 3000,
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == "0") {
+                        console.log(data.data.id)
+                        $("#UserName_label").text("你好，" + data.data.name);
+                        CreateWebSocket(data.data.id);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("错误信息：" + textStatus);
+                }
+            });
+
+            $("#Msg_button").click(function ()
+            {
+                var val = $("#sendText").val();
+                ws.send(val);
+                $("#sendText").val("");
+            });
+            //form.addEventListener('submit', function (e) {
+            //    e.preventDefault();
+            //    var val = input.value;
+            //    ws.send(val);
+            //    input.value = "";
+            //});
+        }
+
+        window.onload = start;
+
+        /**
+         * 创建一个WebSocket连接
+         * */
+        function CreateWebSocket(id) {
+            var inc = document.getElementById('incomming');
+            var wsImpl = window.WebSocket || window.MozWebSocket;
+            var form = document.getElementById('sendForm');
+            var input = document.getElementById('sendText');
+
+            inc.innerHTML += "连接服务中...<br/>";
+
+            // create a new websocket and connect
+            window.ws = new wsImpl('ws://localhost:7181/' + id);
+
+            console.log(window.ws);
+            // when data is comming from the server, this metod is called
+            ws.onmessage = function (evt) {
+                console.log(evt);
+                inc.innerHTML += evt.data + '<br/>';
+            };
+
+            // when the connection is established, this method is called
+            ws.onopen = function () {
+                inc.innerHTML += '连接成功<br/>';
+            };
+
+            // when the connection is closed, this method is called
+            ws.onclose = function () {
+                inc.innerHTML += '断开连接<br/>';
+            }
+        }
+    </script>
+</body>
+</html>
