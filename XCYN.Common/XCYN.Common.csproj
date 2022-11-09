@@ -164,6 +164,8 @@
     <Compile Include="MailHelper.cs" />
     <Compile Include="Performance\CacheHelper.cs" />
     <Compile Include="Performance\CacheHelperBeta.cs" />
+    <Compile Include="ResumeDownload\HttpStableDownloader.cs" />
+    <Compile Include="ResumeDownload\RemoteLinkDownloadInfo.cs" />
     <Compile Include="SMSHelper.cs" />
     <Compile Include="mssql\CommandInfo.cs" />
     <Compile Include="Performance\CompressHelper.cs" />
@@ -192,6 +194,9 @@
     <EmbeddedResource Include="ActiveX\SerialPortControl.resx">
       <DependentUpon>SerialPortControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ResumeDownload\备忘录.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

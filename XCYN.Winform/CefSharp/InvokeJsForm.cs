@@ -1,7 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.Example;
 using CefSharp.WinForms;
-using PaperApplication.Common;
+using XCYN.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

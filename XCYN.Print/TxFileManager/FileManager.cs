@@ -1,5 +1,5 @@
 ﻿using ChinhDo.Transactions;
-using PaperApplication.Common;
+using XCYN.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;

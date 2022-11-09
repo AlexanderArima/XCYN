@@ -13,7 +13,9 @@ using XCYN.Winform.MeiTuan;
 using XCYN.Winform.NPOI;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
+using XCYN.Winform.ResumeDownload;
 using XCYN.Winform.Spire;
+using XCYN.Winform.WebSocket;
 
 namespace XCYN.Winform
 {
@@ -41,8 +43,8 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InvokeJsForm());
-
+            Application.Run(new DownloadForm());
+            
             //方式1
             //Application app = new Application();
             //MainWindow userControl1 = new MainWindow();
