@@ -184,6 +184,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncDemo\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsyncDemo\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalculatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -437,6 +443,9 @@
     <Compile Include="WebSocket\ServerForm.Designer.cs">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AsyncDemo\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
