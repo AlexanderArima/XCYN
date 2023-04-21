@@ -246,6 +246,12 @@
     <Compile Include="LogViewer\LogMain.Designer.cs">
       <DependentUpon>LogMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogViewer\WindowsLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogViewer\WindowsLogForm.Designer.cs">
+      <DependentUpon>WindowsLogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MaskLayer\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -469,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogViewer\LogMain.resx">
       <DependentUpon>LogMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogViewer\WindowsLogForm.resx">
+      <DependentUpon>WindowsLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MaskLayer\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

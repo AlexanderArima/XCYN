@@ -43,7 +43,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new XCYN.Winform.AsyncDemo.MainForm());
+            Application.Run(new WindowsLogForm());
             
             //方式1
             //Application app = new Application();

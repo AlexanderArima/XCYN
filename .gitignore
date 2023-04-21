@@ -305,3 +305,4 @@ __pycache__/
 OpenCover/
 #    gitignore  
 /XCYN.Test/obj
+/.vs
