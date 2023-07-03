@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using XCYN.Winform.CefSharp;
 using XCYN.Winform.Demo;
+using XCYN.Winform.Files;
 using XCYN.Winform.GridView;
 using XCYN.Winform.LogViewer;
 using XCYN.Winform.MaskLayer;
@@ -43,7 +44,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WindowsLogForm());
+            Application.Run(new UseFileForm());
             
             //方式1
             //Application app = new Application();

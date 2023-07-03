@@ -221,6 +221,12 @@
     <Compile Include="Demo\MouseClickForm.Designer.cs">
       <DependentUpon>MouseClickForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Files\UseFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Files\UseFileForm.Designer.cs">
+      <DependentUpon>UseFileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GridView\School.cs" />
     <Compile Include="GridView\SchoolForm.cs">
       <SubType>Form</SubType>
@@ -463,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Demo\MouseClickForm.resx">
       <DependentUpon>MouseClickForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Files\UseFileForm.resx">
+      <DependentUpon>UseFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GridView\SchoolForm.resx">
       <DependentUpon>SchoolForm.cs</DependentUpon>
