@@ -32,6 +32,7 @@ namespace XCYN.Print
     using XCYN.Print.DesignPattern.Strategy;
     using XCYN.Print.FileSystem;
     using XCYN.Print.Generics;
+    using XCYN.Print.Http;
     using XCYN.Print.MianShiTi;
     using XCYN.Print.MultiThread;
     using XCYN.Print.Operators;
@@ -52,7 +53,8 @@ namespace XCYN.Print
             //NiMingType.Fun01();
             // MyCommand.Fun02();
             // FileManager.Fun02();
-            Console.WriteLine(DateTime.Now.Ticks);
+            // Console.WriteLine(DateTime.Now.Ticks);
+            DNSUpdater.SetDNS("192.168.10.1");
             Console.Read();
         }
 

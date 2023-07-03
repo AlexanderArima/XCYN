@@ -345,6 +345,7 @@
     <Compile Include="Generics\GenericsFunc.cs" />
     <Compile Include="Generics\KangBianXieBian.cs" />
     <Compile Include="Generics\LinkedListNode.cs" />
+    <Compile Include="Http\DNSUpdater.cs" />
     <Compile Include="linq\DataClasses1.designer.cs">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
       <DesignTime>True</DesignTime>
