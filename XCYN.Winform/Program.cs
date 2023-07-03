@@ -12,6 +12,7 @@ using XCYN.Winform.LogViewer;
 using XCYN.Winform.MaskLayer;
 using XCYN.Winform.MeiTuan;
 using XCYN.Winform.NPOI;
+using XCYN.Winform.OpenCvSharp;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
 using XCYN.Winform.ResumeDownload;
@@ -44,7 +45,7 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UseFileForm());
+            Application.Run(new CapturingVideoForm());
             
             //方式1
             //Application app = new Application();
