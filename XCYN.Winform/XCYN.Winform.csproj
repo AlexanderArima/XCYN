@@ -15,6 +15,11 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,13 +32,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -77,6 +77,15 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
@@ -110,6 +119,12 @@
     <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DSkin">
+      <HintPath>..\..\..\旅馆业项目\GitProject\Git\master\HotelManage\HotelManage.UI\DLL\DSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="DSkin.Design">
+      <HintPath>..\..\..\旅馆业项目\GitProject\Git\master\HotelManage\HotelManage.UI\DLL\DSkin.Design.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -174,7 +189,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -202,6 +219,12 @@
     </Compile>
     <Compile Include="AsyncDemo\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoScreen\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoScreen\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="CalculatorForm.cs">
       <SubType>Form</SubType>
@@ -252,6 +275,12 @@
     </Compile>
     <Compile Include="HtmlTagRemoverForm.Designer.cs">
       <DependentUpon>HtmlTagRemoverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageView\MakeCircleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageView\MakeCircleForm.Designer.cs">
+      <DependentUpon>MakeCircleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogViewer\LogDetail.cs">
       <SubType>Form</SubType>
@@ -379,6 +408,12 @@
     <Compile Include="OpenCvSharp\CapturingVideoForm.Designer.cs">
       <DependentUpon>CapturingVideoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenCvSharp\FaceDetectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenCvSharp\FaceDetectionForm.Designer.cs">
+      <DependentUpon>FaceDetectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quartz\ViewModel\AddServiceFormViewModel.cs" />
@@ -498,6 +533,9 @@
     <EmbeddedResource Include="HtmlTagRemoverForm.resx">
       <DependentUpon>HtmlTagRemoverForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageView\MakeCircleForm.resx">
+      <DependentUpon>MakeCircleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogViewer\LogDetail.resx">
       <DependentUpon>LogDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -537,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OpenCvSharp\CapturingVideoForm.resx">
       <DependentUpon>CapturingVideoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenCvSharp\FaceDetectionForm.resx">
+      <DependentUpon>FaceDetectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -600,6 +641,7 @@
     <None Include="Model\Spider\DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\XCYN.Winform.GridView.School.datasource" />
     <None Include="Properties\DataSources\XCYN.Winform.Model.LogViewer.LogLevel.datasource" />
     <None Include="Properties\DataSources\XCYN.Winform.Model.LogViewer.LogModel.datasource" />

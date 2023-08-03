@@ -4,10 +4,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using XCYN.Common;
 using XCYN.Winform.CefSharp;
 using XCYN.Winform.Demo;
 using XCYN.Winform.Files;
 using XCYN.Winform.GridView;
+using XCYN.Winform.ImageView;
 using XCYN.Winform.LogViewer;
 using XCYN.Winform.MaskLayer;
 using XCYN.Winform.MeiTuan;
@@ -45,7 +47,14 @@ namespace XCYN.Winform
             InitLog4Net();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CapturingVideoForm());
+
+            // var scaleX = PrimaryScreen.ScaleX;
+            // var scaleY = PrimaryScreen.ScaleY;
+            // var workingArea = PrimaryScreen.WorkingArea;
+            // var dESKTOP = PrimaryScreen.DESKTOP;
+            // Log4NetHelper.Info(string.Format("scaleX = {0}，scaleY = {1}", scaleX, scaleY));
+            // Log4NetHelper.Info(string.Format("WorkingArea = {0}，DESKTOP = {1}", workingArea, dESKTOP));
+            Application.Run(new MakeCircleForm());
             
             //方式1
             //Application app = new Application();
@@ -68,7 +77,7 @@ namespace XCYN.Winform
         private static void InitLog4Net()
         {
             var logCfg = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config");
-            //log4net.Config.XmlConfigurator.ConfigureAndWatch(logCfg);
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(logCfg);
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)

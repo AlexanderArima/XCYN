@@ -280,6 +280,7 @@
             this.Name = "LogMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "日志查看器";
+            this.SizeChanged += new System.EventHandler(this.LogMain_SizeChanged);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logLevelBindingSource)).EndInit();
