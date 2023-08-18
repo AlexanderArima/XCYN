@@ -157,6 +157,7 @@
     <Compile Include="MyJob.cs" />
     <Compile Include="mysql\MySqlHelper.cs" />
     <Compile Include="PathHelper.cs" />
+    <Compile Include="PrimaryScreen.cs" />
     <Compile Include="PrintHelper.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="RequestHelper.cs" />
