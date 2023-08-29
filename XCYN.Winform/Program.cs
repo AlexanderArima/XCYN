@@ -17,6 +17,7 @@ using XCYN.Winform.NPOI;
 using XCYN.Winform.OpenCvSharp;
 using XCYN.Winform.Quartz;
 using XCYN.Winform.Quartz.Views;
+using XCYN.Winform.ReaderCard;
 using XCYN.Winform.ResumeDownload;
 using XCYN.Winform.Spire;
 using XCYN.Winform.WebSocket;
@@ -54,7 +55,7 @@ namespace XCYN.Winform
             // var dESKTOP = PrimaryScreen.DESKTOP;
             // Log4NetHelper.Info(string.Format("scaleX = {0}，scaleY = {1}", scaleX, scaleY));
             // Log4NetHelper.Info(string.Format("WorkingArea = {0}，DESKTOP = {1}", workingArea, dESKTOP));
-            Application.Run(new MakeCircleForm());
+            Application.Run(new Form1());
             
             //方式1
             //Application app = new Application();
