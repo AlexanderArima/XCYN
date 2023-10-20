@@ -128,7 +128,7 @@ namespace XCYN.Winform.ReaderCard
             string path = string.Format("{0}\\{1}", Application.StartupPath, directory_image);
             string savepath = string.Format("{0}\\{1}.wlt", path, uuid);
             FileStream fs;
-            using (fs = new FileStream(savepath, FileMode.Create, FileAccess.ReadWrite);)
+            using (fs = new FileStream(savepath, FileMode.Create, FileAccess.ReadWrite))
             {
                 fs.Write(pic, 0, pic.Length);
             }

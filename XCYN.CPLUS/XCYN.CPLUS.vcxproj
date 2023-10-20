@@ -151,11 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="md5.cpp" />
+    <ClCompile Include="md5file.cpp" />
     <ClCompile Include="Primer001.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="XCYN.CPLUS.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="md5file.h" />
+    <ClInclude Include="md5global.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

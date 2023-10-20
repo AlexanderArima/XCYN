@@ -134,6 +134,7 @@
     <ClCompile Include="CharStringStroage.c" />
     <ClCompile Include="CommonTree.c" />
     <ClCompile Include="fenZhiYuJu.c" />
+    <ClCompile Include="FileDemo.c" />
     <ClCompile Include="globalVariable.c" />
     <ClCompile Include="hello.c" />
     <ClCompile Include="input.c" />
@@ -169,6 +170,7 @@
     <ClInclude Include="CharStringStorage.h" />
     <ClInclude Include="CommonTree.h" />
     <ClInclude Include="fenZhiYuJu.h" />
+    <ClInclude Include="FileDemo.h" />
     <ClInclude Include="globalVariable.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="JieGouTi01.h" />

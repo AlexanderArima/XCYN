@@ -105,6 +105,9 @@
     <ClCompile Include="CommonTree.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FileDemo.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -174,6 +177,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CommonTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileDemo.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

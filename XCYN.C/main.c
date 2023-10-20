@@ -17,18 +17,20 @@
 #include "LinkLists.h"
 #include "BiTree.h"
 #include "CommonTree.h"
+#include "FileDemo.h"
 #define MAX(a,b) (a>b) ? a : b
 
 int main()
 {
-	PTree tree;
-	//初始化树
-	for (int i = 0; i < 10; i++) {
-		tree.tNode[i].data = ' ';
-		tree.tNode[i].parent = 0;	
-	}
-	tree = InitPNode(tree);
-	printf("根结点的值为：%c", tree.tNode[0].data);
+	//PTree tree;
+	////初始化树
+	//for (int i = 0; i < 10; i++) {
+	//	tree.tNode[i].data = ' ';
+	//	tree.tNode[i].parent = 0;	
+	//}
+	//tree = InitPNode(tree);
+	//printf("根结点的值为：%c", tree.tNode[0].data);
+	FileDemo_Open();
 	return 0;
 }
 
