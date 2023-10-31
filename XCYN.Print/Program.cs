@@ -30,6 +30,7 @@ namespace XCYN.Print
     using XCYN.Print.DesignPattern.Proxy;
     using XCYN.Print.DesignPattern.State;
     using XCYN.Print.DesignPattern.Strategy;
+    using XCYN.Print.EncryptionAlgorithm;
     using XCYN.Print.FileSystem;
     using XCYN.Print.Generics;
     using XCYN.Print.Http;
@@ -58,7 +59,12 @@ namespace XCYN.Print
             // DNSUpdater.SetDNS("192.168.10.1");
             // ExtenLinq.Fun2();
             // ExtenLinq.Fun2_2();
-            Console.WriteLine(@"""");
+            var secret = "{'username':'zhangsan'}";
+            var signKey = "9AFD9A7C-2CF4-4567-A0A4-BDD104C3062C";
+            var result = HMacSHA256Helper.Encrypt(secret, signKey);
+            Console.WriteLine(string.Format("secret = {0}", secret));
+            Console.WriteLine(string.Format("signKey = {0}", signKey));
+            Console.WriteLine(string.Format("result = {0}", result));
             Console.Read();
         }
 
