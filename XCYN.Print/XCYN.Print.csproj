@@ -1030,6 +1030,7 @@
     <Compile Include="XmlAndJson\BookProduct.cs" />
     <Compile Include="XmlAndJson\Inventory.cs" />
     <Compile Include="XmlAndJson\JsonFuns.cs" />
+    <Compile Include="XmlAndJson\JsonToString.cs" />
     <Compile Include="XmlAndJson\LinqToXML.cs" />
     <Compile Include="XmlAndJson\MyXmlSerializer.cs" />
     <Compile Include="XmlAndJson\Person.cs" />

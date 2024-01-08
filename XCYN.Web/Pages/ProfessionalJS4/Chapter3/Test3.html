@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        // Boolean类型转换
+        let msg = "hello world";
+        console.log(Boolean(msg));    // 打印true，因为是非空字符串
+
+        msg = "";
+        console.log(Boolean(msg));    // 打印false，因为是空字符串
+
+        let age = 0;
+        console.log(Boolean(age));    // 打印false，因为是0
+
+        age = 100;
+        console.log(Boolean(age));    // 打印true，因为是非0
+
+        let person = null;
+        console.log(Boolean(person));    // 打印false，因为是空对象
+
+        class Person {
+            // 声明一个类
+        }
+
+        person = new Person();
+        console.log(Boolean(person));    // 打印true，因为是不是空对象
+
+        let id;
+        console.log(Boolean(id));    // 打印false，因为未能初始化
+    </script>
+</body>
+</html>

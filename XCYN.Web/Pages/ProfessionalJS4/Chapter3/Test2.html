@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        // undefined和null类型
+        let name;
+        console.log(name);    // 打印undefined，出现这个提示表明name变量未初始化
+
+        let age = null;
+        console.log(age);    // 打印null，出现这个提示表明age变量的值为null
+
+        name = null;
+        console.log(name);    // 打印null，由于name被初始化过了，即使赋值为null，不再打印undefined，而是打印null
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        // Number类型转化
+        let num = parseInt("AF", 16);
+        console.log(num);    // 输出175
+
+        num = parseInt("AF");
+        console.log(num);    // 输出NaN
+
+        let num1 = parseInt("10", 2);
+        let num2 = parseInt("10", 8);
+        let num3 = parseInt("10", 10);
+        let num4 = parseInt("10", 16);
+        console.log(num1);    // 输出2
+        console.log(num2);    // 输出8
+        console.log(num3);    // 输出10
+        console.log(num4);    // 输出16
+        
+    </script>
+</body>
+</html>

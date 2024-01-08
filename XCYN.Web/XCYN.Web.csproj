@@ -198,6 +198,7 @@
     <Content Include="Pages\javascript\ThisUsage.html" />
     <Content Include="Pages\javascript\WindowObject.html" />
     <Content Include="Pages\layui\laydate235959.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter3\Test1.html" />
     <Content Include="Pages\redis\Index.aspx" />
     <Content Include="Pages\redis\Login.aspx" />
     <Content Include="Pages\SSE\Index.aspx" />

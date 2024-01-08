@@ -15,6 +15,7 @@ namespace XCYN.Print
     using ChinhDo.Transactions;
     using log4net;
     using log4net.Config;
+    using Newtonsoft.Json.Linq;
     using XCYN.Common;
     using XCYN.Print.AsyncProgram;
     using XCYN.Print.Basic;
@@ -39,6 +40,7 @@ namespace XCYN.Print
     using XCYN.Print.MultiThread;
     using XCYN.Print.Operators;
     using XCYN.Print.TxFileManager;
+    using XCYN.Print.XmlAndJson;
 
     internal class Program
     {
@@ -59,12 +61,23 @@ namespace XCYN.Print
             // DNSUpdater.SetDNS("192.168.10.1");
             // ExtenLinq.Fun2();
             // ExtenLinq.Fun2_2();
-            var secret = "{'username':'zhangsan'}";
-            var signKey = "9AFD9A7C-2CF4-4567-A0A4-BDD104C3062C";
-            var result = HMacSHA256Helper.Encrypt(secret, signKey);
-            Console.WriteLine(string.Format("secret = {0}", secret));
-            Console.WriteLine(string.Format("signKey = {0}", signKey));
-            Console.WriteLine(string.Format("result = {0}", result));
+            // var secret = "{'username':'zhangsan'}";
+            // var signKey = "9AFD9A7C-2CF4-4567-A0A4-BDD104C3062C";
+            // var result = HMacSHA256Helper.Encrypt(secret, signKey);
+            // Console.WriteLine(string.Format("secret = {0}", secret));
+            // Console.WriteLine(string.Format("signKey = {0}", signKey));
+            // Console.WriteLine(string.Format("result = {0}", result));
+            //JObject jsonData = JsonToString.Fun01();
+            //Console.WriteLine("code = " + jsonData["code"]);
+            //Console.WriteLine("data = " + jsonData["data"]);
+            //Console.WriteLine("data.accessToken = " + jsonData["data"]["accessToken"]);
+            //Console.WriteLine("data.userInfo.nickname = " + jsonData["data"]["userInfo"]["nickname"]);
+            //Console.WriteLine("msg = " + jsonData["msg"]);
+            JObject jsonData = JsonToString.Fun02();
+            Console.WriteLine("code = " + jsonData["code"]);
+            Console.WriteLine("data = " + jsonData["data"]);
+            Console.WriteLine("data[0]['configValue'] = " + jsonData["data"][0]["configValue"]);
+            Console.WriteLine("msg = " + jsonData["msg"]);
             Console.Read();
         }
 
