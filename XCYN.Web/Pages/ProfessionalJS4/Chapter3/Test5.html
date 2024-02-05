@@ -12,6 +12,12 @@
         console.log(num.toString(8));    // 10转成八进制，即8 ^ 1 + 2 ^ 1 = 12
         console.log(num.toString(10));
         console.log(num.toString(16));    // 10转成十六进制，即10 ^ 1 = A
+
+        // 字符串的占位符，使用反引号（如何输入：将输入法切换为英文，然后点击键盘左上角的飘号），并输入${ 变量名 }即可插入该变量
+        let value = 5;
+        let name = "Jim"
+        let result = `${name}'s age is ${value}`;
+        console.log(result);
     </script>
 </body>
 </html>
