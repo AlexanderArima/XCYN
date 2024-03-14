@@ -210,6 +210,10 @@
     <Content Include="Pages\ProfessionalJS4\Chapter5\Test1.html" />
     <Content Include="Pages\ProfessionalJS4\Chapter5\Test2.html" />
     <Content Include="Pages\ProfessionalJS4\Chapter5\Test3.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter5\Test4.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter5\Test5.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter6\Test1.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter6\Test2.html" />
     <Content Include="Pages\redis\Index.aspx" />
     <Content Include="Pages\redis\Login.aspx" />
     <Content Include="Pages\SSE\Index.aspx" />

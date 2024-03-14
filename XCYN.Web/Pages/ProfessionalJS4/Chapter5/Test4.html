@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        // URL编码方法
+        var url = "www.baidu.com?id=3&name=张 三";
+        var url1 = encodeURI(url);
+        console.log(url1);
+        var url2 = encodeURIComponent(url);
+        console.log(url2);
+        var url1_original = decodeURI(url1);
+        console.log(url1_original);
+        var url1_original2 = decodeURIComponent(url1);
+        console.log(url1_original2);
+        var url2_original = decodeURI(url2);
+        console.log(url2_original);
+        var url2_original2 = decodeURIComponent(url2);
+        console.log(url2_original2);
+    </script>
+</body>
+</html>
