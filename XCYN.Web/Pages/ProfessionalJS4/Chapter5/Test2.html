@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        let pattern = /.at/g;
+        let text = "cat, pat, hat, rat";
+        let matches = pattern.exec(text);
+
+        // 获取匹配到字符串的起始下标
+        console.log(matches.index);
+
+        // 获取匹配到的字符串
+        console.log(matches[0]);
+
+        // 获取匹配到的字符串结束下标
+        console.log(pattern.lastIndex);
+        for (var i = 0; i < 10; i++) {
+            matches = pattern.exec(text);
+            if (matches == null) {
+                break;
+            }
+
+            console.log(matches.index);
+            console.log(matches[0]);
+            console.log(pattern.lastIndex);
+        }
+    </script>
+</body>
+</html>

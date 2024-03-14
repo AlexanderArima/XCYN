@@ -204,6 +204,12 @@
     <Content Include="Pages\ProfessionalJS4\Chapter3\Test4.html" />
     <Content Include="Pages\ProfessionalJS4\Chapter3\Test5.html" />
     <Content Include="Pages\ProfessionalJS4\Chapter3\Test6.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter4\Test3.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter4\Test2.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter4\Test1.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter5\Test1.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter5\Test2.html" />
+    <Content Include="Pages\ProfessionalJS4\Chapter5\Test3.html" />
     <Content Include="Pages\redis\Index.aspx" />
     <Content Include="Pages\redis\Login.aspx" />
     <Content Include="Pages\SSE\Index.aspx" />

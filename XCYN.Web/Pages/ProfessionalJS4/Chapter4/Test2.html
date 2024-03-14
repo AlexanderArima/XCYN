@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        // 传递参数
+        function Fun01(obj) {
+            obj.name = "Tom";
+        }
+
+        var person = new Object();
+        Fun01(person);
+        console.log(person.name);    // 由于在函数中给person的值赋予了name属性 => Tom，所以打印它
+        
+    </script>
+</body>
+</html>

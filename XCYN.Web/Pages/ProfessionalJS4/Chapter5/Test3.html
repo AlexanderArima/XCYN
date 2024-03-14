@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+
+        // 截取字符串
+        var str = "hello world你好，世界";
+        console.log(str.substr(5, str.length - 5));
+        console.log(str.substring(5, str.length));
+
+        // 搜索字符串
+        var index = str.indexOf("world");
+        console.log(index);
+
+        // 查找字符串
+        var flag = str.includes("你好");
+        console.log(flag);    // 返回true，表示查找到该字符串
+        var flag2 = str.startsWith("hello");
+        console.log(flag2);    // 返回true，表示起始字符串是hello
+        var flag3 = str.endsWith("你好");
+        console.log(flag3);    // 返回false，表示最后的字符串不是你好
+
+        // 大小写转换
+        console.log(str.toUpperCase());
+
+    </script>
+</body>
+</html>
