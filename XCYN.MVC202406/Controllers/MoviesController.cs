@@ -15,9 +15,27 @@ namespace XCYN.MVC202406.Controllers
         private MovieDBContext db = new MovieDBContext();
 
         // GET: Movies
-        public ActionResult Index()
+        public ActionResult Index(string movieGenre, string searchString)
         {
-            return View(db.Movies.ToList());
+            var GenreList = new List<string>();
+            var GenreQry = from d in db.Movies
+                           orderby d.Genre
+                           select d.Genre;
+            GenreList.AddRange(GenreQry.Distinct());
+            ViewBag.movieGenre = new SelectList(GenreList);
+            var movies = from m in db.Movies
+                                  select m;
+            if (string.IsNullOrEmpty(searchString) == false)
+            {
+                movies = movies.Where(m => m.Title.Contains(searchString));
+            }
+
+            if (string.IsNullOrEmpty(movieGenre) == false)
+            {
+                movies = movies.Where(m => m.Genre.Contains(movieGenre));
+            }
+
+            return View(movies);
         }
 
         // GET: Movies/Details/5
@@ -46,7 +64,7 @@ namespace XCYN.MVC202406.Controllers
         // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +97,7 @@ namespace XCYN.MVC202406.Controllers
         // ValidateAntiForgeryToken注释用来验证，@Html.AntiForgeryToken()生成的令牌
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -111,6 +129,11 @@ namespace XCYN.MVC202406.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Movie movie = db.Movies.Find(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");
