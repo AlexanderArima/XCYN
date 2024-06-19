@@ -306,3 +306,5 @@ OpenCover/
 #    gitignore  
 /XCYN.Test/obj
 /.vs
+/XCYN.WS/obj
+/XCYN.WS/bin

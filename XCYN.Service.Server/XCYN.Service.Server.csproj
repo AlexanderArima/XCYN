@@ -64,12 +64,6 @@
     <None Include="Connected Services\ServiceReference1\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XCYN.Service.Library\XCYN.Service.Library.csproj">
-      <Project>{6697fcf0-e5c7-4e61-9aad-45471d77d13c}</Project>
-      <Name>XCYN.Service.Library</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
