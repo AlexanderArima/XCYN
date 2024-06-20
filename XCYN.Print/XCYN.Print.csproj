@@ -232,6 +232,7 @@
     <Compile Include="Alg\SortOrderTest.cs" />
     <Compile Include="AsyncProgram\Class1.cs" />
     <Compile Include="AsyncProgram\JiaMiYuanLi.cs" />
+    <Compile Include="Basic\AnonymousClass.cs" />
     <Compile Include="Basic\AutoProperies.cs" />
     <Compile Include="Basic\DefineUndef.cs" />
     <Compile Include="Basic\ListDictSetTest.cs" />

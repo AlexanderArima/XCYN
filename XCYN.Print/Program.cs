@@ -73,11 +73,14 @@ namespace XCYN.Print
             //Console.WriteLine("data.accessToken = " + jsonData["data"]["accessToken"]);
             //Console.WriteLine("data.userInfo.nickname = " + jsonData["data"]["userInfo"]["nickname"]);
             //Console.WriteLine("msg = " + jsonData["msg"]);
-            JObject jsonData = JsonToString.Fun02();
-            Console.WriteLine("code = " + jsonData["code"]);
-            Console.WriteLine("data = " + jsonData["data"]);
-            Console.WriteLine("data[0]['configValue'] = " + jsonData["data"][0]["configValue"]);
-            Console.WriteLine("msg = " + jsonData["msg"]);
+            //JObject jsonData = JsonToString.Fun02();
+            //Console.WriteLine("code = " + jsonData["code"]);
+            //Console.WriteLine("data = " + jsonData["data"]);
+            //Console.WriteLine("data[0]['configValue'] = " + jsonData["data"][0]["configValue"]);
+            //Console.WriteLine("msg = " + jsonData["msg"]);
+            // AnonymousClass.Fun01();
+            string str = "abcefg123456";
+            Console.WriteLine(str.GetNumberLength());
             Console.Read();
         }
 
