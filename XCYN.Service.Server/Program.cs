@@ -7,7 +7,6 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using XCYN.Service.Library;
 
 namespace XCYN.Service.Server
 {
