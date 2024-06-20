@@ -309,3 +309,5 @@ OpenCover/
 /XCYN.WS/obj
 /XCYN.WS/bin
 /packages
+/XCYN.MVC202406/App_Data/Movies.mdf
+/XCYN.MVC202406/App_Data/Movies_log.ldf
