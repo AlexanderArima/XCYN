@@ -347,6 +347,157 @@
     <Compile Include="DesignPattern\TemplateMethod\Handler.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XieCheng.cs" />
     <Compile Include="DesignPattern\TemplateMethod\XiongWei.cs" />
+    <Compile Include="EF\Alphabetical_list_of_products.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Categories.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Category_Sales_for_1997.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Current_Product_List.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\CustomerDemographics.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Customers.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Customer_and_Suppliers_by_City.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\CustOrderHist_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\CustOrdersDetail_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\CustOrdersOrders_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\DataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\DataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\dtproperties.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\dt_getpropertiesbyid_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\dt_getpropertiesbyid_u_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Employees.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Employee_Sales_by_Country_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Invoices.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Northwind.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Northwind.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Northwind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Northwind.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Northwind.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\NorthwindCURD.cs" />
+    <Compile Include="EF\Orders.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Orders_Qry.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Order_Details.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Order_Details_Extended.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Order_Subtotals.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Products.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Products_Above_Average_Price.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Products_by_Category.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Product_Sales_for_1997.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Region.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SalesByCategory_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Sales_by_Category.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Sales_by_Year_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Sales_Totals_by_Amount.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Shippers.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Summary_of_Sales_by_Quarter.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Summary_of_Sales_by_Year.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Suppliers.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sysdiagrams.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Ten_Most_Expensive_Products_Result.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Territories.cs">
+      <DependentUpon>Northwind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\T_Customer.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EncryptionAlgorithm\HMacSHA256Helper.cs" />
     <Compile Include="FileSystem\MyFile.cs" />
     <Compile Include="FileSystem\MyDirectory.cs" />
@@ -1052,6 +1203,20 @@
     <None Include="DesignPattern\Builder\ClassDiagram1.cd" />
     <None Include="DesignPattern\Builder\Rest\ClassDiagram1.cd" />
     <None Include="DesignPattern\Factory\ClassDiagram1.cd" />
+    <EntityDeploy Include="EF\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="EF\Northwind.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\Northwind.edmx.diagram">
+      <DependentUpon>Northwind.edmx</DependentUpon>
+    </None>
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1092,6 +1257,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database1.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database1_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
+    <Content Include="EF\Northwind.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Northwind.edmx</DependentUpon>
+      <LastGenOutput>Northwind.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\Northwind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Northwind.edmx</DependentUpon>
+      <LastGenOutput>Northwind.cs</LastGenOutput>
+    </Content>
+    <Content Include="northwind.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="northwind_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>northwind.mdf</DependentUpon>
+    </Content>
     <Content Include="DesignPattern\Adapter\info.txt" />
     <Content Include="DesignPattern\Bridge\info.txt" />
     <Content Include="DesignPattern\Builder\info.txt" />
@@ -1111,6 +1300,16 @@
     <Content Include="DesignPattern\StaticFactoryMethod\info.txt" />
     <Content Include="DesignPattern\Strategy\info.txt" />
     <Content Include="DesignPattern\TemplateMethod\info.txt" />
+    <Content Include="EF\DataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\DataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
+    </Content>
     <Content Include="linq\Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

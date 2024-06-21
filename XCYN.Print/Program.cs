@@ -7,15 +7,19 @@ namespace XCYN.Print
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net.Http;
     using System.ServiceModel;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.SelfHost;
+    using System.Windows.Controls;
     using ChinhDo.Transactions;
     using log4net;
     using log4net.Config;
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using Quartz.Util;
     using XCYN.Common;
     using XCYN.Print.AsyncProgram;
     using XCYN.Print.Basic;
@@ -31,6 +35,7 @@ namespace XCYN.Print
     using XCYN.Print.DesignPattern.Proxy;
     using XCYN.Print.DesignPattern.State;
     using XCYN.Print.DesignPattern.Strategy;
+    using XCYN.Print.EF;
     using XCYN.Print.EncryptionAlgorithm;
     using XCYN.Print.FileSystem;
     using XCYN.Print.Generics;
@@ -79,8 +84,31 @@ namespace XCYN.Print
             //Console.WriteLine("data[0]['configValue'] = " + jsonData["data"][0]["configValue"]);
             //Console.WriteLine("msg = " + jsonData["msg"]);
             // AnonymousClass.Fun01();
-            string str = "abcefg123456";
-            Console.WriteLine(str.GetNumberLength());
+            //string str = "abcefg123456";
+            //Console.WriteLine(str.GetNumberLength());
+            //Database1Entities entity = new Database1Entities();
+            //var obj = new T_Customer()
+            //{
+            //    Address = "淮海路12号",
+            //    Age = 18,
+            //    UserName = "张三",
+            //};
+            //entity.T_Customer.Add(obj);
+            //var flag =  entity.SaveChanges();
+            //// var list =  entity.T_Customer.SqlQuery("select * from T_Customer");
+            //var result = entity.T_Customer.Where(m => m.Age == 28);
+            //var item = result.FirstOrDefault();
+            //var json = JsonConvert.SerializeObject(item);
+            //Console.WriteLine(json);
+            NorthwindCURD.Fun01();
+
+            // NorthwindCURD.Fun02();
+            // var list = NorthwindCURD.Fun03(m => m.CustomerID == "zouqj", n => n.CustomerID);
+            var list = NorthwindCURD.Fun03(m => true, n => n.CustomerID);
+            list.ForEach(m =>
+            {
+                Console.WriteLine(m.CustomerID);
+            });
             Console.Read();
         }
 
