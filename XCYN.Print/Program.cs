@@ -100,16 +100,33 @@ namespace XCYN.Print
             //var item = result.FirstOrDefault();
             //var json = JsonConvert.SerializeObject(item);
             //Console.WriteLine(json);
-            NorthwindCURD.Fun01();
+            NorthwindCURD.Insert();
 
             // NorthwindCURD.Fun02();
             // var list = NorthwindCURD.Fun03(m => m.CustomerID == "zouqj", n => n.CustomerID);
-            var list = NorthwindCURD.Fun03(m => true, n => n.CustomerID);
-            list.ForEach(m =>
-            {
-                Console.WriteLine(m.CustomerID);
-            });
-            Console.Read();
+            //var list = NorthwindCURD.Fun03(m => true, n => n.CustomerID);
+            //list.ForEach(m =>
+            //{
+            //    Console.WriteLine(m.CustomerID);
+            //});
+
+            //var list = NorthwindCURD.Fun04(1, 10, m => true, n => n.CustomerID);
+            //list.ForEach(m =>
+            //{
+            //    Console.WriteLine(m.CustomerID);
+            //});
+
+            //var list = NorthwindCURD.Fun03(m => m.CustomerID == "zouqj", n => n.CustomerID);
+            //if (list.Count <= 0)
+            //{
+            //    return;
+            //}
+
+            //var model = list[0];
+            //model.Country = "CHI";
+            //NorthwindCURD.Fun06(m => m.CustomerID == model.CustomerID, model);
+            NorthwindCURD.Delete(m => m.CustomerID == "zouqj");
+            Console.ReadKey();
         }
 
         /// <summary>
