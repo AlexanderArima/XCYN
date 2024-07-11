@@ -80,7 +80,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\BasicUserValidator.cs" />
     <Compile Include="Modules\CustomBootstrapper.cs" />
     <Compile Include="Modules\BasicUser.cs" />
     <Compile Include="Modules\TestBindModule.cs" />
