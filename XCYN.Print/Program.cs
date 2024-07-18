@@ -43,6 +43,7 @@ namespace XCYN.Print
     using XCYN.Print.Linq;
     using XCYN.Print.MianShiTi;
     using XCYN.Print.MultiThread;
+    using XCYN.Print.Nancy;
     using XCYN.Print.Operators;
     using XCYN.Print.TxFileManager;
     using XCYN.Print.XmlAndJson;
@@ -100,7 +101,7 @@ namespace XCYN.Print
             //var item = result.FirstOrDefault();
             //var json = JsonConvert.SerializeObject(item);
             //Console.WriteLine(json);
-            NorthwindCURD.Insert();
+            // NorthwindCURD.Insert();
 
             // NorthwindCURD.Fun02();
             // var list = NorthwindCURD.Fun03(m => m.CustomerID == "zouqj", n => n.CustomerID);
@@ -125,7 +126,8 @@ namespace XCYN.Print
             //var model = list[0];
             //model.Country = "CHI";
             //NorthwindCURD.Fun06(m => m.CustomerID == model.CustomerID, model);
-            NorthwindCURD.Delete(m => m.CustomerID == "zouqj");
+            // NorthwindCURD.Delete(m => m.CustomerID == "zouqj");
+            StartProcess.Fun01();
             Console.ReadKey();
         }
 

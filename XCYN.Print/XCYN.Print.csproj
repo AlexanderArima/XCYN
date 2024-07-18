@@ -131,6 +131,12 @@
     <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.1.4.5\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Self, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Hosting.Self.1.4.1\lib\net40\Nancy.Hosting.Self.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -1126,6 +1132,7 @@
     <Compile Include="MianShiTi\DataTableSort.cs" />
     <Compile Include="MianShiTi\Indexer.cs" />
     <Compile Include="MianShiTi\RefOut.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="MongoDB\BasicOperation.cs" />
     <Compile Include="MongoDB\MongoHelper.cs" />
     <Compile Include="MultiThread\DemoCancellationToken.cs" />
@@ -1155,6 +1162,7 @@
     <Compile Include="MultiThread\DemoWait.cs" />
     <Compile Include="MyQuartz\QuartzMisfire.cs" />
     <Compile Include="MySQL\MySQLTest.cs" />
+    <Compile Include="Nancy\StartProcess.cs" />
     <Compile Include="Operators\MultiplicationOperators.cs" />
     <Compile Include="Operators\NullOperators.cs" />
     <Compile Include="Operators\PrimaryOperators.cs" />
@@ -1331,6 +1339,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="ReadMe.md" />
+    <Content Include="Views\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="XmlAndJson\books.xml">
       <SubType>Designer</SubType>
     </Content>
