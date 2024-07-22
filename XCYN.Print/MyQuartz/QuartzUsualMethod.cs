@@ -24,29 +24,32 @@ namespace XCYN.Print.MyQuartz
     public class QuartzUsualMethod
     {
         /// <summary>
-        /// 每隔3s触发一次，永远重复
+        /// 每隔3s触发一次，永远重复.
         /// </summary>
         public static void Fun1()
         {
+            // 创建一个日常类，并启动它
             var scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
-            
-            //将键值对传给定时器
+
+            // 创建任务
             var job = JobBuilder.Create<ConsumerJob>()
                                                 .UsingJobData("UserName", "Cheng")
                                                  .UsingJobData("Password", 123456)
                                                  .Build();
-            
+
+            // 创建触发器，用于规定任务的执行频率
             var trigger = TriggerBuilder.Create()
                                                 .WithSimpleSchedule(m => m.WithIntervalInSeconds(3).RepeatForever())
                                                  .StartNow()
                                                  .Build();
 
+            // 将任务和触发器绑定到日程类中
             scheduler.ScheduleJob(job, trigger);
         }
 
         /// <summary>
-        ///  每隔1s出发一次，执行1次
+        ///  每隔1s出发一次，执行1次.
         /// </summary>
         public static void Fun2()
         {
@@ -68,12 +71,12 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        /// 通过 OfType + 反射 的方式执行定时任务
+        /// 通过 OfType + 反射 的方式执行定时任务.
         /// </summary>
         public static void Fun3()
         {
             var sche = StdSchedulerFactory.GetDefaultScheduler();
-            sche.Start();            
+            sche.Start();
 
             //job
             string path = string.Format("{0}XCYN.Common.dll", System.AppDomain.CurrentDomain.BaseDirectory);
@@ -89,7 +92,7 @@ namespace XCYN.Print.MyQuartz
         }
 
         /// <summary>
-        ///  JobBuilder对象 & IJobDetail 常用方法
+        ///  JobBuilder对象 & IJobDetail 常用方法.
         /// </summary>
         public static void Fun4()
         {
