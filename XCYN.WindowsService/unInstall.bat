@@ -1,2 +1,2 @@
-%~dp0InstallUtil.exe -u %~dp0XCYN.WindowsService.exe
+sc delete 1445Service
 pause

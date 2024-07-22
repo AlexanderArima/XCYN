@@ -40,8 +40,8 @@
             // serviceInstaller1
             // 
             this.serviceInstaller1.Description = "消息发送服务";
-            this.serviceInstaller1.DisplayName = "X服务";
-            this.serviceInstaller1.ServiceName = "XService";
+            this.serviceInstaller1.DisplayName = "1525服务";
+            this.serviceInstaller1.ServiceName = "1525Service";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

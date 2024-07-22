@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -14,11 +15,14 @@ namespace XCYN.WindowsService
         /// </summary>
         static void Main()
         {
+            //注册Log4Net
+            XmlConfigurator.Configure();
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new MyService()
+                new UseQuartzService()
             };
+
             ServiceBase.Run(ServicesToRun);
         }
     }

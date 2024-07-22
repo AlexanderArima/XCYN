@@ -14,6 +14,7 @@ namespace XCYN.WindowsService
     public partial class MyService : ServiceBase
     {
         System.Timers.Timer myTimer;
+
         public MyService()
         {
             InitializeComponent();
