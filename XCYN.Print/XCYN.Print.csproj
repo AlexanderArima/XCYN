@@ -236,7 +236,7 @@
     <Compile Include="ADONET\ConnectDataBase.cs" />
     <Compile Include="Alg\SortOrder.cs" />
     <Compile Include="Alg\SortOrderTest.cs" />
-    <Compile Include="AsyncProgram\Class1.cs" />
+    <Compile Include="AsyncProgram\AsyncDemo.cs" />
     <Compile Include="AsyncProgram\JiaMiYuanLi.cs" />
     <Compile Include="Basic\AnonymousClass.cs" />
     <Compile Include="Basic\AutoProperies.cs" />

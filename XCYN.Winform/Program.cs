@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using XCYN.Common;
+using XCYN.Winform.AsyncDemo;
 using XCYN.Winform.CefSharp;
 using XCYN.Winform.Demo;
 using XCYN.Winform.Files;
@@ -55,7 +56,7 @@ namespace XCYN.Winform
             // var dESKTOP = PrimaryScreen.DESKTOP;
             // Log4NetHelper.Info(string.Format("scaleX = {0}，scaleY = {1}", scaleX, scaleY));
             // Log4NetHelper.Info(string.Format("WorkingArea = {0}，DESKTOP = {1}", workingArea, dESKTOP));
-            Application.Run(new Form1());
+            Application.Run(new ConfigureAwaitForm());
             
             //方式1
             //Application app = new Application();
