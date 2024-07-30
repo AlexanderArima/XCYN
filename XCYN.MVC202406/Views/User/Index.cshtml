@@ -1,0 +1,47 @@
+﻿@model XCYN.MVC202406.Models.User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>从Controller传递数据到View的四种方式</h3>
+<p>@ViewData["One"]</p>
+<p>@ViewBag.Two</p>
+<p>@Model.Name</p>
+<p>@TempData["Four"]</p>
+
+<h3>Razor语法</h3>
+@{
+    string name = "Cheng";
+}
+@*
+    @符号的签名需要有空格，否则会被当做字符串处理
+*@
+<p>姓名@name</p>
+<p>姓名 @name</p>
+
+@*
+    操作Web内部对象
+*@
+<p>请求URL：@Request.Url</p>
+<p>响应状态码：@Response.StatusCode</p>
+
+@*
+    输出尚未转义的HTML代码（Razor默认使用了Html编码）
+*@
+@{ 
+    var jsString = "<script>alert('123')</script>";
+}
+<p>未使用Html.Raw()：@jsString，不执行js指令，只当做字符串输出</p>
+<p>使用Html.Raw()：@Html.Raw(jsString)，执行js指令</p>
+
+@*
+    数据转换    
+*@
+<br/>
+<h4>数据转换语法</h4>
+@{ 
+    var age = "18";
+}
+<p>age是否是数字类型：@age.IsInt()</p>
+<p>age转为数字类型：@age.AsInt()</p>
