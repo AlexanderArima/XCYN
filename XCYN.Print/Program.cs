@@ -127,7 +127,8 @@ namespace XCYN.Print
             //model.Country = "CHI";
             //NorthwindCURD.Fun06(m => m.CustomerID == model.CustomerID, model);
             // NorthwindCURD.Delete(m => m.CustomerID == "zouqj");
-            AsyncDemo.Fun01();
+            // AsyncDemo.Fun01();
+            StartProcess.Fun01();
             Console.ReadKey();
         }
 
