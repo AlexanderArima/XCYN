@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<!-- Vue 使用一种基于 HTML 的模板语法，使我们能够声明式地将其组件实例的数据绑定到呈现的 DOM 上。
+        所有的 Vue 模板都是语法层面合法的 HTML，可以被符合规范的浏览器和 HTML 解析器解析。
+        在底层机制中，Vue 会将模板编译成高度优化的 JavaScript 代码。
+        结合响应式系统，当应用状态变更时，Vue 能够智能地推导出需要重新渲染的组件的最少数量，并应用最少的 DOM 操作。
+        -->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="MainDiv">
+        <!-- 双大框号将数据解析为文本 -->
+        <span>Message:{{ msg }}</span><br />
+
+        <!-- 插入原始HTML使用v-html属性，为避免XSS漏洞一般不会使用它 -->
+        <span v-html="rawHtml"></span>
+        <br />
+
+        <!-- 绑定属性，使用v-bind:attributeName或者:attributeName，只是这种简写的方式只适用于Vue3.4以上的版本  -->
+        <select>
+            <option :id="stu_id" :value="stu_value">1</option>
+            <option v-bind:id="stu_id2" :value="stu_value2">2</option>
+        </select>
+        <br />
+
+        <!-- 在使用disabled这种有效时只显示属性名，无效时不显示，绑定的值为布尔值 -->
+        <button :disabled="click_disabled">Click</button>
+        <br />
+
+        <!-- 使用JavaScript表达式 -->
+        <span>
+            {{ number * 10}}
+        </span>
+        <br />
+
+        <span>
+            {{ flag ? "通过" : "未通过"}}
+        </span>
+        <br />
+
+        <span>
+            {{ msg.split(' ').length }}
+        </span>
+
+        <!-- 对属性值进行字符串拼接 -->
+        <div :id="`list-${stu_id}`">1</div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    msg: "Hello World",
+                    rawHtml: "<span style='color: red'>Hello World</span>",
+                    stu_id: "stu_1",
+                    stu_value: "1",
+                    stu_id2: "stu_2",
+                    stu_value2: "2",
+                    click_disabled: true,
+                    number: 10,
+                    flag: true
+                }
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>

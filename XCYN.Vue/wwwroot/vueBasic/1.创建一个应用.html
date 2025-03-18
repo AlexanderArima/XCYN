@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <button @click="count++">点击{{count}}次</button>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        // 使用Vue对象，让人不得不吐槽的是，里面的例子全是通过【Import maps 】的方式引入vue对象，而且这种方式还对版本有要求。。
+        const { createApp } = Vue
+
+        // 使用 createApp(App) 函数创建一个 Vue 应用实例，将 App 组件作为根组件传递给它
+        const app = createApp({
+            data() {
+                return {
+                    count : 0
+                }
+            }
+        });
+
+        // 挂载应用，对Dom元素的所有操作必须挂载后才能应用到UI层，相当于为变量指定了一个地址
+        // 需要注意的是mount方法一定要放到最后面！
+        app.mount('#app');
+    </script>
+</body>
+</html>
