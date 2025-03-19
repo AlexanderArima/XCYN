@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="MainDiv">
+        {{ author.name }} 出版了 {{ booksNumber}} 本书
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    author: {
+                        name: 'John Doe',
+                        books: [
+                            'Vue2 - Advanced Guide',
+                            'Vue3 - Basic Guide',
+                            'Vue4 - The Mystery'
+                        ]
+                    }
+                };
+            },
+            computed: {
+                // 使用计算属性computed，将复杂的表达式简化为一个变量，类似于数据库中的视图，别忘了写this，因为它访问的是内部变量
+                // 计算属性值会自动应用缓存，这会带来性能上的优化，但如果是一个方法则不会应用缓存，当数据量很大时会看出两者的差异
+                // 计算属性的值默认是只读的，应避免修改它
+                booksNumber() {
+                    return this.author.books.length;
+                }
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="MainDiv">
+        <!-- 在控件的事件中使用方法，达成业务逻辑 -->
+        <button v-on:click="decrease">-</button>
+        <span>&nbsp;{{ count }}&nbsp;</span>
+        <button v-on:click="increment">+</button>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                // 用data选项来声明变量和值
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                // 在此处声明一个方法，this指向在data中声明的变量
+                increment() {
+                    this.count++
+                },
+                decrease() {
+                    this.count--
+                }
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>
