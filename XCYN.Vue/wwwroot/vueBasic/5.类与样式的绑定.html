@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<!--
+    数据绑定的一个常见需求场景是操纵元素的 CSS class 列表和内联样式。
+    因为 class 和 style 都是 attribute，我们可以和其他 attribute 一样使用 v-bind 将它们和动态的字符串绑定。
+    但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。
+    因此，Vue 专门为 class 和 style 的 v-bind 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是对象或数组。
+    -->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .bind_text {
+            font-weight: 700;
+            display: none;
+        }
+
+        .debug_text {
+            color: purple;
+            display: block;
+        }
+
+        .info_text {
+            color: green;
+            display: block;
+        }
+
+        .warn_text {
+            color: darkorange;
+            display: block;
+        }
+
+        .error_text {
+            color: red;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="MainDiv">
+        <!-- 绑定class，控件里的值是一个key-value对，key写样式名，value是data选项返回对象的key -->
+        <div class="bind_text" v-bind:class="{debug_text: isDebug}">这是一段调试日志</div>
+        <div class="bind_text" v-bind:class="{info_text: isInfo}">这是一段信息日志</div>
+        <div class="bind_text" v-bind:class="{warn_text: isWarn}">这是一段警告日志</div>
+        <div class="bind_text" v-bind:class="{error_text: isError}">这是一段错误日志</div>
+
+        <!-- 绑定多个class，控件里的值写data选项返回对象的key，对应的value写样式名  -->
+        <div v-bind:class="[bind_class, debug_class]">这是一段调试日志</div>
+
+        <!-- 绑定style，在控件的值里写属性名，支持数组的形式 -->
+        <div :style="info_style">这是一段信息日志</div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                // 我猜测这里应该可以写获取数据的方法，比如调用后台接口，获取一个Json，然后解析它，再将数据结构进行整合
+                return {
+                    isDebug: false,
+                    isInfo: true,
+                    isWarn: true,
+                    isError: true,
+                    bind_class: "bind_text",
+                    debug_class: "debug_text",
+                    info_style: {
+                        color: 'green',
+                        display: 'block',
+                        // 需要注意的是此处的样式需要采用小驼峰命名法，不能是font-weight
+                        fontWeight: '700',
+                    }
+                };
+            }
+        });
+
+        app.mount("#MainDiv")
+    </script>
+</body>
+</html>
