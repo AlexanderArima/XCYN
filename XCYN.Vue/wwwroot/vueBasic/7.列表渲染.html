@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            text-align: center;
+            margin: 10px;
+        }
+
+        table,
+        table td,
+        table th {
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <div id="MainDiv">
+        <table>
+            <tr>
+                <th>序号</th>
+                <th style="width: 150px;">学号</th>
+                <th>姓名</th>
+            </tr>
+            <!--
+            v-for 指令的值需要使用 item in items 形式的特殊语法，其中 items 是源数据的数组，而 item 是迭代项的别名。
+            它也支持第二个参数index，表示循环的下标
+        -->
+            <tr v-for="(item, index) in list_student">
+                <td>{{ index + 1 }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th colspan="2">班级信息</th>
+            </tr>
+            <!-- 你也可以使用 v-for 来遍历一个对象的所有属性。-->
+            <tr v-for="(value, key, index) in class_info">
+                <td v-if="index == 0">名称：</td>
+                <td v-else-if="index == 1">班主任：</td>
+                <td v-else-if="index == 2">桌子数量：</td>
+                <td v-else-if="index == 3">是否有电脑：</td>
+                <td v-else-if="index == 4">成立时间：</td>
+                <td v-if="index == 3">{{ value == true? "有" : "没有" }}</td>
+                <td v-else>{{ value }}</td>
+            </tr>
+        </table>
+        <div style="text-align: left;">
+            出生年份：
+            <select>
+                <!-- 应避免同时使用v-for和v-if，因为if的优先级高于for，这和C#的循环语句不同，需要特别注意!-->
+                <!-- 规避的方法有：使用计算属性，将判断的逻辑写进去，这样就能提前剔除不需要的元素了-->
+                <option v-for="item in 150">
+                    {{ item + 1899 }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    list_student: [
+                        {
+                            id: 202501050001,
+                            name: "张三"
+                        },
+                        {
+                            id: 202501050002,
+                            name: "李四"
+                        },
+                        {
+                            id: 202501050003,
+                            name: "王五"
+                        },
+                    ],
+                    class_info: {
+                        name: "一年五班",
+                        leader: "赵六",
+                        table_number: 50,
+                        hasComputer: true,
+                        createTime: "2010-08-25"
+                    }
+                };
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>

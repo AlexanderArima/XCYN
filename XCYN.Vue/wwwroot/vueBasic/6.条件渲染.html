@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="MainDiv">
+        <!-- 条件分支就不多说了，几乎所有编程语言都有，是构成程序的基础单元 -->
+        <div v-if="isChildren">是未成年内容</div>
+        <div v-else="">是成年内容</div>
+        <br/>
+        <div>门票费用：</div>
+        <div v-if="age <= 6">免费</div>
+        <div v-else-if="age > 6 && age <= 12">10元</div>
+        <div v-else-if="age > 12 && age <= 18">20元</div>
+        <div v-else>50元</div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    isChildren: true,
+                    age : 18,
+                };
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>
