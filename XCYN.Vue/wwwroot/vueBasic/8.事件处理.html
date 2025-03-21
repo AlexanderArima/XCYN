@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="MainDiv">
+        <div>
+            <!-- 有两种格式定义一个事件：v-on:事件名，@事件名，事件的值是函数名，在下面的methods选项中定义具体的逻辑-->
+            <button v-on:click="decrease">-</button>
+            <input type="text" style="width:50px" :value="count" />
+            <button v-on:click="increase">+</button>
+            
+            <!-- 也可以传递参数到函数中，如果需要访问原生的DOM事件可以传递$event参数 -->
+            <button @click="helloWorld('1', $event)">购买</button>
+        </div>
+        <div>
+            收件地址：
+            <select v-on:change="changeProvince">
+                <option value="0">==请选择==</option>
+                <option value="42">湖北省</option>
+                <option value="43">湖南省</option>
+            </select>
+        </div>
+        <div>
+            <!-- 
+                在很多事件我们是不希望控件按照默认的方式去执行事件，比如：点击a标签后立即跳转到新页面而是留在本页面，提交表单
+                后不会重载页面，而是通过Ajax的方式处理结果
+                Vue提供了在v-on的后面添加点语法的方式实现了事件的阻断
+                -->
+
+            <!-- 解释一下，这里的.stop阻止了事件的传递是指，假如在a标签的外面再包了一层，在这一层上又有一个单击事件，
+                有stop只执行一次，没有执行两次-->
+            <div v-on:click="GetDetail">
+                <a href="#" v-on:click.stop="GetDetail">查看详情</a>
+            </div>
+        </div>
+        <div>
+            <!-- 提交事件将不再重新加载页面 -->
+            <form @submit.prevent="onSubmit">
+                <input type="submit" value="提交" />
+            </form>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>姓名：</td>
+                    <!-- 注册键盘上的事件，还可以指定具体按的是哪个按钮 -->
+                    <td><input type="text" @keyup.enter="keyupName" /></td>
+                </tr>
+                <tr>
+                    <td>出生日期：</td>
+                    <td><input type="date" @keyup.enter="keyupBirthday" /></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td><input type="radio" value="男" />男 &nbsp;<input type="radio" value="女" />女</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    count: 1
+                };
+            },
+            methods: {
+                // 在此处定义事件执行的逻辑
+                increase() {
+                    this.count++;
+                },
+                decrease() {
+                    if (this.count <= 1) {
+                        return;
+                    }
+
+                    this.count--;
+                },
+                helloWorld(arg1, event) {
+                    alert(`购买${this.count}件，传递的参数是：${arg1}`)
+                    console.log(event)
+                },
+                changeProvince(event) {
+                    console.log(event.target.value);
+                },
+                GetDetail() {
+                    console.log("显示详情")
+                },
+                onSubmit() {
+                    console.log("表单提交")
+                },
+                keyupName() {
+                    console.log("检验名字");
+                },
+                keyupBirthday() {
+                    console.log("检验出生日期");
+                }
+            }
+        });
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>
