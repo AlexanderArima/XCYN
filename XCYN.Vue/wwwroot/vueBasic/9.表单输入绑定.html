@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<!-- 在前端处理表单时，我们常常需要将表单输入框的内容同步给 JavaScript 中相应的变量。 -->
+<!-- 这一节应该最重要的了，是Vue优势所在，使用起来很方便-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="MainDiv">
+        <div>
+            <form>
+                <table style="text-align: left;">
+                    <tr>
+                        <th>注册</th>
+                    </tr>
+                    <tr>
+                        <td>用户名：</td>
+                        <!-- 绑定输入框 -->
+                        <td><input type="text" placeholder="请输入用户名" v-model="register.userName" /></td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td><input type="password" placeholder="请输入密码" v-model="register.password" /></td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：</td>
+                        <td><input type="password" placeholder="请再次输入密码" v-model="register.repassword" /></td>
+                    </tr>
+                    <tr>
+                        <td>性别：</td>
+                        <td>
+                            <!-- 绑定单选框 -->
+                            <input type="radio" id="male_radio" value="1" v-model="register.sex" />
+                            <label for="male_radio">男</label>&nbsp;
+                            <input type="radio" id="female_radio" value="2" v-model="register.sex" />
+                            <label for="female_radio">女</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>兴趣爱好：</td>
+                        <td>
+                            <!-- 多选框 -->
+                            <input type="checkbox" id="sport" value="运动" v-model="register.interest" />
+                            <label for="sport">运动</label>
+                            <input type="checkbox" id="read" value="阅读" v-model="register.interest" />
+                            <label for="read">阅读</label>
+                            <input type="checkbox" id="movie" value="电影" v-model="register.interest" />
+                            <label for="movie">电影</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>您的身份：</td>
+                        <td>
+                            <select v-model="register.identity_value">
+                                <option v-for="item in register.identity" v-bind:value="item.value">
+                                    {{ item.text }}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td>
+                            <textarea v-model="register.remark"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="提交" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div style="margin-top: 20px">
+                <table style="text-align: left;">
+                    <tr>
+                        <th>日志区</th>
+                    </tr>
+                    <tr>
+                        <td>用户名：{{ register.userName }}</td>
+                    </tr>
+                    <tr>
+                        <td>密码：{{ register.password }}</td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：{{ register.repassword }}</td>
+                    </tr>
+                    <tr>
+                        <td>性别：{{ register.sex == 1 ? "男" : "女" }}</td>
+                    </tr>
+                    <tr>
+                        <td>兴趣爱好：{{ showInterest }}</td>
+                    </tr>
+                    <tr>
+                        <td>身份：{{ showIndentity }}</td>
+                    </tr>
+                    <tr>
+                        <td>备注：{{ register.remark }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    register: {
+                        userName: "",
+                        password: "",
+                        repassword: "",
+                        sex: "1",
+                        interest: [],
+                        identity_value: "0",
+                        identity: [
+                            { text: "==请选择==", value: "0" },
+                            { text: "学生", value: "1" },
+                            { text: "雇员", value: "2" },
+                            { text: "企业家", value: "3" },
+                        ],
+                        remark: "", 
+                    }
+                };
+            },
+            computed: {
+                showInterest() {
+                    // 将兴趣爱好转成中文
+                    var result = "";
+                    for (var i = 0; i < this.register.interest.length; i++) {
+                        console.log(this.register.interest[i])
+                        if (this.register.interest.length - 1 == i) {
+                            result = result + this.register.interest[i];
+                            break;
+                        }
+
+                        result = result + this.register.interest[i] + "，";
+                    }
+
+                    return result;
+                },
+                showIndentity() {
+                    // 将身份转成中文
+                    for (var i = 0; i < this.register.identity.length; i++) {
+                        if (this.register.identity_value == this.register.identity[i].value) {
+                            return this.register.identity[i].text;
+                        }
+                    }
+                }
+            }
+        })
+
+        app.mount("#MainDiv")
+    </script>
+</body>
+</html>
