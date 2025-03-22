@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <template>
+        <div id="MainDiv">
+            <ButtonCounter />
+        </div>
+    </template>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script type="module">
+        import ButtonCounter from './A11_1.vue'
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return;
+            }
+        })
+
+        app.mount("#MainDiv");
+    </script>
+</body>
+</html>

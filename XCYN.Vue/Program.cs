@@ -24,6 +24,7 @@ namespace XCYN.Vue
 
             app.MapRazorPages();
             app.UseStaticFiles();
+            
 
             app.Run();
         }

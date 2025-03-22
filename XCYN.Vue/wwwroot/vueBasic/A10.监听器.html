@@ -1,10 +1,71 @@
 ﻿<!DOCTYPE html>
+<!-- 
+    在有些时候，我们需要在值发生改变的时候做一些事情，这就像是在未改变和已改变的中间地带做了一些事情，
+    比如：可以记录操作日志，从服务器获取一些数据，但我感觉配合change事件+函数也能实现这种效果
+    -->
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
+    <div id="MainDiv">
+        <input type="text" placeholder="请搜索"  v-model="question"/>
+        <div v-bind:style="isLoading">加载中...</div>
+        <table>
+            <tr v-for="item in answer" style="background-color: lightgrey">
+                <td>
+                    {{ item }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script>
+        var { createApp } = Vue;
+        var app = createApp({
+            data() {
+                return {
+                    question: "",
+                    isLoading:
+                    {
+                        display: "none"
+                    },
+                    answer: []
+                };
+            },
+            watch: {
+                // 监听控件的值是否改变，可获得当前值和上一个值，这里的question和data选项中的question对应上了
+                question(newText, oldText) {
+                    if (newText.length <= 0) {
+                        this.answer = [];
+                        this.isLoading.display = "none";
+                        return;
+                    }
 
+                    if (newText != oldText) {
+                        // 当发现确实发生改变后，调用函数去做一些业务逻辑
+                        this.getAnswer();
+                    }
+                }
+            },
+            methods: {
+                async getAnswer() {
+                    this.isLoading.display = "block";
+                    setTimeout(() => {
+                        this.isLoading.display = "none";
+                        if (this.question.length <= 0) {
+                            this.answer = [];
+                            return;
+                        }
+
+                        this.answer = ["答案1", "答案2", "答案3"];
+                    }, 3000)
+                }
+            }
+        })
+
+        app.mount("#MainDiv")
+    </script>
 </body>
 </html>
