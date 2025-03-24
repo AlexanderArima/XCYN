@@ -24,8 +24,4 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\vue2.0Basic\" />
-  </ItemGroup>
-
 </Project>

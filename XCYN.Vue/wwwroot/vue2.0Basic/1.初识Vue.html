@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <h2>你好，{{ msg }}</h2>
+        <h2>{{ name }}</h2>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                msg: "北京",
+                name: "张三"
+            }
+        })
+
+    </script>
+</body>
+</html>
