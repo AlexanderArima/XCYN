@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+</head>
+<body>
+    <script type="module">
+        import { createApp } from 'vue'
+        import ButtonCounter from './src/components/1.组件基础.vue'
+        import ButtonCounter2 from './src/components/1.组件基础.vue'
+        createApp(ButtonCounter).mount('#app')
+        createApp(ButtonCounter2).mount('#app2')
+    </script>
+    <div id="app">
+        <template>
+            <ButtonCounter></ButtonCounter>
+        </template>
+    </div>
+    <div id="app2">
+        <template>
+            <ButtonCounter2></ButtonCounter2>
+        </template>
+    </div>
+
+</body>
+</html>
