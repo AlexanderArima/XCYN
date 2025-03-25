@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="ClickMe1">点击我1</button><br/><br/>
+        <button v-on:click="ClickMe2(account,$event)">点击我2</button><br/><br/>
+        <div v-for="item in 3">
+            <button v-on:click="ClickMe2(item,$event)">点击我{{item}}</button>
+        </div>
+        
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                    account: "420107"
+                }
+            },
+            methods: {
+                ClickMe1(event) {
+                    alert("点击我1");
+                    console.log(event);
+                },
+                ClickMe2(account, event) {
+                    alert("点击我2");
+                    console.log(event, account);
+                }
+            }
+        })
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>
