@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 在事件后面添加点语法,prenent可以阻止该控件触发事件的默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent="add">新增1</a>
+
+        <!-- stop可以阻止事件冒泡 -->
+        <div @click="add">
+            <button @click.stop="add">新增2</button>
+        </div>
+
+        <!-- 如果使用的是a标签，光用stop去阻止冒泡显然是不够的，还需要再使用prevent阻止跳转-->
+        <div @click="add">
+            <a href="http://www.baidu.com" @click.prevent.stop="add">新增3</a>
+        </div>
+
+        <!-- once事件只触发一次 -->
+        <button @click.once="ClickMe1">点击我1</button>
+        <button v-on:click.once="ClickMe1">点击我1</button>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                }
+            },
+            methods: {
+                ClickMe1(event) {
+                    alert("点击我1");
+                    console.log(event);
+                },
+                add(){
+                    alert("新增")
+                }
+            }
+        })
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>

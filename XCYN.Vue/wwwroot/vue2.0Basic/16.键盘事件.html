@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" @keydown.enter="ClickMe1" />
+        </div>
+        <div>
+            <!-- 绑定tab的键盘事件时，只能绑定keydown事件 -->
+            <input type="text" @keydown.Tab="ClickMe1" />
+        </div>
+        <div>
+            <!-- 绑定ctrl时，如果绑定的时keyup事件，触发的时机是在按下ctrl和另外一个按钮后才触发-->
+            <input type="text" @keyup.ctrl="ClickMe1" />
+            <Br/>
+
+            <!-- 而如果绑定的是keydown事件，则会立即触发 -->
+            <input type="text" @keydown.ctrl="ClickMe1" />
+
+            <!-- 如果想绑定ctrl + c事件，只需再ctrl后面再点一个c就行-->
+            <input type="text" @keyup.ctrl.c="ClickMe1" />
+            <Br/>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                }
+            },
+            methods: {
+                ClickMe1(event) {
+                    console.log(event.target.value);
+                },
+            }
+        })
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>
