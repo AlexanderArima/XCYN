@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            中文姓：<input type="text" v-model="firstName"/>
+        </div>
+        <div>
+            年龄：<input type="text" v-model="age"/>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                    firstName:'',
+                    age: 0,
+                }
+            },
+           watch:{
+                // 监视属性的简写形式
+                age(newVal, oldVal){
+                    console.log(newVal, oldVal);
+                }
+            }
+           
+        })
+
+        app.$watch('firstName', 
+            // 监视属性的简写形式
+            function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+            }
+        )
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>

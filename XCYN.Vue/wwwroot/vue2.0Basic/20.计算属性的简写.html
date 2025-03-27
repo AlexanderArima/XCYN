@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            中文姓：<input type="text" v-model="firstName"/>
+        </div>
+        <div>
+            中文名：<input type="text" v-model="lastName"/>
+        </div>
+        <div>
+            中文姓名：{{fullName}}
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                    firstName:'',
+                    lastName:'',
+                }
+            },
+            computed: {
+                fullName(){
+                    // 计算属性的简写有一个前提就是只需要实现get，不用实现set函数
+                    if(this.firstName.length <= 0 && this.lastName.length <= 0) return '';
+                    return this.firstName + '-' + this.lastName;
+                }
+            },
+        })
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>

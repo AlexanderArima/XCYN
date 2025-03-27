@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            中文姓：<input type="text" v-model="firstName"/>
+        </div>
+        <div>
+            学生姓名：<input type="text" v-model="student.name"/>
+        </div>
+        <div>
+            学生年龄：<input type="text" v-model="student.age"/>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            
+           data() {
+                return {
+                    firstName:'',
+                    student:{
+                        name:'',
+                        age:0,
+                    }
+                }
+            },
+            /* watch: {
+                firstName: {
+                    immediate: true, // 立即执行
+                    handler(newVal, oldVal){
+                        console.log(newVal, oldVal);
+                    }
+                }
+            } */
+           watch:{
+             student:{
+                 deep: true, // 深度监视
+                 handler(newVal, oldVal){
+                     console.log(newVal, oldVal);
+                 }
+             }
+           }
+        })
+
+        app.$watch('firstName', {
+            immediate: true, // 立即执行
+            handler (newVal, oldVal) {
+                console.log(newVal, oldVal);
+            }
+        })
+
+        // 也可以用这种方式绑定容器
+        app.$mount("#app");
+    </script>
+</body>
+</html>
