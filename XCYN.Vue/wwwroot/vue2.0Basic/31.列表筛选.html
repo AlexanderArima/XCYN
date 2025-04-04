@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        搜索关键字： <input type="text" v-model="searchKey">
+        <ul>
+            <li v-for="item in searchResult" :key="item.id">
+                {{item.name}} - {{item.price}} - {{item.type}}
+            </li>
+        </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        // 用函数实现
+        // var app = new Vue({
+        //    data() {
+        //         return {
+        //             roomList:[
+        //                 {
+        //                     id:"001",
+        //                     name:"1001",
+        //                     price:100,
+        //                     type:"单人间"
+        //                 },
+        //                 {
+        //                     id:"002",
+        //                     name:"1002",
+        //                     price:100,
+        //                     type:"单人间"
+        //                 },
+        //                 {
+        //                     id:"003",
+        //                     name:"1003",
+        //                     price:180,
+        //                     type:"双人间"
+        //                 },
+        //                 {
+        //                     id:"004",
+        //                     name:"1004",
+        //                     price:180,
+        //                     type:"双人间"
+        //                 }
+        //             ],
+        //             searchResult:[],
+        //             searchKey:"",
+        //        }
+        //    },
+        //    methods:{
+        //        searchKeyChange(){
+        //             this.searchResult = this.roomList.filter(item =>{
+        //                 return item.name.indexOf(this.searchKey) != -1;
+        //             });
+        //        }
+        //    },
+        //    beforeMount(){
+        //        this.searchResult = this.roomList;
+        //    }
+        // })
+
+        // 用计算属性实现
+        var app = new Vue({
+           data() {
+                return {
+                    roomList:[
+                        {
+                            id:"001",
+                            name:"1001",
+                            price:100,
+                            type:"单人间"
+                        },
+                        {
+                            id:"002",
+                            name:"1002",
+                            price:100,
+                            type:"单人间"
+                        },
+                        {
+                            id:"003",
+                            name:"1003",
+                            price:180,
+                            type:"双人间"
+                        },
+                        {
+                            id:"004",
+                            name:"1004",
+                            price:180,
+                            type:"双人间"
+                        }
+                    ],
+                    searchKey:"",
+               }
+           },
+           computed:{
+               searchResult(){
+                   return this.roomList.filter(item =>{
+                       return item.name.indexOf(this.searchKey) != -1;
+                   });
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
