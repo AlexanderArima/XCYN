@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form @submit.prevent="formSubmit">
+            <div>
+                证件号码：<input type="text" v-model="idNumber">
+            </div>
+            <div>
+                姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" v-model="name">
+            </div>
+            <div>
+                性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+                <input type="radio" name="sex" value="男" id="male" v-model="sex"><label for="male">男</label>
+                <input type="radio" name="sex" value="女" id="female" v-model="sex"><label for="female">女</label>
+            </div>
+            <div>
+                省&nbsp;&nbsp;市&nbsp;&nbsp;县：
+                <select v-model="city">
+                    <option value=""></option>
+                    <option value="beijing">北京</option>
+                    <option value="tianjing">天津</option>
+                    <option value="jinan">济南</option>
+                    <option value="qingdao">青岛</option>
+                </select>
+            </div>
+            <div>
+                入住天数：<input type="number" v-model="days">
+            </div>
+            <div>
+                房&nbsp;&nbsp;间&nbsp;&nbsp;号：
+                <select v-model="room">
+                    <option></option>
+                    <option value="101">101</option>
+                    <option value="102">102</option>
+                    <option value="103">103</option>
+                    <option value="104">104</option>
+                </select>
+            </div>
+            <div>
+                来源渠道：
+                <input type="checkbox" value="携程" v-model="origin" id="xiecheng"><label for="xiecheng">携程</label>
+                <input type="checkbox" value="飞猪" v-model="origin" id="feizhu"><label for="feizhu">飞猪</label>
+                <input type="checkbox" value="美团" v-model="origin" id="meituan"><label for="meituan">美团</label>
+            </div>
+            <div>
+                <button>提交</button>
+            </div>
+        </form>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                   name:"",
+                   idNumber:"",
+                   sex:"",
+                   city:"",
+                   days:1,
+                   room:"",
+                   origin:[],
+               }
+           },
+           methods:{
+               formSubmit(){
+                   console.log(JSON.stringify(this._data));
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html> 
