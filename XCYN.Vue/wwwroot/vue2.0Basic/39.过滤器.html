@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        {{time}}<br/><br/>
+        {{getTime()}}<br/><br/>
+        {{formatTime}}<br/><br/>
+
+        <!-- 表达式的右边跟一个管道符|和过滤器的名称，即可使用它 -->
+        {{time | filterTime}}<br/><br/>
+
+        <!-- 而且过滤器可以叠加使用，在一个过滤器的后面再跟一个过滤器，虽然方法也可以再嵌套方法，但像过滤器这样显得更有层次感-->
+        {{time | filterTime | MySlice}}<br/><br/>
+        
+        <!-- 在v-bind中使用过滤器 -->
+        <a :href="url | MySlice">百度</a>
+    </div>
+    <div id='app2'>
+        {{msg | MySlice}}<br/><br/>
+    </div>
+    <script src="dayjs.min.js"></script>
+    <script src="vue.js"></script>
+    <script>
+        // 全局过滤器
+        Vue.filter("MySlice", function(value){
+            return value.slice(0, 4);
+        })
+
+        var app = new Vue({
+           data() {
+               return {
+                   time: Date.now(),
+                   url: "http://www.baidu.com"
+               }
+           },
+           methods:{
+               getTime(){
+                   return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+               }
+           },
+           computed:{
+               formatTime(){
+                   return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+               }
+           },
+           // 这样写是一个局部过滤器
+           filters:{
+               filterTime(value){
+                   return dayjs(value).format("YYYY-MM-DD HH:mm:ss")
+               }
+           }
+        })
+
+        var app2 = new Vue({
+           data() {
+               return {
+                   msg: "hello world"
+               }
+           }
+        })
+
+        app.$mount("#app");
+        app2.$mount("#app2");
+    </script>
+</body>
+</html>
