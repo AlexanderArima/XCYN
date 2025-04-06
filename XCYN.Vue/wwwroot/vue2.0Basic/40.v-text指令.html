@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <div>{{msg}}，world</div>
+        <div v-text='msg'></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                   msg:"hello"
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
