@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- 使用v-once可以让加载的内容只初始化一次，避免每次都更新它-->
+        <div v-once>count的初始值：{{count}}</div>
+        <div>当前count值：{{count}}</div>
+        <div><button @click="count++">增加</button></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                   count:0
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
