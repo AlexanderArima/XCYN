@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- 使用v-cloak指令，并配合css语法可以实现未成功加载的插值语法不展示 -->
+        <div v-cloak>{{ msg }}</div>
+        
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                   msg: "hello world"
+               }
+           }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
