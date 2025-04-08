@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- 这是一个不断变化文字透明度的效果，点击停止按钮后，该动画会停下来 -->
+        <div>
+            <h1 :style="{opacity:opa}">Hello World</h1>
+        </div>
+        <div>
+            <button @click="stop()">停止变化</button>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+           data() {
+               return {
+                  opa:0,
+                  timer:{},
+               }
+           },
+           methods: {
+               stop(){
+                    // 停止变化，销毁Vue实例，之后它会调用beforeDestroy钩子
+                    this.$destroy();
+               }
+           },
+           mounted(){
+               this.timer = setInterval(() => {
+                  console.log("setInterval")
+                  this.opa -= 0.02
+                  if(this.opa <= 0){
+                      this.opa = 1
+                  }
+               }, 20);
+           },
+           beforeDestroy() {
+                // 清除定时器的逻辑，要写在beforeDestroy中
+                clearInterval(this.timer)
+           },
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
