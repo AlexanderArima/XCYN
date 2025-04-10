@@ -11,40 +11,11 @@
 </head>
 <body>
     <div id='app'>
-        <hello></hello>
-        <hr/>
-
-        <!-- 3、使用组件 -->
-        <school></school>
-        <hr/>
-        <student></student>
-        <hr/>
-    </div>
-    <div id="app2">
-        <hello></hello>
-        <hr/>
+        <app></app>
     </div>
     <script src="vue.js"></script>
     <script>
         // 1、创建组件
-        var school = Vue.extend(
-            {
-                template: `
-                <div>
-                    <h2>学校名称：{{schoolName}}</h2>
-                    <br/>
-                    <h2>学校地址：{{schoolAddress}}</h2>
-                    <br/>
-                </div>`,
-                data(){
-                    return {
-                        schoolName: "北京大学",
-                        schoolAddress: "北京市海淀区"
-                    }
-                }
-            }
-        );
-
         var student = Vue.extend({
             template: `
             <div>
@@ -61,31 +32,57 @@
             }
         });
 
+        var school = Vue.extend(
+            {
+                template: `
+                <div>
+                    <h2>学校名称：{{schoolName}}</h2>
+                    <br/>
+                    <h2>学校地址：{{schoolAddress}}</h2>
+                    <br/>
+                    <hr/>
+                    <student></student>
+                </div>`,
+                data(){
+                    return {
+                        schoolName: "北京大学",
+                        schoolAddress: "北京市海淀区"
+                    }
+                },
+                components:{
+                    student
+                }
+            }
+        );
+
         var hello = Vue.extend({
             template: `
             <div>
                 <h2>hello</h2>
+                <br/>
+                <hr/>
             </div>`
         });
 
-        // 注册全局组件
-        Vue.component("hello", hello);
-
-        var app = new Vue({
-            // 2、注册组件
+        var app = Vue.extend({
+            template: `
+                <div>
+                    <hello></hello>
+                    <school></school>
+                </div>
+            `,
             components:{
                 school,
-                student
+                hello
             }
         })
 
-        app.$mount("#app");
-
-
-        var app2 = new Vue({
+        new Vue({
+            el:"app",
+            components:{
+                app
+            }
         })
-
-        app2.$mount("#app2");
     </script>
 </body>
 </html>
