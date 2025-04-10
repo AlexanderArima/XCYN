@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Vue2</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- 3、使用组件 -->
+        <school></school>
+        <hr/>
+        <student></student>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        // 1、创建组件
+        var school = Vue.extend(
+            {
+                template: `
+                <div>
+                    <h2>学校名称：{{schoolName}}</h2>
+                    <br/>
+                    <h2>学校地址：{{schoolAddress}}</h2>
+                    <br/>
+                </div>`,
+                data(){
+                    return {
+                        schoolName: "北京大学",
+                        schoolAddress: "北京市海淀区"
+                    }
+                }
+            }
+        );
+
+        var student = Vue.extend({
+            template: `
+            <div>
+                <h2>学生姓名：{{studentName}}</h2>
+                <br/>
+                <h2>学生年龄：{{studentAge}}</h2>
+                <br/> 
+            </div>`,
+            data(){
+                return {
+                    studentName: "张三",
+                    studentAge: 18
+                }
+            }
+        });
+
+        var app = new Vue({
+            // 2、注册组件
+            components:{
+                school,
+                student
+            },
+            data() {
+                return {
+                    
+                }
+            }
+        })
+
+        app.$mount("#app");
+    </script>
+</body>
+</html>
